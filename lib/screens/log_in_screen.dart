@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/config/utility.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/email_text_field.dart';
 import 'package:lettutor_app/widgets/flat_button.dart';
+import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:lettutor_app/widgets/password_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final String facebookIconPath = 'assets/images/facebook_icon.svg';
-    final String googleIconPath = 'assets/images/google_icon.svg';
-    final Widget facebookIcon = SvgPicture.asset(facebookIconPath);
-    final Widget googleIcon = SvgPicture.asset(googleIconPath);
+    final TextEditingController _emailController = new TextEditingController();
+    final TextEditingController _passwordController =
+        new TextEditingController();
+
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: AppTheme.mainColor,
       primary: Colors.white,
@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: Row(
           children: <Widget>[
-            facebookIcon,
+            AppIcons.facebookIcon,
             SizedBox(
               width: 5,
             ),
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.all(8),
         child: Row(
           children: <Widget>[
-            googleIcon,
+            AppIcons.googleIcon,
             SizedBox(
               width: 5,
             ),
@@ -75,11 +75,13 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: <Widget>[
-            EmailTextField(),
+            EmailTextField(controller: _emailController),
             SizedBox(
               height: 10,
             ),
-            PasswordTextField(),
+            PasswordTextField(
+              controller: _passwordController,
+            ),
             SizedBox(
               height: 10,
             ),

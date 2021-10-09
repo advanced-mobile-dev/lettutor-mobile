@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 
 class EmailTextField extends StatelessWidget {
+  final TextEditingController controller;
+  EmailTextField({@required this.controller});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,6 +16,7 @@ class EmailTextField extends StatelessWidget {
             height: 5,
           ),
           TextFormField(
+            controller: controller,
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppTheme.mainColor),
