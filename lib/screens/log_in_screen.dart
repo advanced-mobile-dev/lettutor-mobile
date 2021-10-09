@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/config/utility.dart';
+import 'package:lettutor_app/screens/forget_password_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/email_text_field.dart';
 import 'package:lettutor_app/widgets/flat_button.dart';
@@ -87,7 +88,13 @@ class LoginScreen extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.centerRight,
-              child: AppFlatButton(text: 'Forget password?', function: () {}),
+              child: AppFlatButton(
+                  text: 'Forget password?',
+                  function: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ForgetPasswordScreen(),
+                    ));
+                  }),
             ),
             SizedBox(
               height: 10,
