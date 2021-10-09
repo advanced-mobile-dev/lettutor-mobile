@@ -7,10 +7,12 @@ import 'package:lettutor_app/screens/sign_up_screen.dart';
 class LaunchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final String backgroundPath = 'assets/images/background.svg';
-    final String imagePath = 'assets/images/illustrator_image_01.svg';
-    final Widget background = SvgPicture.asset(backgroundPath);
-    final Widget image = SvgPicture.asset(imagePath);
+    final String _backgroundPath = 'assets/images/background.svg';
+    final String _imagePath = 'assets/images/illustrator_image_01.svg';
+    final String _logoPath = 'assets/images/mortarboard.svg';
+    final Widget _background = SvgPicture.asset(_backgroundPath);
+    final Widget _image = SvgPicture.asset(_imagePath);
+    final Widget _logo = SvgPicture.asset(_logoPath);
 
     final ButtonStyle raisedButtonStyle1 = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
@@ -38,16 +40,28 @@ class LaunchScreen extends StatelessWidget {
         children: <Widget>[
           Stack(
             children: <Widget>[
-              background,
+              _background,
               Padding(
                 padding: MediaQuery.of(context).padding,
                 child: Container(
                   alignment: Alignment.center,
                   child: Column(children: <Widget>[
-                    Text('Let Tutor',
-                        style:
-                            TextStyle(fontSize: 36, color: AppTheme.mainColor)),
-                    image,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        _logo,
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('LetTutor',
+                            style: TextStyle(
+                                fontSize: 36, color: AppTheme.mainColor))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    _image,
                   ]),
                 ),
               )
