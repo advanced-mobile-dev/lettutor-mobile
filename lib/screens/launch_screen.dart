@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/screens/log_in_screen.dart';
+import 'package:lettutor_app/screens/sign_up_screen.dart';
 
 class LaunchScreen extends StatelessWidget {
   @override
@@ -57,7 +58,11 @@ class LaunchScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   style: raisedButtonStyle1,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SignUpScreen(),
+                    ));
+                  },
                   child: Text(
                     'Sign up',
                     style: TextStyle(fontSize: 24),
@@ -67,7 +72,11 @@ class LaunchScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     style: raisedButtonStyle2,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ));
+                    },
                     child: Text(
                       'Login',
                       style: TextStyle(fontSize: 24),
