@@ -32,6 +32,7 @@ class LaunchScreen extends StatelessWidget {
       ),
     );
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: AppTheme.backgroundColor,
       body: Column(
         children: <Widget>[
@@ -68,19 +69,19 @@ class LaunchScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 24),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: ElevatedButton(
-                    style: raisedButtonStyle2,
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ));
-                    },
-                    child: Text(
-                      'Login',
-                      style: TextStyle(fontSize: 24),
-                    ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  style: raisedButtonStyle2,
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ));
+                  },
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 24),
                   ),
                 ),
               ],

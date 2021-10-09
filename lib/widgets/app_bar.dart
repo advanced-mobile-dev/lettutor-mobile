@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/config/utility.dart';
 
 class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -14,6 +15,7 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: AppTheme.mainColor,
             ),
             onPressed: () {
+              Utility.hideKeyboard(context);
               Navigator.pop(context);
             }),
         backgroundColor: AppTheme.mainColor2,
