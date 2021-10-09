@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/theme.dart';
+
+class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+
+  ApplicationAppBar({@required this.title});
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: AppTheme.mainColor,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        backgroundColor: AppTheme.mainColor2,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          title,
+          style: TextStyle(color: AppTheme.mainColor, fontSize: 28),
+        ));
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60);
+}
