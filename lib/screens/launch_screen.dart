@@ -8,11 +8,14 @@ class LaunchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String _backgroundPath = 'assets/images/background.svg';
-    final String _imagePath = 'assets/images/illustrator_image_01.svg';
-    final String _logoPath = 'assets/images/mortarboard.svg';
     final Widget _background = SvgPicture.asset(_backgroundPath);
+    final String _imagePath = 'assets/images/illustrator_image_01.svg';
     final Widget _image = SvgPicture.asset(_imagePath);
-    final Widget _logo = SvgPicture.asset(_logoPath);
+    final String _logoPath = 'assets/icons/logo.svg';
+    final Widget _logo = SvgPicture.asset(
+      _logoPath,
+      height: 40,
+    );
 
     final ButtonStyle raisedButtonStyle1 = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
@@ -46,18 +49,10 @@ class LaunchScreen extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   child: Column(children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        _logo,
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('LetTutor',
-                            style: TextStyle(
-                                fontSize: 36, color: AppTheme.mainColor))
-                      ],
+                    SizedBox(
+                      height: 7,
                     ),
+                    _logo,
                     SizedBox(
                       height: 12,
                     ),

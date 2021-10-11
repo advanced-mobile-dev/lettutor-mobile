@@ -70,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: ApplicationAppBar(
-        title: 'SignUp',
+        title: 'Sign Up',
       ),
       backgroundColor: AppTheme.backgroundColor,
       body: Container(
