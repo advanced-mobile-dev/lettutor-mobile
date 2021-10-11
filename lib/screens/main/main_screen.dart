@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/screens/main/home_screen.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 
 class MainScreen extends StatefulWidget {
@@ -9,10 +10,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-    ),
+  final List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
     Text(
       'Index 1: ',
     ),
@@ -46,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         title: AppIcons.appLogo,
       ),
-      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
