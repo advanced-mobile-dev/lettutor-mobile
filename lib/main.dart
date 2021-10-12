@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/screens/launch_screen.dart';
+import 'package:lettutor_app/screens/authentication/launch_screen.dart';
 
 void main() {
   runApp(MyApp());

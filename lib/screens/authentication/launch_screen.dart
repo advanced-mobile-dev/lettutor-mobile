@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/screens/log_in_screen.dart';
-import 'package:lettutor_app/screens/sign_up_screen.dart';
+import 'package:lettutor_app/screens/authentication/log_in_screen.dart';
+import 'package:lettutor_app/screens/authentication/sign_up_screen.dart';
 
 class LaunchScreen extends StatelessWidget {
   @override
