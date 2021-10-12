@@ -7,4 +7,5 @@ class AppTheme {
   static const mainColor3 = Color(0xff2F80ED);
   static const unactiveColor = Color(0xffB9BCBE);
   static const myGreyColor = Color(0xffE7E7E7);
+  static const redColor = Colors.red;
 }
