@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/screens/main/home_screen.dart';
+import 'package:lettutor_app/screens/home/chats_tab.dart';
+import 'package:lettutor_app/screens/home/courses_tab.dart';
+import 'package:lettutor_app/screens/home/settings_tab.dart';
+import 'package:lettutor_app/screens/home/tutors_tab.dart';
+import 'package:lettutor_app/screens/main/home_tab.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 
-class MainScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Text(
-      'Index 1: ',
-    ),
-    Text(
-      'Index 2: ',
-    ),
-    Text(
-      'Index 3: ',
-    ),
-    Text(
-      'Index 4: ',
-    ),
-    Text(
-      'Index 5: ',
-    ),
+    TutorsTab(),
+    CoursesTab(),
+    ChatsTab(),
+    SettingsTab(),
   ];
 
   void _onItemTapped(int index) {
@@ -58,11 +51,11 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.picture_as_pdf),
-            label: 'E-book',
+            label: 'Courses',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            label: 'Message',
+            label: 'Chats',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

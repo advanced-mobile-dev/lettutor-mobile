@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/config/utility.dart';
 import 'package:lettutor_app/screens/forget_password_screen.dart';
-import 'package:lettutor_app/screens/main/main_screen.dart';
+import 'package:lettutor_app/screens/main/home_screen.dart';
 import 'package:lettutor_app/screens/tutor_profile/tutor_profile_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/email_text_field.dart';

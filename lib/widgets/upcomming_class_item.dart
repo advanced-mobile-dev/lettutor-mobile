@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/teacher.dart';
+import 'package:lettutor_app/widgets/outline_button.dart';
 
 class UpcommingClassItem extends StatelessWidget {
   final Teacher teacher;
@@ -10,33 +11,6 @@ class UpcommingClassItem extends StatelessWidget {
       {@required this.teacher,
       @required this.startMeeting,
       @required this.endMeeting});
-
-  final ButtonStyle _cancelButtonStyle = OutlinedButton.styleFrom(
-    primary: AppTheme.redColor,
-    side: BorderSide(color: AppTheme.redColor, width: 1.5),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5)),
-    ),
-  );
-  final ButtonStyle _joinButtonStyle = OutlinedButton.styleFrom(
-    primary: AppTheme.mainColor,
-    side: BorderSide(color: AppTheme.mainColor, width: 1.5),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5)),
-    ),
-  );
-
-  final ButtonStyle _sendMessageButtonStyle = OutlinedButton.styleFrom(
-    primary: Colors.black,
-    side: BorderSide(color: Colors.black, width: 0.5),
-    padding: EdgeInsets.all(5),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5)),
-    ),
-  );
-  final TextStyle textStyle =
-      TextStyle(fontSize: 12, fontWeight: FontWeight.w400);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -109,7 +83,11 @@ class UpcommingClassItem extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    _sendMessageButton(() => {})
+                                    AppOutlineButton(
+                                        text: 'Send message',
+                                        function: () => {},
+                                        iconData: Icons.message,
+                                        color: Colors.black)
                                   ],
                                 ),
                               )
@@ -141,72 +119,24 @@ class UpcommingClassItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    _cancelButton(() => {}),
+                    AppOutlineButton(
+                        text: 'Cancel',
+                        function: () => {},
+                        iconData: Icons.cancel,
+                        color: Colors.red),
                     SizedBox(
                       width: 10,
                     ),
-                    _joinButton(() => {})
+                    AppOutlineButton(
+                        text: 'Go to meeting',
+                        function: () => {},
+                        iconData: Icons.video_call_rounded,
+                        color: AppTheme.mainColor),
                   ],
                 ),
               )
             ],
           ),
-        ));
-  }
-
-  Widget _sendMessageButton(Function() function) {
-    return OutlinedButton(
-        style: _sendMessageButtonStyle,
-        onPressed: function,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Icon(
-              Icons.message,
-              color: Colors.black,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text('Send message', style: textStyle)
-          ],
-        ));
-  }
-
-  Widget _cancelButton(Function() function) {
-    return OutlinedButton(
-        style: _cancelButtonStyle,
-        onPressed: function,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Icon(
-              Icons.cancel,
-              color: AppTheme.redColor,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text('Cancel', style: textStyle)
-          ],
-        ));
-  }
-
-  Widget _joinButton(Function() function) {
-    return OutlinedButton(
-        style: _joinButtonStyle,
-        onPressed: function,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Icon(
-              Icons.video_call_rounded,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text('Go to meeting', style: textStyle)
-          ],
         ));
   }
 }

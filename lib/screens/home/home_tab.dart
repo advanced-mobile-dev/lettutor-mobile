@@ -3,7 +3,7 @@ import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/teacher.dart';
 import 'package:lettutor_app/widgets/upcomming_class_item.dart';
 
-class HomePage extends StatelessWidget {
+class HomeTab extends StatelessWidget {
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
     primary: Colors.white,
   );
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(left: _horizontalPadding),
                   child: Text(
-                    'Total time you study is',
+                    'Total learned time',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      'Upcomming class',
+                      'Upcomming lesson',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
