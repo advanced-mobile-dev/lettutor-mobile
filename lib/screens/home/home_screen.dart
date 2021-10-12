@@ -4,7 +4,7 @@ import 'package:lettutor_app/screens/home/chats_tab.dart';
 import 'package:lettutor_app/screens/home/courses_tab.dart';
 import 'package:lettutor_app/screens/home/home_tab.dart';
 import 'package:lettutor_app/screens/home/settings_tab.dart';
-import 'package:lettutor_app/screens/home/tutors_tab.dart';
+import 'package:lettutor_app/screens/home/tutors/tutors_tab.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 
 class HomeScreen extends StatefulWidget {

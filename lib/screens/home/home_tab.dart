@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/models/teacher.dart';
+import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/upcomming_lesson_item.dart';
 
 class HomeTab extends StatelessWidget {
@@ -65,7 +65,7 @@ class HomeTab extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 UpcommingClassItem(
-                  teacher: Teacher.data,
+                  tutor: Tutor.data,
                   startMeeting: DateTime.now(),
                   endMeeting: DateTime.now(),
                   upcommingLesson: true,
@@ -74,21 +74,21 @@ class HomeTab extends StatelessWidget {
                   height: 20,
                 ),
                 UpcommingClassItem(
-                    teacher: Teacher.data1,
+                    tutor: Tutor.data1,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
                 SizedBox(
                   height: 20,
                 ),
                 UpcommingClassItem(
-                    teacher: Teacher.data2,
+                    tutor: Tutor.data2,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
                 SizedBox(
                   height: 20,
                 ),
                 UpcommingClassItem(
-                    teacher: Teacher.data3,
+                    tutor: Tutor.data3,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
               ],

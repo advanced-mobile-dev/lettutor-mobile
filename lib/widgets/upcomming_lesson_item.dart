@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/models/teacher.dart';
+import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 
 class UpcommingClassItem extends StatelessWidget {
-  final Teacher teacher;
+  final Tutor tutor;
   final DateTime startMeeting;
   final DateTime endMeeting;
   final bool upcommingLesson;
   UpcommingClassItem(
-      {@required this.teacher,
+      {@required this.tutor,
       @required this.startMeeting,
       @required this.endMeeting,
       this.upcommingLesson = false});
@@ -69,7 +69,7 @@ class UpcommingClassItem extends StatelessWidget {
                               children: <Widget>[
                                 ClipOval(
                                   child: Image.asset(
-                                    teacher.avatar,
+                                    tutor.avatar,
                                     fit: BoxFit.cover,
                                     width: 50.0,
                                     height: 50.0,
@@ -96,7 +96,7 @@ class UpcommingClassItem extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: Text(
-                                                teacher.name,
+                                                tutor.name,
                                                 style: TextStyle(
                                                     fontSize: 13,
                                                     fontWeight:
@@ -109,7 +109,7 @@ class UpcommingClassItem extends StatelessWidget {
                                         ),
                                       ),
                                       Image.asset(
-                                        'assets/national_flags/${teacher.countryCode}.png',
+                                        'assets/national_flags/${tutor.countryCode}.png',
                                         height: 20,
                                         width: 40,
                                       ),
