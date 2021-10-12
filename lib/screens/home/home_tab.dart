@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/teacher.dart';
-import 'package:lettutor_app/widgets/upcomming_class_item.dart';
+import 'package:lettutor_app/widgets/upcomming_lesson_item.dart';
 
 class HomeTab extends StatelessWidget {
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
@@ -59,65 +59,38 @@ class HomeTab extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: _horizontalPadding, vertical: 15),
-            color: AppTheme.myGreyColor,
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Upcomming lesson',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
-                    Text(
-                      'Time remaining: 9h37m',
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
+                UpcommingClassItem(
+                  teacher: Teacher.data,
+                  startMeeting: DateTime.now(),
+                  endMeeting: DateTime.now(),
+                  upcommingLesson: true,
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 UpcommingClassItem(
-                    teacher: Teacher.data,
+                    teacher: Teacher.data1,
                     startMeeting: DateTime.now(),
-                    endMeeting: DateTime.now())
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: _horizontalPadding),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: UpcommingClassItem(
-                      teacher: Teacher.data1,
-                      startMeeting: DateTime.now(),
-                      endMeeting: DateTime.now()),
+                    endMeeting: DateTime.now()),
+                SizedBox(
+                  height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: UpcommingClassItem(
-                      teacher: Teacher.data2,
-                      startMeeting: DateTime.now(),
-                      endMeeting: DateTime.now()),
+                UpcommingClassItem(
+                    teacher: Teacher.data2,
+                    startMeeting: DateTime.now(),
+                    endMeeting: DateTime.now()),
+                SizedBox(
+                  height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: UpcommingClassItem(
-                      teacher: Teacher.data3,
-                      startMeeting: DateTime.now(),
-                      endMeeting: DateTime.now()),
-                ),
+                UpcommingClassItem(
+                    teacher: Teacher.data3,
+                    startMeeting: DateTime.now(),
+                    endMeeting: DateTime.now()),
               ],
             ),
           )
