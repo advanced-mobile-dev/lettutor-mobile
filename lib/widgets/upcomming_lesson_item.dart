@@ -3,12 +3,12 @@ import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 
-class UpcommingClassItem extends StatelessWidget {
+class UpcommingLessonItem extends StatelessWidget {
   final Tutor tutor;
   final DateTime startMeeting;
   final DateTime endMeeting;
   final bool upcommingLesson;
-  UpcommingClassItem(
+  UpcommingLessonItem(
       {@required this.tutor,
       @required this.startMeeting,
       @required this.endMeeting,
@@ -91,9 +91,6 @@ class UpcommingClassItem extends StatelessWidget {
                                               MainAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.max,
                                           children: <Widget>[
-                                            SizedBox(
-                                              width: 3,
-                                            ),
                                             Expanded(
                                               child: Text(
                                                 tutor.name,
@@ -108,16 +105,24 @@ class UpcommingClassItem extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Image.asset(
-                                        'assets/national_flags/${tutor.countryCode}.png',
-                                        height: 20,
-                                        width: 40,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: <Widget>[
+                                          Image.asset(
+                                            'assets/national_flags/${tutor.countryCode}.png',
+                                            height: 15,
+                                            width: 20,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(tutor.countryName,
+                                              style: TextStyle(fontSize: 11))
+                                        ],
                                       ),
-                                      // AppOutlineButton(
-                                      //     text: 'Send message',
-                                      //     function: () => {},
-                                      //     iconData: Icons.message,
-                                      //     color: Colors.black)
                                     ],
                                   ),
                                 )

@@ -64,7 +64,7 @@ class HomeTab extends StatelessWidget {
                 horizontal: _horizontalPadding, vertical: 15),
             child: Column(
               children: <Widget>[
-                UpcommingClassItem(
+                UpcommingLessonItem(
                   tutor: Tutor.data,
                   startMeeting: DateTime.now(),
                   endMeeting: DateTime.now(),
@@ -73,21 +73,21 @@ class HomeTab extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                UpcommingClassItem(
+                UpcommingLessonItem(
                     tutor: Tutor.data1,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
                 SizedBox(
                   height: 20,
                 ),
-                UpcommingClassItem(
+                UpcommingLessonItem(
                     tutor: Tutor.data2,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
                 SizedBox(
                   height: 20,
                 ),
-                UpcommingClassItem(
+                UpcommingLessonItem(
                     tutor: Tutor.data3,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
