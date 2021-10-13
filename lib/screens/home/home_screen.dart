@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/screens/home/chats_tab.dart';
-import 'package:lettutor_app/screens/home/courses_tab.dart';
+import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
 import 'package:lettutor_app/screens/home/home_tab.dart';
 import 'package:lettutor_app/screens/home/settings_tab.dart';
 import 'package:lettutor_app/screens/home/tutors/tutors_tab.dart';
