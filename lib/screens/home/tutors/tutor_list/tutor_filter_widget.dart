@@ -34,7 +34,7 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
               contentPadding: EdgeInsets.all(0),
               border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(5)),
               prefixIcon: Icon(
                 Icons.search,
                 color: Colors.black,
@@ -109,7 +109,8 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
                               border: Border.all(width: 1)),
                           child: DropdownButton<String>(
                             value: countryValue,
-                            icon: SizedBox(),
+                            // icon: SizedBox(),
+                            isExpanded: true,
                             iconSize: 24,
                             style: const TextStyle(color: Colors.black),
                             underline: SizedBox(),
