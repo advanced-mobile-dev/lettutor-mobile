@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/screens/home/chats_tab.dart';
+import 'package:lettutor_app/screens/home/chats/chats_tab.dart';
 import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
 import 'package:lettutor_app/screens/home/home_tab.dart';
 import 'package:lettutor_app/screens/home/settings/settings_tab.dart';
