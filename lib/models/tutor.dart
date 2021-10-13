@@ -2,12 +2,14 @@ class Tutor {
   final String name;
   final String description;
   final String countryCode;
+  final String countryName;
   final String avatar;
   final double rating;
 
   Tutor(
       {this.name,
       this.countryCode,
+      this.countryName,
       this.avatar,
       this.description,
       this.rating});
@@ -15,6 +17,7 @@ class Tutor {
   static final data = Tutor(
       name: 'Quang Hai Nguyen',
       countryCode: 'vn',
+      countryName: 'Viet Nam',
       avatar: 'assets/images/quang_hai.png',
       rating: 4.9,
       description:
@@ -22,6 +25,7 @@ class Tutor {
   static final data1 = Tutor(
       name: 'Ronaldo',
       countryCode: 'pt',
+      countryName: 'Portugal',
       avatar: 'assets/images/ronaldo.png',
       rating: 4.7,
       description:
@@ -29,6 +33,7 @@ class Tutor {
   static final data2 = Tutor(
       name: 'Messi',
       countryCode: 'ar',
+      countryName: 'Argentina',
       avatar: 'assets/images/messi.png',
       rating: 3,
       description:
@@ -36,6 +41,7 @@ class Tutor {
   static final data3 = Tutor(
       name: 'Kevin Debruyne',
       countryCode: 'be',
+      countryName: 'Belgium',
       avatar: 'assets/images/kevin_debruyne.png',
       rating: 3.5,
       description:

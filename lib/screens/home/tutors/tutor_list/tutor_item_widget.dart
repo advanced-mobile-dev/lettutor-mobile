@@ -28,14 +28,14 @@ class TutorItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
-                  height: 40,
+                  height: 60,
                   child: Row(
                     children: <Widget>[
                       ClipOval(
                         child: Image.asset(
                           tutor.avatar,
-                          width: 40.0,
-                          height: 40.0,
+                          width: 50.0,
+                          height: 50.0,
                         ),
                       ),
                       SizedBox(
@@ -45,36 +45,63 @@ class TutorItemWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(tutor.name),
-                          Container(
-                            width: 100,
-                            child: RatingBar.builder(
-                              initialRating: tutor.rating,
-                              ignoreGestures: true,
-                              itemSize: 15,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              itemCount: 5,
-                              itemPadding:
-                                  EdgeInsets.symmetric(horizontal: 1.0),
-                              itemBuilder: (context, _) => Icon(
-                                Icons.star,
-                                color: Colors.amber,
+                          Text(
+                            tutor.name,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/national_flags/${tutor.countryCode}.png',
+                                height: 15,
+                                width: 20,
                               ),
-                              onRatingUpdate: (rating) {
-                                print(rating);
-                              },
-                            ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(tutor.countryName,
+                                  style: TextStyle(fontSize: 11))
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '${tutor.rating}',
+                                style: TextStyle(color: Colors.amber),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                width: 100,
+                                child: RatingBar.builder(
+                                  initialRating: tutor.rating,
+                                  ignoreGestures: true,
+                                  itemSize: 15,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 1.0),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    print(rating);
+                                  },
+                                ),
+                              ),
+                            ],
                           )
                         ],
                       ),
                     ],
                   )),
-              Image.asset(
-                'assets/national_flags/${tutor.countryCode}.png',
-                height: 20,
-                width: 40,
-              ),
+              IconButton(
+                  alignment: Alignment.topRight,
+                  icon: Icon(Icons.favorite_border),
+                  onPressed: () => {}),
             ],
           ),
           SizedBox(
@@ -86,30 +113,30 @@ class TutorItemWidget extends StatelessWidget {
             child: Text(tutor.description,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
-                style: TextStyle(color: Colors.grey, fontSize: 11)),
+                style: TextStyle(color: AppTheme.textColor, fontSize: 11)),
           ),
-          Container(
-            height: 35,
-            width: double.infinity,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                AppOutlineButton(
-                    text: 'Favorite',
-                    function: () {},
-                    iconData: Icons.favorite,
-                    color: Colors.pink),
-                SizedBox(
-                  width: 10,
-                ),
-                AppOutlineButton(
-                    text: 'Detail',
-                    function: () {},
-                    iconData: Icons.description,
-                    color: AppTheme.mainColor)
-              ],
-            ),
-          ),
+          // Container(
+          //   height: 35,
+          //   width: double.infinity,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.end,
+          //     children: <Widget>[
+          // AppOutlineButton(
+          //     text: 'Favorite',
+          //     function: () {},
+          //     iconData: Icons.favorite,
+          //     color: Colors.pink),
+          //       SizedBox(
+          //         width: 10,
+          //       ),
+          //       AppOutlineButton(
+          //           text: 'Detail',
+          //           function: () {},
+          //           iconData: Icons.description,
+          //           color: AppTheme.mainColor)
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
