@@ -61,7 +61,7 @@ class ChatItem extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 70,
+                width: 60,
                 alignment: Alignment.topRight,
                 child: Text(
                   '5 hour',

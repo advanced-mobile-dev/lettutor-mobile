@@ -25,6 +25,23 @@ class ChatsTab extends StatelessWidget {
           Container(
             child: Column(
               children: <Widget>[
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 10, left: 15, right: 15),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(0),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.circular(15)),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.black,
+                        ),
+                        hintText: 'Search...',
+                        hintStyle: TextStyle(fontSize: 14)),
+                  ),
+                ),
                 ...tutors
                     .map((e) => Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
