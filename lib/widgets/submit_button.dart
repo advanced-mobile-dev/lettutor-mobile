@@ -4,24 +4,40 @@ import 'package:lettutor_app/config/theme.dart';
 class SubmitButton extends StatelessWidget {
   final String text;
   final Function function;
-
-  SubmitButton({@required this.text, @required this.function});
+  final Color backgroundColor;
+  final Color textColor;
+  final Widget icon;
+  SubmitButton(
+      {@required this.text,
+      @required this.function,
+      this.backgroundColor = AppTheme.mainColor,
+      this.textColor = Colors.white,
+      this.icon});
   @override
   Widget build(BuildContext context) {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: Colors.white,
-      primary: AppTheme.mainColor,
+      onPrimary: textColor,
+      primary: backgroundColor,
       minimumSize: Size(double.infinity, 50),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
     );
     return ElevatedButton(
       style: raisedButtonStyle,
       onPressed: function,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          icon != null ? icon : SizedBox(),
+          SizedBox(
+            width: icon != null ? 10 : 0,
+          ),
+          Text(
+            text,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+          )
+        ],
       ),
     );
   }
