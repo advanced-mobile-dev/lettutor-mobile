@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_reviews.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
+import 'package:lettutor_app/widgets/flat_button.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
@@ -94,7 +96,7 @@ class TutorDetail extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(tutor.countryName,
-                                  style: TextStyle(fontSize: 14))
+                                  style: TextStyle(fontSize: 14)),
                             ],
                           ),
                         ],
@@ -111,7 +113,12 @@ class TutorDetail extends StatelessWidget {
               ),
               SubmitButton(
                 text: 'Calendar',
-                function: () {},
+                function: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => TutorCalendarScreen(
+                            tutor: tutor,
+                          )));
+                },
                 backgroundColor: Colors.white,
                 textColor: AppTheme.mainColor,
                 icon: Icon(Icons.calendar_today),
@@ -123,6 +130,10 @@ class TutorDetail extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    _buildFlatButton(
+                        icon: Icon(Icons.video_library_outlined),
+                        function: () {},
+                        title: 'Intro video'),
                     _buildFlatButton(
                         icon: AppIcons.chatIcon,
                         function: () {},
