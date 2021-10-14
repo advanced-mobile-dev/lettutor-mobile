@@ -18,7 +18,7 @@ class BookingScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
-        title: 'Book a lesson',
+        title: 'Book a class',
       ),
       body: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
