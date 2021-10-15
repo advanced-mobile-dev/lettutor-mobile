@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/screens/home/schedule/video_conference.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 
 class UpcommingLessonItem extends StatelessWidget {
@@ -167,7 +168,10 @@ class UpcommingLessonItem extends StatelessWidget {
                       ),
                       AppOutlineButton(
                           text: 'Go to meeting',
-                          function: () => {},
+                          function: () => {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => VideoConference()))
+                              },
                           iconData: Icons.video_call_rounded,
                           color: AppTheme.mainColor),
                     ],
