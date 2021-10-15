@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/screens/home/settings/password_change_screen.dart';
 import 'package:lettutor_app/screens/home/settings/profile_edit_screen.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
@@ -63,7 +64,10 @@ class SettingsTab extends StatelessWidget {
                     ),
                     SettingItem(
                       title: 'Change password',
-                      function: () {},
+                      function: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => PasswordChangeScreen()));
+                      },
                     ),
                     SettingItem(
                       title: 'Language',

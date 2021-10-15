@@ -3,13 +3,14 @@ import 'package:lettutor_app/config/theme.dart';
 
 class PasswordTextField extends StatelessWidget {
   final TextEditingController controller;
-  PasswordTextField({@required this.controller});
+  final String title;
+  PasswordTextField({@required this.controller, this.title = 'Password'});
   @override
   Widget build(BuildContext context) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Password',
+          Text(title,
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 14, color: AppTheme.mainColor)),
           SizedBox(
