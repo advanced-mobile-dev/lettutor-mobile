@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/screens/home/schedule/history_screen.dart';
 import 'package:lettutor_app/widgets/upcomming_lesson_item.dart';
 
 class HomeTab extends StatelessWidget {
@@ -23,7 +24,10 @@ class HomeTab extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     style: flatButtonStyle,
-                    onPressed: () => {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => HistoryScreen()));
+                    },
                     child:
                         Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
                       Icon(Icons.history),
