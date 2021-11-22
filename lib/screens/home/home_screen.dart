@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeTab(),
     TutorsTab(),
     CoursesTab(),
-    ChatsTab(),
+    // ChatsTab(),
     SettingsTab(),
   ];
 
@@ -53,10 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.picture_as_pdf),
             label: 'Courses',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Chats',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.message),
+          //   label: 'Chats',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
