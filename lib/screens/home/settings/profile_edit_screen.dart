@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -18,12 +19,11 @@ class ProfileEditScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
               Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 15),
                 child: Stack(
                   children: <Widget>[
                     ClipOval(
@@ -51,17 +51,11 @@ class ProfileEditScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               NameTextField(controller: null),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               EmailTextField(controller: null),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               PasswordTextField(controller: null),
               SizedBox(
                 height: 30,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -19,23 +20,16 @@ class PasswordChangeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
               PasswordTextField(controller: null),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               PasswordTextField(
                 controller: null,
                 title: 'New password',
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               ConfirmPasswordTextField(
                   passwordController: null, confirmPasswordController: null),
               SizedBox(

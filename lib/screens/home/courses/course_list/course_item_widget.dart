@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/screens/home/courses/course_detail/course_detail_screen.dart';
@@ -27,19 +28,19 @@ class CourseItemWidget extends StatelessWidget {
                     blurRadius: 3,
                     offset: Offset(0, 3))
               ]),
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(AppSizes.cardPadding),
           child: Container(
             color: Colors.white,
             child: Column(
               children: <Widget>[
                 Container(
-                    // padding: EdgeInsets.symmetric(vertical: 15),
                     alignment: Alignment.centerLeft,
                     child: Text(course.name,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15))),
+                            fontWeight: FontWeight.bold,
+                            fontSize: AppSizes.normalTextSize))),
                 SizedBox(
-                  height: 10,
+                  height: AppSizes.horizontalItemSpacing,
                 ),
                 Container(
                   height: 120,
@@ -56,7 +57,8 @@ class CourseItemWidget extends StatelessWidget {
                           flex: 1,
                           child: Text(course.shortDescription,
                               style: TextStyle(
-                                  color: AppTheme.textColor, fontSize: 10))),
+                                  color: AppTheme.textColor,
+                                  fontSize: AppSizes.smallTextSize))),
                     ],
                   ),
                 ),
@@ -64,8 +66,9 @@ class CourseItemWidget extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: Text(
                       '${course.experienceLevel} - ${course.courseLength} topics',
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: AppSizes.smallTextSize,
+                          fontWeight: FontWeight.bold)),
                 )
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_detail_screen.dart';
@@ -62,7 +63,8 @@ class TutorItemWidget extends StatelessWidget {
                               width: 5,
                             ),
                             Text(tutor.countryName,
-                                style: TextStyle(fontSize: 11))
+                                style:
+                                    TextStyle(fontSize: AppSizes.smallTextSize))
                           ],
                         ),
                         Row(
@@ -101,7 +103,7 @@ class TutorItemWidget extends StatelessWidget {
                   ],
                 )),
             SizedBox(
-              height: 10,
+              height: AppSizes.verticalItemSpacing,
             ),
             Container(
               height: 50,
@@ -109,7 +111,9 @@ class TutorItemWidget extends StatelessWidget {
               child: Text(tutor.description,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
-                  style: TextStyle(color: AppTheme.textColor, fontSize: 11)),
+                  style: TextStyle(
+                      color: AppTheme.textColor,
+                      fontSize: AppSizes.smallTextSize)),
             ),
           ],
         ),

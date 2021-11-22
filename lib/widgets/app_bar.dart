@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/config/utility.dart';
 
@@ -23,7 +24,8 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         title: Text(
           title,
-          style: TextStyle(color: AppTheme.mainColor, fontSize: 18),
+          style: TextStyle(
+              color: AppTheme.mainColor, fontSize: AppSizes.normalTextSize),
         ));
   }
 

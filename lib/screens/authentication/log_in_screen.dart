@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/config/utility.dart';
 import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
@@ -41,7 +42,9 @@ class LoginScreen extends StatelessWidget {
             ),
             Text(
               'Facebook',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: AppSizes.smallTextSize,
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),
@@ -60,7 +63,9 @@ class LoginScreen extends StatelessWidget {
             ),
             Text(
               'Google',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: AppSizes.smallTextSize,
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),
@@ -73,19 +78,18 @@ class LoginScreen extends StatelessWidget {
       ),
       backgroundColor: AppTheme.backgroundColor,
       body: Container(
-        margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.all(AppSizes.pagePadding),
         child: Column(
           children: <Widget>[
             EmailTextField(controller: _emailController),
             SizedBox(
-              height: 10,
+              height: AppSizes.verticalItemSpacing,
             ),
             PasswordTextField(
               controller: _passwordController,
             ),
             SizedBox(
-              height: 10,
+              height: AppSizes.verticalItemSpacing,
             ),
             Container(
               alignment: Alignment.centerRight,
@@ -98,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                   }),
             ),
             SizedBox(
-              height: 10,
+              height: AppSizes.verticalItemSpacing,
             ),
             SubmitButton(
                 text: 'Login',
@@ -108,14 +112,14 @@ class LoginScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => HomeScreen()));
                 }),
             SizedBox(
-              height: 20,
+              height: AppSizes.verticalItemSpacing,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 facebookLoginButton,
                 SizedBox(
-                  width: 10,
+                  width: AppSizes.horizontalItemSpacing,
                 ),
                 googleLoginButton
               ],

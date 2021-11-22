@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 
 class AppFlatButton extends StatelessWidget {
@@ -18,7 +19,7 @@ class AppFlatButton extends StatelessWidget {
     return TextButton(
       style: flatButtonStyle,
       onPressed: function,
-      child: Text(text, style: TextStyle(fontSize: 14)),
+      child: Text(text, style: TextStyle(fontSize: AppSizes.normalTextSize)),
     );
   }
 }

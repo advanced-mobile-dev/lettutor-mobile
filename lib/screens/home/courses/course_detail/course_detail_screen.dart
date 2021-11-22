@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -10,13 +11,16 @@ class CourseDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final courseNameTextStyle = TextStyle(
-        color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold);
+        color: Colors.black,
+        fontSize: AppSizes.largeTextSize,
+        fontWeight: FontWeight.bold);
     final titleTextStyle = TextStyle(
       color: AppTheme.mainColor,
-      fontSize: 15,
+      fontSize: AppSizes.normalTextSize,
       fontWeight: FontWeight.bold,
     );
-    final contentTextStyle = TextStyle(color: Colors.black, fontSize: 13);
+    final contentTextStyle =
+        TextStyle(color: Colors.black, fontSize: AppSizes.normalTextSize);
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
@@ -30,8 +34,8 @@ class CourseDetail extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Container(
+                padding: EdgeInsets.all(AppSizes.pagePadding),
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -40,76 +44,80 @@ class CourseDetail extends StatelessWidget {
                       style: courseNameTextStyle,
                     ),
                     SizedBox(
-                      height: 10,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
                       course.shortDescription,
                       style: contentTextStyle,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
                       'Overview',
                       style: titleTextStyle,
                     ),
                     SizedBox(
-                      height: 2,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.horizontalItemSpacing),
                       child: Text(
                         course.overview,
                         style: contentTextStyle,
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
                       'Experience Level',
                       style: titleTextStyle,
                     ),
                     SizedBox(
-                      height: 2,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.horizontalItemSpacing),
                       child: Text(
                         course.experienceLevel,
                         style: contentTextStyle,
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
                       'Course length',
                       style: titleTextStyle,
                     ),
                     SizedBox(
-                      height: 2,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.horizontalItemSpacing),
                       child: Text(
                         '${course.courseLength} topics',
                         style: contentTextStyle,
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
                       'List topics',
                       style: titleTextStyle,
                     ),
                     SizedBox(
-                      height: 2,
+                      height: AppSizes.verticalItemSpacing,
                     ),
                     ...course.topics
                         .map((e) => Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSizes.horizontalItemSpacing),
                               child: Text(
                                 e,
                                 style: contentTextStyle,
@@ -123,22 +131,4 @@ class CourseDetail extends StatelessWidget {
       ),
     );
   }
-}
-
-_buildFlatButton({Widget icon, Function() function, String title}) {
-  final ButtonStyle buttonStyle = TextButton.styleFrom(
-      primary: AppTheme.mainColor, backgroundColor: Colors.transparent);
-  return TextButton(
-      onPressed: function,
-      style: buttonStyle,
-      child: Column(
-        children: <Widget>[
-          icon,
-          SizedBox(
-            height: 4,
-          ),
-          Text(title,
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 14))
-        ],
-      ));
 }

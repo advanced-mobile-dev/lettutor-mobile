@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 
 class SubmitButton extends StatelessWidget {
@@ -35,7 +36,9 @@ class SubmitButton extends StatelessWidget {
           ),
           Text(
             text,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+            style: TextStyle(
+                fontSize: AppSizes.normalTextSize,
+                fontWeight: FontWeight.normal),
           )
         ],
       ),

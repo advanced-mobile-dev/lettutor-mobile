@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/feedback.dart';
 import 'package:lettutor_app/models/tutor.dart';
@@ -16,18 +17,13 @@ class HistoryScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 15,
-              ),
               HistoryItem(
                 tutor: Tutor.data,
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
                 tutor: Tutor.data1,
                 feedback: LearnerFeedback(
@@ -35,9 +31,7 @@ class HistoryScreen extends StatelessWidget {
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
                 tutor: Tutor.data2,
                 feedback: LearnerFeedback(
@@ -45,9 +39,7 @@ class HistoryScreen extends StatelessWidget {
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
                 tutor: Tutor.data3,
                 feedback: LearnerFeedback(
@@ -55,9 +47,7 @@ class HistoryScreen extends StatelessWidget {
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
             ],
           ),
         ),
@@ -83,7 +73,7 @@ class HistoryItem extends StatelessWidget {
                 blurRadius: 3,
                 offset: Offset(0, 3))
           ]),
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(AppSizes.cardPadding),
       child: Column(
         children: <Widget>[
           Container(
@@ -129,7 +119,8 @@ class HistoryItem extends StatelessWidget {
                                   width: 5,
                                 ),
                                 Text(tutor.countryName,
-                                    style: TextStyle(fontSize: 11))
+                                    style: TextStyle(
+                                        fontSize: AppSizes.smallTextSize))
                               ],
                             ),
                           ],
@@ -139,7 +130,9 @@ class HistoryItem extends StatelessWidget {
                   )),
                   Container(
                     child: Text('3 days ago',
-                        style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        style: TextStyle(
+                            fontSize: AppSizes.smallTextSize,
+                            color: Colors.grey)),
                     alignment: Alignment.topRight,
                   )
                 ],
@@ -192,8 +185,11 @@ class HistoryItem extends StatelessWidget {
 
   _buildDataRow({String title, IconData iconData, String content}) {
     final titleStyle = TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 12, color: AppTheme.mainColor);
-    final contentStyle = TextStyle(fontWeight: FontWeight.normal, fontSize: 12);
+        fontWeight: FontWeight.bold,
+        fontSize: AppSizes.smallTextSize,
+        color: AppTheme.mainColor);
+    final contentStyle = TextStyle(
+        fontWeight: FontWeight.normal, fontSize: AppSizes.smallTextSize);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 
 class TutorFilterWidget extends StatefulWidget {
   @override
@@ -6,7 +7,8 @@ class TutorFilterWidget extends StatefulWidget {
 }
 
 class _TutorFilterWidgetState extends State<TutorFilterWidget> {
-  final textStyle = TextStyle(color: Colors.black, fontSize: 12);
+  final textStyle =
+      TextStyle(color: Colors.black, fontSize: AppSizes.smallTextSize);
   final specialities = [
     'All',
     'English for kids',
@@ -40,7 +42,7 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
                 color: Colors.black,
               ),
               hintText: 'Search by name...',
-              hintStyle: TextStyle(fontSize: 14)),
+              hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
         ),
         SizedBox(
           height: 10,

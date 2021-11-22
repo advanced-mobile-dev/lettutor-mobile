@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 
@@ -15,23 +16,25 @@ class TutorReviews extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Reviews',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: AppSizes.normalTextSize,
+                    fontWeight: FontWeight.bold),
               )),
           SizedBox(
-            height: 10,
+            height: AppSizes.verticalItemSpacing,
           ),
           Column(
             children: <Widget>[
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
             ],
           ),
         ],
@@ -48,7 +51,7 @@ class RatingComment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: EdgeInsets.all(AppSizes.cardPadding),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),

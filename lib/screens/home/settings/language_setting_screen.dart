@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 
@@ -8,7 +9,7 @@ class LanguageSettingScreen extends StatelessWidget {
     final ButtonStyle textButtonStyle = TextButton.styleFrom(
         primary: Colors.black,
         padding: EdgeInsets.all(15),
-        textStyle: TextStyle(fontSize: 16));
+        textStyle: TextStyle(fontSize: AppSizes.normalTextSize));
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: AppTheme.backgroundColor,

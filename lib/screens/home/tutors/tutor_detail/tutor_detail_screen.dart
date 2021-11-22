@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
@@ -23,12 +24,9 @@ class TutorDetail extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 10,
-              ),
               Container(
                   height: 110,
                   child: Row(
@@ -40,7 +38,7 @@ class TutorDetail extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: AppSizes.horizontalItemSpacing,
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -49,7 +47,8 @@ class TutorDetail extends StatelessWidget {
                           Text(
                             tutor.name,
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: AppSizes.normalTextSize,
+                                fontWeight: FontWeight.bold),
                           ),
                           Row(
                             children: [
@@ -65,7 +64,7 @@ class TutorDetail extends StatelessWidget {
                                 child: RatingBar.builder(
                                   initialRating: tutor.rating,
                                   ignoreGestures: true,
-                                  itemSize: 15,
+                                  itemSize: AppSizes.normalTextSize,
                                   direction: Axis.horizontal,
                                   allowHalfRating: true,
                                   itemCount: 5,
@@ -96,20 +95,23 @@ class TutorDetail extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(tutor.countryName,
-                                  style: TextStyle(fontSize: 14)),
+                                  style: TextStyle(
+                                    fontSize: AppSizes.normalTextSize,
+                                  )),
                             ],
                           ),
                         ],
                       ),
                     ],
                   )),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                child: Text(
-                  tutor.description,
-                ),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
+              ),
+              Text(
+                tutor.description,
+              ),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
               ),
               SubmitButton(
                 text: 'Calendar',
@@ -124,7 +126,7 @@ class TutorDetail extends StatelessWidget {
                 icon: Icon(Icons.calendar_today),
               ),
               SizedBox(
-                height: 10,
+                height: AppSizes.verticalItemSpacing,
               ),
               Container(
                 child: Row(
@@ -156,6 +158,9 @@ class TutorDetail extends StatelessWidget {
                 thickness: 1,
                 height: 10,
               ),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
+              ),
               TutorDescription(),
               TutorReviews()
             ],
@@ -179,7 +184,9 @@ _buildFlatButton({Widget icon, Function() function, String title}) {
             height: 4,
           ),
           Text(title,
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 14))
+              style: TextStyle(
+                  fontWeight: FontWeight.w300,
+                  fontSize: AppSizes.normalTextSize))
         ],
       ));
 }

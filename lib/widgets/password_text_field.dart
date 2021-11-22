@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 
 class PasswordTextField extends StatelessWidget {
@@ -12,7 +13,9 @@ class PasswordTextField extends StatelessWidget {
         children: <Widget>[
           Text(title,
               textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 14, color: AppTheme.mainColor)),
+              style: TextStyle(
+                  fontSize: AppSizes.normalTextSize,
+                  color: AppTheme.mainColor)),
           SizedBox(
             height: 5,
           ),

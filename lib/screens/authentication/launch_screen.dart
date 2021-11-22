@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/screens/authentication/log_in_screen.dart';
 import 'package:lettutor_app/screens/authentication/sign_up_screen.dart';
@@ -63,7 +64,7 @@ class LaunchScreen extends StatelessWidget {
             ],
           ),
           Container(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(AppSizes.pagePadding),
             child: Column(
               children: [
                 ElevatedButton(
@@ -75,7 +76,7 @@ class LaunchScreen extends StatelessWidget {
                   },
                   child: Text(
                     'Sign up',
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: AppSizes.largeTextSize),
                   ),
                 ),
                 SizedBox(
@@ -90,7 +91,7 @@ class LaunchScreen extends StatelessWidget {
                   },
                   child: Text(
                     'Login',
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: AppSizes.largeTextSize),
                   ),
                 ),
               ],

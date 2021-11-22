@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 
 class EmailTextField extends StatelessWidget {
@@ -11,7 +12,9 @@ class EmailTextField extends StatelessWidget {
         children: <Widget>[
           Text('Email',
               textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 14, color: AppTheme.mainColor)),
+              style: TextStyle(
+                  fontSize: AppSizes.normalTextSize,
+                  color: AppTheme.mainColor)),
           SizedBox(
             height: 5,
           ),

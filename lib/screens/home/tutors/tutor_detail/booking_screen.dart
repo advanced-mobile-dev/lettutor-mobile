@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -13,15 +14,18 @@ class BookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titleTextStyle = TextStyle(
-        color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold);
-    final contentTextStyle = TextStyle(color: AppTheme.textColor, fontSize: 12);
+        color: Colors.black,
+        fontSize: AppSizes.normalTextSize,
+        fontWeight: FontWeight.bold);
+    final contentTextStyle =
+        TextStyle(color: AppTheme.textColor, fontSize: AppSizes.normalTextSize);
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
         title: 'Book a class',
       ),
       body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -36,7 +40,7 @@ class BookingScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: AppSizes.horizontalItemSpacing,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -45,7 +49,8 @@ class BookingScreen extends StatelessWidget {
                             Text(
                               tutor.name,
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: AppSizes.normalTextSize,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Row(
                               children: [
@@ -61,7 +66,7 @@ class BookingScreen extends StatelessWidget {
                                   child: RatingBar.builder(
                                     initialRating: tutor.rating,
                                     ignoreGestures: true,
-                                    itemSize: 15,
+                                    itemSize: AppSizes.normalTextSize,
                                     direction: Axis.horizontal,
                                     allowHalfRating: true,
                                     itemCount: 5,
@@ -92,7 +97,8 @@ class BookingScreen extends StatelessWidget {
                                   width: 5,
                                 ),
                                 Text(tutor.countryName,
-                                    style: TextStyle(fontSize: 14))
+                                    style: TextStyle(
+                                        fontSize: AppSizes.normalTextSize))
                               ],
                             ),
                           ],
@@ -100,14 +106,14 @@ class BookingScreen extends StatelessWidget {
                       ],
                     )),
                 SizedBox(
-                  height: 20,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Text(
                   'Booking time',
                   style: titleTextStyle,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
@@ -117,11 +123,11 @@ class BookingScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Text('Balance', style: titleTextStyle),
                 SizedBox(
-                  height: 5,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
@@ -131,11 +137,11 @@ class BookingScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Text('Price', style: titleTextStyle),
                 SizedBox(
-                  height: 5,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
@@ -145,14 +151,14 @@ class BookingScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 SubmitButton(
                   text: 'Book',
                   function: () {},
                 ),
                 SizedBox(
-                  height: 10,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 SubmitButton(
                   text: 'Cancel',

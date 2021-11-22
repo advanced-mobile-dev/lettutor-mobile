@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 
 class AppOutlineButton extends StatelessWidget {
   final String text;
@@ -35,7 +36,9 @@ class AppOutlineButton extends StatelessWidget {
               width: 5,
             ),
             Text(text,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400))
+                style: TextStyle(
+                    fontSize: AppSizes.smallTextSize,
+                    fontWeight: FontWeight.w400))
           ],
         ));
   }

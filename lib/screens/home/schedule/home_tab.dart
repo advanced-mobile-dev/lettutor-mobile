@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/schedule/history_screen.dart';
@@ -9,13 +10,13 @@ class HomeTab extends StatelessWidget {
     primary: Colors.white,
   );
 
-  final double _horizontalPadding = 20;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           Container(
+            padding: EdgeInsets.only(left: AppSizes.pagePadding),
             height: 105,
             color: AppTheme.mainColor,
             child: Column(
@@ -36,36 +37,31 @@ class HomeTab extends StatelessWidget {
                       ),
                       Text(
                         'History',
-                        style: TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: AppSizes.normalTextSize),
                       )
                     ]),
                   ),
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(left: _horizontalPadding),
                   child: Text(
                     'Total learned time',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                        fontSize: AppSizes.normalTextSize,
                         color: Colors.white),
                   ),
-                ),
-                SizedBox(
-                  height: 5,
                 ),
                 Text('36 hours 12 minutes',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                        fontSize: AppSizes.largeTextSize,
                         color: Colors.white)),
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: _horizontalPadding, vertical: 15),
+            padding: const EdgeInsets.all(AppSizes.pagePadding),
             child: Column(
               children: <Widget>[
                 UpcommingLessonItem(
@@ -74,30 +70,24 @@ class HomeTab extends StatelessWidget {
                   endMeeting: DateTime.now(),
                   upcommingLesson: true,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: AppSizes.verticalItemSpacing),
                 UpcommingLessonItem(
                     tutor: Tutor.data1,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: AppSizes.verticalItemSpacing),
                 UpcommingLessonItem(
                     tutor: Tutor.data2,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: AppSizes.verticalItemSpacing),
                 UpcommingLessonItem(
                     tutor: Tutor.data3,
                     startMeeting: DateTime.now(),
                     endMeeting: DateTime.now()),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
