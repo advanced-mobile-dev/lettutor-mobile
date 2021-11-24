@@ -1,11 +1,8 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/screen_arguments.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/course.dart';
-import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/authentication/start_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:lettutor_app/screens/authentication/log_in_screen.dart';
@@ -36,8 +33,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
       routes: _registerRoutes(),
+      initialRoute: LettutorRoutes.start,
       onGenerateRoute: _registerRoutesWithParameters,
     );
   }
