@@ -4,9 +4,9 @@ import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 
-class CourseDetail extends StatelessWidget {
+class CourseDetailScreen extends StatelessWidget {
   final Course course;
-  CourseDetail({@required this.course});
+  CourseDetailScreen({@required this.course});
 
   @override
   Widget build(BuildContext context) {

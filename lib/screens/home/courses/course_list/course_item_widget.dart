@@ -13,7 +13,7 @@ class CourseItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => CourseDetail(
+            builder: (context) => CourseDetailScreen(
                   course: course,
                 )));
       },

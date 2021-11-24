@@ -5,8 +5,8 @@ class LettutorRoutes {
   static const signUp = 'sign-up';
   static const signIn = 'sign-in';
   static const history = 'history';
-  static const teacherProfile = 'teacher-profile';
-  static const teacherCalendar = 'teacher-calendar';
+  static const tutorProfile = 'tutor-profile';
+  static const tutorCalendar = 'tutor-calendar';
   static const booking = 'booking';
   static const courseDetail = 'course-detail';
   static const userProfile = 'user-profile';

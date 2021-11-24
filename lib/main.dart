@@ -1,7 +1,24 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/config/screen_arguments.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/screens/authentication/launch_screen.dart';
+import 'package:lettutor_app/models/course.dart';
+import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/screens/authentication/start_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:lettutor_app/screens/authentication/log_in_screen.dart';
+import 'package:lettutor_app/screens/authentication/sign_up_screen.dart';
+import 'package:lettutor_app/screens/home/courses/course_detail/course_detail_screen.dart';
+import 'package:lettutor_app/screens/home/home_screen.dart';
+import 'package:lettutor_app/screens/home/schedule/history_screen.dart';
+import 'package:lettutor_app/screens/home/settings/language_setting_screen.dart';
+import 'package:lettutor_app/screens/home/settings/password_change_screen.dart';
+import 'package:lettutor_app/screens/home/settings/profile_edit_screen.dart';
+import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
+import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
+import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,13 +37,57 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
+      routes: _registerRoutes(),
+      onGenerateRoute: _registerRoutesWithParameters,
     );
+  }
+
+  Map<String, WidgetBuilder> _registerRoutes() {
+    return <String, WidgetBuilder>{
+      LettutorRoutes.home: (context) => HomeScreen(),
+      // LettutorRoutes.loading: LoadingScreen(),
+      LettutorRoutes.start: (context) => StartScreen(),
+      LettutorRoutes.signUp: (context) => SignUpScreen(),
+      LettutorRoutes.signIn: (context) => LoginScreen(),
+      LettutorRoutes.history: (context) => HistoryScreen(),
+      LettutorRoutes.tutorProfile: (context) => TutorDescription(),
+      LettutorRoutes.tutorCalendar: (context) => TutorCalendarScreen(),
+// LettutorRoutes.booking : BookingScreen(tutor: tutor, time: time);
+// LettutorRoutes.courseDetail : CourseDetail(course: course),
+      LettutorRoutes.userProfile: (context) => ProfileEditScreen(),
+      LettutorRoutes.changePassword: (context) => PasswordChangeScreen(),
+      LettutorRoutes.languageSetting: (context) => LanguageSettingScreen()
+    };
+  }
+
+  Route<dynamic> _registerRoutesWithParameters(RouteSettings routeSettings) {
+    switch (routeSettings.name) {
+      case LettutorRoutes.booking:
+        final args = routeSettings.arguments as BookingScreenArguments;
+        return MaterialPageRoute(
+          builder: (context) =>
+              BookingScreen(tutor: args.tutor, time: args.time),
+        );
+
+        break;
+
+      case LettutorRoutes.courseDetail:
+        final courseDetail = routeSettings.arguments as Course;
+        return MaterialPageRoute(
+            builder: (context) => CourseDetailScreen(course: courseDetail));
+
+        break;
+      default:
+    }
+
+    // return ErrorScreen();
+    return null;
   }
 }
 
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LaunchScreen();
+    return StartScreen();
   }
 }
