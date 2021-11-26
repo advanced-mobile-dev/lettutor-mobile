@@ -69,7 +69,7 @@ class TutorDescription extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                color: AppTheme.mainColor,
+                color: AppTheme.primaryColor,
               ),
             ),
           ],
@@ -92,10 +92,11 @@ class TutorDescription extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5), color: AppTheme.mainColor2),
+            borderRadius: BorderRadius.circular(5),
+            color: AppTheme.secondaryColor),
         child: Text(
           text,
-          style: TextStyle(color: AppTheme.mainColor),
+          style: TextStyle(color: AppTheme.primaryColor),
         ));
   }
 }

@@ -13,19 +13,19 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
-              color: AppTheme.mainColor,
+              color: AppTheme.primaryColor,
             ),
             onPressed: () {
               Utility.hideKeyboard(context);
               Navigator.pop(context);
             }),
-        backgroundColor: AppTheme.mainColor2,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         title: Text(
           title,
           style: TextStyle(
-              color: AppTheme.mainColor, fontSize: AppSizes.normalTextSize),
+              color: AppTheme.primaryColor, fontSize: AppSizes.largeTextSize),
         ));
   }
 

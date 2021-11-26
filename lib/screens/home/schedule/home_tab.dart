@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/schedule/history_screen.dart';
@@ -18,7 +19,7 @@ class HomeTab extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: AppSizes.pagePadding),
             height: 105,
-            color: AppTheme.mainColor,
+            color: AppTheme.primaryColor,
             child: Column(
               children: <Widget>[
                 Container(
@@ -26,8 +27,7 @@ class HomeTab extends StatelessWidget {
                   child: TextButton(
                     style: flatButtonStyle,
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => HistoryScreen()));
+                      Navigator.of(context).pushNamed(LettutorRoutes.history);
                     },
                     child:
                         Row(mainAxisSize: MainAxisSize.min, children: <Widget>[

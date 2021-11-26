@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
@@ -116,13 +117,11 @@ class TutorDetail extends StatelessWidget {
               SubmitButton(
                 text: 'Calendar',
                 function: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TutorCalendarScreen(
-                            tutor: tutor,
-                          )));
+                  Navigator.of(context).pushNamed(LettutorRoutes.tutorCalendar,
+                      arguments: tutor);
                 },
                 backgroundColor: Colors.white,
-                textColor: AppTheme.mainColor,
+                textColor: AppTheme.primaryColor,
                 icon: Icon(Icons.calendar_today),
               ),
               SizedBox(
@@ -173,7 +172,7 @@ class TutorDetail extends StatelessWidget {
 
 _buildFlatButton({Widget icon, Function() function, String title}) {
   final ButtonStyle buttonStyle = TextButton.styleFrom(
-      primary: AppTheme.mainColor, backgroundColor: Colors.transparent);
+      primary: AppTheme.primaryColor, backgroundColor: Colors.transparent);
   return TextButton(
       onPressed: function,
       style: buttonStyle,

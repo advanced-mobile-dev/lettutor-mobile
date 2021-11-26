@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/feedback.dart';
 import 'package:lettutor_app/models/tutor.dart';
@@ -83,10 +84,9 @@ class HistoryItem extends StatelessWidget {
                   Expanded(
                       child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => TutorDetail(
-                                tutor: tutor,
-                              )));
+                      Navigator.of(context).pushNamed(
+                          LettutorRoutes.tutorProfile,
+                          arguments: tutor);
                     },
                     child: Row(
                       children: [
@@ -174,7 +174,7 @@ class HistoryItem extends StatelessWidget {
                     text: 'Feedback',
                     function: () {},
                     iconData: Icons.comment,
-                    color: AppTheme.mainColor,
+                    color: AppTheme.primaryColor,
                   ),
                 )
               : SizedBox()
@@ -187,7 +187,7 @@ class HistoryItem extends StatelessWidget {
     final titleStyle = TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: AppSizes.smallTextSize,
-        color: AppTheme.mainColor);
+        color: AppTheme.primaryColor);
     final contentStyle = TextStyle(
         fontWeight: FontWeight.normal, fontSize: AppSizes.smallTextSize);
     return Row(
@@ -196,7 +196,7 @@ class HistoryItem extends StatelessWidget {
         Icon(
           iconData,
           size: 15,
-          color: AppTheme.mainColor,
+          color: AppTheme.primaryColor,
         ),
         SizedBox(
           width: 5,

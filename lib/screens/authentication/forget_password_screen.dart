@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
@@ -18,14 +18,6 @@ class ForgetPasswordScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Reset password',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: AppSizes.largeTextSize,
-                    fontWeight: FontWeight.bold)),
-            SizedBox(
-              height: AppSizes.verticalItemSpacing,
-            ),
             Text('Please enter your email address to search for your account.',
                 maxLines: 2,
                 style: TextStyle(
@@ -34,9 +26,14 @@ class ForgetPasswordScreen extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            EmailTextField(controller: _emailController),
+            CustomTextField(
+              title: "Email",
+              controller: _emailController,
+              iconData: Icons.email,
+              keyboardType: TextInputType.emailAddress,
+            ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 5,
             ),
             SubmitButton(text: 'Send reset link', function: () {})
           ],

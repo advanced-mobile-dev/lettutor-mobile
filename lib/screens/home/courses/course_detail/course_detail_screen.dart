@@ -15,7 +15,7 @@ class CourseDetailScreen extends StatelessWidget {
         fontSize: AppSizes.largeTextSize,
         fontWeight: FontWeight.bold);
     final titleTextStyle = TextStyle(
-      color: AppTheme.mainColor,
+      color: AppTheme.primaryColor,
       fontSize: AppSizes.normalTextSize,
       fontWeight: FontWeight.bold,
     );

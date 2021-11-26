@@ -17,9 +17,9 @@ class AppIcons {
   static final Widget facebookIcon = SvgPicture.asset(_facebookIconPath);
   static final Widget googleIcon = SvgPicture.asset(_googleIconPath);
   static final Widget chatIcon =
-      SvgPicture.asset(_chatIconPath, color: AppTheme.mainColor);
+      SvgPicture.asset(_chatIconPath, color: AppTheme.primaryColor);
   static final Widget favoriteIcon =
-      SvgPicture.asset(_favoriteIconPath, color: AppTheme.mainColor);
+      SvgPicture.asset(_favoriteIconPath, color: AppTheme.primaryColor);
 
   static final Widget languageIcon = SvgPicture.asset(_languageIconPath);
   static final Widget listIcon = SvgPicture.asset(_listIconPath);

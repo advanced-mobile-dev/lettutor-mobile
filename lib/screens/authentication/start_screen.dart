@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/screens/authentication/log_in_screen.dart';
 import 'package:lettutor_app/screens/authentication/sign_up_screen.dart';
@@ -20,7 +21,7 @@ class StartScreen extends StatelessWidget {
 
     final ButtonStyle raisedButtonStyle1 = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: AppTheme.mainColor,
+      primary: AppTheme.primaryColor,
       minimumSize: Size(double.infinity, 60),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -28,7 +29,7 @@ class StartScreen extends StatelessWidget {
     );
 
     final ButtonStyle raisedButtonStyle2 = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.mainColor,
+      onPrimary: AppTheme.primaryColor,
       primary: Colors.white,
       minimumSize: Size(double.infinity, 60),
       shape: const RoundedRectangleBorder(
@@ -70,12 +71,10 @@ class StartScreen extends StatelessWidget {
                 ElevatedButton(
                   style: raisedButtonStyle1,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SignUpScreen(),
-                    ));
+                    Navigator.of(context).pushNamed(LettutorRoutes.signIn);
                   },
                   child: Text(
-                    'Sign up',
+                    'Login',
                     style: TextStyle(fontSize: AppSizes.largeTextSize),
                   ),
                 ),
@@ -85,12 +84,10 @@ class StartScreen extends StatelessWidget {
                 ElevatedButton(
                   style: raisedButtonStyle2,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ));
+                    Navigator.of(context).pushNamed(LettutorRoutes.signUp);
                   },
                   child: Text(
-                    'Login',
+                    'Sign up',
                     style: TextStyle(fontSize: AppSizes.largeTextSize),
                   ),
                 ),

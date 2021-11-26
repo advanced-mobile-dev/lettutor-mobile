@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/course.dart';
-import 'package:lettutor_app/screens/home/courses/course_detail/course_detail_screen.dart';
 
 class CourseItemWidget extends StatelessWidget {
   final Course course;
@@ -12,10 +12,8 @@ class CourseItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => CourseDetailScreen(
-                  course: course,
-                )));
+        Navigator.of(context)
+            .pushNamed(LettutorRoutes.courseDetail, arguments: course);
       },
       child: Container(
           decoration: BoxDecoration(

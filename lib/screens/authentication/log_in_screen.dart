@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/config/utility.dart';
 import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
 import 'package:lettutor_app/screens/home/home_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/flat_button.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
-import 'package:lettutor_app/widgets/password_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
         new TextEditingController();
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.mainColor,
+      onPrimary: AppTheme.primaryColor,
       primary: Colors.white,
       minimumSize: Size(100, 30),
       shape: const RoundedRectangleBorder(
@@ -76,43 +76,52 @@ class LoginScreen extends StatelessWidget {
       appBar: ApplicationAppBar(
         title: 'Login',
       ),
-      backgroundColor: AppTheme.backgroundColor,
+      backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.all(AppSizes.pagePadding),
         child: Column(
           children: <Widget>[
-            EmailTextField(controller: _emailController),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 4,
             ),
-            PasswordTextField(
+            CustomTextField(
+              controller: _emailController,
+              title: 'Email',
+              iconData: Icons.email,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            SizedBox(
+              height: AppSizes.verticalItemSpacing * 3,
+            ),
+            CustomTextField(
               controller: _passwordController,
+              title: 'Password',
+              iconData: Icons.lock,
+              keyboardType: TextInputType.visiblePassword,
+              isPasswordTextField: true,
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 2,
             ),
             Container(
               alignment: Alignment.centerRight,
               child: AppFlatButton(
                   text: 'Forget password?',
                   function: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ForgetPasswordScreen(),
-                    ));
+                    Navigator.of(context)
+                        .pushNamed(LettutorRoutes.forgetPassword);
                   }),
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 2,
             ),
             SubmitButton(
                 text: 'Login',
                 function: () {
-                  Utility.hideKeyboard(context);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.of(context).pushNamed(LettutorRoutes.home);
                 }),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 2,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

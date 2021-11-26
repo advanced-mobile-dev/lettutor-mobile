@@ -3,9 +3,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
-import 'package:lettutor_app/widgets/name_text_field.dart';
-import 'package:lettutor_app/widgets/password_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
 class ProfileEditScreen extends StatelessWidget {
@@ -51,18 +49,24 @@ class ProfileEditScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              NameTextField(controller: null),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              EmailTextField(controller: null),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              PasswordTextField(controller: null),
-              SizedBox(
-                height: 30,
+              SizedBox(height: AppSizes.verticalItemSpacing * 3),
+              CustomTextField(
+                title: "Name",
+                controller: null,
+                iconData: Icons.account_box,
+                keyboardType: TextInputType.text,
               ),
-              Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: SubmitButton(text: 'Save', function: () {}))
+              SizedBox(height: AppSizes.verticalItemSpacing * 3),
+              CustomTextField(
+                title: "Email",
+                controller: null,
+                iconData: Icons.email,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing * 5,
+              ),
+              Container(child: SubmitButton(text: 'Save', function: () {}))
             ],
           ),
         ),

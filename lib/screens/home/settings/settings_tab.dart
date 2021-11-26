@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/user.dart';
 import 'package:lettutor_app/screens/home/settings/language_setting_screen.dart';
 import 'package:lettutor_app/screens/home/settings/password_change_screen.dart';
@@ -71,22 +72,22 @@ class SettingsTab extends StatelessWidget {
                   SettingItem(
                     title: 'Edit profile',
                     function: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ProfileEditScreen()));
+                      Navigator.of(context)
+                          .pushNamed(LettutorRoutes.userProfile);
                     },
                   ),
                   SettingItem(
                     title: 'Change password',
                     function: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PasswordChangeScreen()));
+                      Navigator.of(context)
+                          .pushNamed(LettutorRoutes.changePassword);
                     },
                   ),
                   SettingItem(
                     title: 'Language',
                     function: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LanguageSettingScreen()));
+                      Navigator.of(context)
+                          .pushNamed(LettutorRoutes.languageSetting);
                     },
                   ),
                   Container(
@@ -112,7 +113,11 @@ class SettingsTab extends StatelessWidget {
             SizedBox(
               height: AppSizes.verticalItemSpacing,
             ),
-            SubmitButton(text: 'Logout', function: () {}),
+            SubmitButton(
+                text: 'Logout',
+                function: () {
+                  Navigator.pop(context);
+                }),
           ],
         ),
       ),

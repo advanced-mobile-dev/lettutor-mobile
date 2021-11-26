@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/schedule/video_conference.dart';
@@ -34,7 +35,7 @@ class UpcommingLessonItem extends StatelessWidget {
               ? Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
-                      color: AppTheme.mainColor,
+                      color: AppTheme.primaryColor,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10))),
@@ -182,11 +183,11 @@ class UpcommingLessonItem extends StatelessWidget {
                       AppOutlineButton(
                           text: 'Go to meeting',
                           function: () => {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => VideoConference()))
+                                Navigator.of(context)
+                                    .pushNamed(LettutorRoutes.videoConference)
                               },
                           iconData: Icons.video_call_rounded,
-                          color: AppTheme.mainColor),
+                          color: AppTheme.primaryColor),
                     ],
                   ),
                 )

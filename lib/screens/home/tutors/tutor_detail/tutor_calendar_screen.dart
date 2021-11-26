@@ -1,7 +1,8 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/config/screen_arguments.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 
 class TutorCalendarScreen extends StatelessWidget {
@@ -12,11 +13,11 @@ class TutorCalendarScreen extends StatelessWidget {
     _buildTimeFrame(String hour) {
       return GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => BookingScreen(
-                      tutor: tutor,
-                      time: '15:00 - 17:00, Monday 11/10/2021',
-                    )));
+            Navigator.of(context).pushNamed(LettutorRoutes.booking,
+                arguments: BookingScreenArguments(
+                  tutor: tutor,
+                  time: '15:00 - 17:00, Monday 11/10/2021',
+                ));
           },
           child: Container(
             alignment: Alignment.centerLeft,

@@ -166,7 +166,7 @@ class BookingScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   backgroundColor: Colors.white,
-                  textColor: AppTheme.mainColor,
+                  textColor: AppTheme.primaryColor,
                 ),
               ])),
     );

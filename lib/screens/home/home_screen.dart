@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppTheme.backgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: AppTheme.mainColor2,
+        backgroundColor: AppTheme.secondaryColor,
         elevation: 0,
         title: AppIcons.appLogo,
       ),
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Settings',
           ),
         ],
-        selectedItemColor: AppTheme.mainColor,
+        selectedItemColor: AppTheme.primaryColor,
         unselectedItemColor: AppTheme.unactiveColor,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,

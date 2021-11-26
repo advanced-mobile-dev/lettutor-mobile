@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/config/utility.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/confirm_password_text_field.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
-import 'package:lettutor_app/widgets/password_text_field.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -20,7 +16,7 @@ class SignUpScreen extends StatelessWidget {
         new TextEditingController();
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.mainColor,
+      onPrimary: AppTheme.primaryColor,
       primary: Colors.white,
       minimumSize: Size(100, 30),
       shape: const RoundedRectangleBorder(
@@ -82,21 +78,31 @@ class SignUpScreen extends StatelessWidget {
         padding: EdgeInsets.all(AppSizes.pagePadding),
         child: Column(
           children: <Widget>[
-            EmailTextField(
+            CustomTextField(
               controller: _emailController,
+              title: 'Email',
+              iconData: Icons.email,
+              keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 3,
             ),
-            PasswordTextField(
+            CustomTextField(
               controller: _passwordController,
+              title: 'Password',
+              iconData: Icons.lock,
+              keyboardType: TextInputType.visiblePassword,
+              isPasswordTextField: true,
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 3,
             ),
-            ConfirmPasswordTextField(
-              passwordController: _passwordController,
-              confirmPasswordController: _confirmPasswordController,
+            CustomTextField(
+              controller: _confirmPasswordController,
+              title: 'Confirm Password',
+              iconData: Icons.lock,
+              keyboardType: TextInputType.visiblePassword,
+              isPasswordTextField: true,
             ),
             SizedBox(
               height: 30,
