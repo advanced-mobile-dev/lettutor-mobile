@@ -6,7 +6,6 @@ class VideoConference extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
         title: 'Video conference',
       ),

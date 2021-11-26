@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/screens/home/chats/chats_tab.dart';
 import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
-import 'package:lettutor_app/screens/home/schedule/home_tab.dart';
+import 'package:lettutor_app/screens/home/schedule/schedule_tab.dart';
 import 'package:lettutor_app/screens/home/settings/settings_tab.dart';
 import 'package:lettutor_app/screens/home/tutors/tutors_tab.dart';
 import 'package:lettutor_app/widgets/icons.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    HomeTab(),
+    ScheduleTab(),
     TutorsTab(),
     CoursesTab(),
     // ChatsTab(),
@@ -31,14 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: AppTheme.secondaryColor,
-        elevation: 0,
-        title: AppIcons.appLogo,
+      body: Container(
+        margin: MediaQuery.of(context).padding,
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

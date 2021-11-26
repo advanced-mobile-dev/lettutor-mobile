@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/config/utility.dart';
-import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
-import 'package:lettutor_app/screens/home/home_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/flat_button.dart';
@@ -76,7 +73,6 @@ class LoginScreen extends StatelessWidget {
       appBar: ApplicationAppBar(
         title: 'Login',
       ),
-      backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.all(AppSizes.pagePadding),
         child: Column(

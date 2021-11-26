@@ -34,8 +34,9 @@ class MyApp extends StatelessWidget {
       title: 'Lettutor',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          backgroundColor: Colors.white,
+          primaryColor: AppTheme.primaryColor),
       routes: _registerRoutes(),
       initialRoute: LettutorRoutes.start,
       onGenerateRoute: _registerRoutesWithParameters,

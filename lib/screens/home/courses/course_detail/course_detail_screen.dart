@@ -22,7 +22,6 @@ class CourseDetailScreen extends StatelessWidget {
     final contentTextStyle =
         TextStyle(color: Colors.black, fontSize: AppSizes.normalTextSize);
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
         title: 'Course detail',
       ),

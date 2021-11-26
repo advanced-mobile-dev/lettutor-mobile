@@ -30,10 +30,8 @@ class CustomTextField extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide:
-                    BorderSide(color: AppTheme.primaryColor, width: 0.5),
+                borderSide: BorderSide(width: 0.5),
               ),
-              focusColor: AppTheme.primaryColor,
             ),
             keyboardType:
                 keyboardType == null ? TextInputType.text : keyboardType,

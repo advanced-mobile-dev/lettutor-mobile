@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/user.dart';
-import 'package:lettutor_app/screens/home/settings/language_setting_screen.dart';
-import 'package:lettutor_app/screens/home/settings/password_change_screen.dart';
-import 'package:lettutor_app/screens/home/settings/profile_edit_screen.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
 class SettingsTab extends StatelessWidget {
   final titleStyle = TextStyle(
-      color: Colors.black,
+      color: AppTheme.primaryColor,
       fontWeight: FontWeight.bold,
       fontSize: AppSizes.hugeTextSize);
   @override

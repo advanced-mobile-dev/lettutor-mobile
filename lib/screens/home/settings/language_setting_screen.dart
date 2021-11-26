@@ -12,7 +12,6 @@ class LanguageSettingScreen extends StatelessWidget {
         textStyle: TextStyle(fontSize: AppSizes.normalTextSize));
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
         title: 'Change password',
       ),

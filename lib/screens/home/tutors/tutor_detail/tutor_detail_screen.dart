@@ -4,11 +4,9 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_reviews.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/flat_button.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
@@ -19,7 +17,6 @@ class TutorDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
         title: 'Profile',
       ),
@@ -116,11 +113,11 @@ class TutorDetail extends StatelessWidget {
               ),
               SubmitButton(
                 text: 'Calendar',
+                backgroundColor: Colors.white,
                 function: () {
                   Navigator.of(context).pushNamed(LettutorRoutes.tutorCalendar,
                       arguments: tutor);
                 },
-                backgroundColor: Colors.white,
                 textColor: AppTheme.primaryColor,
                 icon: Icon(Icons.calendar_today),
               ),

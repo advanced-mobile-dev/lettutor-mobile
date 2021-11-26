@@ -7,7 +7,7 @@ import 'package:lettutor_app/screens/home/courses/course_list/course_item_widget
 
 class CoursesTab extends StatelessWidget {
   final titleStyle = TextStyle(
-      color: Colors.black,
+      color: AppTheme.primaryColor,
       fontWeight: FontWeight.bold,
       fontSize: AppSizes.hugeTextSize);
 
@@ -22,6 +22,9 @@ class CoursesTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('Courses', style: titleStyle),
+          SizedBox(
+            height: AppSizes.verticalItemSpacing,
+          ),
           Container(child: CourseFilterWidget()),
           SizedBox(
             height: 15,

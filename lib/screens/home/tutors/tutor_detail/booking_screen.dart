@@ -20,7 +20,6 @@ class BookingScreen extends StatelessWidget {
     final contentTextStyle =
         TextStyle(color: AppTheme.textColor, fontSize: AppSizes.normalTextSize);
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
         title: 'Book a class',
       ),

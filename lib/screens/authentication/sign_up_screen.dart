@@ -73,7 +73,6 @@ class SignUpScreen extends StatelessWidget {
       appBar: ApplicationAppBar(
         title: 'Sign Up',
       ),
-      backgroundColor: AppTheme.backgroundColor,
       body: Container(
         padding: EdgeInsets.all(AppSizes.pagePadding),
         child: Column(

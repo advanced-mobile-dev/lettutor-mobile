@@ -7,7 +7,7 @@ import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_item_widget.da
 
 class TutorsTab extends StatelessWidget {
   final titleStyle = TextStyle(
-      color: Colors.black,
+      color: AppTheme.primaryColor,
       fontWeight: FontWeight.bold,
       fontSize: AppSizes.hugeTextSize);
 
@@ -27,6 +27,9 @@ class TutorsTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('Tutors', style: titleStyle),
+          SizedBox(
+            height: AppSizes.verticalItemSpacing,
+          ),
           Container(child: TutorFilterWidget()),
           SizedBox(
             height: 15,

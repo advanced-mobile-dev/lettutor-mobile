@@ -3,8 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/screens/authentication/log_in_screen.dart';
-import 'package:lettutor_app/screens/authentication/sign_up_screen.dart';
 
 class StartScreen extends StatelessWidget {
   @override
@@ -40,7 +38,6 @@ class StartScreen extends StatelessWidget {
     );
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppTheme.backgroundColor,
       body: Column(
         children: <Widget>[
           Stack(
