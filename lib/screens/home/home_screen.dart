@@ -6,7 +6,6 @@ import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
 import 'package:lettutor_app/screens/home/schedule/schedule_tab.dart';
 import 'package:lettutor_app/screens/home/settings/settings_tab.dart';
 import 'package:lettutor_app/screens/home/tutors/tutors_tab.dart';
-import 'package:lettutor_app/widgets/icons.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

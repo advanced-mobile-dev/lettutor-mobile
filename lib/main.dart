@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/screen_arguments.dart';
 import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/data/shared_preference/user_preferences.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/providers/auth-provider.dart';
+import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
 import 'package:lettutor_app/screens/authentication/start_screen.dart';
 import 'package:flutter/services.dart';
@@ -19,8 +23,10 @@ import 'package:lettutor_app/screens/home/settings/profile_edit_screen.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -30,17 +36,40 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.secondaryColor,
     ));
-    return MaterialApp(
-      title: 'Lettutor',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.blue,
-          backgroundColor: Colors.white,
-          primaryColor: AppTheme.primaryColor),
-      routes: _registerRoutes(),
-      initialRoute: LettutorRoutes.start,
-      onGenerateRoute: _registerRoutesWithParameters,
-    );
+    Future<User> getUser() => UserPreferences().user;
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider(create: (_) => UserProvider()),
+        ],
+        child: MaterialApp(
+          title: 'Lettutor',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              backgroundColor: Colors.white,
+              primaryColor: AppTheme.primaryColor),
+          routes: _registerRoutes(),
+          // home: FutureBuilder<User>(
+          //     future: getUser(),
+          //     builder: (context, snapshot) {
+          //       switch (snapshot.connectionState) {
+          //         case ConnectionState.none:
+          //         case ConnectionState.waiting:
+          //           return CircularProgressIndicator();
+          //           break;
+          //         default:
+          //           if (snapshot.hasData) {
+          //             if (snapshot.data.token == null) return StartScreen();
+          //             Provider.of<UserProvider>(context).setUser(snapshot.data);
+          //             return HomeScreen();
+          //           }
+          //           return Text('Error');
+          //       }
+          //     }),
+          initialRoute: LettutorRoutes.start,
+          onGenerateRoute: _registerRoutesWithParameters,
+        ));
   }
 
   Map<String, WidgetBuilder> _registerRoutes() {

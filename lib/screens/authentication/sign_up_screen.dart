@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/icons.dart';
@@ -80,6 +81,7 @@ class SignUpScreen extends StatelessWidget {
             CustomTextField(
               controller: _emailController,
               title: 'Email',
+              validator: validateEmail,
               iconData: Icons.email,
               keyboardType: TextInputType.emailAddress,
             ),
@@ -90,6 +92,7 @@ class SignUpScreen extends StatelessWidget {
               controller: _passwordController,
               title: 'Password',
               iconData: Icons.lock,
+              validator: validatePassword,
               keyboardType: TextInputType.visiblePassword,
               isPasswordTextField: true,
             ),
@@ -99,6 +102,7 @@ class SignUpScreen extends StatelessWidget {
             CustomTextField(
               controller: _confirmPasswordController,
               title: 'Confirm Password',
+              validator: validatePassword,
               iconData: Icons.lock,
               keyboardType: TextInputType.visiblePassword,
               isPasswordTextField: true,

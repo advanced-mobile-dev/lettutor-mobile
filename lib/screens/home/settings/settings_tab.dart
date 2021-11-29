@@ -3,7 +3,9 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:provider/provider.dart';
 
 class SettingsTab extends StatelessWidget {
   final titleStyle = TextStyle(
@@ -12,6 +14,7 @@ class SettingsTab extends StatelessWidget {
       fontSize: AppSizes.hugeTextSize);
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<UserProvider>(context).user;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.pagePadding),
@@ -26,7 +29,7 @@ class SettingsTab extends StatelessWidget {
               children: <Widget>[
                 ClipOval(
                   child: Image.asset(
-                    User.data.avatar,
+                    user.avatar,
                     fit: BoxFit.cover,
                     width: 50.0,
                     height: 50.0,
@@ -35,7 +38,7 @@ class SettingsTab extends StatelessWidget {
                 SizedBox(
                   width: 15,
                 ),
-                Text(User.data.name,
+                Text(user.name,
                     style: TextStyle(
                         fontSize: AppSizes.normalTextSize,
                         fontWeight: FontWeight.bold))

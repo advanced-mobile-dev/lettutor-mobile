@@ -6,13 +6,17 @@ class CustomTextField extends StatelessWidget {
   final String title;
   final IconData iconData;
   final TextInputType keyboardType;
+  final Function(String) validator;
+  final Function(String) onSaved;
   final bool isPasswordTextField;
   CustomTextField(
       {@required this.title,
-      @required this.controller,
+      this.controller,
       @required this.iconData,
       this.keyboardType,
-      this.isPasswordTextField = false});
+      this.isPasswordTextField = false,
+      this.validator,
+      this.onSaved});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,6 +37,8 @@ class CustomTextField extends StatelessWidget {
                 borderSide: BorderSide(width: 0.5),
               ),
             ),
+            validator: validator,
+            onSaved: onSaved,
             keyboardType:
                 keyboardType == null ? TextInputType.text : keyboardType,
             obscureText: isPasswordTextField ? true : false,

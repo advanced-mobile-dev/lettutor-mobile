@@ -31,6 +31,8 @@ dependencies:
   flutter_svg: ^0.22.0
   flutter_rating_bar: ^4.0.0
   expandable: ^5.0.1
+  provider: ^6.0.1
+  shared_preferences: ^2.0.7
 
 dev_dependencies:
   flutter_test:
