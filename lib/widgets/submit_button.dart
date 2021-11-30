@@ -11,7 +11,7 @@ class SubmitButton extends StatelessWidget {
   SubmitButton(
       {@required this.text,
       @required this.function,
-      this.backgroundColor = AppTheme.primaryColor,
+      this.backgroundColor,
       this.textColor = Colors.white,
       this.icon});
   @override

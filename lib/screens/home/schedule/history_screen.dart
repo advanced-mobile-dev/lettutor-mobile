@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/feedback.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -61,13 +60,49 @@ class HistoryItem extends StatelessWidget {
   HistoryItem({@required this.tutor, this.feedback});
   @override
   Widget build(BuildContext context) {
+    _buildDataRow({String title, IconData iconData, String content}) {
+      final titleStyle = TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: AppSizes.smallTextSize,
+          color: Theme.of(context).primaryColor);
+      final contentStyle = TextStyle(
+          fontWeight: FontWeight.normal, fontSize: AppSizes.smallTextSize);
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Icon(
+            iconData,
+            size: 15,
+            color: Theme.of(context).primaryColor,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Container(
+            width: 100,
+            child: Text(
+              title,
+              style: titleStyle,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              content,
+              style: contentStyle,
+              textAlign: TextAlign.start,
+            ),
+          )
+        ],
+      );
+    }
+
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
@@ -172,48 +207,12 @@ class HistoryItem extends StatelessWidget {
                     text: 'Feedback',
                     function: () {},
                     iconData: Icons.comment,
-                    color: AppTheme.primaryColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                 )
               : SizedBox()
         ],
       ),
-    );
-  }
-
-  _buildDataRow({String title, IconData iconData, String content}) {
-    final titleStyle = TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: AppSizes.smallTextSize,
-        color: AppTheme.primaryColor);
-    final contentStyle = TextStyle(
-        fontWeight: FontWeight.normal, fontSize: AppSizes.smallTextSize);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Icon(
-          iconData,
-          size: 15,
-          color: AppTheme.primaryColor,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        Container(
-          width: 100,
-          child: Text(
-            title,
-            style: titleStyle,
-          ),
-        ),
-        Expanded(
-          child: Text(
-            content,
-            style: contentStyle,
-            textAlign: TextAlign.start,
-          ),
-        )
-      ],
     );
   }
 }

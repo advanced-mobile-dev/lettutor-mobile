@@ -18,11 +18,11 @@ class TutorItemWidget extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.grey[200],
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                  color: Colors.grey.withOpacity(0.8),
+                  color: Colors.black.withOpacity(0.3),
                   spreadRadius: 2,
                   blurRadius: 3,
                   offset: Offset(0, 3))
@@ -50,7 +50,8 @@ class TutorItemWidget extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           tutor.name,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
                         ),
                         Row(
                           children: <Widget>[
@@ -63,8 +64,9 @@ class TutorItemWidget extends StatelessWidget {
                               width: 5,
                             ),
                             Text(tutor.countryName,
-                                style:
-                                    TextStyle(fontSize: AppSizes.smallTextSize))
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: AppSizes.smallTextSize))
                           ],
                         ),
                         Row(
@@ -112,8 +114,7 @@ class TutorItemWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                   style: TextStyle(
-                      color: AppTheme.textColor,
-                      fontSize: AppSizes.smallTextSize)),
+                      color: Colors.black, fontSize: AppSizes.smallTextSize)),
             ),
           ],
         ),

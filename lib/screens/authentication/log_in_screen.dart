@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.primaryColor,
+      onPrimary: Theme.of(context).primaryColor,
       primary: Colors.white,
       minimumSize: Size(100, 30),
       shape: const RoundedRectangleBorder(
@@ -143,6 +143,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .pushNamed(LettutorRoutes.home);
                                 } else {
                                   print(result['message']);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Username or Password is Incorrect')));
                                 }
                               }
 

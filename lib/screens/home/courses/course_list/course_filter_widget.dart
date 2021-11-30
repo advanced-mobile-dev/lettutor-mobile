@@ -7,8 +7,7 @@ class CourseFilterWidget extends StatefulWidget {
 }
 
 class _CourseFilterWidgetState extends State<CourseFilterWidget> {
-  final textStyle =
-      TextStyle(color: Colors.black, fontSize: AppSizes.smallTextSize);
+  final textStyle = TextStyle(fontSize: AppSizes.smallTextSize);
   final levels = [
     'Any Level',
     'Beginner',
@@ -39,12 +38,10 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
         TextFormField(
           decoration: InputDecoration(
               contentPadding: EdgeInsets.all(0),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(5)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
               prefixIcon: Icon(
                 Icons.search,
-                color: Colors.black,
               ),
               hintText: 'Search course by name...',
               hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
@@ -71,14 +68,12 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
                               border: Border.all(width: 1)),
                           child: DropdownButton<String>(
                             isExpanded: true,
                             value: levelValue,
                             icon: const Icon(Icons.arrow_drop_down),
                             iconSize: 24,
-                            style: const TextStyle(color: Colors.black),
                             underline: SizedBox(),
                             onChanged: (String newValue) {
                               setState(() {
@@ -112,13 +107,11 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
                               border: Border.all(width: 1)),
                           child: DropdownButton<String>(
                             value: categoryValue,
                             isExpanded: true,
                             iconSize: 24,
-                            style: const TextStyle(color: Colors.black),
                             underline: SizedBox(),
                             onChanged: (String newValue) {
                               setState(() {

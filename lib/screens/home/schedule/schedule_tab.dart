@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/upcomming_lesson_item.dart';
 
 class ScheduleTab extends StatelessWidget {
-  final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-    primary: Colors.white,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +21,9 @@ class ScheduleTab extends StatelessWidget {
                       child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppIcons.appLogo,
+                      SvgPicture.asset('assets/icons/logo.svg',
+                          color: Theme.of(context).primaryColor),
                       TextButton(
-                        style: TextButton.styleFrom(
-                          primary: Colors.white,
-                        ),
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(LettutorRoutes.history);
@@ -37,15 +31,17 @@ class ScheduleTab extends StatelessWidget {
                         child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              Icon(Icons.history, color: Colors.black),
+                              Icon(
+                                Icons.history,
+                              ),
                               SizedBox(
                                 width: 3,
                               ),
                               Text(
                                 'History',
                                 style: TextStyle(
-                                    fontSize: AppSizes.normalTextSize,
-                                    color: Colors.black),
+                                  fontSize: AppSizes.normalTextSize,
+                                ),
                               )
                             ]),
                       ),
@@ -59,7 +55,6 @@ class ScheduleTab extends StatelessWidget {
                       child: Row(children: [
                         Icon(
                           Icons.timer,
-                          color: AppTheme.primaryColor,
                           size: 20,
                         ),
                         SizedBox(
@@ -68,9 +63,9 @@ class ScheduleTab extends StatelessWidget {
                         Text(
                           'Total learned time: 36 hours 12 minutes',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: AppSizes.normalTextSize,
-                              color: AppTheme.primaryColor),
+                            fontWeight: FontWeight.bold,
+                            fontSize: AppSizes.normalTextSize,
+                          ),
                         ),
                       ])),
                 ],

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_reviews.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
 class TutorDetail extends StatelessWidget {
@@ -16,6 +15,27 @@ class TutorDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _buildFlatButton({Widget icon, Function() function, String title}) {
+      final ButtonStyle buttonStyle = TextButton.styleFrom(
+          primary: Theme.of(context).primaryColor,
+          backgroundColor: Colors.transparent);
+      return TextButton(
+          onPressed: function,
+          style: buttonStyle,
+          child: Column(
+            children: <Widget>[
+              icon,
+              SizedBox(
+                height: 4,
+              ),
+              Text(title,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: AppSizes.normalTextSize))
+            ],
+          ));
+    }
+
     return Scaffold(
       appBar: ApplicationAppBar(
         title: 'Profile',
@@ -118,7 +138,7 @@ class TutorDetail extends StatelessWidget {
                   Navigator.of(context).pushNamed(LettutorRoutes.tutorCalendar,
                       arguments: tutor);
                 },
-                textColor: AppTheme.primaryColor,
+                textColor: Theme.of(context).primaryColor,
                 icon: Icon(Icons.calendar_today),
               ),
               SizedBox(
@@ -132,12 +152,13 @@ class TutorDetail extends StatelessWidget {
                         icon: Icon(Icons.video_library_outlined),
                         function: () {},
                         title: 'Intro video'),
+                    // _buildFlatButton(
+                    //     icon: AppIcons.chatIcon,
+                    //     function: () {},
+                    //     title: 'Message'),
                     _buildFlatButton(
-                        icon: AppIcons.chatIcon,
-                        function: () {},
-                        title: 'Message'),
-                    _buildFlatButton(
-                        icon: AppIcons.favoriteIcon,
+                        icon: SvgPicture.asset('assets/icons/favorite.svg',
+                            color: Theme.of(context).primaryColor),
                         function: () {},
                         title: 'Favorite'),
                     _buildFlatButton(
@@ -165,24 +186,4 @@ class TutorDetail extends StatelessWidget {
       ),
     );
   }
-}
-
-_buildFlatButton({Widget icon, Function() function, String title}) {
-  final ButtonStyle buttonStyle = TextButton.styleFrom(
-      primary: AppTheme.primaryColor, backgroundColor: Colors.transparent);
-  return TextButton(
-      onPressed: function,
-      style: buttonStyle,
-      child: Column(
-        children: <Widget>[
-          icon,
-          SizedBox(
-            height: 4,
-          ),
-          Text(title,
-              style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: AppSizes.normalTextSize))
-        ],
-      ));
 }

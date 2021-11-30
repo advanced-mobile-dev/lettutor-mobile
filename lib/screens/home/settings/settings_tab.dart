@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/user.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:provider/provider.dart';
 
 class SettingsTab extends StatelessWidget {
-  final titleStyle = TextStyle(
-      color: AppTheme.primaryColor,
-      fontWeight: FontWeight.bold,
-      fontSize: AppSizes.hugeTextSize);
   @override
   Widget build(BuildContext context) {
+    final titleStyle = TextStyle(
+        color: Theme.of(context).primaryColor,
+        fontWeight: FontWeight.bold,
+        fontSize: AppSizes.hugeTextSize);
     User user = Provider.of<UserProvider>(context).user;
     return SingleChildScrollView(
       child: Padding(
@@ -102,7 +101,7 @@ class SettingsTab extends StatelessWidget {
                               fontWeight: FontWeight.normal),
                         ),
                         Switch(
-                          value: false,
+                          value: true,
                           onChanged: (bool value) {},
                         )
                       ],
@@ -135,11 +134,10 @@ class SettingItem extends StatelessWidget {
       fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.normal);
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        style: TextButton.styleFrom(
-            primary: Colors.black, padding: EdgeInsets.all(0)),
-        onPressed: function,
+    return GestureDetector(
+        onTap: function,
         child: Container(
+          height: 50,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

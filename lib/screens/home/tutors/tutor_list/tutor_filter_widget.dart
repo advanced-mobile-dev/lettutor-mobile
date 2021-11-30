@@ -7,8 +7,7 @@ class TutorFilterWidget extends StatefulWidget {
 }
 
 class _TutorFilterWidgetState extends State<TutorFilterWidget> {
-  final textStyle =
-      TextStyle(color: Colors.black, fontSize: AppSizes.smallTextSize);
+  final textStyle = TextStyle(fontSize: AppSizes.smallTextSize);
   final specialities = [
     'All',
     'English for kids',
@@ -39,7 +38,6 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
                   borderRadius: BorderRadius.circular(5)),
               prefixIcon: Icon(
                 Icons.search,
-                color: Colors.black,
               ),
               hintText: 'Search by name...',
               hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
@@ -66,14 +64,14 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
+                              // color: Colors.white,
                               border: Border.all(width: 1)),
                           child: DropdownButton<String>(
                             isExpanded: true,
                             value: specialValue,
                             icon: const Icon(Icons.arrow_drop_down),
                             iconSize: 24,
-                            style: const TextStyle(color: Colors.black),
+                            // style: const TextStyle(color: Colors.black),
                             underline: SizedBox(),
                             onChanged: (String newValue) {
                               setState(() {
@@ -107,14 +105,14 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
+                              // color: Colors.white,
                               border: Border.all(width: 1)),
                           child: DropdownButton<String>(
                             value: countryValue,
                             // icon: SizedBox(),
                             isExpanded: true,
                             iconSize: 24,
-                            style: const TextStyle(color: Colors.black),
+                            // style: const TextStyle(color: Colors.black),
                             underline: SizedBox(),
                             onChanged: (String newValue) {
                               setState(() {

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
 import 'package:lettutor_app/screens/home/schedule/schedule_tab.dart';
@@ -58,8 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Settings',
           ),
         ],
-        selectedItemColor: AppTheme.primaryColor,
-        unselectedItemColor: AppTheme.unactiveColor,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 
@@ -11,16 +10,13 @@ class CourseDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final courseNameTextStyle = TextStyle(
-        color: Colors.black,
-        fontSize: AppSizes.largeTextSize,
-        fontWeight: FontWeight.bold);
+        fontSize: AppSizes.largeTextSize, fontWeight: FontWeight.bold);
     final titleTextStyle = TextStyle(
-      color: AppTheme.primaryColor,
+      color: Theme.of(context).primaryColor,
       fontSize: AppSizes.normalTextSize,
       fontWeight: FontWeight.bold,
     );
-    final contentTextStyle =
-        TextStyle(color: Colors.black, fontSize: AppSizes.normalTextSize);
+    final contentTextStyle = TextStyle(fontSize: AppSizes.normalTextSize);
     return Scaffold(
       appBar: ApplicationAppBar(
         title: 'Course detail',

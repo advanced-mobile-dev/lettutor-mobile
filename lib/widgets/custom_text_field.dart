@@ -24,13 +24,15 @@ class CustomTextField extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               labelText: title,
-              labelStyle: TextStyle(fontSize: 14, color: Colors.grey),
-              icon: Icon(iconData, color: AppTheme.primaryColor),
-              fillColor: Colors.grey[200],
+              labelStyle: TextStyle(fontSize: 14),
+              icon: Icon(
+                iconData,
+              ),
+              // fillColor: Colors.grey[200],
               filled: true,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: BorderSide(color: Colors.transparent),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),

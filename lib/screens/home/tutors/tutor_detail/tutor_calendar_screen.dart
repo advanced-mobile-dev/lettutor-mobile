@@ -25,7 +25,6 @@ class TutorCalendarScreen extends StatelessWidget {
             height: 40,
             width: double.infinity,
             decoration: BoxDecoration(
-                color: Colors.white,
                 border:
                     Border(bottom: BorderSide(width: 1, color: Colors.grey))),
             child: Row(

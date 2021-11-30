@@ -17,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
         new TextEditingController();
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.primaryColor,
+      onPrimary: Theme.of(context).primaryColor,
       primary: Colors.white,
       minimumSize: Size(100, 30),
       shape: const RoundedRectangleBorder(

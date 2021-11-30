@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
 
 class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String _backgroundPath = 'assets/images/background.svg';
-    final Widget _background = SvgPicture.asset(_backgroundPath);
-    final String _imagePath = 'assets/images/illustrator_image_01.svg';
-    final Widget _image = SvgPicture.asset(_imagePath);
-    final String _logoPath = 'assets/icons/logo.svg';
-    final Widget _logo = SvgPicture.asset(
-      _logoPath,
-      height: 40,
+    final Widget _background = SvgPicture.asset(
+      _backgroundPath,
     );
+    final String _imagePath = 'assets/images/illustrator_image_01.svg';
+    final Widget _image = SvgPicture.asset(
+      _imagePath,
+      width: 175,
+    );
+    final String _logoPath = 'assets/icons/logo.svg';
+    final Widget _logo = SvgPicture.asset(_logoPath,
+        height: 40, color: Theme.of(context).primaryColor);
 
     final ButtonStyle raisedButtonStyle1 = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: AppTheme.primaryColor,
+      // primary: Theme.of(context).primaryColor,
       minimumSize: Size(double.infinity, 60),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -27,7 +30,7 @@ class StartScreen extends StatelessWidget {
     );
 
     final ButtonStyle raisedButtonStyle2 = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.primaryColor,
+      onPrimary: Theme.of(context).primaryColor,
       primary: Colors.white,
       minimumSize: Size(double.infinity, 60),
       shape: const RoundedRectangleBorder(

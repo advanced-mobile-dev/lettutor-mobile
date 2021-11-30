@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/screens/home/schedule/video_conference.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 
 class UpcommingLessonItem extends StatelessWidget {
@@ -20,11 +20,11 @@ class UpcommingLessonItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
@@ -35,7 +35,7 @@ class UpcommingLessonItem extends StatelessWidget {
               ? Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
-                      color: AppTheme.primaryColor,
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10))),
@@ -102,6 +102,7 @@ class UpcommingLessonItem extends StatelessWidget {
                                               child: Text(
                                                 tutor.name,
                                                 style: TextStyle(
+                                                    color: Colors.black,
                                                     fontSize:
                                                         AppSizes.normalTextSize,
                                                     fontWeight:
@@ -129,6 +130,7 @@ class UpcommingLessonItem extends StatelessWidget {
                                           ),
                                           Text(tutor.countryName,
                                               style: TextStyle(
+                                                  color: Colors.black,
                                                   fontSize:
                                                       AppSizes.smallTextSize))
                                         ],
@@ -150,6 +152,7 @@ class UpcommingLessonItem extends StatelessWidget {
                                 Text(
                                   '11/10/2021',
                                   style: TextStyle(
+                                      color: Colors.black,
                                       fontSize: AppSizes.smallTextSize),
                                 ),
                                 SizedBox(
@@ -157,6 +160,7 @@ class UpcommingLessonItem extends StatelessWidget {
                                 ),
                                 Text('20:00 - 20:25',
                                     style: TextStyle(
+                                      color: Colors.black,
                                       fontSize: AppSizes.smallTextSize,
                                     )),
                               ],
@@ -187,7 +191,7 @@ class UpcommingLessonItem extends StatelessWidget {
                                     .pushNamed(LettutorRoutes.videoConference)
                               },
                           iconData: Icons.video_call_rounded,
-                          color: AppTheme.primaryColor),
+                          color: Theme.of(context).primaryColor),
                     ],
                   ),
                 )

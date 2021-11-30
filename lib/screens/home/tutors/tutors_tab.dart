@@ -6,11 +6,6 @@ import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_filter_widget.
 import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_item_widget.dart';
 
 class TutorsTab extends StatelessWidget {
-  final titleStyle = TextStyle(
-      color: AppTheme.primaryColor,
-      fontWeight: FontWeight.bold,
-      fontSize: AppSizes.hugeTextSize);
-
   final List<Tutor> tutorList = [
     Tutor.data,
     Tutor.data1,
@@ -22,11 +17,14 @@ class TutorsTab extends StatelessWidget {
     return SingleChildScrollView(
         child: Container(
       padding: EdgeInsets.all(AppSizes.pagePadding),
-      color: AppTheme.backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Tutors', style: titleStyle),
+          Text('Tutors',
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: AppSizes.hugeTextSize)),
           SizedBox(
             height: AppSizes.verticalItemSpacing,
           ),

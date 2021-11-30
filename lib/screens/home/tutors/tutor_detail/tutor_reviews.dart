@@ -51,13 +51,15 @@ class RatingComment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(AppSizes.cardPadding),
+      padding: EdgeInsets.symmetric(
+          vertical: AppSizes.pagePadding * 1.5,
+          horizontal: AppSizes.pagePadding),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
@@ -85,7 +87,8 @@ class RatingComment extends StatelessWidget {
                     children: [
                       Text(
                         Tutor.data.name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: 10,
@@ -133,7 +136,7 @@ class RatingComment extends StatelessWidget {
           )),
           Text(
             'This is an excellent teacher. He is very talented and kind',
-            style: TextStyle(color: AppTheme.textColor),
+            style: TextStyle(color: Colors.black),
           )
         ],
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
@@ -14,11 +13,10 @@ class BookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titleTextStyle = TextStyle(
-        color: Colors.black,
-        fontSize: AppSizes.normalTextSize,
-        fontWeight: FontWeight.bold);
-    final contentTextStyle =
-        TextStyle(color: AppTheme.textColor, fontSize: AppSizes.normalTextSize);
+        fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.bold);
+    final contentTextStyle = TextStyle(
+        // color: AppTheme.textColor,
+        fontSize: AppSizes.normalTextSize);
     return Scaffold(
       appBar: ApplicationAppBar(
         title: 'Book a class',
@@ -165,7 +163,7 @@ class BookingScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   backgroundColor: Colors.white,
-                  textColor: AppTheme.primaryColor,
+                  textColor: Theme.of(context).primaryColor,
                 ),
               ])),
     );
