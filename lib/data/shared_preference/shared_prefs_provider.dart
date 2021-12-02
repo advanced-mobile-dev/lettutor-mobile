@@ -2,10 +2,15 @@ import 'package:lettutor_app/data/shared_preference/constants/preferences.dart';
 import 'package:lettutor_app/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserPreferences {
-  Future removeUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+class SharedPrefsProvider {
+  SharedPrefsProvider._();
 
+  static SharedPreferences prefs;
+  static init() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  static void removeUser() {
     prefs.remove(Preferences.user_id);
     prefs.remove(Preferences.user_name);
     prefs.remove(Preferences.user_email);
@@ -15,8 +20,7 @@ class UserPreferences {
     prefs.remove(Preferences.is_logged_in);
   }
 
-  Future<bool> saveUser(User user) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  static bool saveUser(User user) {
     prefs.setInt(Preferences.user_id, user.userId);
     prefs.setString(Preferences.user_name, user.name);
     prefs.setString(Preferences.user_email, user.email);
@@ -27,16 +31,13 @@ class UserPreferences {
     return true;
   }
 
-  Future<User> get user async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  static User get user {
     int id = prefs.getInt(Preferences.user_id);
     String name = prefs.getString(Preferences.user_name);
     String email = prefs.getString(Preferences.user_email);
     String avatar = prefs.getString(Preferences.user_avatar);
     String token = prefs.getString(Preferences.user_token);
     String refreshToken = prefs.getString(Preferences.user_refreshtoken);
-
     return User(
         userId: id,
         name: name,
@@ -46,25 +47,41 @@ class UserPreferences {
         refreshToken: refreshToken);
   }
 
-  Future<bool> get isLoggedIn async {
-    print('1');
-    final sharedPreference = await SharedPreferences.getInstance();
-    print('2');
-    return sharedPreference.getBool(Preferences.is_logged_in) ?? false;
+  static bool get isLoggedIn {
+    return prefs.getBool(Preferences.is_logged_in) ?? false;
   }
 
-  Future<String> get authToken async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    return sharedPreference.getString(Preferences.auth_token);
+  static String get authToken {
+    return prefs.getString(Preferences.auth_token);
   }
 
-  Future<bool> saveAuthToken(String authToken) async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    return sharedPreference.setString(Preferences.auth_token, authToken);
+  static bool saveAuthToken(String authToken) {
+    prefs.setString(Preferences.auth_token, authToken);
+    return true;
   }
 
-  Future<bool> removeAuthToken() async {
+  static bool removeAuthToken() {
+    prefs.remove(Preferences.auth_token);
+    return true;
+  }
+
+  static Future<bool> get isDarkMode async {
     final sharedPreference = await SharedPreferences.getInstance();
-    return sharedPreference.remove(Preferences.auth_token);
+    return sharedPreference.getBool(Preferences.is_dark_mode) ?? false;
+  }
+
+  static Future<void> changeBrightnessToDark(bool value) async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    return sharedPreference.setBool(Preferences.is_dark_mode, value);
+  }
+
+  static Future<String> get currentLanguage async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    return sharedPreference.getString(Preferences.current_language);
+  }
+
+  static Future<void> changeLanguage(String language) async {
+    final sharedPreference = await SharedPreferences.getInstance();
+    return sharedPreference.setString(Preferences.current_language, language);
   }
 }

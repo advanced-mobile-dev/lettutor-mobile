@@ -169,3 +169,10 @@ class BookingScreen extends StatelessWidget {
     );
   }
 }
+
+class BookingScreenArguments {
+  final Tutor tutor;
+  final String time;
+
+  BookingScreenArguments({this.tutor, this.time});
+}

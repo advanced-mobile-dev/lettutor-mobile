@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/config/routes.dart';
 
 class StartScreen extends StatelessWidget {

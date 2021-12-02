@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/user.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
@@ -14,6 +15,7 @@ class SettingsTab extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontSize: AppSizes.hugeTextSize);
     User user = Provider.of<UserProvider>(context).user;
+    print(user);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.pagePadding),
@@ -27,12 +29,14 @@ class SettingsTab extends StatelessWidget {
             Row(
               children: <Widget>[
                 ClipOval(
-                  child: Image.asset(
-                    user.avatar,
-                    fit: BoxFit.cover,
-                    width: 50.0,
-                    height: 50.0,
-                  ),
+                  child: user.avatar == null
+                      ? Icon(Icons.account_circle_outlined)
+                      : Image.asset(
+                          user.avatar,
+                          fit: BoxFit.cover,
+                          width: 50.0,
+                          height: 50.0,
+                        ),
                 ),
                 SizedBox(
                   width: 15,
@@ -116,7 +120,10 @@ class SettingsTab extends StatelessWidget {
             SubmitButton(
                 text: 'Logout',
                 function: () {
-                  Navigator.pop(context);
+                  SharedPrefsProvider.removeUser();
+                  Provider.of<UserProvider>(context, listen: false)
+                      .setUser(null);
+                  Navigator.pushReplacementNamed(context, LettutorRoutes.start);
                 }),
           ],
         ),

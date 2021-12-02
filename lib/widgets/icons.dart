@@ -21,6 +21,6 @@ class AppIcons {
 
   static final Widget languageIcon = SvgPicture.asset(_languageIconPath);
   static final Widget listIcon = SvgPicture.asset(_listIconPath);
-  static final Widget starBoxIcon = SvgPicture.asset(_starBoxIconPath);
+  static final Widget starBoxIcon = SvgPicture.asset('assets/icons/star-box-multiple.svg');
   static final Widget suitCaseIcon = SvgPicture.asset(_suitcaseIconPath);
 }

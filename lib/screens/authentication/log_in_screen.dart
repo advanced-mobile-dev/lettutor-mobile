@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
 import 'package:lettutor_app/providers/auth-provider.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/utils/validator.dart';
@@ -122,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: AppSizes.verticalItemSpacing * 2,
                     ),
-                    context.watch<AuthProvider>().loggedInStatus ==
+                    context.watch<UserProvider>().loggedInStatus ==
                             AuthStatus.LoggingIn
                         ? SubmitButton(text: 'Logging in...', function: null)
                         : SubmitButton(
@@ -132,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _formKey.currentState.save();
 
                                 final result = await context
-                                    .read<AuthProvider>()
+                                    .read<UserProvider>()
                                     .login(_email, _password);
 
                                 if (result['status'] == true) {

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/screen_arguments.dart';
 import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/providers/auth-provider.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
 import 'package:lettutor_app/screens/authentication/loading_screen.dart';
@@ -27,6 +26,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefsProvider.init();
   runApp(MyApp());
 }
 
@@ -36,17 +36,20 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColors.primaryColor[50],
     ));
+    final userProvider = new UserProvider();
+    userProvider.init();
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => AuthProvider()),
-          ChangeNotifierProvider(create: (_) => UserProvider()),
+          ChangeNotifierProvider.value(value: userProvider),
         ],
         child: MaterialApp(
           title: 'Lettutor',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.themeData,
           routes: _registerRoutes(),
-          initialRoute: LettutorRoutes.start,
+          initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
+              ? LettutorRoutes.start
+              : LettutorRoutes.home,
           onGenerateRoute: _registerRoutesWithParameters,
         ));
   }

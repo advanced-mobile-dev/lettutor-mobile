@@ -1,8 +1,8 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/screen_arguments.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 
 class TutorCalendarScreen extends StatelessWidget {
