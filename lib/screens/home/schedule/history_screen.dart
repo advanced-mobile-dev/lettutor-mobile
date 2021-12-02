@@ -67,7 +67,9 @@ class HistoryItem extends StatelessWidget {
           fontSize: AppSizes.smallTextSize,
           color: Theme.of(context).primaryColor);
       final contentStyle = TextStyle(
-          fontWeight: FontWeight.normal, fontSize: AppSizes.smallTextSize);
+          fontWeight: FontWeight.normal,
+          fontSize: AppSizes.smallTextSize,
+          color: Colors.black);
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -99,7 +101,7 @@ class HistoryItem extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -140,7 +142,9 @@ class HistoryItem extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               tutor.name,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Row(
                               children: <Widget>[
@@ -154,6 +158,7 @@ class HistoryItem extends StatelessWidget {
                                 ),
                                 Text(tutor.countryName,
                                     style: TextStyle(
+                                        color: Colors.black,
                                         fontSize: AppSizes.smallTextSize))
                               ],
                             ),
