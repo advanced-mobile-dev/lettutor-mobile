@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String title;
   final IconData iconData;
+  final String initialValue;
   final TextInputType keyboardType;
   final Function(String) validator;
   final Function(String) onSaved;
@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
       this.controller,
       @required this.iconData,
       this.keyboardType,
+      this.initialValue,
       this.isPasswordTextField = false,
       this.validator,
       this.onSaved});
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         child: TextFormField(
+            initialValue: initialValue,
             controller: controller,
             decoration: InputDecoration(
               labelText: title,
