@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/widgets/upcomming_lesson_item.dart';
+import 'package:lettutor_app/models/upcomming_lesson.dart';
+import 'package:lettutor_app/widgets/upcomming_lesson_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScheduleTab extends StatelessWidget {
@@ -75,27 +76,16 @@ class ScheduleTab extends StatelessWidget {
               padding: const EdgeInsets.all(AppSizes.pagePadding),
               child: Column(
                 children: <Widget>[
-                  UpcommingLessonItem(
-                    tutor: Tutor.data,
-                    startMeeting: DateTime.now(),
-                    endMeeting: DateTime.now(),
-                    upcommingLesson: true,
-                  ),
-                  SizedBox(height: AppSizes.verticalItemSpacing * 2),
-                  UpcommingLessonItem(
-                      tutor: Tutor.data1,
-                      startMeeting: DateTime.now(),
-                      endMeeting: DateTime.now()),
-                  SizedBox(height: AppSizes.verticalItemSpacing * 2),
-                  UpcommingLessonItem(
-                      tutor: Tutor.data2,
-                      startMeeting: DateTime.now(),
-                      endMeeting: DateTime.now()),
-                  SizedBox(height: AppSizes.verticalItemSpacing * 2),
-                  UpcommingLessonItem(
-                      tutor: Tutor.data3,
-                      startMeeting: DateTime.now(),
-                      endMeeting: DateTime.now()),
+                  ...UpcommingLesson.sampleData
+                      .map((e) => Column(
+                            children: [
+                              UpcommingLessonWidget(upcommingLesson: e),
+                              SizedBox(
+                                height: AppSizes.verticalItemSpacing * 2,
+                              )
+                            ],
+                          ))
+                      .toList()
                 ],
               ),
             ),

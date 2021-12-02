@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/upcomming_lesson.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -116,7 +118,7 @@ class BookingScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 30),
                   child: Text(
-                    '15:00 - 17:00, Monday 11/10/2021',
+                    '15:00 - 17:00, Monday 07/12/2021',
                     style: contentTextStyle,
                   ),
                 ),
@@ -153,14 +155,19 @@ class BookingScreen extends StatelessWidget {
                   height: 50,
                 ),
                 SubmitButton(
-                  text: AppLocalizations.of(context).book,
-                  function: () {},
+                  text: AppLocalizations.of(context).book.toUpperCase(),
+                  function: () {
+                    UpcommingLesson.sampleData.add(
+                        UpcommingLesson(3, tutor, '21/12/2021', '15:00 17:00'));
+                    Navigator.popUntil(
+                        context, ModalRoute.withName(LettutorRoutes.home));
+                  },
                 ),
                 SizedBox(
                   height: AppSizes.verticalItemSpacing,
                 ),
                 SubmitButton(
-                  text: AppLocalizations.of(context).cancel,
+                  text: AppLocalizations.of(context).cancel.toUpperCase(),
                   function: () {
                     Navigator.pop(context);
                   },
