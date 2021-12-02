@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorReviews extends StatelessWidget {
   @override
@@ -15,7 +15,7 @@ class TutorReviews extends StatelessWidget {
           Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Reviews',
+                AppLocalizations.of(context).reviews,
                 style: TextStyle(
                     fontSize: AppSizes.normalTextSize,
                     fontWeight: FontWeight.bold),

@@ -8,6 +8,7 @@ import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_reviews.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorDetail extends StatelessWidget {
   final Tutor tutor;
@@ -38,7 +39,7 @@ class TutorDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'Profile',
+        title: AppLocalizations.of(context).profile,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -132,7 +133,7 @@ class TutorDetail extends StatelessWidget {
                 height: AppSizes.verticalItemSpacing,
               ),
               SubmitButton(
-                text: 'Calendar',
+                text: AppLocalizations.of(context).calendar,
                 backgroundColor: Colors.white,
                 function: () {
                   Navigator.of(context).pushNamed(LettutorRoutes.tutorCalendar,
@@ -151,7 +152,7 @@ class TutorDetail extends StatelessWidget {
                     _buildFlatButton(
                         icon: Icon(Icons.video_library_outlined),
                         function: () {},
-                        title: 'Intro video'),
+                        title: AppLocalizations.of(context).introVideo),
                     // _buildFlatButton(
                     //     icon: AppIcons.chatIcon,
                     //     function: () {},
@@ -160,14 +161,14 @@ class TutorDetail extends StatelessWidget {
                         icon: SvgPicture.asset('assets/icons/favorite.svg',
                             color: Theme.of(context).primaryColor),
                         function: () {},
-                        title: 'Favorite'),
+                        title: AppLocalizations.of(context).favorite),
                     _buildFlatButton(
                         icon: Icon(
                           Icons.report,
                           size: 20,
                         ),
                         function: () {},
-                        title: 'Report'),
+                        title: AppLocalizations.of(context).report),
                   ],
                 ),
               ),

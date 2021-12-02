@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorFilterWidget extends StatefulWidget {
   @override
@@ -39,7 +40,7 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
               prefixIcon: Icon(
                 Icons.search,
               ),
-              hintText: 'Search by name...',
+              hintText: AppLocalizations.of(context).searchByName,
               hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
         ),
         SizedBox(
@@ -55,7 +56,8 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Specialities', style: textStyle),
+                      Text(AppLocalizations.of(context).specialities,
+                          style: textStyle),
                       SizedBox(
                         height: 3,
                       ),
@@ -96,7 +98,8 @@ class _TutorFilterWidgetState extends State<TutorFilterWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text('Countries', style: textStyle),
+                      Text(AppLocalizations.of(context).countries,
+                          style: textStyle),
                       SizedBox(
                         height: 3,
                       ),

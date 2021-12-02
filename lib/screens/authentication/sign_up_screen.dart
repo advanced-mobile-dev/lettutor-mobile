@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -72,7 +72,7 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: ApplicationAppBar(
-        title: 'Sign Up',
+        title: AppLocalizations.of(context).signUp,
       ),
       body: Container(
         padding: EdgeInsets.all(AppSizes.pagePadding),
@@ -80,7 +80,7 @@ class SignUpScreen extends StatelessWidget {
           children: <Widget>[
             CustomTextField(
               controller: _emailController,
-              title: 'Email',
+              title: AppLocalizations.of(context).email,
               validator: validateEmail,
               iconData: Icons.email,
               keyboardType: TextInputType.emailAddress,
@@ -90,7 +90,7 @@ class SignUpScreen extends StatelessWidget {
             ),
             CustomTextField(
               controller: _passwordController,
-              title: 'Password',
+              title: AppLocalizations.of(context).password,
               iconData: Icons.lock,
               validator: validatePassword,
               keyboardType: TextInputType.visiblePassword,
@@ -101,7 +101,7 @@ class SignUpScreen extends StatelessWidget {
             ),
             CustomTextField(
               controller: _confirmPasswordController,
-              title: 'Confirm Password',
+              title: AppLocalizations.of(context).confirmPassword,
               validator: validatePassword,
               iconData: Icons.lock,
               keyboardType: TextInputType.visiblePassword,
@@ -111,7 +111,7 @@ class SignUpScreen extends StatelessWidget {
               height: 30,
             ),
             SubmitButton(
-                text: 'Sign Up',
+                text: AppLocalizations.of(context).signUp,
                 function: () {
                   // Utility.hideKeyboard(context);
                 }),
@@ -121,7 +121,7 @@ class SignUpScreen extends StatelessWidget {
             Container(
                 padding: EdgeInsets.all(5),
                 alignment: Alignment.center,
-                child: Text('Or continue with',
+                child: Text(AppLocalizations.of(context).orContinueWith,
                     style: TextStyle(
                         color: Colors.grey, fontSize: AppSizes.smallTextSize))),
             Row(

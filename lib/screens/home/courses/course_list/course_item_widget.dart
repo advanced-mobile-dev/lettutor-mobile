@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/course.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CourseItemWidget extends StatelessWidget {
   final Course course;
@@ -63,7 +64,7 @@ class CourseItemWidget extends StatelessWidget {
                 Container(
                   alignment: Alignment.bottomRight,
                   child: Text(
-                      '${course.experienceLevel} - ${course.courseLength} topics',
+                      '${course.experienceLevel} - ${course.courseLength} ${AppLocalizations.of(context).topics}',
                       style: TextStyle(
                           fontSize: AppSizes.smallTextSize,
                           color: Colors.black,

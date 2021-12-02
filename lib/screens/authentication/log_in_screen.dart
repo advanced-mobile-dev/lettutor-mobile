@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
-import 'package:lettutor_app/providers/auth-provider.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -12,6 +9,7 @@ import 'package:lettutor_app/widgets/flat_button.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -80,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: ApplicationAppBar(
-              title: 'Login',
+              title: AppLocalizations.of(context).login,
             ),
             body: Container(
               padding: EdgeInsets.all(AppSizes.pagePadding),
@@ -92,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: AppSizes.verticalItemSpacing * 4,
                     ),
                     CustomTextField(
-                        title: 'Email',
+                        title: AppLocalizations.of(context).email,
                         iconData: Icons.email,
                         onSaved: (value) => {_email = value},
                         keyboardType: TextInputType.emailAddress,
@@ -101,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: AppSizes.verticalItemSpacing * 3,
                     ),
                     CustomTextField(
-                      title: 'Password',
+                      title: AppLocalizations.of(context).password,
                       iconData: Icons.lock,
                       keyboardType: TextInputType.visiblePassword,
                       onSaved: (value) => _password = value,
@@ -114,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       alignment: Alignment.centerRight,
                       child: AppFlatButton(
-                          text: 'Forget password?',
+                          text:
+                              '${AppLocalizations.of(context).forgetPassword}?',
                           function: () {
                             Navigator.of(context)
                                 .pushNamed(LettutorRoutes.forgetPassword);
@@ -127,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             AuthStatus.LoggingIn
                         ? SubmitButton(text: 'Logging in...', function: null)
                         : SubmitButton(
-                            text: 'Login',
+                            text: AppLocalizations.of(context).login,
                             function: () async {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
@@ -146,8 +145,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   print(result['message']);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                          content: Text(
-                                              'Username or Password is Incorrect')));
+                                          content: Text(AppLocalizations.of(
+                                                  context)
+                                              .emailOrPasswordIsInCorrect)));
                                 }
                               }
 

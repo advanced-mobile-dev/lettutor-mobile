@@ -3,6 +3,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/screens/home/courses/course_list/course_filter_widget.dart';
 import 'package:lettutor_app/screens/home/courses/course_list/course_item_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CoursesTab extends StatelessWidget {
   final List<Course> courses = Course.courseList;
@@ -19,7 +20,7 @@ class CoursesTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Courses', style: titleStyle),
+          Text(AppLocalizations.of(context).courses, style: titleStyle),
           SizedBox(
             height: AppSizes.verticalItemSpacing,
           ),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/upcomming_lesson_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScheduleTab extends StatelessWidget {
   @override
@@ -38,7 +38,7 @@ class ScheduleTab extends StatelessWidget {
                                 width: 3,
                               ),
                               Text(
-                                'History',
+                                AppLocalizations.of(context).history,
                                 style: TextStyle(
                                   fontSize: AppSizes.normalTextSize,
                                 ),
@@ -61,7 +61,7 @@ class ScheduleTab extends StatelessWidget {
                           width: 10,
                         ),
                         Text(
-                          'Total learned time: 36 hours 12 minutes',
+                          '${AppLocalizations.of(context).totalLearnedTime}: 36 ${AppLocalizations.of(context).hours} 12 ${AppLocalizations.of(context).minutes}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: AppSizes.normalTextSize,

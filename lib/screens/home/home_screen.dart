@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
 import 'package:lettutor_app/screens/home/schedule/schedule_tab.dart';
 import 'package:lettutor_app/screens/home/settings/settings_tab.dart';
 import 'package:lettutor_app/screens/home/tutors/tutors_tab.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -37,15 +37,15 @@ class _HomeScreenState extends State<HomeScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: AppLocalizations.of(context).home,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            label: 'Tutors',
+            label: AppLocalizations.of(context).tutors,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.picture_as_pdf),
-            label: 'Courses',
+            label: AppLocalizations.of(context).courses,
           ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.message),
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: AppLocalizations.of(context).settings,
           ),
         ],
         showUnselectedLabels: true,

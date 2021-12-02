@@ -4,6 +4,7 @@ import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorCalendarScreen extends StatelessWidget {
   final Tutor tutor;
@@ -75,7 +76,7 @@ class TutorCalendarScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'Calendar',
+        title: AppLocalizations.of(context).calendar,
       ),
       body: SingleChildScrollView(
         child: Container(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lettutor_app/widgets/icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorDescription extends StatelessWidget {
   @override
@@ -57,7 +57,7 @@ class TutorDescription extends StatelessWidget {
                 'assets/icons/language.svg',
                 color: Theme.of(context).primaryColor,
               ),
-              title: 'Languages',
+              title: AppLocalizations.of(context).languages,
               content: Container(
                 alignment: Alignment.centerLeft,
                 child: Wrap(
@@ -76,7 +76,7 @@ class TutorDescription extends StatelessWidget {
                 'assets/icons/view-list.svg',
                 color: Theme.of(context).primaryColor,
               ),
-              title: 'Specialities',
+              title: AppLocalizations.of(context).specialities,
               content: Container(
                 alignment: Alignment.centerLeft,
                 child: Wrap(
@@ -95,7 +95,7 @@ class TutorDescription extends StatelessWidget {
                 'assets/icons/star-box-multiple.svg',
                 color: Theme.of(context).primaryColor,
               ),
-              title: 'Interests',
+              title: AppLocalizations.of(context).interests,
               content: Text(
                 'Watching English films and talking to friends from different countries',
               )),
@@ -104,7 +104,7 @@ class TutorDescription extends StatelessWidget {
                 'assets/icons/suitcase.svg',
                 color: Theme.of(context).primaryColor,
               ),
-              title: 'Teaching experience',
+              title: AppLocalizations.of(context).teachingExperience,
               content: Text(
                   'I have been teaching as an English teacher for over three years. I have been working for many English centers, including VUS and I am also a lecturer at HCM College of Economics. I have taught English at various levels, including English for Kids, English for Communication, TOEIC and IELTS.')),
         ],

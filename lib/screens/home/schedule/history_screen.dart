@@ -5,13 +5,14 @@ import 'package:lettutor_app/models/feedback.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'History',
+        title: AppLocalizations.of(context).history,
       ),
       body: SingleChildScrollView(
         child: Container(

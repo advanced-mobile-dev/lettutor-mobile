@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoConference extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'Video conference',
+        title: AppLocalizations.of(context).videoConference,
       ),
       body: Stack(
         children: [

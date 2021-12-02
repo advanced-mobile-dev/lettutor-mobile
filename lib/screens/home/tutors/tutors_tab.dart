@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_filter_widget.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_item_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorsTab extends StatelessWidget {
   final List<Tutor> tutorList = [
@@ -20,7 +20,7 @@ class TutorsTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Tutors',
+          Text(AppLocalizations.of(context).tutors,
               style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,

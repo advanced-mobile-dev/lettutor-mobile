@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_detail_screen.dart';
 

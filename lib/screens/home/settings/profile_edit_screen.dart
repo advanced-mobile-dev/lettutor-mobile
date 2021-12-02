@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileEditScreen extends StatelessWidget {
   @override
@@ -12,7 +12,7 @@ class ProfileEditScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: ApplicationAppBar(
-        title: 'Edit profile',
+        title: AppLocalizations.of(context).editProfile,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -50,14 +50,14 @@ class ProfileEditScreen extends StatelessWidget {
               ),
               SizedBox(height: AppSizes.verticalItemSpacing * 3),
               CustomTextField(
-                title: "Name",
+                title: AppLocalizations.of(context).name,
                 controller: null,
                 iconData: Icons.account_box,
                 keyboardType: TextInputType.text,
               ),
               SizedBox(height: AppSizes.verticalItemSpacing * 3),
               CustomTextField(
-                title: "Email",
+                title: AppLocalizations.of(context).email,
                 controller: null,
                 iconData: Icons.email,
                 keyboardType: TextInputType.emailAddress,
@@ -65,7 +65,9 @@ class ProfileEditScreen extends StatelessWidget {
               SizedBox(
                 height: AppSizes.verticalItemSpacing * 5,
               ),
-              Container(child: SubmitButton(text: 'Save', function: () {}))
+              Container(
+                  child: SubmitButton(
+                      text: AppLocalizations.of(context).save, function: () {}))
             ],
           ),
         ),

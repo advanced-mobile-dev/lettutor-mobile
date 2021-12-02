@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   final Course course;
@@ -19,7 +20,7 @@ class CourseDetailScreen extends StatelessWidget {
     final contentTextStyle = TextStyle(fontSize: AppSizes.normalTextSize);
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'Course detail',
+        title: AppLocalizations.of(context).courseDetail,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,7 +50,7 @@ class CourseDetailScreen extends StatelessWidget {
                       height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
-                      'Overview',
+                      AppLocalizations.of(context).overview,
                       style: titleTextStyle,
                     ),
                     SizedBox(
@@ -67,7 +68,7 @@ class CourseDetailScreen extends StatelessWidget {
                       height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
-                      'Experience Level',
+                      AppLocalizations.of(context).experienceLevel,
                       style: titleTextStyle,
                     ),
                     SizedBox(
@@ -85,7 +86,7 @@ class CourseDetailScreen extends StatelessWidget {
                       height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
-                      'Course length',
+                      AppLocalizations.of(context).courseLength,
                       style: titleTextStyle,
                     ),
                     SizedBox(
@@ -95,7 +96,7 @@ class CourseDetailScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: AppSizes.horizontalItemSpacing),
                       child: Text(
-                        '${course.courseLength} topics',
+                        '${course.courseLength} ${AppLocalizations.of(context).topics}',
                         style: contentTextStyle,
                       ),
                     ),
@@ -103,7 +104,7 @@ class CourseDetailScreen extends StatelessWidget {
                       height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
-                      'List topics',
+                      AppLocalizations.of(context).listTopics,
                       style: titleTextStyle,
                     ),
                     SizedBox(

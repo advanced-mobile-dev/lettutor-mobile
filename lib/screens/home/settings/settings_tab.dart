@@ -3,9 +3,11 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/providers/app-settings-provider.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsTab extends StatelessWidget {
   @override
@@ -15,14 +17,14 @@ class SettingsTab extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontSize: AppSizes.hugeTextSize);
     User user = Provider.of<UserProvider>(context).user;
-    print(user);
+    final appSettingsProvider = context.watch<AppSettingsProvider>();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.pagePadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Settings', style: titleStyle),
+            Text(AppLocalizations.of(context).settings, style: titleStyle),
             SizedBox(
               height: AppSizes.verticalItemSpacing,
             ),
@@ -65,7 +67,7 @@ class SettingsTab extends StatelessWidget {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    child: Text('Account Settings',
+                    child: Text(AppLocalizations.of(context).accountSettings,
                         style: TextStyle(
                             fontSize: AppSizes.normalTextSize,
                             color: Colors.grey)),
@@ -74,21 +76,21 @@ class SettingsTab extends StatelessWidget {
                     height: AppSizes.verticalItemSpacing,
                   ),
                   SettingItem(
-                    title: 'Edit profile',
+                    title: AppLocalizations.of(context).editProfile,
                     function: () {
                       Navigator.of(context)
                           .pushNamed(LettutorRoutes.userProfile);
                     },
                   ),
                   SettingItem(
-                    title: 'Change password',
+                    title: AppLocalizations.of(context).changePassword,
                     function: () {
                       Navigator.of(context)
                           .pushNamed(LettutorRoutes.changePassword);
                     },
                   ),
                   SettingItem(
-                    title: 'Language',
+                    title: AppLocalizations.of(context).language,
                     function: () {
                       Navigator.of(context)
                           .pushNamed(LettutorRoutes.languageSetting);
@@ -99,14 +101,16 @@ class SettingsTab extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Dark mode',
+                          AppLocalizations.of(context).darkMode,
                           style: TextStyle(
                               fontSize: AppSizes.normalTextSize,
                               fontWeight: FontWeight.normal),
                         ),
                         Switch(
-                          value: true,
-                          onChanged: (bool value) {},
+                          value: appSettingsProvider.isDarkTheme,
+                          onChanged: (bool value) {
+                            appSettingsProvider.setIsDarkTheme(value);
+                          },
                         )
                       ],
                     ),
@@ -118,7 +122,7 @@ class SettingsTab extends StatelessWidget {
               height: AppSizes.verticalItemSpacing,
             ),
             SubmitButton(
-                text: 'Logout',
+                text: AppLocalizations.of(context).logout,
                 function: () {
                   SharedPrefsProvider.removeUser();
                   Provider.of<UserProvider>(context, listen: false)

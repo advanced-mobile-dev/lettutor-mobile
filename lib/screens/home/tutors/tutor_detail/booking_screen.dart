@@ -4,6 +4,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookingScreen extends StatelessWidget {
   final Tutor tutor;
@@ -19,7 +20,7 @@ class BookingScreen extends StatelessWidget {
         fontSize: AppSizes.normalTextSize);
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'Book a class',
+        title: AppLocalizations.of(context).bookAClass,
       ),
       body: Container(
           padding: EdgeInsets.all(AppSizes.pagePadding),
@@ -106,7 +107,7 @@ class BookingScreen extends StatelessWidget {
                   height: AppSizes.verticalItemSpacing,
                 ),
                 Text(
-                  'Booking time',
+                  AppLocalizations.of(context).bookingTime,
                   style: titleTextStyle,
                 ),
                 SizedBox(
@@ -122,28 +123,29 @@ class BookingScreen extends StatelessWidget {
                 SizedBox(
                   height: AppSizes.verticalItemSpacing,
                 ),
-                Text('Balance', style: titleTextStyle),
+                Text(AppLocalizations.of(context).balance,
+                    style: titleTextStyle),
                 SizedBox(
                   height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
                   child: Text(
-                    '17 lessons left',
+                    '17 ${AppLocalizations.of(context).lessonsLeft}',
                     style: contentTextStyle,
                   ),
                 ),
                 SizedBox(
                   height: AppSizes.verticalItemSpacing,
                 ),
-                Text('Price', style: titleTextStyle),
+                Text(AppLocalizations.of(context).price, style: titleTextStyle),
                 SizedBox(
                   height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
                   child: Text(
-                    '1 lesson',
+                    '1 ${AppLocalizations.of(context).lesson}',
                     style: contentTextStyle,
                   ),
                 ),
@@ -151,14 +153,14 @@ class BookingScreen extends StatelessWidget {
                   height: 50,
                 ),
                 SubmitButton(
-                  text: 'Book',
+                  text: AppLocalizations.of(context).book,
                   function: () {},
                 ),
                 SizedBox(
                   height: AppSizes.verticalItemSpacing,
                 ),
                 SubmitButton(
-                  text: 'Cancel',
+                  text: AppLocalizations.of(context).cancel,
                   function: () {
                     Navigator.pop(context);
                   },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartScreen extends StatelessWidget {
   @override
@@ -73,7 +74,7 @@ class StartScreen extends StatelessWidget {
                     Navigator.of(context).pushNamed(LettutorRoutes.signIn);
                   },
                   child: Text(
-                    'Login',
+                    AppLocalizations.of(context).login,
                     style: TextStyle(fontSize: AppSizes.largeTextSize),
                   ),
                 ),
@@ -86,7 +87,7 @@ class StartScreen extends StatelessWidget {
                     Navigator.of(context).pushNamed(LettutorRoutes.signUp);
                   },
                   child: Text(
-                    'Sign up',
+                    AppLocalizations.of(context).signUp,
                     style: TextStyle(fontSize: AppSizes.largeTextSize),
                   ),
                 ),

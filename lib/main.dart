@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/config/languages.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/providers/app-settings-provider.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
 import 'package:lettutor_app/screens/authentication/loading_screen.dart';
@@ -23,35 +25,56 @@ import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dar
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsProvider.init();
-  runApp(MyApp());
+  final userProvider = new UserProvider();
+  userProvider.init();
+  return runApp(MultiProvider(providers: [
+    ChangeNotifierProvider.value(value: userProvider),
+    ChangeNotifierProvider(
+        create: (_) => AppSettingsProvider(SharedPrefsProvider.isDarkMode,
+            SharedPrefsProvider.currentLanguageLocale))
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColors.primaryColor[50],
     ));
-    final userProvider = new UserProvider();
-    userProvider.init();
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(value: userProvider),
-        ],
-        child: MaterialApp(
-          title: 'Lettutor',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.themeData,
-          routes: _registerRoutes(),
-          initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
-              ? LettutorRoutes.start
-              : LettutorRoutes.home,
-          onGenerateRoute: _registerRoutesWithParameters,
-        ));
+    final userProvider = context.read<UserProvider>();
+    final appSettingsProvider = context.watch<AppSettingsProvider>();
+
+    return MaterialApp(
+      navigatorKey: navigatorKey,
+      title: 'Lettutor',
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: supportedLanguages.map((e) => Locale(
+            e.locale,
+            e.code,
+          )),
+      locale: Locale(appSettingsProvider.locale),
+      theme: appSettingsProvider.isDarkTheme
+          ? AppTheme.themeDataDark
+          : AppTheme.themeData,
+      routes: _registerRoutes(),
+      initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
+          ? LettutorRoutes.start
+          : LettutorRoutes.home,
+      onGenerateRoute: _registerRoutesWithParameters,
+    );
   }
 
   Map<String, WidgetBuilder> _registerRoutes() {

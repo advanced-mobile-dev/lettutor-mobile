@@ -65,23 +65,21 @@ class SharedPrefsProvider {
     return true;
   }
 
-  static Future<bool> get isDarkMode async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    return sharedPreference.getBool(Preferences.is_dark_mode) ?? false;
+  static bool get isDarkMode {
+    return prefs.getBool(Preferences.is_dark_mode) ?? false;
   }
 
-  static Future<void> changeBrightnessToDark(bool value) async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    return sharedPreference.setBool(Preferences.is_dark_mode, value);
+  static bool changeBrightnessToDark(bool value) {
+    prefs.setBool(Preferences.is_dark_mode, value);
+    return true;
   }
 
-  static Future<String> get currentLanguage async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    return sharedPreference.getString(Preferences.current_language);
+  static String get currentLanguageLocale {
+    return prefs.getString(Preferences.current_language) ?? 'en';
   }
 
-  static Future<void> changeLanguage(String language) async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    return sharedPreference.setString(Preferences.current_language, language);
+  static bool changeLanguage(String code) {
+    prefs.setString(Preferences.current_language, code);
+    return true;
   }
 }

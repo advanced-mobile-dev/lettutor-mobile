@@ -3,6 +3,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordChangeScreen extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class PasswordChangeScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: ApplicationAppBar(
-        title: 'Change password',
+        title: AppLocalizations.of(context).changePassword,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -18,21 +19,21 @@ class PasswordChangeScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               CustomTextField(
-                title: 'Current password',
+                title: AppLocalizations.of(context).currentPassword,
                 controller: null,
                 iconData: Icons.lock,
                 isPasswordTextField: true,
               ),
               SizedBox(height: AppSizes.verticalItemSpacing * 3),
               CustomTextField(
-                title: 'New password',
+                title: AppLocalizations.of(context).newPassword,
                 controller: null,
                 iconData: Icons.lock,
                 isPasswordTextField: true,
               ),
               SizedBox(height: AppSizes.verticalItemSpacing * 3),
               CustomTextField(
-                title: 'Confirm password',
+                title: AppLocalizations.of(context).confirmPassword,
                 controller: null,
                 iconData: Icons.lock,
                 isPasswordTextField: true,
@@ -40,7 +41,9 @@ class PasswordChangeScreen extends StatelessWidget {
               SizedBox(
                 height: AppSizes.verticalItemSpacing * 5,
               ),
-              Container(child: SubmitButton(text: 'Save', function: () {}))
+              Container(
+                  child: SubmitButton(
+                      text: AppLocalizations.of(context).save, function: () {}))
             ],
           ),
         ),

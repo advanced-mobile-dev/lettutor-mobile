@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/colors.dart';
+
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
+
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpcommingLessonItem extends StatelessWidget {
   final Tutor tutor;
@@ -44,7 +45,7 @@ class UpcommingLessonItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Upcomming lesson',
+                        AppLocalizations.of(context).upcommingLesson,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: AppSizes.smallTextSize),
@@ -177,7 +178,7 @@ class UpcommingLessonItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       AppOutlineButton(
-                          text: 'Cancel',
+                          text: AppLocalizations.of(context).cancel,
                           function: () => {},
                           iconData: Icons.cancel,
                           color: Colors.red),
@@ -185,7 +186,7 @@ class UpcommingLessonItem extends StatelessWidget {
                         width: AppSizes.horizontalItemSpacing,
                       ),
                       AppOutlineButton(
-                          text: 'Go to meeting',
+                          text: AppLocalizations.of(context).goToMeeting,
                           function: () => {
                                 Navigator.of(context)
                                     .pushNamed(LettutorRoutes.videoConference)

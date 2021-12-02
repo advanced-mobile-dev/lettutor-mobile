@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CourseFilterWidget extends StatefulWidget {
   @override
@@ -43,7 +44,7 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
               prefixIcon: Icon(
                 Icons.search,
               ),
-              hintText: 'Search course by name...',
+              hintText: AppLocalizations.of(context).searchByName,
               hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
         ),
         SizedBox(
@@ -59,7 +60,8 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Levels', style: textStyle),
+                      Text(AppLocalizations.of(context).levels,
+                          style: textStyle),
                       SizedBox(
                         height: 3,
                       ),
@@ -98,7 +100,8 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text('Categories', style: textStyle),
+                      Text(AppLocalizations.of(context).categories,
+                          style: textStyle),
                       SizedBox(
                         height: 3,
                       ),
