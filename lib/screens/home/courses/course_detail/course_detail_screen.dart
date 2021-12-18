@@ -5,7 +5,7 @@ import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CourseDetailScreen extends StatelessWidget {
-  final Course course;
+  final CourseTmp course;
   CourseDetailScreen({@required this.course});
 
   @override

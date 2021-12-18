@@ -76,7 +76,7 @@ class ScheduleTab extends StatelessWidget {
               padding: const EdgeInsets.all(AppSizes.pagePadding),
               child: Column(
                 children: <Widget>[
-                  ...UpcommingLesson.sampleData
+                  ...UpcommingLessonTmp.sampleData
                       .map((e) => Column(
                             children: [
                               UpcommingLessonWidget(upcommingLesson: e),

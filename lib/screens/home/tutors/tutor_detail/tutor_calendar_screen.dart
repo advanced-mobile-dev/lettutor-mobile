@@ -7,7 +7,7 @@ import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorCalendarScreen extends StatelessWidget {
-  final Tutor tutor;
+  final TutorTmp tutor;
   TutorCalendarScreen({this.tutor});
   @override
   Widget build(BuildContext context) {

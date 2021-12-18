@@ -9,10 +9,10 @@ class ChatsTab extends StatelessWidget {
       fontWeight: FontWeight.bold,
       fontSize: AppSizes.hugeTextSize);
   final tutors = [
-    Tutor.data,
-    Tutor.data1,
-    Tutor.data2,
-    Tutor.data3,
+    TutorTmp.data,
+    TutorTmp.data1,
+    TutorTmp.data2,
+    TutorTmp.data3,
   ];
   @override
   Widget build(BuildContext context) {

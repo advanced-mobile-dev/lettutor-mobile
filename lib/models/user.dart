@@ -1,4 +1,4 @@
-class User {
+class UserTmp {
   final int userId;
   final String name;
   final String email;
@@ -6,7 +6,7 @@ class User {
   final String token;
   final String refreshToken;
 
-  User(
+  UserTmp(
       {this.userId,
       this.name,
       this.email,
@@ -14,7 +14,7 @@ class User {
       this.token,
       this.refreshToken});
 
-  static final data = User(
+  static final data = UserTmp(
       userId: 1,
       name: 'Hieu Ho',
       email: 'hohieu1099@gmail.com',

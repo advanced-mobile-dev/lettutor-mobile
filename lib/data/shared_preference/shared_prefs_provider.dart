@@ -20,7 +20,7 @@ class SharedPrefsProvider {
     prefs.remove(Preferences.is_logged_in);
   }
 
-  static bool saveUser(User user) {
+  static bool saveUser(UserTmp user) {
     prefs.setInt(Preferences.user_id, user.userId);
     prefs.setString(Preferences.user_name, user.name);
     prefs.setString(Preferences.user_email, user.email);
@@ -31,14 +31,14 @@ class SharedPrefsProvider {
     return true;
   }
 
-  static User get user {
+  static UserTmp get user {
     int id = prefs.getInt(Preferences.user_id);
     String name = prefs.getString(Preferences.user_name);
     String email = prefs.getString(Preferences.user_email);
     String avatar = prefs.getString(Preferences.user_avatar);
     String token = prefs.getString(Preferences.user_token);
     String refreshToken = prefs.getString(Preferences.user_refreshtoken);
-    return User(
+    return UserTmp(
         userId: id,
         name: name,
         email: email,

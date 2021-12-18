@@ -3,7 +3,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor.dart';
 
 class ChatItem extends StatelessWidget {
-  final Tutor tutor;
+  final TutorTmp tutor;
   final String latestMessage;
 
   ChatItem({this.tutor, this.latestMessage});

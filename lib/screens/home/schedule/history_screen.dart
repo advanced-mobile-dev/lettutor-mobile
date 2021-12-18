@@ -20,28 +20,28 @@ class HistoryScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               HistoryItem(
-                tutor: Tutor.data,
+                tutor: TutorTmp.data,
               ),
               SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
-                tutor: Tutor.data1,
-                feedback: LearnerFeedback(
+                tutor: TutorTmp.data1,
+                feedback: LearnerFeedbackTmp(
                     rating: 4.5,
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
               SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
-                tutor: Tutor.data2,
-                feedback: LearnerFeedback(
+                tutor: TutorTmp.data2,
+                feedback: LearnerFeedbackTmp(
                     rating: 4.5,
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
               SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
-                tutor: Tutor.data3,
-                feedback: LearnerFeedback(
+                tutor: TutorTmp.data3,
+                feedback: LearnerFeedbackTmp(
                     rating: 4.5,
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
@@ -56,8 +56,8 @@ class HistoryScreen extends StatelessWidget {
 }
 
 class HistoryItem extends StatelessWidget {
-  final Tutor tutor;
-  final LearnerFeedback feedback;
+  final TutorTmp tutor;
+  final LearnerFeedbackTmp feedback;
   HistoryItem({@required this.tutor, this.feedback});
   @override
   Widget build(BuildContext context) {

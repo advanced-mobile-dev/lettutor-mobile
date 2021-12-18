@@ -5,7 +5,7 @@ import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_detail_screen.dart';
 
 class TutorItemWidget extends StatelessWidget {
-  final Tutor tutor;
+  final TutorTmp tutor;
 
   TutorItemWidget({this.tutor});
   @override

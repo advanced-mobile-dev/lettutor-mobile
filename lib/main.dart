@@ -107,14 +107,14 @@ class MyApp extends StatelessWidget {
         break;
 
       case LettutorRoutes.courseDetail:
-        final courseDetail = routeSettings.arguments as Course;
+        final courseDetail = routeSettings.arguments as CourseTmp;
         return MaterialPageRoute(
             builder: (context) => CourseDetailScreen(course: courseDetail));
 
         break;
 
       case LettutorRoutes.tutorCalendar:
-        final tutor = routeSettings.arguments as Tutor;
+        final tutor = routeSettings.arguments as TutorTmp;
         return MaterialPageRoute(
             builder: (context) => TutorCalendarScreen(tutor: tutor));
 

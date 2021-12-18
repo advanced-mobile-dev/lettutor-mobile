@@ -5,7 +5,7 @@ import 'package:lettutor_app/models/course.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CourseItemWidget extends StatelessWidget {
-  final Course course;
+  final CourseTmp course;
 
   CourseItemWidget({this.course});
   @override

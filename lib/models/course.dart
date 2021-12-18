@@ -1,4 +1,4 @@
-class Course {
+class CourseTmp {
   final String name;
   final String shortDescription;
   final String overview;
@@ -7,7 +7,7 @@ class Course {
   final List<String> topics;
   final String image;
 
-  Course(
+  CourseTmp(
       {this.name,
       this.shortDescription,
       this.overview,
@@ -16,8 +16,8 @@ class Course {
       this.topics,
       this.image});
 
-  static final List<Course> courseList = [
-    Course(
+  static final List<CourseTmp> courseList = [
+    CourseTmp(
         name: 'IELTS Speaking Part 2',
         shortDescription:
             'Practice answering Part 2 questions from past years IELTS exams',
@@ -36,7 +36,7 @@ class Course {
           'Technology'
         ],
         image: 'assets/images/course_01.png'),
-    Course(
+    CourseTmp(
         name: 'Workshop: Practicing Presentations',
         shortDescription: 'Practice an upcoming presentation or speech',
         overview:

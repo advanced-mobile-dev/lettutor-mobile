@@ -28,7 +28,7 @@ class ProfileEditScreen extends StatelessWidget {
                   children: <Widget>[
                     ClipOval(
                       child: Image.asset(
-                        Tutor.data3.avatar,
+                        TutorTmp.data3.avatar,
                         width: 125,
                       ),
                     ),

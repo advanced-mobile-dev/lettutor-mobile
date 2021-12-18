@@ -6,11 +6,11 @@ import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_item_widget.da
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorsTab extends StatelessWidget {
-  final List<Tutor> tutorList = [
-    Tutor.data,
-    Tutor.data1,
-    Tutor.data2,
-    Tutor.data3
+  final List<TutorTmp> tutorList = [
+    TutorTmp.data,
+    TutorTmp.data1,
+    TutorTmp.data2,
+    TutorTmp.data3
   ];
   @override
   Widget build(BuildContext context) {

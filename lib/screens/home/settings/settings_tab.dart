@@ -16,7 +16,7 @@ class SettingsTab extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.bold,
         fontSize: AppSizes.hugeTextSize);
-    User user = Provider.of<UserProvider>(context).user;
+    UserTmp user = Provider.of<UserProvider>(context).user;
     final appSettingsProvider = context.watch<AppSettingsProvider>();
     return SingleChildScrollView(
       child: Padding(

@@ -5,8 +5,8 @@ import 'package:lettutor_app/models/user.dart';
 enum AuthStatus { NotLoggedIn, LoggedIn, LoggingIn }
 
 class UserProvider extends ChangeNotifier {
-  User _user;
-  User get user => _user;
+  UserTmp _user;
+  UserTmp get user => _user;
   AuthStatus _loggedInStatus = AuthStatus.NotLoggedIn;
   AuthStatus get loggedInStatus => _loggedInStatus;
 
@@ -21,7 +21,7 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  void setUser(User user) {
+  void setUser(UserTmp user) {
     _user = user;
     if (user != null) {
       notifyListeners();
@@ -40,10 +40,10 @@ class UserProvider extends ChangeNotifier {
     //
 
     if (email == 'admin@admin.com' && password == '123') {
-      SharedPrefsProvider.saveUser(User.data);
+      SharedPrefsProvider.saveUser(UserTmp.data);
       _loggedInStatus = AuthStatus.LoggedIn;
       notifyListeners();
-      return {'status': true, 'message': 'Successful', 'user': User.data};
+      return {'status': true, 'message': 'Successful', 'user': UserTmp.data};
     }
 
     _loggedInStatus = AuthStatus.NotLoggedIn;

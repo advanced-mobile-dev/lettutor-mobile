@@ -6,7 +6,7 @@ import 'package:lettutor_app/screens/home/courses/course_list/course_item_widget
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CoursesTab extends StatelessWidget {
-  final List<Course> courses = Course.courseList;
+  final List<CourseTmp> courses = CourseTmp.courseList;
   @override
   Widget build(BuildContext context) {
     final titleStyle = TextStyle(

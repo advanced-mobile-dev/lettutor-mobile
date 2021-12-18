@@ -11,7 +11,7 @@ import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorDetail extends StatelessWidget {
-  final Tutor tutor;
+  final TutorTmp tutor;
   TutorDetail({this.tutor});
 
   @override

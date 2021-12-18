@@ -6,7 +6,7 @@ import 'package:lettutor_app/widgets/outline_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpcommingLessonWidget extends StatelessWidget {
-  final UpcommingLesson upcommingLesson;
+  final UpcommingLessonTmp upcommingLesson;
   final bool isNearestLesson;
   UpcommingLessonWidget(
       {@required this.upcommingLesson, this.isNearestLesson = false});
@@ -174,7 +174,7 @@ class UpcommingLessonWidget extends StatelessWidget {
                       AppOutlineButton(
                           text: AppLocalizations.of(context).cancel,
                           function: () => {
-                                UpcommingLesson.sampleData
+                                UpcommingLessonTmp.sampleData
                                     .removeAt(upcommingLesson.id)
                               },
                           iconData: Icons.cancel,

@@ -71,7 +71,7 @@ class RatingComment extends StatelessWidget {
             children: <Widget>[
               ClipOval(
                 child: Image.asset(
-                  Tutor.data.avatar,
+                  TutorTmp.data.avatar,
                   width: 30.0,
                   height: 30.0,
                 ),
@@ -86,7 +86,7 @@ class RatingComment extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        Tutor.data.name,
+                        TutorTmp.data.name,
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
@@ -103,7 +103,7 @@ class RatingComment extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '${Tutor.data.rating}',
+                        '${TutorTmp.data.rating}',
                         style: TextStyle(color: Colors.amber),
                       ),
                       SizedBox(
@@ -112,7 +112,7 @@ class RatingComment extends StatelessWidget {
                       Container(
                         width: 100,
                         child: RatingBar.builder(
-                          initialRating: Tutor.data.rating,
+                          initialRating: TutorTmp.data.rating,
                           ignoreGestures: true,
                           itemSize: 15,
                           direction: Axis.horizontal,
