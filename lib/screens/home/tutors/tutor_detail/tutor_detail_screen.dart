@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lettutor_app/config/theme.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_reviews.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/flat_button.dart';
-import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorDetail extends StatelessWidget {
   final Tutor tutor;
@@ -16,19 +16,36 @@ class TutorDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _buildFlatButton({Widget icon, Function() function, String title}) {
+      final ButtonStyle buttonStyle = TextButton.styleFrom(
+          primary: Theme.of(context).primaryColor,
+          backgroundColor: Colors.transparent);
+      return TextButton(
+          onPressed: function,
+          style: buttonStyle,
+          child: Column(
+            children: <Widget>[
+              icon,
+              SizedBox(
+                height: 4,
+              ),
+              Text(title,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: AppSizes.normalTextSize))
+            ],
+          ));
+    }
+
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
-        title: 'Profile',
+        title: AppLocalizations.of(context).profile,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 10,
-              ),
               Container(
                   height: 110,
                   child: Row(
@@ -40,7 +57,7 @@ class TutorDetail extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: AppSizes.horizontalItemSpacing,
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -49,7 +66,8 @@ class TutorDetail extends StatelessWidget {
                           Text(
                             tutor.name,
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: AppSizes.normalTextSize,
+                                fontWeight: FontWeight.bold),
                           ),
                           Row(
                             children: [
@@ -65,7 +83,7 @@ class TutorDetail extends StatelessWidget {
                                 child: RatingBar.builder(
                                   initialRating: tutor.rating,
                                   ignoreGestures: true,
-                                  itemSize: 15,
+                                  itemSize: AppSizes.normalTextSize,
                                   direction: Axis.horizontal,
                                   allowHalfRating: true,
                                   itemCount: 5,
@@ -96,35 +114,36 @@ class TutorDetail extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(tutor.countryName,
-                                  style: TextStyle(fontSize: 14)),
+                                  style: TextStyle(
+                                    fontSize: AppSizes.normalTextSize,
+                                  )),
                             ],
                           ),
                         ],
                       ),
                     ],
                   )),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                child: Text(
-                  tutor.description,
-                ),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
+              ),
+              Text(
+                tutor.description,
+              ),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
               ),
               SubmitButton(
-                text: 'Calendar',
-                function: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TutorCalendarScreen(
-                            tutor: tutor,
-                          )));
-                },
+                text: AppLocalizations.of(context).calendar,
                 backgroundColor: Colors.white,
-                textColor: AppTheme.mainColor,
+                function: () {
+                  Navigator.of(context).pushNamed(LettutorRoutes.tutorCalendar,
+                      arguments: tutor);
+                },
+                textColor: Theme.of(context).primaryColor,
                 icon: Icon(Icons.calendar_today),
               ),
               SizedBox(
-                height: 10,
+                height: AppSizes.verticalItemSpacing,
               ),
               Container(
                 child: Row(
@@ -133,28 +152,32 @@ class TutorDetail extends StatelessWidget {
                     _buildFlatButton(
                         icon: Icon(Icons.video_library_outlined),
                         function: () {},
-                        title: 'Intro video'),
+                        title: AppLocalizations.of(context).introVideo),
+                    // _buildFlatButton(
+                    //     icon: AppIcons.chatIcon,
+                    //     function: () {},
+                    //     title: 'Message'),
                     _buildFlatButton(
-                        icon: AppIcons.chatIcon,
+                        icon: SvgPicture.asset('assets/icons/favorite.svg',
+                            color: Theme.of(context).primaryColor),
                         function: () {},
-                        title: 'Message'),
-                    _buildFlatButton(
-                        icon: AppIcons.favoriteIcon,
-                        function: () {},
-                        title: 'Favorite'),
+                        title: AppLocalizations.of(context).favorite),
                     _buildFlatButton(
                         icon: Icon(
                           Icons.report,
                           size: 20,
                         ),
                         function: () {},
-                        title: 'Report'),
+                        title: AppLocalizations.of(context).report),
                   ],
                 ),
               ),
               Divider(
                 thickness: 1,
                 height: 10,
+              ),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
               ),
               TutorDescription(),
               TutorReviews()
@@ -164,22 +187,4 @@ class TutorDetail extends StatelessWidget {
       ),
     );
   }
-}
-
-_buildFlatButton({Widget icon, Function() function, String title}) {
-  final ButtonStyle buttonStyle = TextButton.styleFrom(
-      primary: AppTheme.mainColor, backgroundColor: Colors.transparent);
-  return TextButton(
-      onPressed: function,
-      style: buttonStyle,
-      child: Column(
-        children: <Widget>[
-          icon,
-          SizedBox(
-            height: 4,
-          ),
-          Text(title,
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 14))
-        ],
-      ));
 }

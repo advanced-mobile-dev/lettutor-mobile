@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_detail_screen.dart';
 
@@ -17,11 +17,11 @@ class TutorItemWidget extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.grey[200],
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                  color: Colors.grey.withOpacity(0.8),
+                  color: Colors.black.withOpacity(0.3),
                   spreadRadius: 2,
                   blurRadius: 3,
                   offset: Offset(0, 3))
@@ -49,7 +49,8 @@ class TutorItemWidget extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           tutor.name,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
                         ),
                         Row(
                           children: <Widget>[
@@ -62,7 +63,9 @@ class TutorItemWidget extends StatelessWidget {
                               width: 5,
                             ),
                             Text(tutor.countryName,
-                                style: TextStyle(fontSize: 11))
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: AppSizes.smallTextSize))
                           ],
                         ),
                         Row(
@@ -101,7 +104,7 @@ class TutorItemWidget extends StatelessWidget {
                   ],
                 )),
             SizedBox(
-              height: 10,
+              height: AppSizes.verticalItemSpacing,
             ),
             Container(
               height: 50,
@@ -109,7 +112,8 @@ class TutorItemWidget extends StatelessWidget {
               child: Text(tutor.description,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
-                  style: TextStyle(color: AppTheme.textColor, fontSize: 11)),
+                  style: TextStyle(
+                      color: Colors.black, fontSize: AppSizes.smallTextSize)),
             ),
           ],
         ),

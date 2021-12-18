@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/chats/chat_item.dart';
 
 class ChatsTab extends StatelessWidget {
-  final titleStyle =
-      TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 36);
+  final titleStyle = TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+      fontSize: AppSizes.hugeTextSize);
   final tutors = [
     Tutor.data,
     Tutor.data1,
@@ -39,7 +42,8 @@ class ChatsTab extends StatelessWidget {
                           color: Colors.black,
                         ),
                         hintText: 'Search...',
-                        hintStyle: TextStyle(fontSize: 14)),
+                        hintStyle:
+                            TextStyle(fontSize: AppSizes.normalTextSize)),
                   ),
                 ),
                 ...tutors

@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
-import 'package:lettutor_app/widgets/name_text_field.dart';
-import 'package:lettutor_app/widgets/password_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class ProfileEditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userProvider = context.read<UserProvider>().user;
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
-        title: 'Edit profile',
+        title: AppLocalizations.of(context).editProfile,
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
               Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 15),
                 child: Stack(
                   children: <Widget>[
                     ClipOval(
@@ -51,24 +51,28 @@ class ProfileEditScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
+              SizedBox(height: AppSizes.verticalItemSpacing * 3),
+              CustomTextField(
+                title: AppLocalizations.of(context).name,
+                initialValue: userProvider.name,
+                controller: null,
+                iconData: Icons.account_box,
+                keyboardType: TextInputType.text,
               ),
-              NameTextField(controller: null),
-              SizedBox(
-                height: 10,
+              SizedBox(height: AppSizes.verticalItemSpacing * 3),
+              CustomTextField(
+                initialValue: userProvider.email,
+                title: AppLocalizations.of(context).email,
+                controller: null,
+                iconData: Icons.email,
+                keyboardType: TextInputType.emailAddress,
               ),
-              EmailTextField(controller: null),
               SizedBox(
-                height: 10,
-              ),
-              PasswordTextField(controller: null),
-              SizedBox(
-                height: 30,
+                height: AppSizes.verticalItemSpacing * 5,
               ),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: SubmitButton(text: 'Save', function: () {}))
+                  child: SubmitButton(
+                      text: AppLocalizations.of(context).save, function: () {}))
             ],
           ),
         ),

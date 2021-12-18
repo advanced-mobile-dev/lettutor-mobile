@@ -1,49 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/confirm_password_text_field.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
-import 'package:lettutor_app/widgets/name_text_field.dart';
-import 'package:lettutor_app/widgets/password_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordChangeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
-        title: 'Change password',
+        title: AppLocalizations.of(context).changePassword,
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
-              PasswordTextField(controller: null),
-              SizedBox(
-                height: 10,
-              ),
-              PasswordTextField(
+              CustomTextField(
+                title: AppLocalizations.of(context).currentPassword,
                 controller: null,
-                title: 'New password',
+                iconData: Icons.lock,
+                isPasswordTextField: true,
+              ),
+              SizedBox(height: AppSizes.verticalItemSpacing * 3),
+              CustomTextField(
+                title: AppLocalizations.of(context).newPassword,
+                controller: null,
+                iconData: Icons.lock,
+                isPasswordTextField: true,
+              ),
+              SizedBox(height: AppSizes.verticalItemSpacing * 3),
+              CustomTextField(
+                title: AppLocalizations.of(context).confirmPassword,
+                controller: null,
+                iconData: Icons.lock,
+                isPasswordTextField: true,
               ),
               SizedBox(
-                height: 10,
-              ),
-              ConfirmPasswordTextField(
-                  passwordController: null, confirmPasswordController: null),
-              SizedBox(
-                height: 30,
+                height: AppSizes.verticalItemSpacing * 5,
               ),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: SubmitButton(text: 'Save', function: () {}))
+                  child: SubmitButton(
+                      text: AppLocalizations.of(context).save, function: () {}))
             ],
           ),
         ),

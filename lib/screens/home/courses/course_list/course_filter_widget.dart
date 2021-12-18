@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CourseFilterWidget extends StatefulWidget {
   @override
@@ -6,7 +8,7 @@ class CourseFilterWidget extends StatefulWidget {
 }
 
 class _CourseFilterWidgetState extends State<CourseFilterWidget> {
-  final textStyle = TextStyle(color: Colors.black, fontSize: 12);
+  final textStyle = TextStyle(fontSize: AppSizes.smallTextSize);
   final levels = [
     'Any Level',
     'Beginner',
@@ -37,15 +39,13 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
         TextFormField(
           decoration: InputDecoration(
               contentPadding: EdgeInsets.all(0),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(5)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
               prefixIcon: Icon(
                 Icons.search,
-                color: Colors.black,
               ),
-              hintText: 'Search course by name...',
-              hintStyle: TextStyle(fontSize: 14)),
+              hintText: AppLocalizations.of(context).searchByName,
+              hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
         ),
         SizedBox(
           height: 10,
@@ -60,7 +60,8 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Levels', style: textStyle),
+                      Text(AppLocalizations.of(context).levels,
+                          style: textStyle),
                       SizedBox(
                         height: 3,
                       ),
@@ -69,14 +70,12 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
                               border: Border.all(width: 1)),
                           child: DropdownButton<String>(
                             isExpanded: true,
                             value: levelValue,
                             icon: const Icon(Icons.arrow_drop_down),
                             iconSize: 24,
-                            style: const TextStyle(color: Colors.black),
                             underline: SizedBox(),
                             onChanged: (String newValue) {
                               setState(() {
@@ -101,7 +100,8 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text('Categories', style: textStyle),
+                      Text(AppLocalizations.of(context).categories,
+                          style: textStyle),
                       SizedBox(
                         height: 3,
                       ),
@@ -110,13 +110,11 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: Colors.white,
                               border: Border.all(width: 1)),
                           child: DropdownButton<String>(
                             value: categoryValue,
                             isExpanded: true,
                             iconSize: 24,
-                            style: const TextStyle(color: Colors.black),
                             underline: SizedBox(),
                             onChanged: (String newValue) {
                               setState(() {

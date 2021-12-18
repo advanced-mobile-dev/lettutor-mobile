@@ -1,113 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/user.dart';
-import 'package:lettutor_app/screens/home/settings/language_setting_screen.dart';
-import 'package:lettutor_app/screens/home/settings/password_change_screen.dart';
-import 'package:lettutor_app/screens/home/settings/profile_edit_screen.dart';
+import 'package:lettutor_app/providers/app-settings-provider.dart';
+import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsTab extends StatelessWidget {
-  final titleStyle =
-      TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 36);
   @override
   Widget build(BuildContext context) {
+    final titleStyle = TextStyle(
+        color: Theme.of(context).primaryColor,
+        fontWeight: FontWeight.bold,
+        fontSize: AppSizes.hugeTextSize);
+    User user = Provider.of<UserProvider>(context).user;
+    final appSettingsProvider = context.watch<AppSettingsProvider>();
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            child: Text('Settings', style: titleStyle),
-          ),
-          Container(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSizes.pagePadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(AppLocalizations.of(context).settings, style: titleStyle),
+            SizedBox(
+              height: AppSizes.verticalItemSpacing,
+            ),
+            Row(
+              children: <Widget>[
+                ClipOval(
+                  child: user.avatar == null
+                      ? Icon(Icons.account_circle_outlined)
+                      : Image.asset(
+                          user.avatar,
+                          fit: BoxFit.cover,
+                          width: 50.0,
+                          height: 50.0,
+                        ),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Text(user.name,
+                    style: TextStyle(
+                        fontSize: AppSizes.normalTextSize,
+                        fontWeight: FontWeight.bold))
+              ],
+            ),
+            SizedBox(
+              height: AppSizes.verticalItemSpacing,
+            ),
+            Divider(
+              thickness: 1.5,
+            ),
+            SizedBox(
+              height: AppSizes.verticalItemSpacing,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
               child: Column(
-            children: <Widget>[
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
-                child: Row(
-                  children: <Widget>[
-                    ClipOval(
-                      child: Image.asset(
-                        User.data.avatar,
-                        fit: BoxFit.cover,
-                        width: 50.0,
-                        height: 50.0,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(User.data.name,
+                children: <Widget>[
+                  SizedBox(
+                    height: AppSizes.verticalItemSpacing,
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(AppLocalizations.of(context).accountSettings,
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold))
-                  ],
-                ),
+                            fontSize: AppSizes.normalTextSize,
+                            color: Colors.grey)),
+                  ),
+                  SizedBox(
+                    height: AppSizes.verticalItemSpacing,
+                  ),
+                  SettingItem(
+                    title: AppLocalizations.of(context).editProfile,
+                    function: () {
+                      Navigator.of(context)
+                          .pushNamed(LettutorRoutes.userProfile);
+                    },
+                  ),
+                  SettingItem(
+                    title: AppLocalizations.of(context).changePassword,
+                    function: () {
+                      Navigator.of(context)
+                          .pushNamed(LettutorRoutes.changePassword);
+                    },
+                  ),
+                  SettingItem(
+                    title: AppLocalizations.of(context).language,
+                    function: () {
+                      Navigator.of(context)
+                          .pushNamed(LettutorRoutes.languageSetting);
+                    },
+                  ),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          AppLocalizations.of(context).darkMode,
+                          style: TextStyle(
+                              fontSize: AppSizes.normalTextSize,
+                              fontWeight: FontWeight.normal),
+                        ),
+                        Switch(
+                          value: appSettingsProvider.isDarkTheme,
+                          onChanged: (bool value) {
+                            appSettingsProvider.setIsDarkTheme(value);
+                          },
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
-              Divider(
-                thickness: 1.5,
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(left: 30, top: 15, bottom: 10),
-                      child: Text('Account Settings',
-                          style: TextStyle(fontSize: 18, color: Colors.grey)),
-                    ),
-                    SettingItem(
-                      title: 'Edit profile',
-                      function: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ProfileEditScreen()));
-                      },
-                    ),
-                    SettingItem(
-                      title: 'Change password',
-                      function: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PasswordChangeScreen()));
-                      },
-                    ),
-                    SettingItem(
-                      title: 'Language',
-                      function: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LanguageSettingScreen()));
-                      },
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(
-                          left: 30, right: 10, top: 10, bottom: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Dark mode',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.normal),
-                          ),
-                          Switch(
-                            value: false,
-                            onChanged: (bool value) {},
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 20,
-                ),
-                child: SubmitButton(text: 'Logout', function: () {}),
-              )
-            ],
-          )),
-        ],
+            ),
+            SizedBox(
+              height: AppSizes.verticalItemSpacing,
+            ),
+            SubmitButton(
+                text: AppLocalizations.of(context).logout,
+                function: () {
+                  SharedPrefsProvider.removeUser();
+                  Provider.of<UserProvider>(context, listen: false)
+                      .setUser(null);
+                  Navigator.pushReplacementNamed(context, LettutorRoutes.start);
+                }),
+          ],
+        ),
       ),
     );
   }
@@ -118,16 +141,14 @@ class SettingItem extends StatelessWidget {
   final String title;
   SettingItem({@required this.function, @required this.title});
 
-  final TextStyle textStyle =
-      TextStyle(fontSize: 18, fontWeight: FontWeight.normal);
+  final TextStyle textStyle = TextStyle(
+      fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.normal);
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        style: TextButton.styleFrom(
-            primary: Colors.black, padding: EdgeInsets.all(0)),
-        onPressed: function,
+    return GestureDetector(
+        onTap: function,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          height: 50,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

@@ -1,16 +1,24 @@
 class User {
+  final int userId;
   final String name;
   final String email;
   final String avatar;
+  final String token;
+  final String refreshToken;
 
-  User({
-    this.name,
-    this.email,
-    this.avatar,
-  });
+  User(
+      {this.userId,
+      this.name,
+      this.email,
+      this.avatar,
+      this.token,
+      this.refreshToken});
 
   static final data = User(
+      userId: 1,
       name: 'Hieu Ho',
       email: 'hohieu1099@gmail.com',
-      avatar: 'assets/images/kevin_debruyne.png');
+      avatar: 'assets/images/kevin_debruyne.png',
+      token: 'token',
+      refreshToken: 'refreshToken');
 }

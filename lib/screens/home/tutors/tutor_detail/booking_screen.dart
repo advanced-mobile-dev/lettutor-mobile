@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/upcomming_lesson.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookingScreen extends StatelessWidget {
   final Tutor tutor;
@@ -13,15 +16,16 @@ class BookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final titleTextStyle = TextStyle(
-        color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold);
-    final contentTextStyle = TextStyle(color: AppTheme.textColor, fontSize: 12);
+        fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.bold);
+    final contentTextStyle = TextStyle(
+        // color: AppTheme.textColor,
+        fontSize: AppSizes.normalTextSize);
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
-        title: 'Book a class',
+        title: AppLocalizations.of(context).bookAClass,
       ),
       body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -36,7 +40,7 @@ class BookingScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: AppSizes.horizontalItemSpacing,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -45,7 +49,8 @@ class BookingScreen extends StatelessWidget {
                             Text(
                               tutor.name,
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: AppSizes.normalTextSize,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Row(
                               children: [
@@ -61,7 +66,7 @@ class BookingScreen extends StatelessWidget {
                                   child: RatingBar.builder(
                                     initialRating: tutor.rating,
                                     ignoreGestures: true,
-                                    itemSize: 15,
+                                    itemSize: AppSizes.normalTextSize,
                                     direction: Axis.horizontal,
                                     allowHalfRating: true,
                                     itemCount: 5,
@@ -92,7 +97,8 @@ class BookingScreen extends StatelessWidget {
                                   width: 5,
                                 ),
                                 Text(tutor.countryName,
-                                    style: TextStyle(fontSize: 14))
+                                    style: TextStyle(
+                                        fontSize: AppSizes.normalTextSize))
                               ],
                             ),
                           ],
@@ -100,69 +106,82 @@ class BookingScreen extends StatelessWidget {
                       ],
                     )),
                 SizedBox(
-                  height: 20,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Text(
-                  'Booking time',
+                  AppLocalizations.of(context).bookingTime,
                   style: titleTextStyle,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
                   child: Text(
-                    '15:00 - 17:00, Monday 11/10/2021',
+                    '15:00 - 17:00, Monday 07/12/2021',
                     style: contentTextStyle,
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: AppSizes.verticalItemSpacing,
                 ),
-                Text('Balance', style: titleTextStyle),
+                Text(AppLocalizations.of(context).balance,
+                    style: titleTextStyle),
                 SizedBox(
-                  height: 5,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
                   child: Text(
-                    '17 lessons left',
+                    '17 ${AppLocalizations.of(context).lessonsLeft}',
                     style: contentTextStyle,
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: AppSizes.verticalItemSpacing,
                 ),
-                Text('Price', style: titleTextStyle),
+                Text(AppLocalizations.of(context).price, style: titleTextStyle),
                 SizedBox(
-                  height: 5,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 30),
                   child: Text(
-                    '1 lesson',
+                    '1 ${AppLocalizations.of(context).lesson}',
                     style: contentTextStyle,
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
                 SubmitButton(
-                  text: 'Book',
-                  function: () {},
+                  text: AppLocalizations.of(context).book.toUpperCase(),
+                  function: () {
+                    UpcommingLesson.sampleData.add(
+                        UpcommingLesson(3, tutor, '21/12/2021', '15:00 17:00'));
+                    Navigator.popUntil(
+                        context, ModalRoute.withName(LettutorRoutes.home));
+                  },
                 ),
                 SizedBox(
-                  height: 10,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 SubmitButton(
-                  text: 'Cancel',
+                  text: AppLocalizations.of(context).cancel.toUpperCase(),
                   function: () {
                     Navigator.pop(context);
                   },
                   backgroundColor: Colors.white,
-                  textColor: AppTheme.mainColor,
+                  textColor: Theme.of(context).primaryColor,
                 ),
               ])),
     );
   }
+}
+
+class BookingScreenArguments {
+  final Tutor tutor;
+  final String time;
+
+  BookingScreenArguments({this.tutor, this.time});
 }

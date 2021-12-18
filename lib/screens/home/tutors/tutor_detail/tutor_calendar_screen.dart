@@ -1,8 +1,10 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorCalendarScreen extends StatelessWidget {
   final Tutor tutor;
@@ -12,11 +14,11 @@ class TutorCalendarScreen extends StatelessWidget {
     _buildTimeFrame(String hour) {
       return GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => BookingScreen(
-                      tutor: tutor,
-                      time: '15:00 - 17:00, Monday 11/10/2021',
-                    )));
+            Navigator.of(context).pushNamed(LettutorRoutes.booking,
+                arguments: BookingScreenArguments(
+                  tutor: tutor,
+                  time: '15:00 - 17:00, Monday 11/10/2021',
+                ));
           },
           child: Container(
             alignment: Alignment.centerLeft,
@@ -24,7 +26,6 @@ class TutorCalendarScreen extends StatelessWidget {
             height: 40,
             width: double.infinity,
             decoration: BoxDecoration(
-                color: Colors.white,
                 border:
                     Border(bottom: BorderSide(width: 1, color: Colors.grey))),
             child: Row(
@@ -75,7 +76,7 @@ class TutorCalendarScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'Calendar',
+        title: AppLocalizations.of(context).calendar,
       ),
       body: SingleChildScrollView(
         child: Container(

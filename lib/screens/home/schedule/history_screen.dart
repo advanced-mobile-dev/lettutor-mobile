@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/feedback.dart';
 import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_detail_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
       appBar: ApplicationAppBar(
-        title: 'History',
+        title: AppLocalizations.of(context).history,
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              SizedBox(
-                height: 15,
-              ),
               HistoryItem(
                 tutor: Tutor.data,
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
                 tutor: Tutor.data1,
                 feedback: LearnerFeedback(
@@ -35,9 +30,7 @@ class HistoryScreen extends StatelessWidget {
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
                 tutor: Tutor.data2,
                 feedback: LearnerFeedback(
@@ -45,9 +38,7 @@ class HistoryScreen extends StatelessWidget {
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               HistoryItem(
                 tutor: Tutor.data3,
                 feedback: LearnerFeedback(
@@ -55,9 +46,7 @@ class HistoryScreen extends StatelessWidget {
                     comment:
                         'This is an excellent teacher. He is very talented and kind'),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: AppSizes.verticalItemSpacing),
             ],
           ),
         ),
@@ -72,18 +61,56 @@ class HistoryItem extends StatelessWidget {
   HistoryItem({@required this.tutor, this.feedback});
   @override
   Widget build(BuildContext context) {
+    _buildDataRow({String title, IconData iconData, String content}) {
+      final titleStyle = TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: AppSizes.smallTextSize,
+          color: Theme.of(context).primaryColor);
+      final contentStyle = TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: AppSizes.smallTextSize,
+          color: Colors.black);
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Icon(
+            iconData,
+            size: 15,
+            color: Theme.of(context).primaryColor,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Container(
+            width: 100,
+            child: Text(
+              title,
+              style: titleStyle,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              content,
+              style: contentStyle,
+              textAlign: TextAlign.start,
+            ),
+          )
+        ],
+      );
+    }
+
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
           ]),
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(AppSizes.cardPadding),
       child: Column(
         children: <Widget>[
           Container(
@@ -93,10 +120,9 @@ class HistoryItem extends StatelessWidget {
                   Expanded(
                       child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => TutorDetail(
-                                tutor: tutor,
-                              )));
+                      Navigator.of(context).pushNamed(
+                          LettutorRoutes.tutorProfile,
+                          arguments: tutor);
                     },
                     child: Row(
                       children: [
@@ -116,7 +142,9 @@ class HistoryItem extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               tutor.name,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Row(
                               children: <Widget>[
@@ -129,7 +157,9 @@ class HistoryItem extends StatelessWidget {
                                   width: 5,
                                 ),
                                 Text(tutor.countryName,
-                                    style: TextStyle(fontSize: 11))
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: AppSizes.smallTextSize))
                               ],
                             ),
                           ],
@@ -139,7 +169,9 @@ class HistoryItem extends StatelessWidget {
                   )),
                   Container(
                     child: Text('3 days ago',
-                        style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        style: TextStyle(
+                            fontSize: AppSizes.smallTextSize,
+                            color: Colors.grey)),
                     alignment: Alignment.topRight,
                   )
                 ],
@@ -181,45 +213,12 @@ class HistoryItem extends StatelessWidget {
                     text: 'Feedback',
                     function: () {},
                     iconData: Icons.comment,
-                    color: AppTheme.mainColor,
+                    color: Theme.of(context).primaryColor,
                   ),
                 )
               : SizedBox()
         ],
       ),
-    );
-  }
-
-  _buildDataRow({String title, IconData iconData, String content}) {
-    final titleStyle = TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 12, color: AppTheme.mainColor);
-    final contentStyle = TextStyle(fontWeight: FontWeight.normal, fontSize: 12);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Icon(
-          iconData,
-          size: 15,
-          color: AppTheme.mainColor,
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        Container(
-          width: 100,
-          child: Text(
-            title,
-            style: titleStyle,
-          ),
-        ),
-        Expanded(
-          child: Text(
-            content,
-            style: contentStyle,
-            textAlign: TextAlign.start,
-          ),
-        )
-      ],
     );
   }
 }

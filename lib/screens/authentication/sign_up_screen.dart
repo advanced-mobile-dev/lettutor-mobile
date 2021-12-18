@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/config/utility.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/confirm_password_text_field.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
-import 'package:lettutor_app/widgets/password_text_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -19,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
         new TextEditingController();
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.mainColor,
+      onPrimary: Theme.of(context).primaryColor,
       primary: Colors.white,
       minimumSize: Size(100, 30),
       shape: const RoundedRectangleBorder(
@@ -42,7 +40,9 @@ class SignUpScreen extends StatelessWidget {
             ),
             Text(
               'Facebook',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: AppSizes.smallTextSize,
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),
@@ -61,7 +61,9 @@ class SignUpScreen extends StatelessWidget {
             ),
             Text(
               'Google',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: AppSizes.smallTextSize,
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),
@@ -70,35 +72,46 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: ApplicationAppBar(
-        title: 'Sign Up',
+        title: AppLocalizations.of(context).signUp,
       ),
-      backgroundColor: AppTheme.backgroundColor,
       body: Container(
-        margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.all(AppSizes.pagePadding),
         child: Column(
           children: <Widget>[
-            EmailTextField(
+            CustomTextField(
               controller: _emailController,
+              title: AppLocalizations.of(context).email,
+              validator: validateEmail,
+              iconData: Icons.email,
+              keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(
-              height: 10,
+              height: AppSizes.verticalItemSpacing * 3,
             ),
-            PasswordTextField(
+            CustomTextField(
               controller: _passwordController,
+              title: AppLocalizations.of(context).password,
+              iconData: Icons.lock,
+              validator: validatePassword,
+              keyboardType: TextInputType.visiblePassword,
+              isPasswordTextField: true,
             ),
             SizedBox(
-              height: 10,
+              height: AppSizes.verticalItemSpacing * 3,
             ),
-            ConfirmPasswordTextField(
-              passwordController: _passwordController,
-              confirmPasswordController: _confirmPasswordController,
+            CustomTextField(
+              controller: _confirmPasswordController,
+              title: AppLocalizations.of(context).confirmPassword,
+              validator: validatePassword,
+              iconData: Icons.lock,
+              keyboardType: TextInputType.visiblePassword,
+              isPasswordTextField: true,
             ),
             SizedBox(
               height: 30,
             ),
             SubmitButton(
-                text: 'Sign Up',
+                text: AppLocalizations.of(context).signUp,
                 function: () {
                   // Utility.hideKeyboard(context);
                 }),
@@ -108,8 +121,9 @@ class SignUpScreen extends StatelessWidget {
             Container(
                 padding: EdgeInsets.all(5),
                 alignment: Alignment.center,
-                child: Text('Or continue with',
-                    style: TextStyle(color: Colors.grey, fontSize: 12))),
+                child: Text(AppLocalizations.of(context).orContinueWith,
+                    style: TextStyle(
+                        color: Colors.grey, fontSize: AppSizes.smallTextSize))),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[

@@ -1,39 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/models/tutor.dart';
-import 'package:lettutor_app/screens/home/schedule/video_conference.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/models/upcomming_lesson.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class UpcommingLessonItem extends StatelessWidget {
-  final Tutor tutor;
-  final DateTime startMeeting;
-  final DateTime endMeeting;
-  final bool upcommingLesson;
-  UpcommingLessonItem(
-      {@required this.tutor,
-      @required this.startMeeting,
-      @required this.endMeeting,
-      this.upcommingLesson = false});
+class UpcommingLessonWidget extends StatelessWidget {
+  final UpcommingLesson upcommingLesson;
+  final bool isNearestLesson;
+  UpcommingLessonWidget(
+      {@required this.upcommingLesson, this.isNearestLesson = false});
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
           ]),
       child: Column(
         children: <Widget>[
-          upcommingLesson
+          upcommingLesson.id == 1
               ? Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
-                      color: AppTheme.mainColor,
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10))),
@@ -42,19 +38,23 @@ class UpcommingLessonItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Upcomming lesson',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        AppLocalizations.of(context).upcommingLesson,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: AppSizes.smallTextSize),
                       ),
                       Text(
-                        '9h 37m 11s',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        '9h 37m',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: AppSizes.smallTextSize),
                       ),
                     ],
                   ),
                 )
               : SizedBox(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            padding: const EdgeInsets.all(AppSizes.cardPadding),
             child: Column(
               children: <Widget>[
                 Container(
@@ -70,14 +70,14 @@ class UpcommingLessonItem extends StatelessWidget {
                               children: <Widget>[
                                 ClipOval(
                                   child: Image.asset(
-                                    tutor.avatar,
+                                    upcommingLesson.tutor.avatar,
                                     fit: BoxFit.cover,
                                     width: 50.0,
                                     height: 50.0,
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 10,
+                                  width: AppSizes.verticalItemSpacing,
                                 ),
                                 Expanded(
                                   child: Column(
@@ -94,9 +94,11 @@ class UpcommingLessonItem extends StatelessWidget {
                                           children: <Widget>[
                                             Expanded(
                                               child: Text(
-                                                tutor.name,
+                                                upcommingLesson.tutor.name,
                                                 style: TextStyle(
-                                                    fontSize: 13,
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                        AppSizes.normalTextSize,
                                                     fontWeight:
                                                         FontWeight.bold),
                                                 maxLines: 1,
@@ -110,18 +112,22 @@ class UpcommingLessonItem extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Image.asset(
-                                            'assets/national_flags/${tutor.countryCode}.png',
+                                            'assets/national_flags/${upcommingLesson.tutor.countryCode}.png',
                                             height: 15,
                                             width: 20,
                                           ),
                                           SizedBox(
                                             width: 5,
                                           ),
-                                          Text(tutor.countryName,
-                                              style: TextStyle(fontSize: 11))
+                                          Text(
+                                              upcommingLesson.tutor.countryName,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize:
+                                                      AppSizes.smallTextSize))
                                         ],
                                       ),
                                     ],
@@ -138,13 +144,20 @@ class UpcommingLessonItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                Text('11/10/2021'),
+                                Text(
+                                  upcommingLesson.date,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: AppSizes.smallTextSize),
+                                ),
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text('20:00 - 20:25',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(upcommingLesson.time,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: AppSizes.smallTextSize,
+                                    )),
                               ],
                             ),
                           )),
@@ -152,28 +165,31 @@ class UpcommingLessonItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: AppSizes.verticalItemSpacing,
                 ),
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       AppOutlineButton(
-                          text: 'Cancel',
-                          function: () => {},
+                          text: AppLocalizations.of(context).cancel,
+                          function: () => {
+                                UpcommingLesson.sampleData
+                                    .removeAt(upcommingLesson.id)
+                              },
                           iconData: Icons.cancel,
                           color: Colors.red),
                       SizedBox(
-                        width: 10,
+                        width: AppSizes.horizontalItemSpacing,
                       ),
                       AppOutlineButton(
-                          text: 'Go to meeting',
+                          text: AppLocalizations.of(context).goToMeeting,
                           function: () => {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => VideoConference()))
+                                Navigator.of(context)
+                                    .pushNamed(LettutorRoutes.videoConference)
                               },
                           iconData: Icons.video_call_rounded,
-                          color: AppTheme.mainColor),
+                          color: Theme.of(context).primaryColor),
                     ],
                   ),
                 )

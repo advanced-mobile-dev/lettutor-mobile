@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/config/utility.dart';
-import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
-import 'package:lettutor_app/screens/home/home_screen.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/providers/user-provider.dart';
+import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/email_text_field.dart';
+import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/flat_button.dart';
 import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
-import 'package:lettutor_app/widgets/password_text_field.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String _email, _password;
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = new TextEditingController();
-    final TextEditingController _passwordController =
-        new TextEditingController();
-
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-      onPrimary: AppTheme.mainColor,
+      onPrimary: Theme.of(context).primaryColor,
       primary: Colors.white,
       minimumSize: Size(100, 30),
       shape: const RoundedRectangleBorder(
@@ -27,7 +32,6 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
-
     Widget facebookLoginButton = ElevatedButton(
       style: raisedButtonStyle,
       onPressed: () {},
@@ -41,7 +45,9 @@ class LoginScreen extends StatelessWidget {
             ),
             Text(
               'Facebook',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: AppSizes.smallTextSize,
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),
@@ -60,69 +66,109 @@ class LoginScreen extends StatelessWidget {
             ),
             Text(
               'Google',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: AppSizes.smallTextSize,
+                  fontWeight: FontWeight.w400),
             )
           ],
         ),
       ),
     );
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: ApplicationAppBar(
-        title: 'Login',
-      ),
-      backgroundColor: AppTheme.backgroundColor,
-      body: Container(
-        margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: <Widget>[
-            EmailTextField(controller: _emailController),
-            SizedBox(
-              height: 10,
+    return SafeArea(
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: ApplicationAppBar(
+              title: AppLocalizations.of(context).login,
             ),
-            PasswordTextField(
-              controller: _passwordController,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              alignment: Alignment.centerRight,
-              child: AppFlatButton(
-                  text: 'Forget password?',
-                  function: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ForgetPasswordScreen(),
-                    ));
-                  }),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SubmitButton(
-                text: 'Login',
-                function: () {
-                  Utility.hideKeyboard(context);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
-                }),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                facebookLoginButton,
-                SizedBox(
-                  width: 10,
+            body: Container(
+              padding: EdgeInsets.all(AppSizes.pagePadding),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: AppSizes.verticalItemSpacing * 4,
+                    ),
+                    CustomTextField(
+                        title: AppLocalizations.of(context).email,
+                        iconData: Icons.email,
+                        onSaved: (value) => {_email = value},
+                        keyboardType: TextInputType.emailAddress,
+                        validator: validateEmail),
+                    SizedBox(
+                      height: AppSizes.verticalItemSpacing * 3,
+                    ),
+                    CustomTextField(
+                      title: AppLocalizations.of(context).password,
+                      iconData: Icons.lock,
+                      keyboardType: TextInputType.visiblePassword,
+                      onSaved: (value) => _password = value,
+                      validator: validatePassword,
+                      isPasswordTextField: true,
+                    ),
+                    SizedBox(
+                      height: AppSizes.verticalItemSpacing * 2,
+                    ),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: AppFlatButton(
+                          text:
+                              '${AppLocalizations.of(context).forgetPassword}?',
+                          function: () {
+                            Navigator.of(context)
+                                .pushNamed(LettutorRoutes.forgetPassword);
+                          }),
+                    ),
+                    SizedBox(
+                      height: AppSizes.verticalItemSpacing * 2,
+                    ),
+                    context.watch<UserProvider>().loggedInStatus ==
+                            AuthStatus.LoggingIn
+                        ? SubmitButton(text: 'Logging in...', function: null)
+                        : SubmitButton(
+                            text: AppLocalizations.of(context).login,
+                            function: () async {
+                              if (_formKey.currentState.validate()) {
+                                _formKey.currentState.save();
+
+                                final result = await context
+                                    .read<UserProvider>()
+                                    .login(_email, _password);
+
+                                if (result['status'] == true) {
+                                  context
+                                      .read<UserProvider>()
+                                      .setUser(result['user']);
+                                  Navigator.of(context)
+                                      .pushNamed(LettutorRoutes.home);
+                                } else {
+                                  print(result['message']);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(AppLocalizations.of(
+                                                  context)
+                                              .emailOrPasswordIsInCorrect)));
+                                }
+                              }
+
+                              // Navigator.of(context).pushNamed(LettutorRoutes.home);
+                            }),
+                    SizedBox(
+                      height: AppSizes.verticalItemSpacing * 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        facebookLoginButton,
+                        SizedBox(
+                          width: AppSizes.horizontalItemSpacing,
+                        ),
+                        googleLoginButton
+                      ],
+                    ),
+                  ],
                 ),
-                googleLoginButton
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+              ),
+            )));
   }
 }

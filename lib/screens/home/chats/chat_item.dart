@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor.dart';
 
 class ChatItem extends StatelessWidget {
@@ -7,9 +8,10 @@ class ChatItem extends StatelessWidget {
 
   ChatItem({this.tutor, this.latestMessage});
 
-  final TextStyle nameStyle = TextStyle(fontSize: 14, color: Colors.black);
+  final TextStyle nameStyle =
+      TextStyle(fontSize: AppSizes.normalTextSize, color: Colors.black);
   final TextStyle latestMessageStyle = TextStyle(
-    fontSize: 14,
+    fontSize: AppSizes.normalTextSize,
     fontWeight: FontWeight.normal,
   );
   @override

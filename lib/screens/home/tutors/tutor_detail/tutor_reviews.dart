@@ -2,8 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorReviews extends StatelessWidget {
   @override
@@ -14,24 +15,26 @@ class TutorReviews extends StatelessWidget {
           Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Reviews',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                AppLocalizations.of(context).reviews,
+                style: TextStyle(
+                    fontSize: AppSizes.normalTextSize,
+                    fontWeight: FontWeight.bold),
               )),
           SizedBox(
-            height: 10,
+            height: AppSizes.verticalItemSpacing,
           ),
           Column(
             children: <Widget>[
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
               RatingComment(),
-              SizedBox(height: 15),
+              SizedBox(height: AppSizes.verticalItemSpacing),
             ],
           ),
         ],
@@ -48,13 +51,15 @@ class RatingComment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: EdgeInsets.symmetric(
+          vertical: AppSizes.pagePadding * 1.5,
+          horizontal: AppSizes.pagePadding),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
@@ -82,7 +87,8 @@ class RatingComment extends StatelessWidget {
                     children: [
                       Text(
                         Tutor.data.name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: 10,
@@ -130,7 +136,7 @@ class RatingComment extends StatelessWidget {
           )),
           Text(
             'This is an excellent teacher. He is very talented and kind',
-            style: TextStyle(color: AppTheme.textColor),
+            style: TextStyle(color: Colors.black),
           )
         ],
       ),

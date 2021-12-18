@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 
 class AppFlatButton extends StatelessWidget {
   final String text;
@@ -9,7 +9,7 @@ class AppFlatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-      primary: AppTheme.mainColor,
+      // primary: Theme.of(context).primaryColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(2.0)),
       ),
@@ -18,7 +18,7 @@ class AppFlatButton extends StatelessWidget {
     return TextButton(
       style: flatButtonStyle,
       onPressed: function,
-      child: Text(text, style: TextStyle(fontSize: 14)),
+      child: Text(text, style: TextStyle(fontSize: AppSizes.normalTextSize)),
     );
   }
 }

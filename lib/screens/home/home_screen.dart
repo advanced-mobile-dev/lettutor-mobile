@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/screens/home/chats/chats_tab.dart';
 import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
-import 'package:lettutor_app/screens/home/schedule/home_tab.dart';
+import 'package:lettutor_app/screens/home/schedule/schedule_tab.dart';
 import 'package:lettutor_app/screens/home/settings/settings_tab.dart';
 import 'package:lettutor_app/screens/home/tutors/tutors_tab.dart';
-import 'package:lettutor_app/widgets/icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,10 +13,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    HomeTab(),
+    ScheduleTab(),
     TutorsTab(),
     CoursesTab(),
-    ChatsTab(),
+    // ChatsTab(),
     SettingsTab(),
   ];
 
@@ -31,39 +29,33 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: AppTheme.mainColor2,
-        elevation: 0,
-        title: AppIcons.appLogo,
+      body: Container(
+        margin: MediaQuery.of(context).padding,
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: AppLocalizations.of(context).home,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            label: 'Tutors',
+            label: AppLocalizations.of(context).tutors,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.picture_as_pdf),
-            label: 'Courses',
+            label: AppLocalizations.of(context).courses,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Chats',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.message),
+          //   label: 'Chats',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: AppLocalizations.of(context).settings,
           ),
         ],
-        selectedItemColor: AppTheme.mainColor,
-        unselectedItemColor: AppTheme.unactiveColor,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
