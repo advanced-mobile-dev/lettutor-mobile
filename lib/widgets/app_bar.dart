@@ -13,6 +13,7 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
+              color: Theme.of(context).primaryColor,
             ),
             onPressed: () {
               Utility.hideKeyboard(context);
@@ -23,7 +24,9 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: false,
         title: Text(
           title,
-          style: TextStyle(fontSize: AppSizes.largeTextSize),
+          style: TextStyle(
+              fontSize: AppSizes.largeTextSize,
+              color: Theme.of(context).primaryColor),
         ));
   }
 

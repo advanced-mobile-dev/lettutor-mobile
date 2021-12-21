@@ -1,5 +1,6 @@
 import 'package:lettutor_app/data/shared_preference/constants/preferences.dart';
 import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/models/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsProvider {
@@ -20,19 +21,20 @@ class SharedPrefsProvider {
     prefs.remove(Preferences.is_logged_in);
   }
 
-  static bool saveUser(UserTmp user) {
-    prefs.setInt(Preferences.user_id, user.userId);
+  static bool saveUser(User user) {
+    prefs.setString(Preferences.user_id, user.id);
     prefs.setString(Preferences.user_name, user.name);
     prefs.setString(Preferences.user_email, user.email);
     prefs.setString(Preferences.user_avatar, user.avatar);
-    prefs.setString(Preferences.user_token, user.token);
-    prefs.setString(Preferences.user_refreshtoken, user.refreshToken);
+    prefs.setString(Preferences.user_token, user.userToken.accessToken.token);
+    prefs.setString(
+        Preferences.user_refreshtoken, user.userToken.refreshToken.token);
     prefs.setBool(Preferences.is_logged_in, true);
     return true;
   }
 
   static UserTmp get user {
-    int id = prefs.getInt(Preferences.user_id);
+    String id = prefs.getString(Preferences.user_id);
     String name = prefs.getString(Preferences.user_name);
     String email = prefs.getString(Preferences.user_email);
     String avatar = prefs.getString(Preferences.user_avatar);

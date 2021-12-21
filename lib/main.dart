@@ -12,7 +12,7 @@ import 'package:lettutor_app/screens/authentication/forget_password_screen.dart'
 import 'package:lettutor_app/screens/authentication/loading_screen.dart';
 import 'package:lettutor_app/screens/authentication/start_screen.dart';
 import 'package:flutter/services.dart';
-import 'package:lettutor_app/screens/authentication/log_in_screen.dart';
+import 'package:lettutor_app/screens/login/log_in_screen.dart';
 import 'package:lettutor_app/screens/authentication/sign_up_screen.dart';
 import 'package:lettutor_app/screens/home/courses/course_detail/course_detail_screen.dart';
 import 'package:lettutor_app/screens/home/home_screen.dart';

@@ -9,12 +9,12 @@ class RestClient {
   factory RestClient() {
     return _apiClient;
   }
-
-  static const _baseUrl = 'https://sandbox.api.lettutor.com';
+  static const _baseUrl = 'sandbox.api.lettutor.com';
   static const _timeout = 10;
 
   Future<dynamic> get(String path, {Map<String, String> headers, params}) {
-    var uri = Uri.http(_baseUrl, path, params);
+    var uri = Uri.https(_baseUrl, path, params);
+    print(uri);
     return http
         .get(uri, headers: headers)
         .timeout(Duration(seconds: _timeout))
@@ -26,7 +26,7 @@ class RestClient {
 
   Future<dynamic> post(String path,
       {Map<String, String> headers, body, params}) {
-    var uri = Uri.http(_baseUrl, path, params);
+    var uri = Uri.https(_baseUrl, path, params);
     return http
         .post(uri, headers: headers, body: body)
         .timeout(Duration(seconds: _timeout))
@@ -37,7 +37,7 @@ class RestClient {
   }
 
   Future<dynamic> put(path, {Map<String, String> params, headers, body}) {
-    var uri = Uri.http(_baseUrl, path, params);
+    var uri = Uri.https(_baseUrl, path, params);
     return http
         .put(uri, headers: headers, body: body)
         .timeout(Duration(seconds: _timeout))
@@ -48,7 +48,7 @@ class RestClient {
   }
 
   Future<dynamic> delete(path, {Map<String, String> headers, body, params}) {
-    var uri = Uri.http(_baseUrl, path, params);
+    var uri = Uri.https(_baseUrl, path, params);
     return http
         .delete(uri, headers: headers, body: body)
         .timeout(Duration(seconds: _timeout))
@@ -60,6 +60,8 @@ class RestClient {
 
   _handleResponse(http.Response response) {
     final int statusCode = response.statusCode;
+    print(statusCode);
+    print(response.body);
     if (statusCode < 200 || statusCode >= 300) {
       switch (statusCode) {
         case 400:

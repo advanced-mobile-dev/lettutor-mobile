@@ -1,5 +1,5 @@
 class UserTmp {
-  final int userId;
+  final String userId;
   final String name;
   final String email;
   final String avatar;
@@ -15,7 +15,7 @@ class UserTmp {
       this.refreshToken});
 
   static final data = UserTmp(
-      userId: 1,
+      userId: '1',
       name: 'Hieu Ho',
       email: 'hohieu1099@gmail.com',
       avatar: 'assets/images/kevin_debruyne.png',

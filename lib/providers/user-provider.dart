@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:lettutor_app/data/network/api-service.dart';
 import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/models/user/user.dart';
 
-enum AuthStatus { NotLoggedIn, LoggedIn, LoggingIn }
+enum AuthStatus { NotLoggedIn, LoggedIn }
 
 class UserProvider extends ChangeNotifier {
   UserTmp _user;
   UserTmp get user => _user;
+  bool _loading = false;
+  bool get loading => _loading;
+
   AuthStatus _loggedInStatus = AuthStatus.NotLoggedIn;
   AuthStatus get loggedInStatus => _loggedInStatus;
 
@@ -28,26 +33,31 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  void setStatus(AuthStatus authStatus) {
-    _loggedInStatus = authStatus;
-  }
-
   Future login(String email, String password) async {
-    _loggedInStatus = AuthStatus.LoggingIn;
+    String message = '';
+    bool result = false;
+    _loading = true;
     notifyListeners();
-    //call api
-    await Future.delayed(Duration(seconds: 2));
-    //
-
-    if (email == 'admin@admin.com' && password == '123') {
-      SharedPrefsProvider.saveUser(UserTmp.data);
-      _loggedInStatus = AuthStatus.LoggedIn;
-      notifyListeners();
-      return {'status': true, 'message': 'Successful', 'user': UserTmp.data};
+    User user;
+    try {
+      user = await ApiService().login(email, password);
+      if (user != null) {
+        SharedPrefsProvider.saveUser(user);
+        _loggedInStatus = AuthStatus.LoggedIn;
+        result = true;
+      } else {
+        _loggedInStatus = AuthStatus.NotLoggedIn;
+      }
+    } catch (err) {
+      _loggedInStatus = AuthStatus.NotLoggedIn;
+      print(err);
+    } finally {
+      _loading = false;
     }
-
-    _loggedInStatus = AuthStatus.NotLoggedIn;
     notifyListeners();
-    return {'status': false, 'message': 'Falied', 'user': null};
+    return {
+      'status': result,
+      'message': message,
+    };
   }
 }
