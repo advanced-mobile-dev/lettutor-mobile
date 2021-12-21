@@ -1,5 +1,6 @@
 import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/models/user/user-learn-topic.dart';
+import 'package:lettutor_app/models/user/user-token.dart';
 import 'package:lettutor_app/models/user/user-wallet.dart';
 
 class User {
@@ -21,6 +22,7 @@ class User {
   List<String> testPreparations;
   bool isPhoneActivated;
   int timezone;
+  UserToken userToken;
 
   User(
       {this.id,
@@ -40,7 +42,8 @@ class User {
       this.learnTopics,
       this.testPreparations,
       this.isPhoneActivated,
-      this.timezone});
+      this.timezone,
+      this.userToken});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
