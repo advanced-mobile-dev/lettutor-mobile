@@ -8,11 +8,7 @@ class SharedPrefsProvider {
 
   static SharedPreferences prefs;
   static init() async {
-    try {
-      prefs = await SharedPreferences.getInstance();
-    } catch (err) {
-      print(err);
-    }
+    prefs = await SharedPreferences.getInstance();
   }
 
   static void removeUser() {

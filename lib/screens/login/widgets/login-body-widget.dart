@@ -178,9 +178,10 @@ Widget _buildGoogleButton(BuildContext context) {
       GoogleSignIn _googleSignIn = GoogleSignIn(
         scopes: [
           'email',
-          'https://www.googleapis.com/auth/contacts.readonly',
+          'https://www.googleapis.com/auth/userinfo.profile',
         ],
       );
+      await _googleSignIn.signOut();
       try {
         GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
         String accessToken;

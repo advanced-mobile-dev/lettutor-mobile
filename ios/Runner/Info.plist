@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>	
+<dict>
 	<key>CFBundleURLTypes</key>
 	<array>
-  		<dict>
-		  	<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-    		<key>CFBundleURLSchemes</key>
-    			<array>
-      				<string>fb219485996914619</string>
-					<string>com.googleusercontent.apps.552574389333-mljlh08tnqvn5e77tjk8raes3osm353f</string>
-    			</array>
-  		</dict>
+	<dict>
+		<key>CFBundleTypeRole</key>
+		<string>Editor</string>
+		<key>CFBundleURLSchemes</key>
+		<array>
+			<string>fb219485996914619</string>
+			<string>com.googleusercontent.apps.552574389333-mljlh08tnqvn5e77tjk8raes3osm353f</string>
+		</array>
+	</dict>
+	</array>
 	<key>FacebookAppID</key>
 	<string>219485996914619</string>
 	<key>FacebookClientToken</key>
@@ -21,11 +22,10 @@
 	<string>Let Tutor</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
+	<string>fbapi</string>
+	<string>fb-messenger-share-api</string>
+	<string>fbauth2</string>
+	<string>fbshareextension</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
