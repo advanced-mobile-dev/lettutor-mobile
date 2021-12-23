@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "552574389333",
+    "project_id": "let-tutor",
+    "storage_bucket": "let-tutor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552574389333:android:14de86648be2e7bb3c18dc",
+        "android_client_info": {
+          "package_name": "hcmus.hieuho.lettutor_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552574389333-73o05d0hsg2o45vb19mlcu1e8d7ov6ok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hcmus.hieuho.lettutor_app",
+            "certificate_hash": "5c61721812e53b35dc709536b6f2e4a55c616f36"
+          }
+        },
+        {
+          "client_id": "552574389333-bj8hr4piembvv4udres1psq6vpas1uvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtX8ASG9MRDgBeJ87x83Hv_8INJAvQ8mQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552574389333-bj8hr4piembvv4udres1psq6vpas1uvb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "552574389333-52h9h54lsvhanv38qc41nn5f06326fqc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hcmus.hieuho.letttutor"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
@@ -173,7 +174,36 @@ Widget _buildGoogleButton(BuildContext context) {
         ),
       ),
     ),
-    onPressed: () {},
+    onPressed: () async {
+      GoogleSignIn _googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+      );
+      try {
+        GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+        String accessToken;
+        await googleSignInAccount.authentication.then((value) {
+          accessToken = value.accessToken;
+        });
+        if (accessToken != null && accessToken.isNotEmpty) {
+          final loginResult =
+              await context.read<UserProvider>().googleLogin(accessToken);
+          if (loginResult['status'] == true) {
+            context.read<UserProvider>().setUser(loginResult['user']);
+            Navigator.of(context).pushNamed(LettutorRoutes.home);
+          } else {
+            print(loginResult['message']);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                    AppLocalizations.of(context).emailOrPasswordIsInCorrect)));
+          }
+        }
+      } catch (error) {
+        print(error);
+      }
+    },
     child: Container(
       padding: EdgeInsets.all(8),
       child: Row(

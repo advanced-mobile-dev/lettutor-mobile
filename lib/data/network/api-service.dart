@@ -34,4 +34,18 @@ class ApiService {
     }
     return null;
   }
+
+  googleLogin(String token) async {
+    final String endpoint = '/auth/google';
+    final Response response = await _apiClient.post('$endpoint', body: {
+      "access_token": token,
+    });
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final User user = User.fromJson(body['user']);
+      user.userToken = UserToken.fromJson(body['tokens']);
+      return user;
+    }
+    return null;
+  }
 }

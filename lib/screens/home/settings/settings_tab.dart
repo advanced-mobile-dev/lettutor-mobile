@@ -16,7 +16,8 @@ class SettingsTab extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.bold,
         fontSize: AppSizes.hugeTextSize);
-    UserTmp user = Provider.of<UserProvider>(context).user;
+    UserTmp user = context.read<UserProvider>().user;
+    print(context.read<UserProvider>());
     final appSettingsProvider = context.watch<AppSettingsProvider>();
     return SingleChildScrollView(
       child: Padding(
@@ -31,10 +32,9 @@ class SettingsTab extends StatelessWidget {
             Row(
               children: <Widget>[
                 ClipOval(
-                  child: 1 == 1
-                      // child: user.avatar == null
+                  child: user.avatar == null
                       ? Icon(Icons.account_circle_outlined)
-                      : Image.asset(
+                      : Image.network(
                           user.avatar,
                           fit: BoxFit.cover,
                           width: 50.0,
