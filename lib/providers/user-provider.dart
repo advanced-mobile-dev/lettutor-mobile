@@ -60,4 +60,32 @@ class UserProvider extends ChangeNotifier {
       'message': message,
     };
   }
+
+  Future facebookLogin(String token) async {
+    String message = '';
+    bool result = false;
+    _loading = true;
+    notifyListeners();
+    User user;
+    try {
+      user = await ApiService().facebookLogin(token);
+      if (user != null) {
+        SharedPrefsProvider.saveUser(user);
+        _loggedInStatus = AuthStatus.LoggedIn;
+        result = true;
+      } else {
+        _loggedInStatus = AuthStatus.NotLoggedIn;
+      }
+    } catch (err) {
+      _loggedInStatus = AuthStatus.NotLoggedIn;
+      print(err);
+    } finally {
+      _loading = false;
+    }
+    notifyListeners();
+    return {
+      'status': result,
+      'message': message,
+    };
+  }
 }

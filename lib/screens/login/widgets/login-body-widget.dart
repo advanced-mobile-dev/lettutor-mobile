@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
@@ -118,7 +119,29 @@ Widget _buildFacebookButton(BuildContext context) {
         ),
       ),
     ),
-    onPressed: () {},
+    onPressed: () async {
+      final LoginResult result = await FacebookAuth.instance
+          .login(); // by default we request the email and the public profile
+      if (result.status == LoginStatus.success) {
+        // you are logged
+        final AccessToken accessToken = result.accessToken;
+
+        final loginResult =
+            await context.read<UserProvider>().facebookLogin(accessToken.token);
+        if (loginResult['status'] == true) {
+          context.read<UserProvider>().setUser(loginResult['user']);
+          Navigator.of(context).pushNamed(LettutorRoutes.home);
+        } else {
+          print(loginResult['message']);
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                  AppLocalizations.of(context).emailOrPasswordIsInCorrect)));
+        }
+      } else {
+        print(result.status);
+        print(result.message);
+      }
+    },
     child: Container(
       padding: EdgeInsets.all(8),
       child: Row(

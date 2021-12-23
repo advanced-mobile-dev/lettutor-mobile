@@ -1,4 +1,4 @@
-package com.example.lettutor_app
+package hcmus.hieuho.lettutor_app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -31,7 +31,8 @@ class SettingsTab extends StatelessWidget {
             Row(
               children: <Widget>[
                 ClipOval(
-                  child: user.avatar == null
+                  child: 1 == 1
+                      // child: user.avatar == null
                       ? Icon(Icons.account_circle_outlined)
                       : Image.asset(
                           user.avatar,
