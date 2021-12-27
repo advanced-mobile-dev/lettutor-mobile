@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/course.dart';
-import 'package:lettutor_app/screens/home/courses/course_list/course_filter_widget.dart';
-import 'package:lettutor_app/screens/home/courses/course_list/course_item_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'widgets/course_filter_widget.dart';
+import 'widgets/course_item_widget.dart';
+
 class CoursesTab extends StatelessWidget {
-  final List<CourseTmp> courses = CourseTmp.courseList;
   @override
   Widget build(BuildContext context) {
     final titleStyle = TextStyle(
@@ -28,12 +28,6 @@ class CoursesTab extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          for (var element in courses) ...[
-            CourseItemWidget(course: element),
-            SizedBox(
-              height: 15,
-            )
-          ]
         ],
       ),
     ));

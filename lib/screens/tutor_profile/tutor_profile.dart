@@ -4,15 +4,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_reviews.dart';
+
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TutorDetail extends StatelessWidget {
+import 'widgets/tutor-info.dart';
+import 'widgets/tutor_reviews.dart';
+
+class TutorProfile extends StatelessWidget {
   final Tutor tutor;
-  TutorDetail({this.tutor});
+  TutorProfile({this.tutor});
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +182,7 @@ class TutorDetail extends StatelessWidget {
               SizedBox(
                 height: AppSizes.verticalItemSpacing,
               ),
-              TutorDescription(),
+              TutorInfo(),
               TutorReviews()
             ],
           ),

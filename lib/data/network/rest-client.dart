@@ -30,10 +30,12 @@ class RestClient {
   }
 
   Future<dynamic> post(String path,
-      {Map<String, String> headers, body, params}) {
+      {Map<String, String> headers,
+      Map<String, dynamic> body,
+      Map<String, dynamic> params}) {
     var uri = Uri.https(_baseUrl, path, params);
-    print(uri);
     print(jsonEncode(body));
+
     return http
         .post(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))

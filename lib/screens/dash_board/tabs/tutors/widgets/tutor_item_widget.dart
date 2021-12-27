@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_detail_screen.dart';
+import 'package:lettutor_app/screens/tutor_profile/tutor_profile.dart';
 
 class TutorItemWidget extends StatelessWidget {
   final Tutor tutor;
@@ -12,8 +12,8 @@ class TutorItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => TutorDetail(tutor: tutor)));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => TutorProfile(tutor: tutor)));
       },
       child: Container(
         decoration: BoxDecoration(

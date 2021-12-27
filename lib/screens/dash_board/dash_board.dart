@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/screens/home/courses/courses_tab.dart';
-import 'package:lettutor_app/screens/home/schedule/schedule_tab.dart';
-import 'package:lettutor_app/screens/home/settings/settings_tab.dart';
-import 'package:lettutor_app/screens/home/tutors/tutors_tab.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeScreen extends StatefulWidget {
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'tabs/courses/courses_tab.dart';
+import 'tabs/home/home_tab.dart';
+import 'tabs/settings/settings_tab.dart';
+import 'tabs/tutors/tutors_tab.dart';
+
+class DashBoard extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _DashBoardState createState() => _DashBoardState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _DashBoardState extends State<DashBoard> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    ScheduleTab(),
+    HomeTab(),
     TutorsTab(),
     CoursesTab(),
-    // ChatsTab(),
     SettingsTab(),
   ];
 

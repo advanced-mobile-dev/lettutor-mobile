@@ -1,9 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_filter_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_list/tutor_list_widget.dart';
+
+import 'widgets/tutor_filter_widget.dart';
+import 'widgets/tutor_list_widget.dart';
 
 class TutorsTab extends StatelessWidget {
   @override

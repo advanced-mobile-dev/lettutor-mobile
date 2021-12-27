@@ -11,8 +11,8 @@ class ApiService {
 
   Future<User> login(String email, String password) async {
     final String endpoint = '/auth/login';
-    final Response response = await _apiClient
-        .post('$endpoint', body: {"email": email, "password": password});
+    final body = {"email": email, "password": password};
+    final Response response = await _apiClient.post('$endpoint', body: body);
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       final User user = User.fromJson(body['user']);

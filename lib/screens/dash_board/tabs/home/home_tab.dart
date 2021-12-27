@@ -6,7 +6,7 @@ import 'package:lettutor_app/models/upcomming_lesson.dart';
 import 'package:lettutor_app/widgets/upcomming_lesson_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ScheduleTab extends StatelessWidget {
+class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

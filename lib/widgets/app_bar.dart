@@ -19,7 +19,7 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
               Utility.hideKeyboard(context);
               Navigator.pop(context);
             }),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         centerTitle: false,
         title: Text(

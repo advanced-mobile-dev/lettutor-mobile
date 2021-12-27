@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TutorDescription extends StatelessWidget {
+class TutorInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget _buildDescItem({Widget icon, String title, Widget content}) {

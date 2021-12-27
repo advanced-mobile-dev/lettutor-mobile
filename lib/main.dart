@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/colors.dart';
-import 'package:lettutor_app/config/languages.dart';
-import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/data/repository.dart';
-import 'package:lettutor_app/models/course.dart';
-import 'package:lettutor_app/providers/app-settings-provider.dart';
-import 'package:lettutor_app/providers/user-provider.dart';
-import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
-import 'package:lettutor_app/screens/authentication/loading_screen.dart';
-import 'package:lettutor_app/screens/authentication/start_screen.dart';
 import 'package:flutter/services.dart';
-import 'package:lettutor_app/screens/login/log_in_screen.dart';
-import 'package:lettutor_app/screens/authentication/sign_up_screen.dart';
-import 'package:lettutor_app/screens/home/courses/course_detail/course_detail_screen.dart';
-import 'package:lettutor_app/screens/home/home_screen.dart';
-import 'package:lettutor_app/screens/home/schedule/history_screen.dart';
-import 'package:lettutor_app/screens/home/schedule/video_conference.dart';
-import 'package:lettutor_app/screens/home/settings/language_setting_screen.dart';
-import 'package:lettutor_app/screens/home/settings/password_change_screen.dart';
-import 'package:lettutor_app/screens/home/settings/profile_edit_screen.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_calendar_screen.dart';
-import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
+import 'config/colors.dart';
+import 'config/languages.dart';
+import 'config/routes.dart';
+import 'config/theme.dart';
+import 'data/repository.dart';
+import 'models/course.dart';
 import 'models/tutor/tutor.dart';
+import 'providers/app-settings-provider.dart';
 import 'providers/tutor-provider.dart';
+import 'providers/user-provider.dart';
+import 'screens/booking/booking_screen.dart';
+import 'screens/change_password/change_password_screen.dart';
+import 'screens/course_detail/course_detail_screen.dart';
+import 'screens/dash_board/dash_board.dart';
+import 'screens/dash_board/tabs/home/history_screen.dart';
+import 'screens/dash_board/tabs/home/video_conference.dart';
+import 'screens/forget_password/forget_password_screen.dart';
+import 'screens/language_setting/language_setting_screen.dart';
+import 'screens/loading_screen/loading_screen.dart';
+import 'screens/login/log_in_screen.dart';
+import 'screens/sign_up/sign_up_screen.dart';
+import 'screens/start_screen/start_screen.dart';
+import 'screens/tutor_calendar/tutor_calendar_screen.dart';
+import 'screens/tutor_profile/tutor_profile.dart';
+import 'screens/user_profile/user_profile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -84,15 +84,15 @@ class MyApp extends StatelessWidget {
 
   Map<String, WidgetBuilder> _registerRoutes() {
     return <String, WidgetBuilder>{
-      LettutorRoutes.home: (context) => HomeScreen(),
+      LettutorRoutes.home: (context) => DashBoard(),
       LettutorRoutes.loading: (context) => LoadingScreen(),
       LettutorRoutes.start: (context) => StartScreen(),
       LettutorRoutes.signUp: (context) => SignUpScreen(),
       LettutorRoutes.signIn: (context) => LoginScreen(),
       LettutorRoutes.history: (context) => HistoryScreen(),
-      LettutorRoutes.tutorProfile: (context) => TutorDescription(),
-      LettutorRoutes.userProfile: (context) => ProfileEditScreen(),
-      LettutorRoutes.changePassword: (context) => PasswordChangeScreen(),
+      LettutorRoutes.tutorProfile: (context) => TutorProfile(),
+      LettutorRoutes.userProfile: (context) => UserProfileScreen(),
+      LettutorRoutes.changePassword: (context) => ChangePasswordScreen(),
       LettutorRoutes.languageSetting: (context) => LanguageSettingScreen(),
       LettutorRoutes.forgetPassword: (context) => ForgetPasswordScreen(),
       LettutorRoutes.videoConference: (context) => VideoConference(),
