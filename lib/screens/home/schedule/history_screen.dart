@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/feedback.dart';
-import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,34 +19,34 @@ class HistoryScreen extends StatelessWidget {
           padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              HistoryItem(
-                tutor: TutorTmp.data,
-              ),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              HistoryItem(
-                tutor: TutorTmp.data1,
-                feedback: LearnerFeedbackTmp(
-                    rating: 4.5,
-                    comment:
-                        'This is an excellent teacher. He is very talented and kind'),
-              ),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              HistoryItem(
-                tutor: TutorTmp.data2,
-                feedback: LearnerFeedbackTmp(
-                    rating: 4.5,
-                    comment:
-                        'This is an excellent teacher. He is very talented and kind'),
-              ),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              HistoryItem(
-                tutor: TutorTmp.data3,
-                feedback: LearnerFeedbackTmp(
-                    rating: 4.5,
-                    comment:
-                        'This is an excellent teacher. He is very talented and kind'),
-              ),
-              SizedBox(height: AppSizes.verticalItemSpacing),
+              // HistoryItem(
+              //   tutor: Tutor.data,
+              // ),
+              // SizedBox(height: AppSizes.verticalItemSpacing),
+              // HistoryItem(
+              //   tutor: Tutor.data1,
+              //   feedback: LearnerFeedbackTmp(
+              //       rating: 4.5,
+              //       comment:
+              //           'This is an excellent teacher. He is very talented and kind'),
+              // ),
+              // SizedBox(height: AppSizes.verticalItemSpacing),
+              // HistoryItem(
+              //   tutor: Tutor.data2,
+              //   feedback: LearnerFeedbackTmp(
+              //       rating: 4.5,
+              //       comment:
+              //           'This is an excellent teacher. He is very talented and kind'),
+              // ),
+              // SizedBox(height: AppSizes.verticalItemSpacing),
+              // HistoryItem(
+              //   tutor: Tutor.data3,
+              //   feedback: LearnerFeedbackTmp(
+              //       rating: 4.5,
+              //       comment:
+              //           'This is an excellent teacher. He is very talented and kind'),
+              // ),
+              // SizedBox(height: AppSizes.verticalItemSpacing),
             ],
           ),
         ),
@@ -56,7 +56,7 @@ class HistoryScreen extends StatelessWidget {
 }
 
 class HistoryItem extends StatelessWidget {
-  final TutorTmp tutor;
+  final Tutor tutor;
   final LearnerFeedbackTmp feedback;
   HistoryItem({@required this.tutor, this.feedback});
   @override
@@ -126,44 +126,44 @@ class HistoryItem extends StatelessWidget {
                     },
                     child: Row(
                       children: [
-                        ClipOval(
-                          child: Image.asset(
-                            tutor.avatar,
-                            width: 40.0,
-                            height: 40.0,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              tutor.name,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Image.asset(
-                                  'assets/national_flags/${tutor.countryCode}.png',
-                                  height: 15,
-                                  width: 20,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(tutor.countryName,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: AppSizes.smallTextSize))
-                              ],
-                            ),
-                          ],
-                        ),
+                        // ClipOval(
+                        //   child: Image.asset(
+                        //     tutor.avatar,
+                        //     width: 40.0,
+                        //     height: 40.0,
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        // Column(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: <Widget>[
+                        //     Text(
+                        //       tutor.name,
+                        //       style: TextStyle(
+                        //           color: Colors.black,
+                        //           fontWeight: FontWeight.bold),
+                        //     ),
+                        //     Row(
+                        //       children: <Widget>[
+                        //         Image.asset(
+                        //           'assets/national_flags/${tutor.countryCode}.png',
+                        //           height: 15,
+                        //           width: 20,
+                        //         ),
+                        //         SizedBox(
+                        //           width: 5,
+                        //         ),
+                        //         Text(tutor.countryName,
+                        //             style: TextStyle(
+                        //                 color: Colors.black,
+                        //                 fontSize: AppSizes.smallTextSize))
+                        //       ],
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   )),

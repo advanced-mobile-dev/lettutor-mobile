@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:lettutor_app/data/network/api-exception.dart';
 
@@ -10,12 +12,16 @@ class RestClient {
   static const _baseUrl = 'sandbox.api.lettutor.com';
   static const _timeout = 10;
 
-  Future<dynamic> get(String path, {Map<String, String> headers, params}) {
+  Future<dynamic> get(String path,
+      {Map<String, String> headers, Map<String, String> params}) {
     var uri = Uri.https(_baseUrl, path, params);
     print(uri);
     print(headers);
     return http
-        .get(uri, headers: headers)
+        .get(
+          uri,
+          headers: headers,
+        )
         .timeout(Duration(seconds: _timeout))
         .then(_handleResponse)
         .catchError((error) {
@@ -26,8 +32,10 @@ class RestClient {
   Future<dynamic> post(String path,
       {Map<String, String> headers, body, params}) {
     var uri = Uri.https(_baseUrl, path, params);
+    print(uri);
+    print(jsonEncode(body));
     return http
-        .post(uri, headers: headers, body: body)
+        .post(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))
         .then(_handleResponse)
         .catchError((error) {

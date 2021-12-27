@@ -5,7 +5,6 @@ import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
 import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/course.dart';
-import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/providers/app-settings-provider.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/screens/authentication/forget_password_screen.dart';
@@ -28,8 +27,13 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'models/tutor/tutor.dart';
+import 'providers/tutor-provider.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   await Repository.init();
   final userProvider = new UserProvider();
   await userProvider.init();
@@ -37,7 +41,8 @@ void main() async {
     ChangeNotifierProvider.value(value: userProvider),
     ChangeNotifierProvider(
         create: (_) => AppSettingsProvider(
-            Repository.isDarkMode, Repository.currentLanguageLocale))
+            Repository.isDarkMode, Repository.currentLanguageLocale)),
+    ChangeNotifierProvider(create: (_) => TutorProvider())
   ], child: MyApp()));
 }
 
@@ -114,7 +119,7 @@ class MyApp extends StatelessWidget {
         break;
 
       case LettutorRoutes.tutorCalendar:
-        final tutor = routeSettings.arguments as TutorTmp;
+        final tutor = routeSettings.arguments as Tutor;
         return MaterialPageRoute(
             builder: (context) => TutorCalendarScreen(tutor: tutor));
 

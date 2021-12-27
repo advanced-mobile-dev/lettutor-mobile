@@ -29,8 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        toolbarHeight: 0,
+        elevation: 0,
+      ),
       body: Container(
-        margin: MediaQuery.of(context).padding,
+        // margin: MediaQuery.of(context).padding,
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(

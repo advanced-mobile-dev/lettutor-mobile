@@ -70,7 +70,7 @@ class UpcommingLessonWidget extends StatelessWidget {
                               children: <Widget>[
                                 ClipOval(
                                   child: Image.asset(
-                                    upcommingLesson.tutor.avatar,
+                                    upcommingLesson.tutor.tutorBasicInfo.avatar,
                                     fit: BoxFit.cover,
                                     width: 50.0,
                                     height: 50.0,
@@ -94,7 +94,8 @@ class UpcommingLessonWidget extends StatelessWidget {
                                           children: <Widget>[
                                             Expanded(
                                               child: Text(
-                                                upcommingLesson.tutor.name,
+                                                upcommingLesson
+                                                    .tutor.tutorBasicInfo.name,
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize:
@@ -115,7 +116,7 @@ class UpcommingLessonWidget extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Image.asset(
-                                            'assets/national_flags/${upcommingLesson.tutor.countryCode}.png',
+                                            'assets/national_flags/${upcommingLesson.tutor.tutorBasicInfo.country}.png',
                                             height: 15,
                                             width: 20,
                                           ),
@@ -123,7 +124,8 @@ class UpcommingLessonWidget extends StatelessWidget {
                                             width: 5,
                                           ),
                                           Text(
-                                              upcommingLesson.tutor.countryName,
+                                              upcommingLesson
+                                                  .tutor.tutorBasicInfo.country,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize:

@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/models/tutor.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorReviews extends StatelessWidget {
@@ -71,7 +68,7 @@ class RatingComment extends StatelessWidget {
             children: <Widget>[
               ClipOval(
                 child: Image.asset(
-                  TutorTmp.data.avatar,
+                  'Tutor.data.avatar',
                   width: 30.0,
                   height: 30.0,
                 ),
@@ -86,7 +83,7 @@ class RatingComment extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        TutorTmp.data.name,
+                        'Tutor.data.name',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
@@ -103,7 +100,7 @@ class RatingComment extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '${TutorTmp.data.rating}',
+                        '${'Tutor.data.rating'}',
                         style: TextStyle(color: Colors.amber),
                       ),
                       SizedBox(
@@ -112,7 +109,8 @@ class RatingComment extends StatelessWidget {
                       Container(
                         width: 100,
                         child: RatingBar.builder(
-                          initialRating: TutorTmp.data.rating,
+                          // initialRating: Tutor.data.rating,
+                          initialRating: 3,
                           ignoreGestures: true,
                           itemSize: 15,
                           direction: Axis.horizontal,

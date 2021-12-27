@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_description.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_reviews.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -11,7 +11,7 @@ import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorDetail extends StatelessWidget {
-  final TutorTmp tutor;
+  final Tutor tutor;
   TutorDetail({this.tutor});
 
   @override
@@ -52,7 +52,7 @@ class TutorDetail extends StatelessWidget {
                     children: <Widget>[
                       ClipOval(
                         child: Image.asset(
-                          tutor.avatar,
+                          tutor.tutorBasicInfo.avatar,
                           width: 100.0,
                         ),
                       ),
@@ -64,7 +64,7 @@ class TutorDetail extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            tutor.name,
+                            tutor.tutorBasicInfo.name,
                             style: TextStyle(
                                 fontSize: AppSizes.normalTextSize,
                                 fontWeight: FontWeight.bold),
@@ -72,7 +72,8 @@ class TutorDetail extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '${tutor.rating}',
+                                '${5}',
+                                // '${tutor.tutorBasicInfo.rating}',
                                 style: TextStyle(color: Colors.amber),
                               ),
                               SizedBox(
@@ -81,7 +82,7 @@ class TutorDetail extends StatelessWidget {
                               Container(
                                 width: 90,
                                 child: RatingBar.builder(
-                                  initialRating: tutor.rating,
+                                  initialRating: 5,
                                   ignoreGestures: true,
                                   itemSize: AppSizes.normalTextSize,
                                   direction: Axis.horizontal,
@@ -99,21 +100,21 @@ class TutorDetail extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '(11)',
+                                '(${tutor.tutorBasicInfo.feedbacks.length})',
                               )
                             ],
                           ),
                           Row(
                             children: <Widget>[
                               Image.asset(
-                                'assets/national_flags/${tutor.countryCode}.png',
+                                'assets/national_flags/${tutor.tutorBasicInfo.country}.png',
                                 height: 25,
                                 width: 30,
                               ),
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(tutor.countryName,
+                              Text(tutor.tutorBasicInfo.country,
                                   style: TextStyle(
                                     fontSize: AppSizes.normalTextSize,
                                   )),
@@ -127,7 +128,7 @@ class TutorDetail extends StatelessWidget {
                 height: AppSizes.verticalItemSpacing,
               ),
               Text(
-                tutor.description,
+                'tutor',
               ),
               SizedBox(
                 height: AppSizes.verticalItemSpacing,

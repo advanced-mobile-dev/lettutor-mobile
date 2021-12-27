@@ -1,18 +1,25 @@
+import 'package:lettutor_app/models/tutor/tutor-basic-info.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 
 class TutorList {
-  final List<Tutor> tutors;
+  final List<Tutor> tutorList;
 
   TutorList({
-    this.tutors,
+    this.tutorList,
   });
 
-  factory TutorList.fromJson(List<dynamic> json) {
+  factory TutorList.fromJson(dynamic json) {
+    print(json);
     List<Tutor> tutors = <Tutor>[];
-    tutors = json.map((tutor) => Tutor.fromJson(tutor)).toList();
+    tutors = (json['rows'] as List).map((element) {
+      Tutor tutor = Tutor.fromJson(element);
+      TutorBasicInfo tutorBasicInfo = TutorBasicInfo.fromJson(element);
+      tutor.tutorBasicInfo = tutorBasicInfo;
+      return tutor;
+    }).toList();
 
     return TutorList(
-      tutors: tutors,
+      tutorList: tutors,
     );
   }
 }

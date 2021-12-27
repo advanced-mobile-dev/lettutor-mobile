@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/upcomming_lesson.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookingScreen extends StatelessWidget {
-  final TutorTmp tutor;
+  final Tutor tutor;
   final String time;
   BookingScreen({@required this.tutor, @required this.time});
 
@@ -35,7 +35,7 @@ class BookingScreen extends StatelessWidget {
                   children: <Widget>[
                     ClipOval(
                       child: Image.asset(
-                        tutor.avatar,
+                        tutor.tutorBasicInfo.avatar,
                         width: 100.0,
                       ),
                     ),
@@ -47,7 +47,7 @@ class BookingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          tutor.name,
+                          tutor.tutorBasicInfo.name,
                           style: TextStyle(
                               fontSize: AppSizes.normalTextSize,
                               fontWeight: FontWeight.bold),
@@ -55,7 +55,7 @@ class BookingScreen extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              '${tutor.rating}',
+                              '${tutor.avgRating}',
                               style: TextStyle(color: Colors.amber),
                             ),
                             SizedBox(
@@ -64,7 +64,7 @@ class BookingScreen extends StatelessWidget {
                             Container(
                               width: 90,
                               child: RatingBar.builder(
-                                initialRating: tutor.rating,
+                                initialRating: tutor.avgRating as double,
                                 ignoreGestures: true,
                                 itemSize: AppSizes.normalTextSize,
                                 direction: Axis.horizontal,
@@ -89,14 +89,14 @@ class BookingScreen extends StatelessWidget {
                         Row(
                           children: <Widget>[
                             Image.asset(
-                              'assets/national_flags/${tutor.countryCode}.png',
+                              'assets/national_flags/${tutor.tutorBasicInfo.country}.png',
                               height: 25,
                               width: 30,
                             ),
                             SizedBox(
                               width: 5,
                             ),
-                            Text(tutor.countryName,
+                            Text(tutor.tutorBasicInfo.country,
                                 style: TextStyle(
                                     fontSize: AppSizes.normalTextSize))
                           ],
@@ -179,7 +179,7 @@ class BookingScreen extends StatelessWidget {
 }
 
 class BookingScreenArguments {
-  final TutorTmp tutor;
+  final Tutor tutor;
   final String time;
 
   BookingScreenArguments({this.tutor, this.time});

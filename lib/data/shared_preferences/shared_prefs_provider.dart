@@ -23,7 +23,6 @@ class SharedPrefsHelper {
   }
 
   bool saveUserToken(UserToken userToken) {
-    print('save user token ${userToken.toJson()}');
     _prefs.setString(user_access_token, userToken.accessToken.token);
     _prefs.setString(user_expires_access_token, userToken.accessToken.expires);
     _prefs.setString(user_refresh_token, userToken.refreshToken.token);
@@ -46,7 +45,6 @@ class SharedPrefsHelper {
       accessToken: Token(token: accessToken, expires: expiresAccessToken),
       refreshToken: Token(token: refreshToken, expires: expiresRefreshToken),
     );
-    print('save user token ${userToken.toJson()}');
     return userToken;
   }
 

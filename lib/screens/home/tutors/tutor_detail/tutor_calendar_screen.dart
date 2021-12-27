@@ -1,13 +1,13 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/booking_screen.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorCalendarScreen extends StatelessWidget {
-  final TutorTmp tutor;
+  final Tutor tutor;
   TutorCalendarScreen({this.tutor});
   @override
   Widget build(BuildContext context) {

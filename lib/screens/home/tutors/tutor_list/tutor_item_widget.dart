@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/models/tutor.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/screens/home/tutors/tutor_detail/tutor_detail_screen.dart';
 
 class TutorItemWidget extends StatelessWidget {
-  final TutorTmp tutor;
+  final Tutor tutor;
 
   TutorItemWidget({this.tutor});
   @override
@@ -34,8 +34,8 @@ class TutorItemWidget extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     ClipOval(
-                      child: Image.asset(
-                        tutor.avatar,
+                      child: Image.network(
+                        tutor.tutorBasicInfo.avatar,
                         width: 50.0,
                         height: 50.0,
                       ),
@@ -48,21 +48,21 @@ class TutorItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          tutor.name,
+                          tutor.tutorBasicInfo.name,
                           style: TextStyle(
                               color: Colors.black, fontWeight: FontWeight.bold),
                         ),
                         Row(
                           children: <Widget>[
                             Image.asset(
-                              'assets/national_flags/${tutor.countryCode}.png',
+                              'assets/national_flags/${tutor.tutorBasicInfo.country.toLowerCase()}.png',
                               height: 15,
                               width: 20,
                             ),
                             SizedBox(
                               width: 5,
                             ),
-                            Text(tutor.countryName,
+                            Text(tutor.tutorBasicInfo.country,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: AppSizes.smallTextSize))
@@ -71,7 +71,8 @@ class TutorItemWidget extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              '${tutor.rating}',
+                              // '${5}',
+                              '${tutor.avgRating ?? 5}',
                               style: TextStyle(color: Colors.amber),
                             ),
                             SizedBox(
@@ -80,7 +81,7 @@ class TutorItemWidget extends StatelessWidget {
                             Container(
                               width: 100,
                               child: RatingBar.builder(
-                                initialRating: tutor.rating,
+                                initialRating: tutor.avgRating ?? 5,
                                 ignoreGestures: true,
                                 itemSize: 15,
                                 direction: Axis.horizontal,
@@ -109,7 +110,7 @@ class TutorItemWidget extends StatelessWidget {
             Container(
               height: 50,
               width: double.infinity,
-              child: Text(tutor.description,
+              child: Text(tutor.bio,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                   style: TextStyle(

@@ -38,6 +38,7 @@ dependencies:
   http: ^0.13.4
   flutter_facebook_auth: ^3.5.7
   google_sign_in: ^5.2.1
+  badges: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/models/upcomming_lesson.dart';
 import 'package:lettutor_app/widgets/upcomming_lesson_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

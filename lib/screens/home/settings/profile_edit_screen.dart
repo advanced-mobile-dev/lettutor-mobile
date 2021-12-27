@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
@@ -28,7 +27,7 @@ class ProfileEditScreen extends StatelessWidget {
                   children: <Widget>[
                     ClipOval(
                       child: Image.asset(
-                        TutorTmp.data3.avatar,
+                        'Tutor.data3.avatar',
                         width: 125,
                       ),
                     ),
