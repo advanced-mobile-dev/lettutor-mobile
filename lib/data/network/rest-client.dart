@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:lettutor_app/data/network/exceptions/api-exception.dart';
+import 'package:lettutor_app/data/network/api-exception.dart';
 
 class RestClient {
   RestClient._();
@@ -15,6 +13,7 @@ class RestClient {
   Future<dynamic> get(String path, {Map<String, String> headers, params}) {
     var uri = Uri.https(_baseUrl, path, params);
     print(uri);
+    print(headers);
     return http
         .get(uri, headers: headers)
         .timeout(Duration(seconds: _timeout))

@@ -1,32 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lettutor_app/data/network/api-service.dart';
-import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
-import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
 enum AuthStatus { NotLoggedIn, LoggedIn }
 
 class UserProvider extends ChangeNotifier {
-  UserTmp _user;
-  UserTmp get user => _user;
   bool _loading = false;
+  User _user;
+
+  User get user => _user;
   bool get loading => _loading;
 
   AuthStatus _loggedInStatus = AuthStatus.NotLoggedIn;
   AuthStatus get loggedInStatus => _loggedInStatus;
 
-  void init() {
-    if (SharedPrefsProvider.user != null &&
-        SharedPrefsProvider.user.token != null) {
-      _user = SharedPrefsProvider.user;
+  Future init() async {
+    final user = await Repository.getUserInfo();
+    if (user != null) {
+      _user = user;
       _loggedInStatus = AuthStatus.LoggedIn;
     } else {
-      SharedPrefsProvider.removeUser();
+      Repository.removeUserToken();
       _loggedInStatus = AuthStatus.NotLoggedIn;
     }
   }
 
-  void setUser(UserTmp user) {
+  void setUser(User user) {
     _user = user;
     if (user != null) {
       notifyListeners();
@@ -38,12 +38,11 @@ class UserProvider extends ChangeNotifier {
     bool result = false;
     _loading = true;
     notifyListeners();
-    User user;
+    User tmpUser;
     try {
-      user = await ApiService().login(email, password);
-      if (user != null) {
-        SharedPrefsProvider.saveUser(user);
-        _user = SharedPrefsProvider.user;
+      tmpUser = await Repository.login(email, password);
+      if (tmpUser != null) {
+        _user = tmpUser;
         _loggedInStatus = AuthStatus.LoggedIn;
         result = true;
       } else {
@@ -71,8 +70,7 @@ class UserProvider extends ChangeNotifier {
     try {
       user = await ApiService().facebookLogin(token);
       if (user != null) {
-        SharedPrefsProvider.saveUser(user);
-        _user = SharedPrefsProvider.user;
+        _user = user;
         print(_user);
         _loggedInStatus = AuthStatus.LoggedIn;
         result = true;
@@ -101,8 +99,7 @@ class UserProvider extends ChangeNotifier {
     try {
       user = await ApiService().googleLogin(token);
       if (user != null) {
-        SharedPrefsProvider.saveUser(user);
-        _user = SharedPrefsProvider.user;
+        _user = user;
         _loggedInStatus = AuthStatus.LoggedIn;
         result = true;
       } else {
@@ -119,5 +116,10 @@ class UserProvider extends ChangeNotifier {
       'status': result,
       'message': message,
     };
+  }
+
+  void logout() {
+    Repository.removeUserToken();
+    _user = null;
   }
 }

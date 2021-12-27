@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
-import 'package:lettutor_app/models/user.dart';
+import 'package:lettutor_app/models/user/user.dart';
 import 'package:lettutor_app/providers/app-settings-provider.dart';
 import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
@@ -16,7 +15,7 @@ class SettingsTab extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.bold,
         fontSize: AppSizes.hugeTextSize);
-    UserTmp user = context.read<UserProvider>().user;
+    User user = context.read<UserProvider>().user;
     print(context.read<UserProvider>());
     final appSettingsProvider = context.watch<AppSettingsProvider>();
     return SingleChildScrollView(
@@ -126,9 +125,9 @@ class SettingsTab extends StatelessWidget {
             SubmitButton(
                 text: AppLocalizations.of(context).logout,
                 function: () {
-                  SharedPrefsProvider.removeUser();
-                  Provider.of<UserProvider>(context, listen: false)
-                      .setUser(null);
+                  context.read<UserProvider>().logout();
+                  // Provider.of<UserProvider>(context, listen: false)
+                  //     .setUser(null);
                   Navigator.pushReplacementNamed(context, LettutorRoutes.start);
                 }),
           ],

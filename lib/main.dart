@@ -3,7 +3,7 @@ import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/config/languages.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/config/theme.dart';
-import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
+import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/course.dart';
 import 'package:lettutor_app/models/tutor.dart';
 import 'package:lettutor_app/providers/app-settings-provider.dart';
@@ -30,14 +30,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPrefsProvider.init();
+  await Repository.init();
   final userProvider = new UserProvider();
-  userProvider.init();
+  await userProvider.init();
   return runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: userProvider),
     ChangeNotifierProvider(
-        create: (_) => AppSettingsProvider(SharedPrefsProvider.isDarkMode,
-            SharedPrefsProvider.currentLanguageLocale))
+        create: (_) => AppSettingsProvider(
+            Repository.isDarkMode, Repository.currentLanguageLocale))
   ], child: MyApp()));
 }
 

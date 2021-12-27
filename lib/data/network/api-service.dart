@@ -48,4 +48,16 @@ class ApiService {
     }
     return null;
   }
+
+  getUserInfo(String token) async {
+    final String endpoint = '/user/info';
+    final Response response = await _apiClient
+        .get('$endpoint', headers: {"Authorization": 'Bearer $token'});
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final User user = User.fromJson(body['user']);
+      return user;
+    }
+    return null;
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lettutor_app/data/shared_preference/shared_prefs_provider.dart';
+import 'package:lettutor_app/data/repository.dart';
 
 class AppSettingsProvider extends ChangeNotifier {
   bool _isDarkTheme;
@@ -13,13 +13,13 @@ class AppSettingsProvider extends ChangeNotifier {
   }
 
   void setIsDarkTheme(bool isDarkTheme) {
-    SharedPrefsProvider.changeBrightnessToDark(isDarkTheme);
+    Repository.changeBrightnessToDark(isDarkTheme);
     _isDarkTheme = isDarkTheme;
     notifyListeners();
   }
 
   void setLanguage(String locale) {
-    SharedPrefsProvider.changeLanguage(locale);
+    Repository.changeLanguage(locale);
     print(locale);
     _locale = locale;
     notifyListeners();
