@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/screens/tutor_profile/tutor_profile.dart';
+import 'package:lettutor_app/utils/string_utils.dart';
 
 class TutorItemWidget extends StatelessWidget {
   final Tutor tutor;
@@ -62,7 +63,9 @@ class TutorItemWidget extends StatelessWidget {
                             SizedBox(
                               width: 5,
                             ),
-                            Text(tutor.tutorBasicInfo.country,
+                            Text(
+                                StringUtils.getCountryNameByCode(
+                                    tutor.tutorBasicInfo.country),
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: AppSizes.smallTextSize))

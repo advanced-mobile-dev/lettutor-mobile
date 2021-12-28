@@ -67,7 +67,6 @@ class ApiService {
     final String endpoint = '/tutor/search';
     final Response response = await _apiClient.post('$endpoint', headers: {
       "Authorization": 'Bearer $accessToken',
-      "Content-Type": "application/json"
     }, body: {
       "filters": {
         "specialties": specialties,

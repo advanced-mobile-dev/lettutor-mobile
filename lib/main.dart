@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:lettutor_app/config/config.dart';
 import 'package:provider/provider.dart';
 
 import 'config/colors.dart';
@@ -32,9 +33,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  await AppConfig.readCountriesFromJson();
   await Repository.init();
+
   final userProvider = new UserProvider();
   await userProvider.init();
   return runApp(MultiProvider(providers: [
