@@ -21,7 +21,7 @@ class _TutorsTabState extends State<TutorsTab> {
   Widget build(BuildContext context) {
     _tutorsBloc = context.watch<TutorsBloc>();
     return Container(
-        padding: EdgeInsets.all(AppSizes.pagePadding),
+        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

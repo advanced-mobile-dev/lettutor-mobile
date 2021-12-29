@@ -93,7 +93,16 @@ class MyApp extends StatelessWidget {
 
   Map<String, WidgetBuilder> _registerRoutes() {
     return <String, WidgetBuilder>{
-      LettutorRoutes.home: (context) => DashBoard(),
+      LettutorRoutes.home: (context) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<TutorsBloc>(
+              create: (_) => TutorsBloc(),
+            ),
+          ],
+          child: DashBoard(),
+        );
+      },
       LettutorRoutes.loading: (context) => LoadingScreen(),
       LettutorRoutes.start: (context) => StartScreen(),
       LettutorRoutes.signUp: (context) => SignUpScreen(),

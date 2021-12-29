@@ -89,7 +89,8 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                       flex: 1,
                       child: SubmitButton(
                           text: 'Apply ${_selectedSpec.isEmpty ? '' : '(1)'}',
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor:
+                              Theme.of(context).primaryColor.withOpacity(0.8),
                           function: () {
                             Navigator.pop(context,
                                 TutorFilter(specialities: _selectedSpec));
