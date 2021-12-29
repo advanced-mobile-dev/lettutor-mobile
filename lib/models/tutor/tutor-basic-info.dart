@@ -53,6 +53,15 @@ class TutorBasicInfo {
       this.feedbacks,
       this.courses});
 
+  double calcAvgRating() {
+    int total = 0;
+    for (var item in feedbacks) {
+      total += item.rating;
+    }
+    if (feedbacks != null && feedbacks.isEmpty) return 0;
+    return total / feedbacks.length;
+  }
+
   TutorBasicInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     level = json['level'];

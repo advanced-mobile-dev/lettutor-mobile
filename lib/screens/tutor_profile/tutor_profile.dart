@@ -1,9 +1,12 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
+import 'package:lettutor_app/screens/tutor_profile/widgets/tutor_intro_video.dart';
+import 'package:lettutor_app/utils/string_utils.dart';
 
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
@@ -53,7 +56,7 @@ class TutorProfile extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       ClipOval(
-                        child: Image.asset(
+                        child: Image.network(
                           tutor.tutorBasicInfo.avatar,
                           width: 100.0,
                         ),
@@ -74,8 +77,7 @@ class TutorProfile extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '${5}',
-                                // '${tutor.tutorBasicInfo.rating}',
+                                '${tutor.tutorBasicInfo.calcAvgRating()}',
                                 style: TextStyle(color: Colors.amber),
                               ),
                               SizedBox(
@@ -84,7 +86,8 @@ class TutorProfile extends StatelessWidget {
                               Container(
                                 width: 90,
                                 child: RatingBar.builder(
-                                  initialRating: 5,
+                                  initialRating:
+                                      tutor.tutorBasicInfo.calcAvgRating(),
                                   ignoreGestures: true,
                                   itemSize: AppSizes.normalTextSize,
                                   direction: Axis.horizontal,
@@ -109,14 +112,16 @@ class TutorProfile extends StatelessWidget {
                           Row(
                             children: <Widget>[
                               Image.asset(
-                                'assets/national_flags/${tutor.tutorBasicInfo.country}.png',
+                                'assets/national_flags/${tutor.tutorBasicInfo.country.toLowerCase()}.png',
                                 height: 25,
                                 width: 30,
                               ),
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(tutor.tutorBasicInfo.country,
+                              Text(
+                                  StringUtils.getCountryNameByCode(
+                                      tutor.tutorBasicInfo.country),
                                   style: TextStyle(
                                     fontSize: AppSizes.normalTextSize,
                                   )),
@@ -130,7 +135,7 @@ class TutorProfile extends StatelessWidget {
                 height: AppSizes.verticalItemSpacing,
               ),
               Text(
-                'tutor',
+                tutor.bio,
               ),
               SizedBox(
                 height: AppSizes.verticalItemSpacing,
@@ -153,13 +158,24 @@ class TutorProfile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _buildFlatButton(
-                        icon: Icon(Icons.video_library_outlined),
-                        function: () {},
+                        icon: Badge(
+                          badgeColor: Colors.redAccent,
+                          badgeContent: Text(
+                            '1',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          child: Icon(Icons.video_library_outlined),
+                        ),
+                        function: () {
+                          showModalBottomSheet(
+                            isScrollControlled: false,
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (context) => TutorIntroVideo(
+                                tutor.tutorBasicInfo.name, tutor.video),
+                          );
+                        },
                         title: AppLocalizations.of(context).introVideo),
-                    // _buildFlatButton(
-                    //     icon: AppIcons.chatIcon,
-                    //     function: () {},
-                    //     title: 'Message'),
                     _buildFlatButton(
                         icon: SvgPicture.asset('assets/icons/favorite.svg',
                             color: Theme.of(context).primaryColor),
@@ -183,7 +199,7 @@ class TutorProfile extends StatelessWidget {
                 height: AppSizes.verticalItemSpacing,
               ),
               TutorInfo(),
-              TutorReviews()
+              // TutorReviews()
             ],
           ),
         ),

@@ -8,18 +8,20 @@ class SubmitButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final Widget icon;
+  final double width;
   SubmitButton(
       {@required this.text,
       @required this.function,
       this.backgroundColor,
       this.textColor = Colors.white,
-      this.icon});
+      this.icon,
+      this.width = double.infinity});
   @override
   Widget build(BuildContext context) {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: textColor,
       primary: backgroundColor,
-      minimumSize: Size(double.infinity, 50),
+      minimumSize: Size(width, 50),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),

@@ -41,7 +41,6 @@ class _DashBoardState extends State<DashBoard> {
           child: PageView(
             controller: _pageController,
             onPageChanged: (index) {
-              print(AppTab.values[index]);
               setState(() {
                 _currentTab = AppTab.values[index];
               });

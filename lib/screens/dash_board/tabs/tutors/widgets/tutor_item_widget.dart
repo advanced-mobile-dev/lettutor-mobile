@@ -77,7 +77,8 @@ class TutorItemWidget extends StatelessWidget {
                           children: [
                             Text(
                               // '${5}',
-                              '${tutor.avgRating ?? 5}',
+                              // '${tutor.avgRating ?? 5}',
+                              '${tutor.tutorBasicInfo.calcAvgRating()}',
                               style: TextStyle(color: Colors.amber),
                             ),
                             SizedBox(
@@ -86,7 +87,8 @@ class TutorItemWidget extends StatelessWidget {
                             Container(
                               width: 100,
                               child: RatingBar.builder(
-                                initialRating: tutor.avgRating ?? 5,
+                                initialRating:
+                                    tutor.tutorBasicInfo.calcAvgRating(),
                                 ignoreGestures: true,
                                 itemSize: 15,
                                 direction: Axis.horizontal,
