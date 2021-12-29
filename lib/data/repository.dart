@@ -67,11 +67,11 @@ class Repository {
   }
 
   //
-  static Future<List<Tutor>> getTutors(
+  static Future<TutorList> getTutors(
       int perPage, int page, List<String> specialties) async {
     final accessToken = _sharedPrefsHelper.userToken.accessToken.token;
     final TutorList tutors =
         await _apiService.getTutors(accessToken, perPage, page, specialties);
-    return tutors.tutorList;
+    return tutors;
   }
 }

@@ -36,16 +36,21 @@ class _CourseFilterWidgetState extends State<CourseFilterWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        TextFormField(
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(0),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
-              prefixIcon: Icon(
-                Icons.search,
-              ),
-              hintText: AppLocalizations.of(context).searchByName,
-              hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: TextFormField(
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(15),
+                prefixIcon: Icon(
+                  Icons.search,
+                ),
+                hintText: AppLocalizations.of(context).searchByName,
+                hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
+          ),
         ),
         SizedBox(
           height: 10,

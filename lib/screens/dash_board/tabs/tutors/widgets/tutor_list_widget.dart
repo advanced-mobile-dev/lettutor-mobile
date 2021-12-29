@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/providers/tutor-provider.dart';
-import 'package:provider/provider.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lettutor_app/blocs/tutors/tutors_bloc.dart';
 import 'tutor_item_widget.dart';
 
 class TutorListWidget extends StatefulWidget {
@@ -10,33 +9,58 @@ class TutorListWidget extends StatefulWidget {
 }
 
 class _TutorListWidgetState extends State<TutorListWidget> {
-  loadData() async {
-    Future.delayed(Duration(seconds: 0)).then((value) async {
-      await context.read<TutorProvider>().searchTutors(page: 1, speciality: '');
-    });
-  }
-
+  final _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
-    loadData();
+    context.read<TutorsBloc>().add(TutorsFetchEvent());
+
+    _scrollController.addListener(() {
+      if (_isBottom) context.read<TutorsBloc>().add(TutorsLoadMoreEvent());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TutorProvider>(builder: (context, value, child) {
-      if (value.loading)
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      return Column(children: [
-        for (var element in value.tutorList) ...[
-          TutorItemWidget(tutor: element),
-          SizedBox(
-            height: 15,
-          )
-        ],
-      ]);
-    });
+    return BlocBuilder<TutorsBloc, TutorsState>(
+      builder: (context, state) {
+        if (state is LoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state is LoadFailureState)
+          return const Center(child: Text('failed to fetch tutors'));
+        if (state is LoadSuccessState) {
+          if (state.tutors.isEmpty) {
+            return const Center(child: Text('not found tutors'));
+          }
+          return ListView.builder(
+            itemCount: state.hasReachedMax
+                ? state.tutors.length
+                : state.tutors.length + 1,
+            controller: _scrollController,
+            itemBuilder: (BuildContext context, int index) {
+              if (index < state.tutors.length)
+                return TutorItemWidget(tutor: state.tutors[index]);
+              else
+                return Center(
+                  child: SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+            },
+          );
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }

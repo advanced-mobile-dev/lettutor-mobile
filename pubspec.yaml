@@ -39,6 +39,9 @@ dependencies:
   flutter_facebook_auth: ^3.5.7
   google_sign_in: ^5.2.1
   badges: ^2.0.2
+  bloc: ^8.0.1
+  equatable: ^2.0.3
+  flutter_bloc: ^8.0.0
 
 dev_dependencies:
   flutter_test:

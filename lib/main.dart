@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:provider/provider.dart';
 
+import 'blocs/tutors/tutors_bloc.dart';
 import 'config/colors.dart';
 import 'config/languages.dart';
 import 'config/routes.dart';
@@ -60,29 +62,32 @@ class MyApp extends StatelessWidget {
     final userProvider = context.read<UserProvider>();
     final appSettingsProvider = context.watch<AppSettingsProvider>();
 
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      title: 'Lettutor',
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: supportedLanguages.map((e) => Locale(
-            e.locale,
-            e.code,
-          )),
-      locale: Locale(appSettingsProvider.locale),
-      theme: appSettingsProvider.isDarkTheme
-          ? AppTheme.themeDataDark
-          : AppTheme.themeData,
-      routes: _registerRoutes(),
-      initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
-          ? LettutorRoutes.start
-          : LettutorRoutes.home,
-      onGenerateRoute: _registerRoutesWithParameters,
+    return BlocProvider(
+      create: (_) => TutorsBloc(),
+      child: MaterialApp(
+        navigatorKey: navigatorKey,
+        title: 'Lettutor',
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: supportedLanguages.map((e) => Locale(
+              e.locale,
+              e.code,
+            )),
+        locale: Locale(appSettingsProvider.locale),
+        theme: appSettingsProvider.isDarkTheme
+            ? AppTheme.themeDataDark
+            : AppTheme.themeData,
+        routes: _registerRoutes(),
+        initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
+            ? LettutorRoutes.start
+            : LettutorRoutes.home,
+        onGenerateRoute: _registerRoutesWithParameters,
+      ),
     );
   }
 

@@ -1,14 +1,25 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/blocs/tutors/tutors_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'widgets/tutor_filter_widget.dart';
+import 'package:lettutor_app/models/tutor/tutor-filter.dart';
+import 'package:lettutor_app/screens/dash_board/tabs/tutors/widgets/tutor_filter_bottom_sheet.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'widgets/tutor_search_bar.dart';
 import 'widgets/tutor_list_widget.dart';
 
-class TutorsTab extends StatelessWidget {
+class TutorsTab extends StatefulWidget {
+  @override
+  State<TutorsTab> createState() => _TutorsTabState();
+}
+
+class _TutorsTabState extends State<TutorsTab> {
+  TutorsBloc _tutorsBloc;
+
   @override
   Widget build(BuildContext context) {
+    _tutorsBloc = context.watch<TutorsBloc>();
     return Container(
         padding: EdgeInsets.all(AppSizes.pagePadding),
         child: Column(
@@ -23,13 +34,25 @@ class TutorsTab extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: AppSizes.hugeTextSize)),
                 Badge(
-                  showBadge: false,
+                  showBadge: _tutorsBloc.tutorFilter.specialities.isNotEmpty,
                   badgeContent: Text(
-                    '0',
+                    '1',
                     style: TextStyle(color: Colors.white),
                   ),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final TutorFilter filter = await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) =>
+                              TutorFilterBottomSheet(_tutorsBloc.tutorFilter),
+                        );
+                        if (filter != null) {
+                          _tutorsBloc
+                              .add(ApplyFilterEvent(tutorFilter: filter));
+                        }
+                      },
                       icon: Icon(
                         Icons.filter_list_alt,
                         size: 36,
@@ -40,7 +63,7 @@ class TutorsTab extends StatelessWidget {
             SizedBox(
               height: AppSizes.verticalItemSpacing,
             ),
-            Visibility(visible: true, child: TutorFilterWidget()),
+            TutorSearchBar(),
             SizedBox(
               height: 15,
             ),

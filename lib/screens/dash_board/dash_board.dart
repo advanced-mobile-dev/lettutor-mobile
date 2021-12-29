@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/blocs/tutors/tutors_bloc.dart';
 import 'tabs/courses/courses_tab.dart';
 import 'tabs/home/home_tab.dart';
 import 'tabs/settings/settings_tab.dart';
@@ -15,7 +17,10 @@ class _DashBoardState extends State<DashBoard> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     HomeTab(),
-    TutorsTab(),
+    BlocProvider(
+      create: (_) => TutorsBloc(),
+      child: TutorsTab(),
+    ),
     CoursesTab(),
     SettingsTab(),
   ];
@@ -52,10 +57,6 @@ class _DashBoardState extends State<DashBoard> {
             icon: Icon(Icons.picture_as_pdf),
             label: AppLocalizations.of(context).courses,
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.message),
-          //   label: 'Chats',
-          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: AppLocalizations.of(context).settings,

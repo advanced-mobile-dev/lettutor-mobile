@@ -6,6 +6,7 @@ class AppTheme {
       brightness: Brightness.light,
       primarySwatch: MaterialColor(
           AppColors.primaryColor[900].value, AppColors.primaryColor),
+      scaffoldBackgroundColor: Colors.grey[50],
       primaryColor: AppColors.primaryColor[900],
       primaryColorBrightness: Brightness.light,
       iconTheme: IconThemeData(color: AppColors.primaryColor[900]));
@@ -14,5 +15,6 @@ class AppTheme {
       brightness: Brightness.dark,
       primaryColor: AppColors.primaryColor[200],
       primaryColorBrightness: Brightness.dark,
+      scaffoldBackgroundColor: Colors.white,
       iconTheme: IconThemeData(color: AppColors.primaryColor[200]));
 }

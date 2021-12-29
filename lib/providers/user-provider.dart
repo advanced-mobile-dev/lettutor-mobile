@@ -16,11 +16,16 @@ class UserProvider extends ChangeNotifier {
   AuthStatus get loggedInStatus => _loggedInStatus;
 
   Future init() async {
-    final user = await Repository.getUserInfo();
-    if (user != null) {
-      _user = user;
-      _loggedInStatus = AuthStatus.LoggedIn;
-    } else {
+    try {
+      final user = await Repository.getUserInfo();
+      if (user != null) {
+        _user = user;
+        _loggedInStatus = AuthStatus.LoggedIn;
+      } else {
+        Repository.removeUserToken();
+        _loggedInStatus = AuthStatus.NotLoggedIn;
+      }
+    } catch (_) {
       Repository.removeUserToken();
       _loggedInStatus = AuthStatus.NotLoggedIn;
     }
