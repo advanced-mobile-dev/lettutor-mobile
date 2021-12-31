@@ -1,6 +1,5 @@
 import 'package:lettutor_app/data/network/api-service.dart';
 import 'package:lettutor_app/models/tutor/tutor-list.dart';
-import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/user/user-token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +15,9 @@ class Repository {
         SharedPrefsHelper(await SharedPreferences.getInstance());
     _apiService = ApiService();
   }
+
+  static SharedPrefsHelper get sharedPrefsHelper => _sharedPrefsHelper;
+  static get apiService => _apiService;
 
 //app
   static void changeBrightnessToDark(bool isDarkTheme) =>

@@ -20,6 +20,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   void initState() {
     _currentTab = AppTab.home;
+    print('init dashboard');
     super.initState();
   }
 

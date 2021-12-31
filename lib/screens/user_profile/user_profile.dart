@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/providers/user-provider.dart';
+// import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 class UserProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final userProvider = context.read<UserProvider>().user;
+    // final userProvider = context.read<UserProvider>().user;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: ApplicationAppBar(
@@ -53,14 +53,14 @@ class UserProfileScreen extends StatelessWidget {
               SizedBox(height: AppSizes.verticalItemSpacing * 3),
               CustomTextField(
                 title: AppLocalizations.of(context).name,
-                initialValue: userProvider.name,
+                initialValue: 'userProvider.name',
                 controller: null,
                 iconData: Icons.account_box,
                 keyboardType: TextInputType.text,
               ),
               SizedBox(height: AppSizes.verticalItemSpacing * 3),
               CustomTextField(
-                initialValue: userProvider.email,
+                initialValue: 'userProvider.email',
                 title: AppLocalizations.of(context).email,
                 controller: null,
                 iconData: Icons.email,

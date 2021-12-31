@@ -1,23 +1,19 @@
 class ApiException implements Exception {
-  final _message;
-  final _prefix;
+  final int statusCode;
 
-  ApiException([this._message, this._prefix]);
+  final String message;
 
-  String toString() {
-    return "$_prefix$_message";
-  }
+  ApiException(this.message, this.statusCode);
 }
 
 class FetchDataException extends ApiException {
-  FetchDataException([String message])
-      : super(message, "Error During Communication: ");
+  FetchDataException(message, statusCode) : super(message, statusCode);
 }
 
 class BadRequestException extends ApiException {
-  BadRequestException([message]) : super(message, "Invalid Request: ");
+  BadRequestException(message, statusCode) : super(message, statusCode);
 }
 
 class UnauthorisedException extends ApiException {
-  UnauthorisedException([message]) : super(message, "Unauthorised: ");
+  UnauthorisedException(message, statusCode) : super(message, statusCode);
 }

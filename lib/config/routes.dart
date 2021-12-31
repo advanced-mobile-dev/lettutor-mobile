@@ -1,5 +1,6 @@
 class LettutorRoutes {
-  static const home = '/';
+  static const splash = '/';
+  static const home = 'home';
   static const loading = 'loading';
   static const start = 'start';
   static const signUp = 'sign-up';

@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/config/config.dart';
+import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:provider/provider.dart';
 
+import 'blocs/authentication/authentication_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
 import 'config/colors.dart';
 import 'config/languages.dart';
@@ -16,6 +18,7 @@ import 'models/tutor/tutor.dart';
 import 'providers/app-settings-provider.dart';
 import 'providers/tutor-provider.dart';
 import 'providers/user-provider.dart';
+import 'repositories/authentication_repo.dart';
 import 'screens/booking/booking_screen.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/course_detail/course_detail_screen.dart';
@@ -24,9 +27,9 @@ import 'screens/dash_board/tabs/home/history_screen.dart';
 import 'screens/dash_board/tabs/home/video_conference.dart';
 import 'screens/forget_password/forget_password_screen.dart';
 import 'screens/language_setting/language_setting_screen.dart';
-import 'screens/loading_screen/loading_screen.dart';
-import 'screens/login/log_in_screen.dart';
+import 'screens/login/login_screen.dart';
 import 'screens/sign_up/sign_up_screen.dart';
+import 'screens/splash_screen/splash_screen.dart';
 import 'screens/start_screen/start_screen.dart';
 import 'screens/tutor_calendar/tutor_calendar_screen.dart';
 import 'screens/tutor_profile/tutor_profile.dart';
@@ -41,15 +44,31 @@ void main() async {
   await AppConfig.readCountriesFromJson();
   await Repository.init();
 
-  final userProvider = new UserProvider();
-  await userProvider.init();
-  return runApp(MultiProvider(providers: [
-    ChangeNotifierProvider.value(value: userProvider),
-    ChangeNotifierProvider(
-        create: (_) => AppSettingsProvider(
-            Repository.isDarkMode, Repository.currentLanguageLocale)),
-    ChangeNotifierProvider(create: (_) => TutorProvider())
-  ], child: MyApp()));
+  // final userProvider = new UserProvider();
+  // await userProvider.init();
+  final _authRepo = AuthenticationRepository();
+
+  BlocOverrides.runZoned(
+    () => runApp(MultiProvider(
+        providers: [
+          // ChangeNotifierProvider.value(value: userProvider),
+          ChangeNotifierProvider(
+              create: (_) => AppSettingsProvider(
+                  Repository.isDarkMode, Repository.currentLanguageLocale)),
+          ChangeNotifierProvider(create: (_) => TutorProvider())
+        ],
+        child: RepositoryProvider.value(
+          value: _authRepo,
+          child: BlocProvider(
+            create: (_) => AuthenticationBloc(
+              authenticationRepository: _authRepo,
+              userRepository: UserRepository(),
+            ),
+            child: MyApp(),
+          ),
+        ))),
+    blocObserver: AppBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -59,40 +78,69 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColors.primaryColor[50],
     ));
-    final userProvider = context.read<UserProvider>();
+    // final userProvider = context.read<UserProvider>();
     final appSettingsProvider = context.watch<AppSettingsProvider>();
 
-    return BlocProvider(
-      create: (_) => TutorsBloc(),
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        title: 'Lettutor',
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: supportedLanguages.map((e) => Locale(
-              e.locale,
-              e.code,
-            )),
-        locale: Locale(appSettingsProvider.locale),
-        theme: appSettingsProvider.isDarkTheme
-            ? AppTheme.themeDataDark
-            : AppTheme.themeData,
-        routes: _registerRoutes(),
-        initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
-            ? LettutorRoutes.start
-            : LettutorRoutes.home,
-        onGenerateRoute: _registerRoutesWithParameters,
-      ),
+    return MaterialApp(
+      navigatorKey: navigatorKey,
+      title: 'Lettutor',
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: supportedLanguages.map((e) => Locale(
+            e.locale,
+            e.code,
+          )),
+      locale: Locale(appSettingsProvider.locale),
+      theme: appSettingsProvider.isDarkTheme
+          ? AppTheme.themeDataDark
+          : AppTheme.themeData,
+      routes: _registerRoutes(),
+      // initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
+      //     ? LettutorRoutes.start
+      //     : LettutorRoutes.home,
+      onGenerateRoute: _registerRoutesWithParameters,
+      builder: (context, child) {
+        return BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {
+            if (state is UnknownState) {
+              navigatorKey.currentState.pushNamedAndRemoveUntil(
+                  LettutorRoutes.start, (route) => false);
+            }
+            if (state is UnAuthenticatedState) {
+              navigatorKey.currentState.pushNamedAndRemoveUntil(
+                  LettutorRoutes.start, (route) => false);
+            }
+            if (state is AuthenticatedState) {
+              navigatorKey.currentState.pushNamedAndRemoveUntil(
+                  LettutorRoutes.home, (route) => false);
+            }
+            // switch (state.status) {
+            //   case AuthenticationStatus.authenticated:
+            //     break;
+            //   case AuthenticationStatus.unauthenticated:
+            //     _navigator.pushAndRemoveUntil<void>(
+            //       LoginPage.route(),
+            //       (route) => false,
+            //     );
+            //     break;
+            //   default:
+            //     break;
+            // }
+          },
+          child: child,
+        );
+      },
     );
   }
 
   Map<String, WidgetBuilder> _registerRoutes() {
     return <String, WidgetBuilder>{
+      LettutorRoutes.splash: (context) => SplashScreen(),
       LettutorRoutes.home: (context) {
         return MultiBlocProvider(
           providers: [
@@ -103,7 +151,6 @@ class MyApp extends StatelessWidget {
           child: DashBoard(),
         );
       },
-      LettutorRoutes.loading: (context) => LoadingScreen(),
       LettutorRoutes.start: (context) => StartScreen(),
       LettutorRoutes.signUp: (context) => SignUpScreen(),
       LettutorRoutes.signIn: (context) => LoginScreen(),
@@ -153,5 +200,19 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StartScreen();
+  }
+}
+
+class AppBlocObserver extends BlocObserver {
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    if (bloc is Cubit) print(change);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
   }
 }
