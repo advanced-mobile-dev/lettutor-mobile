@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
 import 'package:lettutor_app/blocs/authentication/authentication_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/user/user.dart';
-import 'package:lettutor_app/providers/app-settings-provider.dart';
-// import 'package:lettutor_app/providers/user-provider.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsTab extends StatelessWidget {
   @override
@@ -16,9 +16,10 @@ class SettingsTab extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.bold,
         fontSize: AppSizes.hugeTextSize);
-    // User user = context.read<UserProvider>().user;
+    User user =
+        (context.read<AuthenticationBloc>().state as AuthenticatedState).user;
     // print(context.read<UserProvider>());
-    final appSettingsProvider = context.watch<AppSettingsProvider>();
+    //final appSettingsProvider = context.watch<AppSettingsProvider>();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.pagePadding),
@@ -33,10 +34,10 @@ class SettingsTab extends StatelessWidget {
               children: <Widget>[
                 ClipOval(
                   // child: user.avatar == null
-                  child: 1 == 1
+                  child: user.avatar == null
                       ? Icon(Icons.account_circle_outlined)
                       : Image.network(
-                          'user.avatar',
+                          user.avatar,
                           fit: BoxFit.cover,
                           width: 50.0,
                           height: 50.0,
@@ -45,7 +46,7 @@ class SettingsTab extends StatelessWidget {
                 SizedBox(
                   width: 15,
                 ),
-                Text('user.name',
+                Text(user.name,
                     style: TextStyle(
                         fontSize: AppSizes.normalTextSize,
                         fontWeight: FontWeight.bold))
@@ -108,12 +109,14 @@ class SettingsTab extends StatelessWidget {
                               fontSize: AppSizes.normalTextSize,
                               fontWeight: FontWeight.normal),
                         ),
-                        Switch(
-                          value: appSettingsProvider.isDarkTheme,
-                          onChanged: (bool value) {
-                            appSettingsProvider.setIsDarkTheme(value);
-                          },
-                        )
+                        BlocBuilder<AppSettingsBloc, AppSettingsState>(
+                            builder: (context, state) => Switch(
+                                  value: state.isDarkTheme,
+                                  onChanged: (bool value) {
+                                    context.read<AppSettingsBloc>().add(
+                                        ThemeChangedEvent(isDarkTheme: value));
+                                  },
+                                ))
                       ],
                     ),
                   )
@@ -126,10 +129,6 @@ class SettingsTab extends StatelessWidget {
             SubmitButton(
                 text: AppLocalizations.of(context).logout,
                 function: () {
-                  // context.read<UserProvider>().logout();
-                  // Provider.of<UserProvider>(context, listen: false)
-                  //     .setUser(null);
-                  // Navigator.pushReplacementNamed(context, LettutorRoutes.start);
                   context.read<AuthenticationBloc>().add(LogoutEvent());
                 }),
           ],

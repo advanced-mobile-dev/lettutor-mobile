@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
+import 'package:lettutor_app/repositories/app_settings_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +17,6 @@ import 'config/theme.dart';
 import 'data/repository.dart';
 import 'models/course.dart';
 import 'models/tutor/tutor.dart';
-import 'providers/app-settings-provider.dart';
-import 'providers/tutor-provider.dart';
-import 'providers/user-provider.dart';
 import 'repositories/authentication_repo.dart';
 import 'screens/booking/booking_screen.dart';
 import 'screens/change_password/change_password_screen.dart';
@@ -38,35 +37,33 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
   await AppConfig.readCountriesFromJson();
   await Repository.init();
 
-  // final userProvider = new UserProvider();
-  // await userProvider.init();
   final _authRepo = AuthenticationRepository();
+  final _appSettingsRepo = AppSettingsRepository();
 
   BlocOverrides.runZoned(
-    () => runApp(MultiProvider(
+    () => runApp(MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (_) => _authRepo),
+        RepositoryProvider(create: (_) => _appSettingsRepo),
+      ],
+      child: MultiBlocProvider(
         providers: [
-          // ChangeNotifierProvider.value(value: userProvider),
-          ChangeNotifierProvider(
-              create: (_) => AppSettingsProvider(
-                  Repository.isDarkMode, Repository.currentLanguageLocale)),
-          ChangeNotifierProvider(create: (_) => TutorProvider())
+          BlocProvider(
+              create: (_) => AuthenticationBloc(
+                    authenticationRepository: _authRepo,
+                    userRepository: UserRepository(),
+                  )),
+          BlocProvider(create: (_) => AppSettingsBloc(_appSettingsRepo))
         ],
-        child: RepositoryProvider.value(
-          value: _authRepo,
-          child: BlocProvider(
-            create: (_) => AuthenticationBloc(
-              authenticationRepository: _authRepo,
-              userRepository: UserRepository(),
-            ),
-            child: MyApp(),
-          ),
-        ))),
+        child: MyApp(),
+      ),
+    )),
     blocObserver: AppBlocObserver(),
   );
 }
@@ -78,64 +75,50 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColors.primaryColor[50],
     ));
-    // final userProvider = context.read<UserProvider>();
-    final appSettingsProvider = context.watch<AppSettingsProvider>();
-
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      title: 'Lettutor',
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: supportedLanguages.map((e) => Locale(
-            e.locale,
-            e.code,
-          )),
-      locale: Locale(appSettingsProvider.locale),
-      theme: appSettingsProvider.isDarkTheme
-          ? AppTheme.themeDataDark
-          : AppTheme.themeData,
-      routes: _registerRoutes(),
-      // initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
-      //     ? LettutorRoutes.start
-      //     : LettutorRoutes.home,
-      onGenerateRoute: _registerRoutesWithParameters,
-      builder: (context, child) {
-        return BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state) {
-            if (state is UnknownState) {
-              navigatorKey.currentState.pushNamedAndRemoveUntil(
-                  LettutorRoutes.start, (route) => false);
-            }
-            if (state is UnAuthenticatedState) {
-              navigatorKey.currentState.pushNamedAndRemoveUntil(
-                  LettutorRoutes.start, (route) => false);
-            }
-            if (state is AuthenticatedState) {
-              navigatorKey.currentState.pushNamedAndRemoveUntil(
-                  LettutorRoutes.home, (route) => false);
-            }
-            // switch (state.status) {
-            //   case AuthenticationStatus.authenticated:
-            //     break;
-            //   case AuthenticationStatus.unauthenticated:
-            //     _navigator.pushAndRemoveUntil<void>(
-            //       LoginPage.route(),
-            //       (route) => false,
-            //     );
-            //     break;
-            //   default:
-            //     break;
-            // }
-          },
-          child: child,
-        );
-      },
-    );
+    return BlocBuilder<AppSettingsBloc, AppSettingsState>(
+        builder: (context, state) {
+      return MaterialApp(
+        navigatorKey: navigatorKey,
+        title: 'Lettutor',
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: supportedLanguages.map((e) => Locale(
+              e.locale,
+              e.code,
+            )),
+        locale: Locale(state.locale),
+        theme: state.isDarkTheme ? AppTheme.themeDataDark : AppTheme.themeData,
+        routes: _registerRoutes(),
+        // initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
+        //     ? LettutorRoutes.start
+        //     : LettutorRoutes.home,
+        onGenerateRoute: _registerRoutesWithParameters,
+        builder: (context, child) {
+          return BlocListener<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) {
+              if (state is UnknownState) {
+                navigatorKey.currentState.pushNamedAndRemoveUntil(
+                    LettutorRoutes.start, (route) => false);
+              }
+              if (state is UnAuthenticatedState) {
+                navigatorKey.currentState.pushNamedAndRemoveUntil(
+                    LettutorRoutes.start, (route) => false);
+              }
+              if (state is AuthenticatedState) {
+                navigatorKey.currentState.pushNamedAndRemoveUntil(
+                    LettutorRoutes.home, (route) => false);
+              }
+            },
+            child: child,
+          );
+        },
+      );
+    });
   }
 
   Map<String, WidgetBuilder> _registerRoutes() {
