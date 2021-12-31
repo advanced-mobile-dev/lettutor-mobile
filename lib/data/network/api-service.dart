@@ -82,4 +82,17 @@ class ApiService {
     }
     return null;
   }
+
+  Future<User> signUp(String email, String password) async {
+    final String endpoint = '/auth/register';
+    final body = {"email": email, "password": password};
+    final Response response = await _apiClient.post('$endpoint', body: body);
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final User user = User.fromJson(body['user']);
+      user.userToken = UserToken.fromJson(body['tokens']);
+      return user;
+    }
+    return null;
+  }
 }

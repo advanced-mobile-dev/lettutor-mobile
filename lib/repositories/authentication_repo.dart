@@ -56,6 +56,16 @@ class AuthenticationRepository {
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 
+  Future<User> signUp(String email, String password) async {
+    final User user = await ApiService().signUp(email, password);
+    if (user != null) {
+      Repository.sharedPrefsHelper.saveUserToken(user.userToken);
+      if (user.isActivated) _controller.add(AuthenticationStatus.authenticated);
+      return user;
+    }
+    return null;
+  }
+
   void dispose() {
     _controller.close();
   }

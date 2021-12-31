@@ -92,7 +92,30 @@ class _LoginFormState extends State<LoginForm> {
                 },
               ),
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 2,
+                height: AppSizes.verticalItemSpacing,
+              ),
+              GestureDetector(
+                  child: Text("Create an account",
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 16,
+                          color: Colors.blue)),
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, LettutorRoutes.signUp);
+                  }),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
+              ),
+              Container(
+                  padding: EdgeInsets.all(5),
+                  alignment: Alignment.center,
+                  child: Text(AppLocalizations.of(context).orContinueWith,
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: AppSizes.smallTextSize))),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
