@@ -1,4 +1,4 @@
-class Feedback {
+class TutorFeedback {
   String id;
   String bookingId;
   String firstId;
@@ -9,7 +9,7 @@ class Feedback {
   String updatedAt;
   Feedbacker feedbacker;
 
-  Feedback(
+  TutorFeedback(
       {this.id,
       this.bookingId,
       this.firstId,
@@ -20,7 +20,7 @@ class Feedback {
       this.updatedAt,
       this.feedbacker});
 
-  Feedback.fromJson(Map<String, dynamic> json) {
+  TutorFeedback.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     bookingId = json['bookingId'];
     firstId = json['firstId'];

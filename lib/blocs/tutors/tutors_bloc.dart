@@ -21,12 +21,14 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
   }
   Future<void> _onTutorsFetch(
       TutorsFetchEvent event, Emitter<TutorsState> emit) async {
+    print('on fetch');
     try {
       final tutorList = await Repository.getTutors(_tutorPerPage, 1,
           _tutorFilter.specialities.map((e) => e.code).toList());
       emit(LoadSuccessState(
+          status: TutorsStatus.success,
           page: 1,
-          hasReachedMax: tutorList.data.length >= tutorList.count,
+          hasReachedMax: tutorList.data.length == tutorList.count,
           tutorFilter: _tutorFilter,
           tutors: tutorList.data));
     } catch (_) {
@@ -37,25 +39,35 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
   Future<void> _onTutorsLoadMore(
       TutorsLoadMoreEvent event, Emitter<TutorsState> emit) async {
     // if (event.specialities!=null && event.specialities)
-    if (state is LoadSuccessState) {
-      final sucessState = (state as LoadSuccessState);
-      if (sucessState.hasReachedMax) return;
 
+    if (state is LoadSuccessState) {
+      final successState = (state as LoadSuccessState);
+      if (successState.status != TutorsStatus.success ||
+          successState.hasReachedMax) return;
+      print('loading more');
+      emit(successState.copyWith(status: TutorsStatus.loadingMore));
       try {
         //load more
-        final int nextPage = sucessState.page + 1;
+        final int nextPage = successState.page + 1;
         final tutorList = await Repository.getTutors(
             _tutorPerPage,
             nextPage,
             // event.specialities.map((e) => e.code).toList()
             _tutorFilter.specialities.map((e) => e.code).toList());
         if (tutorList.data.isEmpty) {
-          emit(sucessState.copyWith(page: nextPage, hasReachedMax: true));
+          emit(successState.copyWith(
+              status: TutorsStatus.success,
+              page: nextPage,
+              hasReachedMax: true));
         } else {
+          final bool hasReachedMax =
+              successState.tutors.length + tutorList.data.length >=
+                  tutorList.count;
           emit(
-            sucessState.copyWith(
-              tutors: List.of(sucessState.tutors)..addAll(tutorList.data),
-              hasReachedMax: false,
+            successState.copyWith(
+              status: TutorsStatus.success,
+              tutors: List.of(successState.tutors)..addAll(tutorList.data),
+              hasReachedMax: hasReachedMax,
               tutorFilter: _tutorFilter,
               page: nextPage,
             ),

@@ -70,8 +70,8 @@ class RestClient {
 
   _handleResponse(http.Response response) {
     final int statusCode = response.statusCode;
-    print(statusCode);
-    print(response.body);
+    // print(statusCode);
+    // print(response.body);
     if (statusCode < 200 || statusCode >= 300) {
       switch (statusCode) {
         case 400:

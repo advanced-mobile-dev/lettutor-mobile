@@ -1,6 +1,6 @@
 part of 'tutors_bloc.dart';
 
-enum TutorStatus { initial, loading, success, failure }
+enum TutorsStatus { success, loadingMore, failure }
 
 abstract class TutorsState extends Equatable {
   List<Object> get props => [];
@@ -12,6 +12,7 @@ class LoadingState extends TutorsState {
 }
 
 class LoadSuccessState extends TutorsState {
+  final TutorsStatus status;
   final List<Tutor> tutors;
   final bool hasReachedMax;
   final int page;
@@ -19,13 +20,15 @@ class LoadSuccessState extends TutorsState {
   final TutorFilter tutorFilter;
 
   LoadSuccessState(
-      {this.tutors = const <Tutor>[],
+      {this.status = TutorsStatus.success,
+      this.tutors = const <Tutor>[],
       this.page = 1,
       this.hasReachedMax = false,
       this.searchKeyword = '',
       this.tutorFilter});
 
   LoadSuccessState copyWith({
+    TutorsStatus status,
     List<Tutor> tutors,
     int page = 1,
     bool hasReachedMax,
@@ -33,6 +36,7 @@ class LoadSuccessState extends TutorsState {
     TutorFilter tutorFilter,
   }) {
     return LoadSuccessState(
+      status: status ?? this.status,
       tutors: tutors ?? this.tutors,
       page: page ?? this.page,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
@@ -43,11 +47,12 @@ class LoadSuccessState extends TutorsState {
 
   @override
   String toString() {
-    return '''LoadedState  { hasReachedMax: $hasReachedMax, page: $page, tutors: ${tutors.length}, filter: $tutorFilter }''';
+    return '''LoadSuccessState  {status: $status hasReachedMax: $hasReachedMax, page: $page, tutors: ${tutors.length}, filter: $tutorFilter }''';
   }
 
   @override
-  List<Object> get props => [tutors, hasReachedMax];
+  List<Object> get props =>
+      [status, tutors, page, hasReachedMax, searchKeyword, tutorFilter];
 }
 
 class LoadFailureState extends TutorsState {

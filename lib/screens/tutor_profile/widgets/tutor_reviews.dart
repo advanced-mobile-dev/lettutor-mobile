@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/models/tutor/tutor-feedback.dart';
 
 class TutorReviews extends StatelessWidget {
+  final List<TutorFeedback> tutorFeedbacks;
+  TutorReviews(this.tutorFeedbacks);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,18 +24,7 @@ class TutorReviews extends StatelessWidget {
             height: AppSizes.verticalItemSpacing,
           ),
           Column(
-            children: <Widget>[
-              RatingComment(),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              RatingComment(),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              RatingComment(),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              RatingComment(),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-              RatingComment(),
-              SizedBox(height: AppSizes.verticalItemSpacing),
-            ],
+            children: tutorFeedbacks.map((e) => RatingComment(e)).toList(),
           ),
         ],
       ),
@@ -41,13 +33,13 @@ class TutorReviews extends StatelessWidget {
 }
 
 class RatingComment extends StatelessWidget {
-  const RatingComment({
-    Key key,
-  }) : super(key: key);
+  final TutorFeedback feedback;
+  RatingComment(this.feedback);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 15),
       padding: EdgeInsets.symmetric(
           vertical: AppSizes.pagePadding * 1.5,
           horizontal: AppSizes.pagePadding),
@@ -67,8 +59,8 @@ class RatingComment extends StatelessWidget {
               child: Row(
             children: <Widget>[
               ClipOval(
-                child: Image.asset(
-                  'Tutor.data.avatar',
+                child: Image.network(
+                  feedback.feedbacker.avatar,
                   width: 30.0,
                   height: 30.0,
                 ),
@@ -83,7 +75,7 @@ class RatingComment extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Tutor.data.name',
+                        feedback.feedbacker.name,
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
@@ -100,7 +92,7 @@ class RatingComment extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '${'Tutor.data.rating'}',
+                        '${feedback.rating}',
                         style: TextStyle(color: Colors.amber),
                       ),
                       SizedBox(
@@ -109,8 +101,7 @@ class RatingComment extends StatelessWidget {
                       Container(
                         width: 100,
                         child: RatingBar.builder(
-                          // initialRating: Tutor.data.rating,
-                          initialRating: 3,
+                          initialRating: feedback.rating.toDouble(),
                           ignoreGestures: true,
                           itemSize: 15,
                           direction: Axis.horizontal,
@@ -132,9 +123,16 @@ class RatingComment extends StatelessWidget {
               ),
             ],
           )),
-          Text(
-            'This is an excellent teacher. He is very talented and kind',
-            style: TextStyle(color: Colors.black),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              '${feedback.content}',
+              style: TextStyle(color: Colors.black),
+              textAlign: TextAlign.start,
+            ),
           )
         ],
       ),

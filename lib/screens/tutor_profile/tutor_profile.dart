@@ -199,7 +199,7 @@ class TutorProfile extends StatelessWidget {
                 height: AppSizes.verticalItemSpacing,
               ),
               TutorInfo(),
-              // TutorReviews()
+              TutorReviews(tutor.tutorBasicInfo.feedbacks)
             ],
           ),
         ),

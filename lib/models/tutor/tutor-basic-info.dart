@@ -24,7 +24,7 @@ class TutorBasicInfo {
   String createdAt;
   String updatedAt;
   String deletedAt;
-  List<Feedback> feedbacks;
+  List<TutorFeedback> feedbacks;
   List<Course> courses;
 
   TutorBasicInfo(
@@ -86,9 +86,9 @@ class TutorBasicInfo {
     updatedAt = json['updatedAt'];
     deletedAt = json['deletedAt'];
     if (json['feedbacks'] != null) {
-      feedbacks = <Feedback>[];
+      feedbacks = <TutorFeedback>[];
       json['feedbacks'].forEach((v) {
-        feedbacks.add(new Feedback.fromJson(v));
+        feedbacks.add(new TutorFeedback.fromJson(v));
       });
     }
     if (json['courses'] != null) {
