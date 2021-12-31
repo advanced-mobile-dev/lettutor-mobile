@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:lettutor_app/data/network/api-service.dart';
+import 'package:lettutor_app/data/network/api_service.dart';
 import 'package:lettutor_app/data/repository.dart';
-import 'package:lettutor_app/models/user/user-token.dart';
+import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
@@ -22,6 +22,7 @@ class AuthenticationRepository {
 
   Future<User> login(String email, String password) async {
     final user = await ApiService().login(email, password);
+    print(user);
     if (user != null) {
       Repository.sharedPrefsHelper.saveUserToken(user.userToken);
       _controller.add(AuthenticationStatus.authenticated);

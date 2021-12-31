@@ -9,6 +9,9 @@ class CustomTextField extends StatelessWidget {
   final Function(String) validator;
   final Function(String) onSaved;
   final bool isPasswordTextField;
+  final bool readOnly;
+  final bool autoFocus;
+  final Function onTap;
   CustomTextField(
       {@required this.title,
       this.controller,
@@ -17,11 +20,15 @@ class CustomTextField extends StatelessWidget {
       this.initialValue,
       this.isPasswordTextField = false,
       this.validator,
-      this.onSaved});
+      this.onSaved,
+      this.readOnly = false,
+      this.autoFocus = false,
+      this.onTap});
   @override
   Widget build(BuildContext context) {
     return Container(
         child: TextFormField(
+            onTap: onTap,
             initialValue: initialValue,
             controller: controller,
             decoration: InputDecoration(
@@ -41,6 +48,8 @@ class CustomTextField extends StatelessWidget {
                 borderSide: BorderSide(width: 0.5),
               ),
             ),
+            autofocus: autoFocus,
+            readOnly: readOnly,
             validator: validator,
             onSaved: onSaved,
             keyboardType:

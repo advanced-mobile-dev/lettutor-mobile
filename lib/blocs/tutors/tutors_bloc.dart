@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:lettutor_app/data/repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:lettutor_app/models/tutor/tutor-filter.dart';
+import 'package:lettutor_app/models/tutor/tutor_filter.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 
 part 'tutors_event.dart';

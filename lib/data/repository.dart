@@ -1,6 +1,6 @@
-import 'package:lettutor_app/data/network/api-service.dart';
-import 'package:lettutor_app/models/tutor/tutor-list.dart';
-import 'package:lettutor_app/models/user/user-token.dart';
+import 'package:lettutor_app/data/network/api_service.dart';
+import 'package:lettutor_app/models/tutor/tutor_list.dart';
+import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

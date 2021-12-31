@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:lettutor_app/data/network/api-exception.dart';
+import 'package:lettutor_app/data/network/api_exception.dart';
 
 class RestClient {
   RestClient._();

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:lettutor_app/data/network/rest-client.dart';
-import 'package:lettutor_app/models/tutor/tutor-list.dart';
-import 'package:lettutor_app/models/user/user-token.dart';
+import 'package:lettutor_app/data/network/rest_client.dart';
+import 'package:lettutor_app/models/tutor/tutor_list.dart';
+import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
 class ApiService {

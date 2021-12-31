@@ -1,5 +1,6 @@
-import 'package:lettutor_app/models/course/course-category.dart';
 import 'package:lettutor_app/models/course/topic.dart';
+
+import 'course-category.dart';
 
 class Course {
   String id;

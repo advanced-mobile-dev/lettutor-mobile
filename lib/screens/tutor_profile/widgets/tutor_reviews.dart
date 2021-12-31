@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:lettutor_app/models/tutor/tutor-feedback.dart';
+import 'package:lettutor_app/models/tutor/tutor_feedback.dart';
 
 class TutorReviews extends StatelessWidget {
   final List<TutorFeedback> tutorFeedbacks;

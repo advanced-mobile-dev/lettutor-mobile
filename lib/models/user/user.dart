@@ -1,7 +1,7 @@
 import 'package:lettutor_app/models/course/course.dart';
-import 'package:lettutor_app/models/user/user-learn-topic.dart';
-import 'package:lettutor_app/models/user/user-token.dart';
-import 'package:lettutor_app/models/user/user-wallet.dart';
+import 'package:lettutor_app/models/user/user_learn_topic.dart';
+import 'package:lettutor_app/models/user/user_token.dart';
+import 'package:lettutor_app/models/user/user_wallet.dart';
 
 class User {
   String id;

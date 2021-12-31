@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/data/network/api-exception.dart';
+import 'package:lettutor_app/data/network/api_exception.dart';
 import 'package:lettutor_app/repositories/authentication_repo.dart';
 
 part 'login_event.dart';
@@ -23,11 +23,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginByEmailEvent event, Emitter<LoginState> emit) async {
     emit(LoginInprogressState());
     try {
-      await _authenticationRepository.login(
+      final user = await _authenticationRepository.login(
         event.email,
         event.password,
       );
-      emit(LoginSuccessState());
+      if (user != null) emit(LoginSuccessState());
     } catch (error) {
       String message = 'Login failed';
       if (error is ApiException) {

@@ -1,4 +1,4 @@
-import 'package:lettutor_app/models/tutor/tutor-basic-info.dart';
+import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 
 class TutorList {

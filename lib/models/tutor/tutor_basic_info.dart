@@ -1,5 +1,5 @@
 import 'package:lettutor_app/models/course/course.dart';
-import 'package:lettutor_app/models/tutor/tutor-feedback.dart';
+import 'package:lettutor_app/models/tutor/tutor_feedback.dart';
 
 class TutorBasicInfo {
   String id;

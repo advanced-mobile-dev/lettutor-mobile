@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:lettutor_app/config/config.dart';
 
 class StringUtils {

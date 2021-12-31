@@ -1,4 +1,4 @@
-import 'package:lettutor_app/models/user/user-token.dart';
+import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsHelper {
