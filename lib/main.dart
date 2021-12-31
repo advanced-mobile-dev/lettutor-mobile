@@ -6,8 +6,6 @@ import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/repositories/app_settings_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
-import 'package:provider/provider.dart';
-
 import 'blocs/authentication/authentication_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
 import 'config/colors.dart';
