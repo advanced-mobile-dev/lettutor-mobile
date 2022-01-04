@@ -9,4 +9,11 @@ class UserRepository {
     final user = await ApiService().getUserInfo(userToken.accessToken.token);
     return user;
   }
+
+  Future<User> putUserInfo(User user) async {
+    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
+    final resUser =
+        await ApiService().putUserInfo(userToken.accessToken.token, user);
+    return resUser;
+  }
 }

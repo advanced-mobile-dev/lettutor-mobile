@@ -95,4 +95,16 @@ class ApiService {
     }
     return null;
   }
+
+  Future<User> putUserInfo(String token, User user) async {
+    final String endpoint = '/user/info';
+    final Response response = await _apiClient.put('$endpoint',
+        headers: {"Authorization": 'Bearer $token'}, body: user.toJsonForPut());
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final User user = User.fromJson(body['user']);
+      return user;
+    }
+    return null;
+  }
 }

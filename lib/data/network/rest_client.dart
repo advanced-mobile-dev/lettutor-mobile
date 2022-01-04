@@ -39,10 +39,18 @@ class RestClient {
         .then(_handleResponse);
   }
 
-  Future<dynamic> put(path, {Map<String, String> params, headers, body}) {
+  Future<dynamic> put(
+    path, {
+    Map<String, String> params,
+    Map<String, String> headers,
+    Map<String, dynamic> body,
+  }) {
     var uri = Uri.https(_baseUrl, path, params);
+    if (headers == null) headers = {};
+    headers['Content-type'] = 'application/json';
+    print(jsonEncode(body));
     return http
-        .put(uri, headers: headers, body: body)
+        .put(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))
         .then(_handleResponse);
   }
@@ -57,6 +65,8 @@ class RestClient {
 
   _handleResponse(http.Response response) {
     final int statusCode = response.statusCode;
+    print(statusCode);
+    print(response.body);
     if (statusCode == 500) {
       final res = jsonDecode(response.body);
       final statusCode = res['statusCode'];

@@ -22,6 +22,7 @@ class _TutorListWidgetState extends State<TutorListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print('rebuild');
     return BlocBuilder<TutorsBloc, TutorsState>(
       builder: (context, state) {
         if (state is LoadingState) {

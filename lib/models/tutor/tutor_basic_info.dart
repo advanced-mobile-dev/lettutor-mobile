@@ -59,7 +59,7 @@ class TutorBasicInfo {
       total += item.rating;
     }
     if (feedbacks != null && feedbacks.isEmpty) return 0;
-    return total / feedbacks.length;
+    return ((total / feedbacks.length) ~/ 1).toDouble();
   }
 
   TutorBasicInfo.fromJson(Map<String, dynamic> json) {

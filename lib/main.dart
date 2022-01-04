@@ -7,6 +7,7 @@ import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/repositories/app_settings_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'blocs/authentication/authentication_bloc.dart';
+import 'blocs/bloc/user_profile_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
 import 'config/colors.dart';
 import 'config/languages.dart';
@@ -43,19 +44,21 @@ void main() async {
 
   final _authRepo = AuthenticationRepository();
   final _appSettingsRepo = AppSettingsRepository();
+  final _userRepo = UserRepository();
 
   BlocOverrides.runZoned(
     () => runApp(MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => _authRepo),
         RepositoryProvider(create: (_) => _appSettingsRepo),
+        RepositoryProvider(create: (_) => _userRepo),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
               create: (_) => AuthenticationBloc(
                     authenticationRepository: _authRepo,
-                    userRepository: UserRepository(),
+                    userRepository: _userRepo,
                   )),
           BlocProvider(create: (_) => AppSettingsBloc(_appSettingsRepo))
         ],
@@ -132,12 +135,17 @@ class MyApp extends StatelessWidget {
           child: DashBoard(),
         );
       },
+      LettutorRoutes.userProfile: (context) {
+        final UserRepository _userRepo = context.read<UserRepository>();
+        return BlocProvider(
+            create: (context) => UserProfileBloc(_userRepo),
+            child: UserProfileScreen());
+      },
       LettutorRoutes.start: (context) => StartScreen(),
       LettutorRoutes.signUp: (context) => SignUpScreen(),
       LettutorRoutes.signIn: (context) => LoginScreen(),
       LettutorRoutes.history: (context) => HistoryScreen(),
       LettutorRoutes.tutorProfile: (context) => TutorProfile(),
-      LettutorRoutes.userProfile: (context) => UserProfileScreen(),
       LettutorRoutes.changePassword: (context) => ChangePasswordScreen(),
       LettutorRoutes.languageSetting: (context) => LanguageSettingScreen(),
       LettutorRoutes.forgetPassword: (context) => ForgetPasswordScreen(),

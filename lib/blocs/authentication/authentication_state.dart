@@ -16,6 +16,7 @@ class AuthenticatedState extends AuthenticationState {
   final User user;
 
   AuthenticatedState({this.user});
+
   @override
   List<Object> get props => [user];
 }
