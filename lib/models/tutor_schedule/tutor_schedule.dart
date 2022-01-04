@@ -5,30 +5,35 @@ class TutorSchedule {
   String tutorId;
   String startTime;
   String endTime;
-  int startTimestamp;
-  int endTimestamp;
+  DateTime startDateTime;
+  DateTime endDateTime;
   String createdAt;
   bool isBooked;
   List<ScheduleDetail> scheduleDetails;
 
-  TutorSchedule(
-      {this.id,
-      this.tutorId,
-      this.startTime,
-      this.endTime,
-      this.startTimestamp,
-      this.endTimestamp,
-      this.createdAt,
-      this.isBooked,
-      this.scheduleDetails});
+  TutorSchedule({
+    this.id,
+    this.tutorId,
+    this.startTime,
+    this.endTime,
+    this.startDateTime,
+    this.endDateTime,
+    this.createdAt,
+    this.isBooked,
+    this.scheduleDetails,
+  });
 
   TutorSchedule.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     tutorId = json['tutorId'];
     startTime = json['startTime'];
     endTime = json['endTime'];
-    startTimestamp = json['startTimestamp'];
-    endTimestamp = json['endTimestamp'];
+    startDateTime =
+        DateTime.fromMillisecondsSinceEpoch(json['startTimestamp'], isUtc: true)
+            .toLocal();
+    endDateTime =
+        DateTime.fromMillisecondsSinceEpoch(json['endTimestamp'], isUtc: true)
+            .toLocal();
     createdAt = json['createdAt'];
     isBooked = json['isBooked'];
     if (json['scheduleDetails'] != null) {
@@ -45,8 +50,8 @@ class TutorSchedule {
     data['tutorId'] = this.tutorId;
     data['startTime'] = this.startTime;
     data['endTime'] = this.endTime;
-    data['startTimestamp'] = this.startTimestamp;
-    data['endTimestamp'] = this.endTimestamp;
+    // data['startTimestamp'] = this.startTimestamp;
+    // data['endTimestamp'] = this.endTimestamp;
     data['createdAt'] = this.createdAt;
     data['isBooked'] = this.isBooked;
     if (this.scheduleDetails != null) {

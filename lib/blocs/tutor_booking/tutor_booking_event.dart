@@ -7,4 +7,10 @@ abstract class TutorBookingEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class BookPressedEvent extends TutorBookingEvent {}
+class FetchTutorSchedulesEvent extends TutorBookingEvent {}
+
+class BookEvent extends TutorBookingEvent {
+  final TutorSchedule tutorSchedule;
+
+  BookEvent(this.tutorSchedule);
+}

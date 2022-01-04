@@ -30,7 +30,7 @@ class RestClient {
       Map<String, dynamic> body,
       Map<String, dynamic> params}) {
     var uri = Uri.https(_baseUrl, path, params);
-    print(jsonEncode(body));
+    // print(jsonEncode(body));
     if (headers == null) headers = {};
     headers['Content-type'] = 'application/json';
     return http
@@ -65,8 +65,8 @@ class RestClient {
 
   _handleResponse(http.Response response) {
     final int statusCode = response.statusCode;
-    print(statusCode);
-    print(response.body);
+    // print(statusCode);
+    // print(response.body);
     if (statusCode == 500) {
       final res = jsonDecode(response.body);
       final statusCode = res['statusCode'];

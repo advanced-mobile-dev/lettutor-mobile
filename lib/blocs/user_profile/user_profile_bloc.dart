@@ -19,7 +19,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       FetchUserInfodEvent event, Emitter<UserProfileState> emit) async {
     try {
       User user = await _tryGetUser();
-      emit(user == null ? SaveFailureState() : LoadedState(user: user));
+      emit(user == null ? LoadFailureState() : LoadedState(user: user));
     } catch (_) {
       emit(LoadFailureState());
     }

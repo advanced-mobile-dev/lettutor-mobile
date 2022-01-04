@@ -24,8 +24,4 @@ class LoadedState extends UserProfileState {
   List<Object> get props => [user, userInfoStatus];
 }
 
-class SavingState extends UserProfileState {}
-
 class LoadFailureState extends UserProfileState {}
-
-class SaveFailureState extends UserProfileState {}

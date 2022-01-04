@@ -8,7 +8,7 @@ class LettutorRoutes {
   static const forgetPassword = 'forget-password';
   static const history = 'history';
   static const tutorProfile = 'tutor-profile';
-  static const tutorCalendar = 'tutor-calendar';
+  static const tutorSchedule = 'tutor-calendar';
   static const booking = 'booking';
   static const courseDetail = 'course-detail';
   static const userProfile = 'user-profile';

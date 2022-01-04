@@ -1,36 +1,35 @@
 import 'booking_info.dart';
 
 class ScheduleDetail {
-  int startPeriodTimestamp;
-  int endPeriodTimestamp;
+  DateTime startPeriod;
+  DateTime endPeriod;
   String id;
   String scheduleId;
-  String startPeriod;
-  String endPeriod;
   String createdAt;
   String updatedAt;
   List<BookingInfo> bookingInfo;
   bool isBooked;
 
   ScheduleDetail(
-      {this.startPeriodTimestamp,
-      this.endPeriodTimestamp,
+      {this.startPeriod,
+      this.endPeriod,
       this.id,
       this.scheduleId,
-      this.startPeriod,
-      this.endPeriod,
       this.createdAt,
       this.updatedAt,
       this.bookingInfo,
       this.isBooked});
 
   ScheduleDetail.fromJson(Map<String, dynamic> json) {
-    startPeriodTimestamp = json['startPeriodTimestamp'];
-    endPeriodTimestamp = json['endPeriodTimestamp'];
+    startPeriod = DateTime.fromMillisecondsSinceEpoch(
+            json['startPeriodTimestamp'],
+            isUtc: true)
+        .toLocal();
+    endPeriod = DateTime.fromMillisecondsSinceEpoch(json['endPeriodTimestamp'],
+            isUtc: true)
+        .toLocal();
     id = json['id'];
     scheduleId = json['scheduleId'];
-    startPeriod = json['startPeriod'];
-    endPeriod = json['endPeriod'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     if (json['bookingInfo'] != null) {
@@ -44,12 +43,10 @@ class ScheduleDetail {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['startPeriodTimestamp'] = this.startPeriodTimestamp;
-    data['endPeriodTimestamp'] = this.endPeriodTimestamp;
+    data['startPeriodTimestamp'] = this.startPeriod;
+    data['endPeriodTimestamp'] = this.endPeriod;
     data['id'] = this.id;
     data['scheduleId'] = this.scheduleId;
-    data['startPeriod'] = this.startPeriod;
-    data['endPeriod'] = this.endPeriod;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     if (this.bookingInfo != null) {

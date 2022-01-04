@@ -144,7 +144,8 @@ class TutorProfile extends StatelessWidget {
                 text: AppLocalizations.of(context).calendar,
                 backgroundColor: Colors.white,
                 function: () {
-                  Navigator.of(context).pushNamed(LettutorRoutes.tutorCalendar,
+                  print(tutor.id);
+                  Navigator.of(context).pushNamed(LettutorRoutes.tutorSchedule,
                       arguments: tutor);
                 },
                 textColor: Theme.of(context).primaryColor,

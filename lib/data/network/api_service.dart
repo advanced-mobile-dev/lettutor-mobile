@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
+import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
+import 'package:lettutor_app/models/tutor_schedule/schedule_list.dart';
+import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
@@ -108,4 +111,25 @@ class ApiService {
     }
     return null;
   }
+
+  fetchTutorSchedules(String tutorId) async {
+    final accessToken = Repository.userToken.accessToken.token;
+    final String endpoint = '/schedule';
+    final Response response = await _apiClient.post('$endpoint', headers: {
+      "Authorization": 'Bearer $accessToken',
+    }, body: {
+      "tutorId": tutorId
+    });
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      // final List<TutorSchedule> tutorSchedules =
+      //     (body['data'] as List).map((e) => TutorSchedule.fromJson(e)).toList();
+      // print(tutorSchedules);
+
+      return ScheduleList.fromJson(body);
+    }
+    return null;
+  }
+
+  bookTutorClass(TutorSchedule tutorSchedule) {}
 }

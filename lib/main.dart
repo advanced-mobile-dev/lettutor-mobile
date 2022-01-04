@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
+import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/repositories/app_settings_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
@@ -29,7 +30,7 @@ import 'screens/login/login_screen.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/splash_screen/splash_screen.dart';
 import 'screens/start_screen/start_screen.dart';
-import 'screens/tutor_calendar/tutor_calendar_screen.dart';
+import 'screens/tutor_calendar/tutor_schedule_screen.dart';
 import 'screens/tutor_profile/tutor_profile.dart';
 import 'screens/user_profile/user_profile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -172,10 +173,13 @@ class MyApp extends StatelessWidget {
 
         break;
 
-      case LettutorRoutes.tutorCalendar:
+      case LettutorRoutes.tutorSchedule:
         final tutor = routeSettings.arguments as Tutor;
         return MaterialPageRoute(
-            builder: (context) => TutorCalendarScreen(tutor: tutor));
+            builder: (context) => BlocProvider(
+                create: (context) =>
+                    TutorBookingBloc(tutor)..add(FetchTutorSchedulesEvent()),
+                child: TutorScheduleScreen()));
 
         break;
     }
