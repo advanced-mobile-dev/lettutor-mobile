@@ -38,18 +38,10 @@ class SettingsTab extends StatelessWidget {
                             Icons.account_circle_outlined,
                             size: 60,
                           )
-                        : ClipOval(
-                            child: CachedNetworkImage(
-                                imageUrl: currentState.user.avatar,
-                                width: 60,
-                                height: 60,
-                                fit: BoxFit.fitWidth,
-                                errorWidget: (context, url, error) {
-                                  return Icon(
-                                    Icons.account_circle_outlined,
-                                    size: 60,
-                                  );
-                                }),
+                        : CircleAvatar(
+                            foregroundImage:
+                                NetworkImage(currentState.user.avatar),
+                            radius: 30,
                           ),
                     SizedBox(
                       width: 15,

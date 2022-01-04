@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lettutor_app/blocs/bloc/user_profile_bloc.dart';
+import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/models/country.dart';
 import 'package:lettutor_app/models/level.dart';

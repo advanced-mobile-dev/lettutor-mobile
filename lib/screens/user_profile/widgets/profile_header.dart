@@ -11,18 +11,9 @@ class UserProfileHeader extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Stack(
         children: <Widget>[
-          ClipOval(
-            child: CachedNetworkImage(
-                imageUrl: user.avatar,
-                width: 75,
-                height: 75,
-                fit: BoxFit.fitWidth,
-                errorWidget: (context, url, error) {
-                  return Icon(
-                    Icons.account_circle_outlined,
-                    size: 75,
-                  );
-                }),
+          CircleAvatar(
+            foregroundImage: NetworkImage(user.avatar),
+            radius: 30,
           ),
           Positioned(
               bottom: 0,

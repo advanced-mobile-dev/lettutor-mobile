@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lettutor_app/blocs/authentication/authentication_bloc.dart';
-import 'package:lettutor_app/blocs/bloc/user_profile_bloc.dart';
+import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/screens/user_profile/widgets/profile_header.dart';
 import 'package:lettutor_app/screens/user_profile/widgets/user_info_form.dart';
