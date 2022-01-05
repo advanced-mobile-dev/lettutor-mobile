@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/upcomming_lesson.dart';
+import 'package:lettutor_app/screens/tutor_profile/widgets/tutor_header.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,82 +31,7 @@ class BookingScreen extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
                   Widget>[
-            Container(
-                height: 110,
-                child: Row(
-                  children: <Widget>[
-                    ClipOval(
-                      child: Image.asset(
-                        tutor.tutorBasicInfo.avatar,
-                        width: 100.0,
-                      ),
-                    ),
-                    SizedBox(
-                      width: AppSizes.horizontalItemSpacing,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          tutor.tutorBasicInfo.name,
-                          style: TextStyle(
-                              fontSize: AppSizes.normalTextSize,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              '${tutor.avgRating}',
-                              style: TextStyle(color: Colors.amber),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              width: 90,
-                              child: RatingBar.builder(
-                                initialRating: tutor.avgRating as double,
-                                ignoreGestures: true,
-                                itemSize: AppSizes.normalTextSize,
-                                direction: Axis.horizontal,
-                                allowHalfRating: true,
-                                itemCount: 5,
-                                itemPadding:
-                                    EdgeInsets.symmetric(horizontal: 1.0),
-                                itemBuilder: (context, _) => Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                onRatingUpdate: (rating) {
-                                  print(rating);
-                                },
-                              ),
-                            ),
-                            Text(
-                              '(11)',
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/national_flags/${tutor.tutorBasicInfo.country}.png',
-                              height: 25,
-                              width: 30,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text(tutor.tutorBasicInfo.country,
-                                style: TextStyle(
-                                    fontSize: AppSizes.normalTextSize))
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
+            TutorHeader(tutor),
             SizedBox(
               height: AppSizes.verticalItemSpacing,
             ),

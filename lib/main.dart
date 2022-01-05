@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
-import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
+import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/repositories/app_settings_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
@@ -179,7 +179,7 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                 create: (context) =>
-                    TutorBookingBloc(tutor)..add(FetchTutorSchedulesEvent()),
+                    TutorScheduleBloc(tutor)..add(FetchTutorSchedulesEvent()),
                 child: TutorScheduleScreen(
                   tutor: tutor,
                 )));

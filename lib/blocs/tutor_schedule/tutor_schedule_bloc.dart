@@ -6,12 +6,12 @@ import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor_schedule/schedule_list.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
 
-part 'tutor_booking_event.dart';
-part 'tutor_booking_state.dart';
+part 'tutor_schedule_event.dart';
+part 'tutor_schedule_state.dart';
 
-class TutorBookingBloc extends Bloc<TutorBookingEvent, TutorBookingState> {
+class TutorScheduleBloc extends Bloc<TutorScheduleEvent, TutorScheduleState> {
   Tutor _tutor;
-  TutorBookingBloc(Tutor tutor)
+  TutorScheduleBloc(Tutor tutor)
       : _tutor = tutor,
         super(TutorBookingInitial()) {
     on<FetchTutorSchedulesEvent>(_onFetchTutorSchedules);

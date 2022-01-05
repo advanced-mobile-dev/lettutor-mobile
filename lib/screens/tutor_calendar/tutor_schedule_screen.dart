@@ -1,7 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
+import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
@@ -19,7 +19,6 @@ class TutorScheduleScreen extends StatelessWidget {
       String hour = MyDateUtils.getTimeFrame(e.startPeriod, e.endPeriod);
       return GestureDetector(
           onTap: () {
-            print(tutor);
             Navigator.of(context).pushNamed(LettutorRoutes.booking,
                 arguments: BookingScreenArguments(
                   tutor: tutor,
@@ -92,13 +91,13 @@ class TutorScheduleScreen extends StatelessWidget {
         appBar: ApplicationAppBar(
           title: AppLocalizations.of(context).calendar,
         ),
-        body: BlocConsumer<TutorBookingBloc, TutorBookingState>(
+        body: BlocConsumer<TutorScheduleBloc, TutorScheduleState>(
           builder: (context, state) {
             if (state is TutorBookingInitial)
               return Center(
                 child: CircularProgressIndicator(),
               );
-            if (state is LoadFailureState) return Text('Failed!!!');
+            if (state is LoadFailureState) return Text('Load data failure!!!');
 
             if (state is SchedulesLoadedState) {
               return SingleChildScrollView(
