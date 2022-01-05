@@ -48,7 +48,6 @@ class RestClient {
     var uri = Uri.https(_baseUrl, path, params);
     if (headers == null) headers = {};
     headers['Content-type'] = 'application/json';
-    print(jsonEncode(body));
     return http
         .put(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))

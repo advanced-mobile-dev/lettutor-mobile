@@ -1,10 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:lettutor_app/data/network/api_exception.dart';
-import 'package:lettutor_app/data/network/api_service.dart';
+import 'package:lettutor_app/models/schedule/booking_info.dart';
+import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/models/tutor_schedule/booking_info.dart';
-import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/user/user.dart';
 import 'package:lettutor_app/models/user/user_wallet.dart';
 import 'package:lettutor_app/repositories/payment_repo.dart';

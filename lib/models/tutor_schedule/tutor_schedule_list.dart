@@ -1,16 +1,16 @@
+import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor_schedule/date_schedule.dart';
-import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
 import "package:collection/collection.dart";
 import 'package:lettutor_app/utils/date_utils.dart';
 
-class ScheduleList {
+class TutorScheduleList {
   final List<ScheduleDetail> data;
   final List<DateSchedule> dateSchedules;
 
-  ScheduleList({this.data, this.dateSchedules});
+  TutorScheduleList({this.data, this.dateSchedules});
 
-  factory ScheduleList.fromJson(dynamic json) {
+  factory TutorScheduleList.fromJson(dynamic json) {
     List<ScheduleDetail> schedules = <ScheduleDetail>[];
     (json['data'] as List).map((element) {
       final tutorSchedule = TutorSchedule.fromJson(element);
@@ -40,6 +40,6 @@ class ScheduleList {
       });
     });
 
-    return ScheduleList(data: schedules, dateSchedules: dateSchedules);
+    return TutorScheduleList(data: schedules, dateSchedules: dateSchedules);
   }
 }

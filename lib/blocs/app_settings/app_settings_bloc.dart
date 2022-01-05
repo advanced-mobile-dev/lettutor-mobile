@@ -22,7 +22,6 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
   void _onThemeChangedEvent(
       ThemeChangedEvent event, Emitter<AppSettingsState> emit) {
     _appSettingsRepository.changeBrightnessToDark(event.isDarkTheme);
-    print(event.isDarkTheme);
     emit(state.copyWith(isDarkTheme: event.isDarkTheme));
   }
 

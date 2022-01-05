@@ -21,7 +21,6 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
   }
   Future<void> _onTutorsFetch(
       TutorsFetchEvent event, Emitter<TutorsState> emit) async {
-    print('on fetch');
     try {
       final tutorList = await Repository.getTutors(_tutorPerPage, 1,
           _tutorFilter.specialities.map((e) => e.code).toList());
@@ -97,16 +96,4 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
       emit(LoadFailureState());
     }
   }
-  // Future<void> _handleApplyFilterEvent(
-  //     ApplyFilterEvent event, Emitter<TutorsState> emit) async {
-  //   if (event.specialities != null) {
-  //     final newState = state.copyWith(
-  //         status: TutorStatus.loading,
-  //         tutors: const <Tutor>[],
-  //         page: 1,
-  //         hasReachedMax: false,
-  //         specialities: event.specialities);
-  //     emit(newState);
-  //   }
-  // }
 }

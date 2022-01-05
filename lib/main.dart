@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
+import 'package:lettutor_app/blocs/student_schedule/student_schedule_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
@@ -137,6 +138,12 @@ class MyApp extends StatelessWidget {
             BlocProvider<TutorsBloc>(
               create: (_) => TutorsBloc(),
             ),
+            BlocProvider<StudentScheduleBloc>(
+              create: (_) => StudentScheduleBloc(
+                  userRepository:
+                      RepositoryProvider.of<UserRepository>(context))
+                ..add(FetchDataEvent()),
+            ),
           ],
           child: DashBoard(),
         );
@@ -163,7 +170,6 @@ class MyApp extends StatelessWidget {
     switch (routeSettings.name) {
       case LettutorRoutes.booking:
         final args = routeSettings.arguments as BookingScreenArguments;
-        print(args.tutor);
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                 create: (context) => TutorBookingBloc(
@@ -190,7 +196,6 @@ class MyApp extends StatelessWidget {
 
       case LettutorRoutes.tutorSchedule:
         final tutor = routeSettings.arguments as Tutor;
-        print(tutor);
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                 create: (context) =>

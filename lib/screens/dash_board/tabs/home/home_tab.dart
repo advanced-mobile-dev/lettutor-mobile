@@ -1,96 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/models/upcomming_lesson.dart';
-import 'package:lettutor_app/widgets/upcomming_lesson_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/blocs/student_schedule/student_schedule_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'widgets/home_tab_header.dart';
+import 'widgets/schedule_list.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  final _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_isBottom) context.read<StudentScheduleBloc>().add(LoadMoreEvent());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: AppSizes.pagePadding),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SvgPicture.asset('assets/icons/logo.svg',
-                          color: Theme.of(context).primaryColor),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(LettutorRoutes.history);
-                        },
-                        child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Icon(
-                                Icons.history,
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                AppLocalizations.of(context).history,
-                                style: TextStyle(
-                                  fontSize: AppSizes.normalTextSize,
-                                ),
-                              )
-                            ]),
-                      ),
-                    ],
-                  )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                      alignment: Alignment.centerLeft,
-                      child: Row(children: [
-                        Icon(
-                          Icons.timer,
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          '${AppLocalizations.of(context).totalLearnedTime}: 36 ${AppLocalizations.of(context).hours} 12 ${AppLocalizations.of(context).minutes}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: AppSizes.normalTextSize,
-                          ),
-                        ),
-                      ])),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(AppSizes.pagePadding),
-              child: Column(
-                children: <Widget>[
-                  ...UpcommingLessonTmp.sampleData
-                      .map((e) => Column(
-                            children: [
-                              UpcommingLessonWidget(upcommingLesson: e),
-                              SizedBox(
-                                height: AppSizes.verticalItemSpacing * 2,
-                              )
-                            ],
-                          ))
-                      .toList()
-                ],
-              ),
-            ),
+            HomeHeader(),
+            ScheduleList(),
           ],
         ),
       ),
     );
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:lettutor_app/data/network/api_service.dart';
 import 'package:lettutor_app/data/repository.dart';
+import 'package:lettutor_app/models/student_schedule/student_schedule_list.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
@@ -23,5 +24,12 @@ class UserRepository {
     final resUser =
         await ApiService().putUserInfo(userToken.accessToken.token, user);
     return resUser;
+  }
+
+  Future<StudentScheduleList> getScheduleList(
+      int perPage, int page, int dateTimeGte) async {
+    final data =
+        await ApiService().getStudentSchedule(perPage, page, dateTimeGte);
+    return data;
   }
 }

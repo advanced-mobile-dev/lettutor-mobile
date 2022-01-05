@@ -55,6 +55,7 @@ class TutorBasicInfo {
 
   double calcAvgRating() {
     int total = 0;
+    if (feedbacks == null) return -1;
     for (var item in feedbacks) {
       total += item.rating;
     }

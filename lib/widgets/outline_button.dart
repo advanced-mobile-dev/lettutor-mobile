@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 
-class AppOutlineButton extends StatelessWidget {
+class CustomTextButton extends StatelessWidget {
   final String text;
   final IconData iconData;
   final Color color;
   final Function function;
 
-  AppOutlineButton(
+  CustomTextButton(
       {@required this.text,
       @required this.function,
       @required this.iconData,
@@ -17,7 +17,8 @@ class AppOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final ButtonStyle _buttonStyle = OutlinedButton.styleFrom(
       primary: color,
-      side: BorderSide(color: color, width: 1),
+      side: BorderSide(color: color, width: 0),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
@@ -37,7 +38,7 @@ class AppOutlineButton extends StatelessWidget {
             ),
             Text(text,
                 style: TextStyle(
-                    fontSize: AppSizes.smallTextSize,
+                    fontSize: AppSizes.normalTextSize,
                     fontWeight: FontWeight.w400))
           ],
         ));

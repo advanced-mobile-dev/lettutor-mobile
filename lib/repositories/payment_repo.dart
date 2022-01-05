@@ -1,5 +1,5 @@
 import 'package:lettutor_app/data/network/api_service.dart';
-import 'package:lettutor_app/models/tutor_schedule/booking_info.dart';
+import 'package:lettutor_app/models/schedule/booking_info.dart';
 
 class PaymentRepository {
   Future<List<BookingInfo>> bookClass(

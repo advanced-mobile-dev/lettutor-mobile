@@ -11,7 +11,7 @@ class TutorBookingInitial extends TutorScheduleState {}
 
 class SchedulesLoadedState extends TutorScheduleState {
   final Tutor tutor;
-  final ScheduleList tutorSchedules;
+  final TutorScheduleList tutorSchedules;
 
   SchedulesLoadedState(this.tutor, this.tutorSchedules);
 }

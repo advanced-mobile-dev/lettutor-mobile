@@ -5,13 +5,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/screens/tutor_profile/widgets/tutor_header.dart';
 import 'package:lettutor_app/screens/tutor_profile/widgets/tutor_intro_video.dart';
 import 'package:lettutor_app/utils/string_utils.dart';
 
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/widgets/tutor_image.dart';
 
 import 'widgets/tutor-info.dart';
 import 'widgets/tutor_reviews.dart';
@@ -52,7 +52,10 @@ class TutorProfile extends StatelessWidget {
           padding: EdgeInsets.all(AppSizes.pagePadding),
           child: Column(
             children: <Widget>[
-              TutorHeader(tutor),
+              TutorImageWidget(
+                  tutorBasicInfo: tutor.tutorBasicInfo,
+                  size: 100,
+                  showRating: true),
               SizedBox(
                 height: AppSizes.verticalItemSpacing,
               ),

@@ -12,9 +12,7 @@ class AppConfig {
   static Future<void> readCountriesFromJson() async {
     String jsonString = await rootBundle
         .loadString('assets/jsons/countries.json')
-        .catchError((error) {
-      print(error);
-    });
+        .catchError((error) {});
     List<Country> countries = (jsonDecode(jsonString ?? '[]') as List)
         .map((e) => Country.fromJson(e))
         .toList();

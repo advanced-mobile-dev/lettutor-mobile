@@ -1,4 +1,4 @@
-import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
+import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 
 class DateSchedule {
   final String date;

@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
 import 'package:lettutor_app/data/repository.dart';
+import 'package:lettutor_app/models/schedule/booking_info.dart';
+import 'package:lettutor_app/models/schedule/schedule_detail.dart';
+import 'package:lettutor_app/models/student_schedule/student_schedule.dart';
+import 'package:lettutor_app/models/student_schedule/student_schedule_list.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
-import 'package:lettutor_app/models/tutor_schedule/booking_info.dart';
-import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
-import 'package:lettutor_app/models/tutor_schedule/schedule_list.dart';
-import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
+import 'package:lettutor_app/models/tutor_schedule/tutor_schedule_list.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
@@ -82,7 +83,6 @@ class ApiService {
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       final TutorList tutorList = TutorList.fromJson(body);
-      print(tutorList.toString());
       return tutorList;
     }
     return null;
@@ -128,7 +128,7 @@ class ApiService {
       //     (body['data'] as List).map((e) => TutorSchedule.fromJson(e)).toList();
       // print(tutorSchedules);
 
-      return ScheduleList.fromJson(body);
+      return TutorScheduleList.fromJson(body);
     }
     return null;
   }
@@ -155,5 +155,26 @@ class ApiService {
 
   Future<double> getPriceOfSession() async {
     return 100;
+  }
+
+  getStudentSchedule(int perPage, int page, int dateTimeGte) async {
+    final accessToken = Repository.userToken.accessToken.token;
+    final String endpoint = '/booking/list/student';
+    final Response response = await _apiClient.get('$endpoint', headers: {
+      "Authorization": 'Bearer $accessToken',
+    }, params: {
+      'page': '$page',
+      'perPage': '$perPage',
+      'dateTimeGte': '$dateTimeGte',
+      'orderBy': 'meeting',
+      'sortBy': 'asc',
+    });
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final StudentScheduleList scheduleList =
+          StudentScheduleList.fromJson(body['data']);
+      return scheduleList;
+    }
+    return null;
   }
 }

@@ -1,14 +1,23 @@
 import 'package:intl/intl.dart';
-import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
+import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 
 class MyDateUtils {
   static final dateFormat = DateFormat('yyyy-MM-dd');
   static final dateFormat2 = DateFormat('dd/MM/yyyy');
+  static final dateFormat3 = DateFormat('EEEE - dd/MM/yyyy');
   static final timeFormat = DateFormat.Hm();
   static String formatDate(DateTime date) {
     String output = '';
     try {
       return dateFormat.format(date);
+    } catch (_) {}
+    return output;
+  }
+
+  static String formatDate2(DateTime date) {
+    String output = '';
+    try {
+      return dateFormat2.format(date);
     } catch (_) {}
     return output;
   }
@@ -27,8 +36,8 @@ class MyDateUtils {
     DateTime now = DateTime.now();
     DateTime today = new DateTime(now.year, now.month, now.day);
     if (_date.difference(today).inDays == 0)
-      return 'Today, ${DateFormat('EEEE - dd/MM/yyyy').format(_date)}';
-    return DateFormat('EEEE - dd/MM/yyyy').format(_date);
+      return 'Today, ${dateFormat3.format(_date)}';
+    return dateFormat3.format(_date);
   }
 
   static String getTimeFrame(DateTime start, DateTime end) {
@@ -52,5 +61,11 @@ class MyDateUtils {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     return convertDate == today;
+  }
+
+  static getDiff(DateTime startPeriod, DateTime endPeriod) {
+    final duration = startPeriod.difference(endPeriod);
+    if (duration.inSeconds < 0) return 'Overdue';
+    return "${duration.inHours}h:${duration.inMinutes.remainder(60)}m";
   }
 }

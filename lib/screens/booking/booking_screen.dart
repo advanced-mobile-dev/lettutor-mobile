@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
-import 'package:lettutor_app/screens/tutor_profile/widgets/tutor_header.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/loading_overlay.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/widgets/tutor_image.dart';
 
 class BookingScreen extends StatelessWidget {
   final LoadingOverlay _loadingOverlay = new LoadingOverlay();
@@ -115,7 +115,10 @@ class BookingScreen extends StatelessWidget {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TutorHeader(state.tutor),
+                        TutorImageWidget(
+                            tutorBasicInfo: state.tutor.tutorBasicInfo,
+                            size: 100,
+                            showRating: true),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
                         ),

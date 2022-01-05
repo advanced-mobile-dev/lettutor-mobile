@@ -209,7 +209,7 @@ class HistoryItem extends StatelessWidget {
           feedback == null
               ? Container(
                   alignment: Alignment.bottomRight,
-                  child: AppOutlineButton(
+                  child: CustomTextButton(
                     text: 'Feedback',
                     function: () {},
                     iconData: Icons.comment,

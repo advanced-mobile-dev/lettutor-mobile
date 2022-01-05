@@ -1,4 +1,4 @@
-import 'schedule_detail.dart';
+import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 
 class TutorSchedule {
   String id;
@@ -42,22 +42,5 @@ class TutorSchedule {
         scheduleDetails.add(new ScheduleDetail.fromJson(v));
       });
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['tutorId'] = this.tutorId;
-    data['startTime'] = this.startTime;
-    data['endTime'] = this.endTime;
-    // data['startTimestamp'] = this.startTimestamp;
-    // data['endTimestamp'] = this.endTimestamp;
-    data['createdAt'] = this.createdAt;
-    data['isBooked'] = this.isBooked;
-    if (this.scheduleDetails != null) {
-      data['scheduleDetails'] =
-          this.scheduleDetails.map((v) => v.toJson()).toList();
-    }
-    return data;
   }
 }
