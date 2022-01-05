@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
+import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/upcomming_lesson.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
@@ -10,11 +11,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookingScreen extends StatelessWidget {
   final Tutor tutor;
-  final String time;
-  BookingScreen({@required this.tutor, @required this.time});
+  final ScheduleDetail scheduleDetail;
+  BookingScreen({@required this.tutor, @required this.scheduleDetail});
 
   @override
   Widget build(BuildContext context) {
+    print(tutor);
     final titleTextStyle = TextStyle(
         fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.bold);
     final contentTextStyle = TextStyle(
@@ -180,7 +182,7 @@ class BookingScreen extends StatelessWidget {
 
 class BookingScreenArguments {
   final Tutor tutor;
-  final String time;
+  final ScheduleDetail scheduleDetail;
 
-  BookingScreenArguments({this.tutor, this.time});
+  BookingScreenArguments({this.tutor, this.scheduleDetail});
 }

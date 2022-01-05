@@ -6,12 +6,12 @@ class BookingInfo {
   String scheduleDetailId;
   String tutorMeetingLink;
   String studentMeetingLink;
-  Null studentRequest;
-  Null tutorReview;
-  Null scoreByTutor;
+  String studentRequest;
+  String tutorReview;
+  int scoreByTutor;
   String createdAt;
   String updatedAt;
-  Null recordUrl;
+  String recordUrl;
   bool isDeleted;
 
   BookingInfo(

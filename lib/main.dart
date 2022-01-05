@@ -158,10 +158,10 @@ class MyApp extends StatelessWidget {
     switch (routeSettings.name) {
       case LettutorRoutes.booking:
         final args = routeSettings.arguments as BookingScreenArguments;
-        print(args.time);
+        print(args.tutor);
         return MaterialPageRoute(
-          builder: (context) =>
-              BookingScreen(tutor: args.tutor, time: args.time),
+          builder: (context) => BookingScreen(
+              tutor: args.tutor, scheduleDetail: args.scheduleDetail),
         );
 
         break;
@@ -175,11 +175,14 @@ class MyApp extends StatelessWidget {
 
       case LettutorRoutes.tutorSchedule:
         final tutor = routeSettings.arguments as Tutor;
+        print(tutor);
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                 create: (context) =>
                     TutorBookingBloc(tutor)..add(FetchTutorSchedulesEvent()),
-                child: TutorScheduleScreen()));
+                child: TutorScheduleScreen(
+                  tutor: tutor,
+                )));
 
         break;
     }

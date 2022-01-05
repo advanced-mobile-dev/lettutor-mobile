@@ -5,7 +5,6 @@ import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
-import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
 import 'package:lettutor_app/screens/booking/booking_screen.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -16,14 +15,15 @@ class TutorScheduleScreen extends StatelessWidget {
   TutorScheduleScreen({this.tutor});
   @override
   Widget build(BuildContext context) {
-    _buildTimeFrame(DateTime start, DateTime end) {
-      String hour = MyDateUtils.getTimeFrame(start, end);
+    _buildTimeFrame(ScheduleDetail e) {
+      String hour = MyDateUtils.getTimeFrame(e.startPeriod, e.endPeriod);
       return GestureDetector(
           onTap: () {
+            print(tutor);
             Navigator.of(context).pushNamed(LettutorRoutes.booking,
                 arguments: BookingScreenArguments(
                   tutor: tutor,
-                  time: '15:00 - 17:00, Monday 11/10/2021',
+                  scheduleDetail: e,
                 ));
           },
           child: Container(
@@ -46,57 +46,48 @@ class TutorScheduleScreen extends StatelessWidget {
           ));
     }
 
-    _buildDateCalendar(String date, List<ScheduleDetail> schedules) {
-      String dateString = MyDateUtils.getScheduleDateString(date);
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 1),
-        child: ExpandablePanel(
-          theme: const ExpandableThemeData(
-            headerAlignment: ExpandablePanelHeaderAlignment.center,
-            tapBodyToExpand: true,
-            tapBodyToCollapse: true,
-            hasIcon: false,
-          ),
-          header: Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 25),
-            height: 40,
-            width: double.infinity,
-            child: Text(
-              dateString,
-              style: TextStyle(color: Colors.white),
+    _buildDateCalendar(String dateString, List<ScheduleDetail> schedules) {
+      String result = MyDateUtils.getScheduleDateString(dateString);
+      DateTime convertDate = MyDateUtils.formatStringToDate(dateString);
+      return Column(children: [
+        convertDate.weekday == 1
+            ? Container(
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  '${MyDateUtils.getWeek(convertDate)}',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ))
+            : SizedBox(),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 1),
+          child: ExpandablePanel(
+            theme: const ExpandableThemeData(
+              headerAlignment: ExpandablePanelHeaderAlignment.center,
+              tapBodyToExpand: true,
+              tapBodyToCollapse: true,
+              hasIcon: false,
             ),
-            color: Color(0xff3269A5),
+            header: Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 25),
+              height: 40,
+              width: double.infinity,
+              child: Text(
+                result,
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Color(0xff3269A5),
+            ),
+            expanded: Column(
+              children: [...schedules.map((e) => _buildTimeFrame(e)).toList()],
+            ),
+            collapsed: null,
           ),
-          expanded: Column(
-            children: [
-              ...schedules
-                  .map((e) => _buildTimeFrame(e.startPeriod, e.endPeriod))
-                  .toList()
-              // _buildTimeFrame('15:00 - 17:00'),
-              // _buildTimeFrame('17:00 - 19:00'),
-              // _buildTimeFrame('19:00 - 21:00'),
-              // _buildTimeFrame('21:00 - 23:00'),
-            ],
-          ),
-          collapsed: null,
         ),
-      );
+      ]);
     }
 
-    // ;SingleChildScrollView(
-    //       child: Container(
-    //         child: Column(
-    //           children: <Widget>[
-    //             _buildDateCalendar('Monday, 11/10/2021'),
-    //             _buildDateCalendar('Tuesday, 12/10/2021'),
-    //             _buildDateCalendar('Thursday, 14/10/2021'),
-    //             _buildDateCalendar('Friday, 15/10/2021'),
-    //             _buildDateCalendar('Sunday, 16/10/2021'),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
     return Scaffold(
         appBar: ApplicationAppBar(
           title: AppLocalizations.of(context).calendar,
@@ -116,8 +107,8 @@ class TutorScheduleScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
-                    children: state.tutorSchedules.scheduleDetailMap.entries
-                        .map((e) => _buildDateCalendar(e.key, e.value))
+                    children: state.tutorSchedules.dateSchedules
+                        .map((e) => _buildDateCalendar(e.date, e.schedules))
                         .toList(),
                   ),
                 ),

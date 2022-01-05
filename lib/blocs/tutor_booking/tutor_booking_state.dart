@@ -10,9 +10,10 @@ abstract class TutorBookingState extends Equatable {
 class TutorBookingInitial extends TutorBookingState {}
 
 class SchedulesLoadedState extends TutorBookingState {
+  final Tutor tutor;
   final ScheduleList tutorSchedules;
 
-  SchedulesLoadedState(this.tutorSchedules);
+  SchedulesLoadedState(this.tutor, this.tutorSchedules);
 }
 
 class LoadFailureState extends TutorBookingState {}

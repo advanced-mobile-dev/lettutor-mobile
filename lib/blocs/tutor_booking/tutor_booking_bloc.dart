@@ -24,7 +24,7 @@ class TutorBookingBloc extends Bloc<TutorBookingEvent, TutorBookingState> {
           await ApiService().fetchTutorSchedules(_tutor.userId);
       emit(schedules == null
           ? LoadFailureState()
-          : SchedulesLoadedState(schedules));
+          : SchedulesLoadedState(_tutor, schedules));
     } catch (error) {
       print(error);
       emit(LoadFailureState());
