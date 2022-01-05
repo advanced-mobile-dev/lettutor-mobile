@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
 
 class MyDateUtils {
   static final dateFormat = DateFormat('yyyy-MM-dd');
@@ -25,8 +26,9 @@ class MyDateUtils {
     DateTime _date = formatStringToDate(date);
     DateTime now = DateTime.now();
     DateTime today = new DateTime(now.year, now.month, now.day);
-    if (_date.difference(today).inDays == 0) return 'Today';
-    return DateFormat('EEEE, dd/MM/yyyy').format(_date);
+    if (_date.difference(today).inDays == 0)
+      return 'Today, ${DateFormat('EEEE - dd/MM/yyyy').format(_date)}';
+    return DateFormat('EEEE - dd/MM/yyyy').format(_date);
   }
 
   static String getTimeFrame(DateTime start, DateTime end) {
@@ -36,7 +38,19 @@ class MyDateUtils {
   static String getWeek(DateTime convertDate) {
     DateTime monday =
         convertDate.subtract(Duration(days: convertDate.weekday - 1));
-    DateTime sunday = monday.add(Duration(days: 7));
+    DateTime sunday = monday.add(Duration(days: 6));
     return 'From ${dateFormat2.format(monday)} to ${dateFormat2.format(sunday)}';
+  }
+
+  static String getBookingTime(ScheduleDetail scheduleDetail) {
+    String timeFrame =
+        getTimeFrame(scheduleDetail.startPeriod, scheduleDetail.endPeriod);
+    return '$timeFrame \n${DateFormat('EEEE, dd/MM/yyyy').format(scheduleDetail.startPeriod)}';
+  }
+
+  static bool isToday(DateTime convertDate) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    return convertDate == today;
   }
 }

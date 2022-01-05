@@ -1,6 +1,7 @@
 import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/models/user/user_learn_topic.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
+import 'package:lettutor_app/models/user/user_wallet.dart';
 
 class User {
   String id;
@@ -18,6 +19,7 @@ class User {
   List<String> testPreparations;
   bool isPhoneActivated;
   int timezone;
+  UserWallet userWallet;
   UserToken userToken;
 
   User(
@@ -64,6 +66,7 @@ class User {
     testPreparations = json['testPreparations'].cast<String>();
     isPhoneActivated = json['isPhoneActivated'];
     timezone = json['timezone'];
+    userWallet = UserWallet.fromJson(json['walletInfo']);
   }
 
   Map<String, dynamic> toJsonForPut() {

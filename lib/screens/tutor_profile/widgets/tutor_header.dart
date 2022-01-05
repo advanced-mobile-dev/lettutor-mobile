@@ -14,12 +14,15 @@ class TutorHeader extends StatelessWidget {
         height: 110,
         child: Row(
           children: <Widget>[
-            ClipOval(
-              child: Image.network(
-                tutor.tutorBasicInfo.avatar,
-                width: 100.0,
-              ),
-            ),
+            tutor.tutorBasicInfo.avatar == null
+                ? Icon(
+                    Icons.account_circle_outlined,
+                    size: 100,
+                  )
+                : CircleAvatar(
+                    foregroundImage: NetworkImage(tutor.tutorBasicInfo.avatar),
+                    radius: 50,
+                  ),
             SizedBox(
               width: AppSizes.horizontalItemSpacing,
             ),

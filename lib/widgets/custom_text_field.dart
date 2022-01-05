@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
   final bool autoFocus;
   final Function onTap;
+  final int maxLines;
   CustomTextField(
       {@required this.title,
       this.controller,
@@ -23,11 +24,13 @@ class CustomTextField extends StatelessWidget {
       this.onSaved,
       this.readOnly = false,
       this.autoFocus = false,
-      this.onTap});
+      this.onTap,
+      this.maxLines = 1});
   @override
   Widget build(BuildContext context) {
     return Container(
         child: TextFormField(
+            maxLines: maxLines,
             onTap: onTap,
             initialValue: initialValue,
             controller: controller,

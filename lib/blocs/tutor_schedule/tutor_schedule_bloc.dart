@@ -15,11 +15,11 @@ class TutorScheduleBloc extends Bloc<TutorScheduleEvent, TutorScheduleState> {
       : _tutor = tutor,
         super(TutorBookingInitial()) {
     on<FetchTutorSchedulesEvent>(_onFetchTutorSchedules);
-    on<BookEvent>(_onBook);
   }
 
   Future<void> _onFetchTutorSchedules(event, emit) async {
     try {
+      emit(TutorBookingInitial());
       ScheduleList schedules =
           await ApiService().fetchTutorSchedules(_tutor.userId);
       emit(schedules == null
@@ -28,15 +28,6 @@ class TutorScheduleBloc extends Bloc<TutorScheduleEvent, TutorScheduleState> {
     } catch (error) {
       print(error);
       emit(LoadFailureState());
-    }
-  }
-
-  Future<void> _onBook(BookEvent event, emit) async {
-    try {
-      bool result = await ApiService().bookTutorClass(event.tutorSchedule);
-      emit(result ? BookSuccessState() : BookFailureState());
-    } catch (_) {
-      emit(BookFailureState());
     }
   }
 }

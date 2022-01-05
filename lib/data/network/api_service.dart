@@ -4,6 +4,8 @@ import 'package:http/http.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
 import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
+import 'package:lettutor_app/models/tutor_schedule/booking_info.dart';
+import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor_schedule/schedule_list.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
@@ -131,5 +133,27 @@ class ApiService {
     return null;
   }
 
-  bookTutorClass(TutorSchedule tutorSchedule) {}
+  bookTutorClass(ScheduleDetail scheduleDetail) {}
+
+  bookClass(String scheduleDetailid, String note) async {
+    final accessToken = Repository.userToken.accessToken.token;
+    final String endpoint = '/booking';
+    final Response response = await _apiClient.post('$endpoint', headers: {
+      "Authorization": 'Bearer $accessToken',
+    }, body: {
+      "scheduleDetailIds": [scheduleDetailid],
+      "note": note
+    });
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      return (body['data'] as List)
+          .map((e) => BookingInfo.fromJson(e))
+          .toList();
+    }
+    return <BookingInfo>[];
+  }
+
+  Future<double> getPriceOfSession() async {
+    return 100;
+  }
 }

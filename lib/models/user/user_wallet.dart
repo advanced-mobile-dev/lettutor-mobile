@@ -1,7 +1,7 @@
 class UserWallet {
   String id;
   String userId;
-  String amount;
+  double amount;
   bool isBlocked;
   String createdAt;
   String updatedAt;
@@ -19,7 +19,7 @@ class UserWallet {
   UserWallet.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['userId'];
-    amount = json['amount'];
+    amount = double.parse(json['amount']);
     isBlocked = json['isBlocked'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];

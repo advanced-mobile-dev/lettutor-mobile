@@ -35,6 +35,7 @@ class AuthenticationBloc
       Emitter<AuthenticationState> emit) async {
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
+        _userRepository.removeUserInfo();
         return emit(UnAuthenticatedState());
       case AuthenticationStatus.authenticated:
         final user = await _tryGetUser();

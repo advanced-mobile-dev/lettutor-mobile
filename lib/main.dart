@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
+import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/repositories/app_settings_repo.dart';
+import 'package:lettutor_app/repositories/payment_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'blocs/authentication/authentication_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
@@ -18,6 +20,7 @@ import 'data/repository.dart';
 import 'models/course.dart';
 import 'models/tutor/tutor.dart';
 import 'repositories/authentication_repo.dart';
+import 'repositories/tutor_repo.dart';
 import 'screens/booking/booking_screen.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/course_detail/course_detail_screen.dart';
@@ -53,6 +56,8 @@ void main() async {
         RepositoryProvider(create: (_) => _authRepo),
         RepositoryProvider(create: (_) => _appSettingsRepo),
         RepositoryProvider(create: (_) => _userRepo),
+        RepositoryProvider(create: (_) => TutorRepository()),
+        RepositoryProvider(create: (_) => PaymentRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -160,9 +165,19 @@ class MyApp extends StatelessWidget {
         final args = routeSettings.arguments as BookingScreenArguments;
         print(args.tutor);
         return MaterialPageRoute(
-          builder: (context) => BookingScreen(
-              tutor: args.tutor, scheduleDetail: args.scheduleDetail),
-        );
+            builder: (context) => BlocProvider(
+                create: (context) => TutorBookingBloc(
+                      tutor: args.tutor,
+                      scheduleDetail: args.scheduleDetail,
+                      userRepository:
+                          RepositoryProvider.of<UserRepository>(context),
+                      paymentRepository:
+                          RepositoryProvider.of<PaymentRepository>(context),
+                    ),
+                child: BookingScreen()));
+        //   (context) => BookingScreen(
+        //       tutor: args.tutor, scheduleDetail: args.scheduleDetail),
+        // );
 
         break;
 

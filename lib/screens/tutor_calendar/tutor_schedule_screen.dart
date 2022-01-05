@@ -2,6 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
@@ -18,26 +19,31 @@ class TutorScheduleScreen extends StatelessWidget {
     _buildTimeFrame(ScheduleDetail e) {
       String hour = MyDateUtils.getTimeFrame(e.startPeriod, e.endPeriod);
       return GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(LettutorRoutes.booking,
-                arguments: BookingScreenArguments(
-                  tutor: tutor,
-                  scheduleDetail: e,
-                ));
-          },
+          onTap: !e.isBooked
+              ? () async {
+                  await Navigator.of(context).pushNamed(LettutorRoutes.booking,
+                      arguments: BookingScreenArguments(
+                        tutor: tutor,
+                        scheduleDetail: e,
+                      ));
+                }
+              : null,
           child: Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 45, right: 45),
             height: 40,
             width: double.infinity,
             decoration: BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(width: 1, color: Colors.grey))),
+              border: Border(
+                bottom: BorderSide(width: 1, color: Colors.grey),
+              ),
+              color: e.isBooked ? Colors.grey[300] : Colors.white,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  hour,
+                  e.isBooked ? '$hour (Booked)' : '$hour',
                 ),
                 Icon(Icons.keyboard_arrow_right)
               ],
@@ -48,14 +54,18 @@ class TutorScheduleScreen extends StatelessWidget {
     _buildDateCalendar(String dateString, List<ScheduleDetail> schedules) {
       String result = MyDateUtils.getScheduleDateString(dateString);
       DateTime convertDate = MyDateUtils.formatStringToDate(dateString);
+
       return Column(children: [
-        convertDate.weekday == 1
+        convertDate.weekday == 1 || MyDateUtils.isToday(convertDate)
             ? Container(
+                color: AppColors.primaryColor[400],
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                alignment: Alignment.topLeft,
+                alignment: Alignment.centerLeft,
+                height: 40,
                 child: Text(
                   '${MyDateUtils.getWeek(convertDate)}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ))
             : SizedBox(),
         Padding(
@@ -68,16 +78,24 @@ class TutorScheduleScreen extends StatelessWidget {
               hasIcon: false,
             ),
             header: Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 25),
-              height: 40,
-              width: double.infinity,
-              child: Text(
-                result,
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Color(0xff3269A5),
-            ),
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: 25, right: 15),
+                height: 40,
+                width: double.infinity,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        result,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        size: 32,
+                        color: Colors.white,
+                      )
+                    ]),
+                color: AppColors.primaryColor[100]),
             expanded: Column(
               children: [...schedules.map((e) => _buildTimeFrame(e)).toList()],
             ),

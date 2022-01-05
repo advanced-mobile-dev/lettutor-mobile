@@ -1,7 +1,3 @@
-import 'dart:collection';
-
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:lettutor_app/models/tutor_schedule/date_schedule.dart';
 import 'package:lettutor_app/models/tutor_schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
@@ -18,9 +14,11 @@ class ScheduleList {
     List<ScheduleDetail> schedules = <ScheduleDetail>[];
     (json['data'] as List).map((element) {
       final tutorSchedule = TutorSchedule.fromJson(element);
+
       tutorSchedule.scheduleDetails.forEach((detail) {
-        if (detail.endPeriod.difference(DateTime.now()).inSeconds > 0)
+        if (detail.startPeriod.difference(DateTime.now()).inSeconds > 0) {
           schedules.add(detail);
+        }
       });
     }).toList();
     Map<String, List<ScheduleDetail>> map = schedules.groupListsBy(
