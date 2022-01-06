@@ -58,7 +58,7 @@ class TutorScheduleScreen extends StatelessWidget {
       return Column(children: [
         convertDate.weekday == 1 || MyDateUtils.isToday(convertDate)
             ? Container(
-                color: AppColors.primaryColor[400],
+                color: Theme.of(context).primaryColor,
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                 alignment: Alignment.centerLeft,
                 height: 40,
@@ -95,7 +95,7 @@ class TutorScheduleScreen extends StatelessWidget {
                         color: Colors.white,
                       )
                     ]),
-                color: AppColors.primaryColor[100]),
+                color: Colors.blue[900].withOpacity(0.5)),
             expanded: Column(
               children: [...schedules.map((e) => _buildTimeFrame(e)).toList()],
             ),
@@ -107,7 +107,8 @@ class TutorScheduleScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: ApplicationAppBar(
-          title: AppLocalizations.of(context).calendar,
+          title: 'Schedule',
+          // title: AppLocalizations.of(context).calendar,
         ),
         body: BlocConsumer<TutorScheduleBloc, TutorScheduleState>(
           builder: (context, state) {

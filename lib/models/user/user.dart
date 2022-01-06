@@ -79,7 +79,7 @@ class User {
     // if (this.learnTopics != null) {
     //   data['learnTopics'] = this.learnTopics.map((v) => v.toJson()).toList();
     // }
-    data['testPreparations'] = this.testPreparations;
+    // data['testPreparations'] = this.testPreparations;
     return data;
   }
 

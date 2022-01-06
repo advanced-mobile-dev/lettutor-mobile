@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/config/config.dart';
+import 'package:lettutor_app/models/country.dart';
+import 'package:lettutor_app/models/speciality.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
 
 class TutorInfo extends StatelessWidget {
+  final Tutor tutor;
+  TutorInfo(this.tutor);
   @override
   Widget build(BuildContext context) {
     Widget _buildDescItem({Widget icon, String title, Widget content}) {
@@ -26,7 +32,8 @@ class TutorInfo extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Padding(
+          Container(
+            alignment: Alignment.topLeft,
             padding: const EdgeInsets.only(left: 20),
             child: content,
           ),
@@ -41,14 +48,20 @@ class TutorInfo extends StatelessWidget {
       return Container(
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Theme.of(context).primaryColor),
+              borderRadius: BorderRadius.circular(5), color: Colors.blue[100]),
           child: Text(
             text,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.blueGrey[700]),
           ));
     }
 
+    List<String> specialities = tutor.specialties.split(',').map((s) {
+      final Speciality speciality = Speciality.data.firstWhere(
+          (element) => element.code.toLowerCase() == s,
+          orElse: () => null);
+      if (speciality == null) return '';
+      return speciality.name;
+    }).toList();
     return Container(
       child: Column(
         children: <Widget>[
@@ -64,11 +77,10 @@ class TutorInfo extends StatelessWidget {
                   alignment: WrapAlignment.start,
                   spacing: 5,
                   runSpacing: 5,
-                  children: [
-                    _buildTag('English'),
-                    _buildTag('Vietnamese'),
-                    _buildTag('Korean'),
-                  ],
+                  children: tutor.languages
+                      .split(',')
+                      .map((e) => _buildTag('$e'))
+                      .toList(),
                 ),
               )),
           _buildDescItem(
@@ -83,11 +95,7 @@ class TutorInfo extends StatelessWidget {
                   alignment: WrapAlignment.start,
                   spacing: 5,
                   runSpacing: 5,
-                  children: [
-                    _buildTag('Conversational'),
-                    _buildTag('English for kids'),
-                    _buildTag('English for business'),
-                  ],
+                  children: specialities.map((e) => _buildTag(e)).toList(),
                 ),
               )),
           _buildDescItem(
@@ -97,7 +105,7 @@ class TutorInfo extends StatelessWidget {
               ),
               title: AppLocalizations.of(context).interests,
               content: Text(
-                'Watching English films and talking to friends from different countries',
+                '${tutor.interests}',
               )),
           _buildDescItem(
               icon: SvgPicture.asset(
@@ -106,7 +114,9 @@ class TutorInfo extends StatelessWidget {
               ),
               title: AppLocalizations.of(context).teachingExperience,
               content: Text(
-                  'I have been teaching as an English teacher for over three years. I have been working for many English centers, including VUS and I am also a lecturer at HCM College of Economics. I have taught English at various levels, including English for Kids, English for Communication, TOEIC and IELTS.')),
+                '${tutor.experience}',
+                textAlign: TextAlign.start,
+              )),
         ],
       ),
     );

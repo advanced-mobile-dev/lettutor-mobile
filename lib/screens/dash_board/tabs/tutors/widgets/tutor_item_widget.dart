@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/screens/tutor_profile/tutor_profile.dart';
-import 'package:lettutor_app/utils/string_utils.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 
 class TutorItemWidget extends StatelessWidget {
@@ -29,8 +27,8 @@ class TutorItemWidget extends StatelessWidget {
                   blurRadius: 7,
                   offset: Offset(1, 3))
             ]),
-        padding: EdgeInsets.all(15),
-        margin: EdgeInsets.fromLTRB(5, 0, 5, 15),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: EdgeInsets.only(bottom: 15),
         child: Column(
           children: <Widget>[
             TutorImageWidget(
@@ -59,7 +57,7 @@ class TutorItemWidget extends StatelessWidget {
                                   .firstWhere((element) => element.code == e)
                                   .name,
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.blueGrey[700],
                                   fontSize: AppSizes.smallTextSize),
                             ),
                           ))
@@ -71,7 +69,6 @@ class TutorItemWidget extends StatelessWidget {
               height: AppSizes.verticalItemSpacing / 2,
             ),
             Container(
-              height: 50,
               width: double.infinity,
               child: Text(tutor.bio,
                   overflow: TextOverflow.ellipsis,

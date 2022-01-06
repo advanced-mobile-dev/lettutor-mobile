@@ -66,14 +66,15 @@ class TutorProfile extends StatelessWidget {
                 height: AppSizes.verticalItemSpacing,
               ),
               SubmitButton(
-                text: AppLocalizations.of(context).calendar,
-                backgroundColor: Colors.white,
+                text: 'Book now',
+                // text: AppLocalizations.of(context).calendar,
+                backgroundColor: Theme.of(context).primaryColor,
                 function: () {
                   print(tutor.id);
                   Navigator.of(context).pushNamed(LettutorRoutes.tutorSchedule,
                       arguments: tutor);
                 },
-                textColor: Theme.of(context).primaryColor,
+                textColor: Colors.white,
                 icon: Icon(Icons.calendar_today),
               ),
               SizedBox(
@@ -124,7 +125,7 @@ class TutorProfile extends StatelessWidget {
               SizedBox(
                 height: AppSizes.verticalItemSpacing,
               ),
-              TutorInfo(),
+              TutorInfo(tutor),
               TutorReviews(tutor.tutorBasicInfo.feedbacks)
             ],
           ),
