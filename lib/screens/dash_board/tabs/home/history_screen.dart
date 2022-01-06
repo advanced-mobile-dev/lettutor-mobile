@@ -1,116 +1,157 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/models/feedback.dart';
-import 'package:lettutor_app/models/tutor/tutor.dart';
+import 'package:lettutor_app/models/student_booking/student_booking.dart';
+import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
+import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:lettutor_app/widgets/outline_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/widgets/outline_button.dart';
+import 'package:lettutor_app/widgets/tutor_image.dart';
 
-class HistoryScreen extends StatelessWidget {
+class HistoryScreen extends StatefulWidget {
+  @override
+  State<HistoryScreen> createState() => _HistoryScreenState();
+}
+
+class _HistoryScreenState extends State<HistoryScreen> {
+  ScrollController _scrollController = new ScrollController();
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      if (_isBottom) {
+        context.read<BookingHistoryBloc>().add(BookingHistoryLoadMoreEvent());
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ApplicationAppBar(
         title: AppLocalizations.of(context).history,
       ),
-      body: SingleChildScrollView(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<BookingHistoryBloc>().add(BookingHistoryRefreshEvent());
+        },
         child: Container(
-          padding: EdgeInsets.all(AppSizes.pagePadding),
-          child: Column(
-            children: <Widget>[
-              // HistoryItem(
-              //   tutor: Tutor.data,
-              // ),
-              // SizedBox(height: AppSizes.verticalItemSpacing),
-              // HistoryItem(
-              //   tutor: Tutor.data1,
-              //   feedback: LearnerFeedbackTmp(
-              //       rating: 4.5,
-              //       comment:
-              //           'This is an excellent teacher. He is very talented and kind'),
-              // ),
-              // SizedBox(height: AppSizes.verticalItemSpacing),
-              // HistoryItem(
-              //   tutor: Tutor.data2,
-              //   feedback: LearnerFeedbackTmp(
-              //       rating: 4.5,
-              //       comment:
-              //           'This is an excellent teacher. He is very talented and kind'),
-              // ),
-              // SizedBox(height: AppSizes.verticalItemSpacing),
-              // HistoryItem(
-              //   tutor: Tutor.data3,
-              //   feedback: LearnerFeedbackTmp(
-              //       rating: 4.5,
-              //       comment:
-              //           'This is an excellent teacher. He is very talented and kind'),
-              // ),
-              // SizedBox(height: AppSizes.verticalItemSpacing),
-            ],
-          ),
+          height: double.infinity,
+          child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              controller: _scrollController,
+              child: BlocBuilder<BookingHistoryBloc, BookingHistoryState>(
+                builder: (context, state) {
+                  if (state is BookingHistoryLoadingState)
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  if (state is BookingHistoryLoadFailureState) {
+                    return Center(
+                      child: Text('Failed'),
+                    );
+                  }
+                  if (state is BookingHistoryLoadedState) {
+                    if (state.bookingList.length == 0)
+                      return Center(
+                        child: Text('Empty'),
+                      );
+                    return Column(
+                      children: <Widget>[
+                        ...state.bookingList
+                            .map(
+                              (e) => Padding(
+                                padding: const EdgeInsets.only(bottom: 15),
+                                child: HistoryItem(
+                                  studentBooking: e,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        (state.status == BookingHistoryStatus.loadingMore)
+                            ? CircularProgressIndicator()
+                            : SizedBox()
+                      ],
+                    );
+                  }
+                  return SizedBox();
+                },
+              )),
         ),
       ),
     );
   }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
 }
 
 class HistoryItem extends StatelessWidget {
-  final Tutor tutor;
-  final LearnerFeedbackTmp feedback;
-  HistoryItem({@required this.tutor, this.feedback});
+  final StudentBooking studentBooking;
+  HistoryItem({@required this.studentBooking});
   @override
   Widget build(BuildContext context) {
     _buildDataRow({String title, IconData iconData, String content}) {
-      final titleStyle = TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: AppSizes.smallTextSize,
-          color: Theme.of(context).primaryColor);
-      final contentStyle = TextStyle(
-          fontWeight: FontWeight.normal,
-          fontSize: AppSizes.smallTextSize,
-          color: Colors.black);
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Icon(
-            iconData,
-            size: 15,
-            color: Theme.of(context).primaryColor,
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Container(
-            width: 100,
-            child: Text(
-              title,
-              style: titleStyle,
+      return Padding(
+        padding: EdgeInsets.only(top: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(
+              iconData,
+              size: 15,
+              color: Theme.of(context).primaryColor,
             ),
-          ),
-          Expanded(
-            child: Text(
-              content,
-              style: contentStyle,
-              textAlign: TextAlign.start,
+            SizedBox(
+              width: 5,
             ),
-          )
-        ],
+            Container(
+              width: 75,
+              child: Text(
+                title,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: AppSizes.smallTextSize,
+                    color: Theme.of(context).primaryColor),
+              ),
+            ),
+            Expanded(
+              child: Text(
+                content,
+                style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: AppSizes.smallTextSize,
+                    color: Colors.black),
+                textAlign: TextAlign.start,
+              ),
+            )
+          ],
+        ),
       );
     }
 
+    TutorBasicInfo tutorBasicInfo =
+        studentBooking.scheduleDetail.tutorBasicInfo;
+
+    String feedback = studentBooking.bookingInfo.tutorReview;
     return Container(
       decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.grey.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
           ]),
-      padding: EdgeInsets.all(AppSizes.cardPadding),
+      padding: EdgeInsets.all(15),
       child: Column(
         children: <Widget>[
           Container(
@@ -118,57 +159,14 @@ class HistoryItem extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                      child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                          LettutorRoutes.tutorProfile,
-                          arguments: tutor);
-                    },
-                    child: Row(
-                      children: [
-                        // ClipOval(
-                        //   child: Image.asset(
-                        //     tutor.avatar,
-                        //     width: 40.0,
-                        //     height: 40.0,
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   width: 10,
-                        // ),
-                        // Column(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: <Widget>[
-                        //     Text(
-                        //       tutor.name,
-                        //       style: TextStyle(
-                        //           color: Colors.black,
-                        //           fontWeight: FontWeight.bold),
-                        //     ),
-                        //     Row(
-                        //       children: <Widget>[
-                        //         Image.asset(
-                        //           'assets/national_flags/${tutor.countryCode}.png',
-                        //           height: 15,
-                        //           width: 20,
-                        //         ),
-                        //         SizedBox(
-                        //           width: 5,
-                        //         ),
-                        //         Text(tutor.countryName,
-                        //             style: TextStyle(
-                        //                 color: Colors.black,
-                        //                 fontSize: AppSizes.smallTextSize))
-                        //       ],
-                        //     ),
-                        //   ],
-                        // ),
-                      ],
-                    ),
-                  )),
+                    child: TutorImageWidget(
+                        tutorBasicInfo: tutorBasicInfo,
+                        size: 50,
+                        showRating: false),
+                  ),
                   Container(
-                    child: Text('3 days ago',
+                    child: Text(
+                        '${MyDateUtils.getCommentTime(studentBooking.scheduleDetail.endPeriod)}',
                         style: TextStyle(
                             fontSize: AppSizes.smallTextSize,
                             color: Colors.grey)),
@@ -176,47 +174,35 @@ class HistoryItem extends StatelessWidget {
                   )
                 ],
               )),
-          SizedBox(
-            height: 10,
-          ),
           _buildDataRow(
             title: 'Date',
             iconData: Icons.calendar_today,
-            content: '20:00 - 20:25, Monday 11/10/2021',
-          ),
-          SizedBox(
-            height: 10,
+            content:
+                '${MyDateUtils.getBookingTime(studentBooking.scheduleDetail)}',
           ),
           _buildDataRow(
-            title: 'Learned time',
-            iconData: Icons.timelapse,
-            content: '30 minutes 15 senconds',
+            title: 'Feedback',
+            iconData: Icons.chat,
+            content: '${feedback ?? ''}',
           ),
-          SizedBox(
-            height: 10,
-          ),
-          feedback != null
+          studentBooking.bookingInfo.scoreByTutor != null
               ? _buildDataRow(
-                  title: 'Your feedback',
-                  iconData: Icons.comment,
-                  content:
-                      'This is an excellent teacher. He is very talented and kind',
+                  title: 'Mark',
+                  iconData: Icons.reviews_outlined,
+                  content: '${studentBooking.bookingInfo.scoreByTutor}',
                 )
               : SizedBox(),
-          SizedBox(
-            height: 10,
-          ),
-          feedback == null
+          studentBooking.bookingInfo.recordUrl != null
               ? Container(
+                  padding: EdgeInsets.only(top: 20),
                   alignment: Alignment.bottomRight,
                   child: CustomTextButton(
-                    text: 'Feedback',
-                    function: () {},
-                    iconData: Icons.comment,
-                    color: Theme.of(context).primaryColor,
-                  ),
+                      text: 'Record',
+                      function: () {},
+                      iconData: Icons.video_call,
+                      color: Theme.of(context).primaryColor),
                 )
-              : SizedBox()
+              : SizedBox(),
         ],
       ),
     );

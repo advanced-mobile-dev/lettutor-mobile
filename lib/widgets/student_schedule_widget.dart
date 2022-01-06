@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/models/student_schedule/student_schedule.dart';
+import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 
-class StudentScheduleWidget extends StatelessWidget {
-  final StudentSchedule studentSchedule;
+class StudentBookingWidget extends StatelessWidget {
+  final StudentBooking studentSchedule;
   final bool isNearestLesson;
-  StudentScheduleWidget(
+  StudentBookingWidget(
       {@required this.studentSchedule, this.isNearestLesson = false});
   @override
   Widget build(BuildContext context) {

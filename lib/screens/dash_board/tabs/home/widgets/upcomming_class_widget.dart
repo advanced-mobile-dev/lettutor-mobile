@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/models/student_schedule/student_schedule.dart';
+import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/student_schedule_widget.dart';
 
 class UpcommingClassWidget extends StatelessWidget {
-  final StudentSchedule studentSchedule;
+  final StudentBooking studentSchedule;
   UpcommingClassWidget(this.studentSchedule);
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class UpcommingClassWidget extends StatelessWidget {
           ],
         ),
       ),
-      StudentScheduleWidget(
+      StudentBookingWidget(
         studentSchedule: studentSchedule,
       ),
     ]);
@@ -40,7 +40,7 @@ class UpcommingClassWidget extends StatelessWidget {
 }
 
 class CountDownUpcommingClass extends StatefulWidget {
-  final StudentSchedule studentSchedule;
+  final StudentBooking studentSchedule;
   const CountDownUpcommingClass(
     this.studentSchedule, {
     Key key,
@@ -53,7 +53,7 @@ class CountDownUpcommingClass extends StatefulWidget {
 
 class _CountDownUpcommingClassState extends State<CountDownUpcommingClass> {
   Timer _timer;
-  StudentSchedule _studentSchedule;
+  StudentBooking _studentSchedule;
   @override
   void initState() {
     super.initState();
@@ -72,7 +72,7 @@ class _CountDownUpcommingClassState extends State<CountDownUpcommingClass> {
   @override
   Widget build(BuildContext context) {
     return Text(
-        '${MyDateUtils.getDiff(_studentSchedule.scheduleDetail.startPeriod, DateTime.now())}',
+        '${MyDateUtils.countDown(_studentSchedule.scheduleDetail.startPeriod)}',
         style:
             TextStyle(color: Colors.black, fontSize: AppSizes.normalTextSize));
   }

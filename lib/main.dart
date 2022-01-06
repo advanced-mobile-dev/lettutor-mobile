@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
-import 'package:lettutor_app/blocs/student_schedule/student_schedule_bloc.dart';
+import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
@@ -11,6 +11,7 @@ import 'package:lettutor_app/repositories/app_settings_repo.dart';
 import 'package:lettutor_app/repositories/payment_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'blocs/authentication/authentication_bloc.dart';
+import 'blocs/student_booking/student_booking_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
 import 'blocs/user_profile/user_profile_bloc.dart';
 import 'config/colors.dart';
@@ -138,11 +139,11 @@ class MyApp extends StatelessWidget {
             BlocProvider<TutorsBloc>(
               create: (_) => TutorsBloc(),
             ),
-            BlocProvider<StudentScheduleBloc>(
-              create: (_) => StudentScheduleBloc(
+            BlocProvider<StudentBookingBloc>(
+              create: (_) => StudentBookingBloc(
                   userRepository:
                       RepositoryProvider.of<UserRepository>(context))
-                ..add(FetchDataEvent()),
+                ..add(StudentBookingFetchDataEvent()),
             ),
           ],
           child: DashBoard(),
@@ -157,7 +158,13 @@ class MyApp extends StatelessWidget {
       LettutorRoutes.start: (context) => StartScreen(),
       LettutorRoutes.signUp: (context) => SignUpScreen(),
       LettutorRoutes.signIn: (context) => LoginScreen(),
-      LettutorRoutes.history: (context) => HistoryScreen(),
+      LettutorRoutes.history: (context) {
+        return BlocProvider(
+            create: (context) => BookingHistoryBloc(
+                userRepository: context.read<UserRepository>())
+              ..add(BookingHistoryFetchDataEvent()),
+            child: HistoryScreen());
+      },
       LettutorRoutes.tutorProfile: (context) => TutorProfile(),
       LettutorRoutes.changePassword: (context) => ChangePasswordScreen(),
       LettutorRoutes.languageSetting: (context) => LanguageSettingScreen(),

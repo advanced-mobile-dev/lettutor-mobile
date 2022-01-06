@@ -63,9 +63,17 @@ class MyDateUtils {
     return convertDate == today;
   }
 
-  static getDiff(DateTime startPeriod, DateTime endPeriod) {
-    final duration = startPeriod.difference(endPeriod);
+  static countDown(DateTime startPeriod) {
+    final duration = startPeriod.difference(DateTime.now());
     if (duration.inSeconds < 0) return 'Overdue';
     return "${duration.inHours}h:${duration.inMinutes.remainder(60)}m";
+  }
+
+  static getCommentTime(DateTime endPeriod) {
+    final duration = DateTime.now().difference(endPeriod);
+    if (duration.inHours < 24) {
+      return '${duration.inHours} hours ago';
+    }
+    return '${duration.inDays} days ago';
   }
 }

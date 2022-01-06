@@ -5,8 +5,8 @@ import 'package:lettutor_app/data/network/rest_client.dart';
 import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/schedule/booking_info.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
-import 'package:lettutor_app/models/student_schedule/student_schedule.dart';
-import 'package:lettutor_app/models/student_schedule/student_schedule_list.dart';
+import 'package:lettutor_app/models/student_booking/student_booking.dart';
+import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule_list.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
@@ -157,7 +157,7 @@ class ApiService {
     return 100;
   }
 
-  getStudentSchedule(int perPage, int page, int dateTimeGte) async {
+  getStudentBooking(int perPage, int page, int dateTimeGte) async {
     final accessToken = Repository.userToken.accessToken.token;
     final String endpoint = '/booking/list/student';
     final Response response = await _apiClient.get('$endpoint', headers: {
@@ -171,9 +171,30 @@ class ApiService {
     });
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      final StudentScheduleList scheduleList =
-          StudentScheduleList.fromJson(body['data']);
-      return scheduleList;
+      final StudentBookingList bookingList =
+          StudentBookingList.fromJson(body['data']);
+      return bookingList;
+    }
+    return null;
+  }
+
+  getBookingHistory(int perPage, int page, int dateTimeLte) async {
+    final accessToken = Repository.userToken.accessToken.token;
+    final String endpoint = '/booking/list/student';
+    final Response response = await _apiClient.get('$endpoint', headers: {
+      "Authorization": 'Bearer $accessToken',
+    }, params: {
+      'page': '$page',
+      'perPage': '$perPage',
+      'dateTimeLte': '$dateTimeLte',
+      'orderBy': 'meeting',
+      'sortBy': 'desc',
+    });
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final StudentBookingList bookingList =
+          StudentBookingList.fromJson(body['data']);
+      return bookingList;
     }
     return null;
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/blocs/student_schedule/student_schedule_bloc.dart';
+import 'package:lettutor_app/blocs/student_booking/student_booking_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/home_tab_header.dart';
-import 'widgets/schedule_list.dart';
+import 'widgets/booking_list_widget.dart';
 
 class HomeTab extends StatefulWidget {
   @override
@@ -15,7 +15,8 @@ class _HomeTabState extends State<HomeTab> {
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      if (_isBottom) context.read<StudentScheduleBloc>().add(LoadMoreEvent());
+      if (_isBottom)
+        context.read<StudentBookingBloc>().add(StudentBookingLoadMoreEvent());
     });
   }
 
@@ -28,7 +29,7 @@ class _HomeTabState extends State<HomeTab> {
         child: Column(
           children: <Widget>[
             HomeHeader(),
-            ScheduleList(),
+            BookingListWidget(),
           ],
         ),
       ),
