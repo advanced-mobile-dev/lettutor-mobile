@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
-import 'package:lettutor_app/widgets/student_schedule_widget.dart';
+import 'package:lettutor_app/screens/dash_board/tabs/home/widgets/student_%08booking_widget.dart';
 
 class UpcommingClassWidget extends StatelessWidget {
-  final StudentBooking studentSchedule;
-  UpcommingClassWidget(this.studentSchedule);
+  final StudentBooking studentBooking;
+  UpcommingClassWidget(this.studentBooking);
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -28,21 +28,21 @@ class UpcommingClassWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: AppSizes.normalTextSize),
             ),
-            CountDownUpcommingClass(studentSchedule),
+            CountDownUpcommingClass(studentBooking),
           ],
         ),
       ),
       StudentBookingWidget(
-        studentSchedule: studentSchedule,
+        studentBooking: studentBooking,
       ),
     ]);
   }
 }
 
 class CountDownUpcommingClass extends StatefulWidget {
-  final StudentBooking studentSchedule;
+  final StudentBooking studentBooking;
   const CountDownUpcommingClass(
-    this.studentSchedule, {
+    this.studentBooking, {
     Key key,
   }) : super(key: key);
 
@@ -53,11 +53,11 @@ class CountDownUpcommingClass extends StatefulWidget {
 
 class _CountDownUpcommingClassState extends State<CountDownUpcommingClass> {
   Timer _timer;
-  StudentBooking _studentSchedule;
+  StudentBooking _studentBooking;
   @override
   void initState() {
     super.initState();
-    _studentSchedule = widget.studentSchedule;
+    _studentBooking = widget.studentBooking;
     _timer = Timer.periodic(const Duration(minutes: 1), (timer) {
       setState(() {});
     });
@@ -72,7 +72,7 @@ class _CountDownUpcommingClassState extends State<CountDownUpcommingClass> {
   @override
   Widget build(BuildContext context) {
     return Text(
-        '${MyDateUtils.countDown(_studentSchedule.scheduleDetail.startPeriod)}',
+        '${MyDateUtils.countDown(_studentBooking.scheduleDetail.startPeriod)}',
         style:
             TextStyle(color: Colors.black, fontSize: AppSizes.normalTextSize));
   }

@@ -63,10 +63,10 @@ class MyDateUtils {
     return convertDate == today;
   }
 
-  static countDown(DateTime startPeriod) {
+  static countDown(DateTime startPeriod, {bool showSeconds = false}) {
     final duration = startPeriod.difference(DateTime.now());
-    if (duration.inSeconds < 0) return 'Overdue';
-    return "${duration.inHours}h:${duration.inMinutes.remainder(60)}m";
+    if (duration.inSeconds < 0) return '';
+    return "${duration.inHours}h:${duration.inMinutes.remainder(60)}m${showSeconds ? ':${duration.inSeconds.remainder(60)}s' : ''}";
   }
 
   static getCommentTime(DateTime endPeriod) {

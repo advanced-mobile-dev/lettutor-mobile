@@ -29,7 +29,7 @@ class Repository {
   static bool get isDarkMode => _sharedPrefsHelper.isDarkMode;
 
 //auth
-  static get userToken => _sharedPrefsHelper.userToken;
+  static UserToken get userToken => _sharedPrefsHelper.userToken;
   static void removeUserToken() => _sharedPrefsHelper.removeUserToken();
   static void saveUserToken(UserToken userToken) =>
       _sharedPrefsHelper.saveUserToken(userToken);

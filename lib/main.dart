@@ -20,6 +20,7 @@ import 'config/routes.dart';
 import 'config/theme.dart';
 import 'data/repository.dart';
 import 'models/course.dart';
+import 'models/student_booking/student_booking.dart';
 import 'models/tutor/tutor.dart';
 import 'repositories/authentication_repo.dart';
 import 'repositories/tutor_repo.dart';
@@ -28,7 +29,7 @@ import 'screens/change_password/change_password_screen.dart';
 import 'screens/course_detail/course_detail_screen.dart';
 import 'screens/dash_board/dash_board.dart';
 import 'screens/dash_board/tabs/home/history_screen.dart';
-import 'screens/dash_board/tabs/home/video_conference.dart';
+import 'screens/video-conference.dart/video_conference_screen.dart';
 import 'screens/forget_password/forget_password_screen.dart';
 import 'screens/language_setting/language_setting_screen.dart';
 import 'screens/login/login_screen.dart';
@@ -169,7 +170,7 @@ class MyApp extends StatelessWidget {
       LettutorRoutes.changePassword: (context) => ChangePasswordScreen(),
       LettutorRoutes.languageSetting: (context) => LanguageSettingScreen(),
       LettutorRoutes.forgetPassword: (context) => ForgetPasswordScreen(),
-      LettutorRoutes.videoConference: (context) => VideoConference(),
+      // LettutorRoutes.videoConference: (context) => VideoConference(),
     };
   }
 
@@ -211,6 +212,12 @@ class MyApp extends StatelessWidget {
                   tutor: tutor,
                 )));
 
+        break;
+
+      case LettutorRoutes.videoConference:
+        final studentBooking = routeSettings.arguments as StudentBooking;
+        return MaterialPageRoute(
+            builder: (context) => VideoConferenceScreen(studentBooking));
         break;
     }
 

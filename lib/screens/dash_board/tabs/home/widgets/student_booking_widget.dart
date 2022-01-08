@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
@@ -6,14 +7,14 @@ import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 
 class StudentBookingWidget extends StatelessWidget {
-  final StudentBooking studentSchedule;
+  final StudentBooking studentBooking;
   final bool isNearestLesson;
   StudentBookingWidget(
-      {@required this.studentSchedule, this.isNearestLesson = false});
+      {@required this.studentBooking, this.isNearestLesson = false});
   @override
   Widget build(BuildContext context) {
     final TutorBasicInfo tutorBasicInfo =
-        studentSchedule.scheduleDetail.tutorBasicInfo;
+        studentBooking.scheduleDetail.tutorBasicInfo;
     if (tutorBasicInfo == null) return SizedBox();
     return Container(
       color: Colors.white,
@@ -30,8 +31,8 @@ class StudentBookingWidget extends StatelessWidget {
                 children: <Widget>[
                   Text(
                       MyDateUtils.getTimeFrame(
-                          studentSchedule.scheduleDetail.startPeriod,
-                          studentSchedule.scheduleDetail.endPeriod),
+                          studentBooking.scheduleDetail.startPeriod,
+                          studentBooking.scheduleDetail.endPeriod),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -41,7 +42,7 @@ class StudentBookingWidget extends StatelessWidget {
                   ),
                   Text(
                     MyDateUtils.formatDate2(
-                        studentSchedule.scheduleDetail.startPeriod),
+                        studentBooking.scheduleDetail.startPeriod),
                     style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                 ],
@@ -56,14 +57,14 @@ class StudentBookingWidget extends StatelessWidget {
                         tutorBasicInfo: tutorBasicInfo,
                         size: 40,
                         showRating: false),
-                    studentSchedule.bookingInfo.studentRequest == null
+                    studentBooking.bookingInfo.studentRequest == null
                         ? SizedBox()
                         : Container(
                             width: double.infinity,
                             padding: EdgeInsets.symmetric(vertical: 15),
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Your note: ${studentSchedule.bookingInfo.studentRequest}',
+                              'Your note: ${studentBooking.bookingInfo.studentRequest}',
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                             )),
@@ -75,7 +76,10 @@ class StudentBookingWidget extends StatelessWidget {
           alignment: Alignment.bottomRight,
           child: SubmitButton(
             text: 'Start',
-            function: () {},
+            function: () {
+              Navigator.pushNamed(context, LettutorRoutes.videoConference,
+                  arguments: studentBooking);
+            },
             width: 100,
             height: 35,
             textColor: Colors.black,

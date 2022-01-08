@@ -63,10 +63,12 @@ class User {
         learnTopics.add(new UserLearnTopic.fromJson(v));
       });
     }
-    testPreparations = json['testPreparations'].cast<String>();
+    if (json['testPreparations'] != null)
+      testPreparations = json['testPreparations'].cast<String>();
     isPhoneActivated = json['isPhoneActivated'];
     timezone = json['timezone'];
-    userWallet = UserWallet.fromJson(json['walletInfo']);
+    if (json['walletInfo'] != null)
+      userWallet = UserWallet.fromJson(json['walletInfo']);
   }
 
   Map<String, dynamic> toJsonForPut() {

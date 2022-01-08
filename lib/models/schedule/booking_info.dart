@@ -1,16 +1,21 @@
+import 'dart:typed_data';
+
+import 'package:lettutor_app/models/meeting_room.dart';
+import 'dart:convert';
+
 class BookingInfo {
   int createdAtTimeStamp;
   int updatedAtTimeStamp;
   String id;
   String userId;
   String scheduleDetailId;
-  String tutorMeetingLink;
-  String studentMeetingLink;
+  // String tutorMeetingLink;
+  MeetingRoom meetingRoom;
   String studentRequest;
   String tutorReview;
   int scoreByTutor;
-  String createdAt;
-  String updatedAt;
+  // String createdAt;
+  // String updatedAt;
   String recordUrl;
   bool isDeleted;
 
@@ -20,13 +25,10 @@ class BookingInfo {
       this.id,
       this.userId,
       this.scheduleDetailId,
-      this.tutorMeetingLink,
-      this.studentMeetingLink,
+      this.meetingRoom,
       this.studentRequest,
       this.tutorReview,
       this.scoreByTutor,
-      this.createdAt,
-      this.updatedAt,
       this.recordUrl,
       this.isDeleted});
 
@@ -36,33 +38,19 @@ class BookingInfo {
     id = json['id'];
     userId = json['userId'];
     scheduleDetailId = json['scheduleDetailId'];
-    tutorMeetingLink = json['tutorMeetingLink'];
-    studentMeetingLink = json['studentMeetingLink'];
+    if (json['studentMeetingLink'] != null) {
+      final String res = (json['studentMeetingLink']);
+      String token = res.replaceFirst('/call/?token=', '');
+      String data = token.split('.')[1];
+      // List<int> res = base64.decode(base64.normalize(data));
+      String result = utf8.decode(base64Decode(base64.normalize(data)));
+      meetingRoom = new MeetingRoom.fromJson(jsonDecode(result));
+      meetingRoom.token = token;
+    }
     studentRequest = json['studentRequest'];
     tutorReview = json['tutorReview'];
     scoreByTutor = json['scoreByTutor'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
     recordUrl = json['recordUrl'];
     isDeleted = json['isDeleted'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['createdAtTimeStamp'] = this.createdAtTimeStamp;
-    data['updatedAtTimeStamp'] = this.updatedAtTimeStamp;
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['scheduleDetailId'] = this.scheduleDetailId;
-    data['tutorMeetingLink'] = this.tutorMeetingLink;
-    data['studentMeetingLink'] = this.studentMeetingLink;
-    data['studentRequest'] = this.studentRequest;
-    data['tutorReview'] = this.tutorReview;
-    data['scoreByTutor'] = this.scoreByTutor;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['recordUrl'] = this.recordUrl;
-    data['isDeleted'] = this.isDeleted;
-    return data;
   }
 }

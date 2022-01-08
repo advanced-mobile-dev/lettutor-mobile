@@ -6,6 +6,8 @@
     </queries>'
     <uses-permission android:name="android.permission.INTERNET" />
    <application
+        tools:replace="android:label"
+        android:name="hcmus.hieuho.lettutor_app"
         android:label="Lettutor App"
         android:icon="@mipmap/ic_launcher">
         <activity

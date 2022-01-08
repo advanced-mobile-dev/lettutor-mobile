@@ -25,7 +25,9 @@ class TutorScheduleBloc extends Bloc<TutorScheduleEvent, TutorScheduleState> {
       emit(schedules == null
           ? LoadFailureState()
           : SchedulesLoadedState(_tutor, schedules));
-    } catch (error) {
+    } catch (error, trace) {
+      print(error);
+      print(trace);
       emit(LoadFailureState());
     }
   }
