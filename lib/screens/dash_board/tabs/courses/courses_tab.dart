@@ -1,35 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/models/course.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'widgets/course_filter_widget.dart';
-import 'widgets/course_item_widget.dart';
+import 'package:lettutor_app/screens/dash_board/tabs/courses/widgets/course_list_widget.dart';
+import 'widgets/search_bar.dart';
+import 'widgets/tab_header.dart';
 
 class CoursesTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final titleStyle = TextStyle(
-        color: Theme.of(context).primaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: AppSizes.hugeTextSize);
-
-    return SingleChildScrollView(
-        child: Container(
-      padding: EdgeInsets.all(AppSizes.pagePadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(AppLocalizations.of(context).courses, style: titleStyle),
-          SizedBox(
-            height: AppSizes.verticalItemSpacing,
+    return Scaffold(
+        body: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding:
+              const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
+          child: Column(
+            children: [
+              TabHeader(),
+              SearchBar(),
+            ],
           ),
-          Container(child: CourseFilterWidget()),
-          SizedBox(
-            height: 15,
-          ),
-        ],
-      ),
+        ),
+        Expanded(child: CourseListWidget()),
+      ],
     ));
   }
 }

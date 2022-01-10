@@ -40,8 +40,8 @@ class _MultiChoiceTagsState extends State<MultiChoiceTags> {
         widget.onChanged(widget.selectedTags);
       },
       child: Container(
-        padding: EdgeInsets.all(12),
-        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        padding: EdgeInsets.all(8),
+        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: (widget.selectedTags.contains(e)

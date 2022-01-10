@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/models/course.dart';
+import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'widgets/topic_item_widget.dart';
+
 class CourseDetailScreen extends StatelessWidget {
-  final CourseTmp course;
+  final Course course;
   CourseDetailScreen({@required this.course});
 
   @override
@@ -25,8 +27,8 @@ class CourseDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Image.asset(
-              course.image,
+            Image.network(
+              course.imageUrl,
               fit: BoxFit.cover,
             ),
             Container(
@@ -43,26 +45,36 @@ class CourseDetailScreen extends StatelessWidget {
                       height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
-                      course.shortDescription,
+                      course.description,
                       style: contentTextStyle,
                     ),
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
                     ),
                     Text(
-                      AppLocalizations.of(context).overview,
+                      'Why take this course?',
                       style: titleTextStyle,
                     ),
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.horizontalItemSpacing),
-                      child: Text(
-                        course.overview,
-                        style: contentTextStyle,
-                      ),
+                    Text(
+                      '${course.reason}',
+                      style: contentTextStyle,
+                    ),
+                    SizedBox(
+                      height: AppSizes.verticalItemSpacing,
+                    ),
+                    Text(
+                      'What will you be able to do',
+                      style: titleTextStyle,
+                    ),
+                    SizedBox(
+                      height: AppSizes.verticalItemSpacing,
+                    ),
+                    Text(
+                      course.purpose,
+                      style: contentTextStyle,
                     ),
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
@@ -74,13 +86,9 @@ class CourseDetailScreen extends StatelessWidget {
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.horizontalItemSpacing),
-                      child: Text(
-                        course.experienceLevel,
-                        style: contentTextStyle,
-                      ),
+                    Text(
+                      course.level,
+                      style: contentTextStyle,
                     ),
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
@@ -92,13 +100,9 @@ class CourseDetailScreen extends StatelessWidget {
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.horizontalItemSpacing),
-                      child: Text(
-                        '${course.courseLength} ${AppLocalizations.of(context).topics}',
-                        style: contentTextStyle,
-                      ),
+                    Text(
+                      '${course.topics.length} ${AppLocalizations.of(context).topics}',
+                      style: contentTextStyle,
                     ),
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
@@ -110,16 +114,7 @@ class CourseDetailScreen extends StatelessWidget {
                     SizedBox(
                       height: AppSizes.verticalItemSpacing,
                     ),
-                    ...course.topics
-                        .map((e) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: AppSizes.horizontalItemSpacing),
-                              child: Text(
-                                e,
-                                style: contentTextStyle,
-                              ),
-                            ))
-                        .toList()
+                    ...course.topics.map((e) => TopicItemWidget(e)).toList(),
                   ],
                 )),
           ],

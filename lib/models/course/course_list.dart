@@ -1,18 +1,25 @@
-import 'package:lettutor_app/models/course/course.dart';
+import 'course.dart';
 
 class CourseList {
-  final List<Course> courses;
+  final int count;
+  final List<Course> data;
 
   CourseList({
-    this.courses,
+    this.count,
+    this.data,
   });
 
-  factory CourseList.fromJson(List<dynamic> json) {
+  factory CourseList.fromJson(dynamic json) {
     List<Course> courses = <Course>[];
-    courses = json.map((course) => Course.fromJson(course)).toList();
-
+    int count = json['count'] as int;
+    courses = (json['rows'] as List).map((element) {
+      Course course = Course.fromJson(element);
+      course.topics.sort((a, b) => a.orderCourse.compareTo(b.orderCourse));
+      return course;
+    }).toList();
     return CourseList(
-      courses: courses,
+      count: count,
+      data: courses,
     );
   }
 }

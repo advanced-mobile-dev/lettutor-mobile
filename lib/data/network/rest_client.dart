@@ -13,7 +13,7 @@ class RestClient {
   static const _timeout = 10;
 
   Future<dynamic> get(String path,
-      {Map<String, String> headers, Map<String, String> params}) {
+      {Map<String, String> headers, Map<String, dynamic> params}) {
     var uri = Uri.https(_baseUrl, path, params);
     print(uri);
     return http

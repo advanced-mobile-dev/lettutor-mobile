@@ -6,3 +6,7 @@ abstract class TutorProfileEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FavoriteTutorEvent extends TutorProfileEvent {}
+
+class ReportTutorEvent extends TutorProfileEvent {}

@@ -1,4 +1,6 @@
 import 'package:lettutor_app/data/network/api_service.dart';
+import 'package:lettutor_app/models/course/course_list.dart';
+import 'package:lettutor_app/models/filter/course_filter.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
@@ -75,5 +77,16 @@ class Repository {
     final TutorList tutors =
         await _apiService.getTutors(accessToken, perPage, page, specialties);
     return tutors;
+  }
+
+  static Future<CourseList> getCourses(
+      int coursePerPage, int page, CourseFilter courseFilter) async {
+    final accessToken = _sharedPrefsHelper.userToken.accessToken.token;
+    final levels = courseFilter.levels;
+    final categories = courseFilter.categories;
+    final keyword = courseFilter.keyword;
+    final CourseList courses = await _apiService.getCourses(
+        accessToken, coursePerPage, page, levels, categories, keyword);
+    return courses;
   }
 }

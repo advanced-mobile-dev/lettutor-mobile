@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
 import 'package:lettutor_app/data/repository.dart';
+import 'package:lettutor_app/models/course/course_level.dart';
+import 'package:lettutor_app/models/course/category.dart';
+import 'package:lettutor_app/models/course/course_list.dart';
 import 'package:lettutor_app/models/schedule/booking_info.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/student_booking/student_booking.dart';
@@ -11,6 +14,7 @@ import 'package:lettutor_app/models/tutor/tutor_list.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule_list.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
+import 'package:lettutor_app/screens/dash_board/tabs/courses/widgets/course_list_widget.dart';
 
 class ApiService {
   static final RestClient _apiClient = RestClient();
@@ -195,6 +199,36 @@ class ApiService {
       final StudentBookingList bookingList =
           StudentBookingList.fromJson(body['data']);
       return bookingList;
+    }
+    return null;
+  }
+
+  getCourses(
+      String accessToken,
+      int perPage,
+      int page,
+      List<CourseLevel> levels,
+      List<Category> categories,
+      String keyword) async {
+    final String endpoint = '/course';
+    Map<String, dynamic> _params = {
+      "size": '$perPage',
+      "page": '$page',
+      "q": '$keyword',
+      "level[]": levels.map((e) => '${e.level}').toList(),
+      "categoryId[]": categories.map((e) => '${e.id}').toList(),
+    };
+    final Response response = await _apiClient.get('$endpoint',
+        headers: {
+          "Authorization": 'Bearer $accessToken',
+        },
+        params: _params);
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      print(body);
+      final CourseList tutorList = CourseList.fromJson(body['data']);
+      print(tutorList.count);
+      return tutorList;
     }
     return null;
   }

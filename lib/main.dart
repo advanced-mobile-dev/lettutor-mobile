@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
 import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
+import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
@@ -20,6 +21,7 @@ import 'config/routes.dart';
 import 'config/theme.dart';
 import 'data/repository.dart';
 import 'models/course.dart';
+import 'models/course/course.dart';
 import 'models/student_booking/student_booking.dart';
 import 'models/tutor/tutor.dart';
 import 'repositories/authentication_repo.dart';
@@ -146,6 +148,9 @@ class MyApp extends StatelessWidget {
                       RepositoryProvider.of<UserRepository>(context))
                 ..add(StudentBookingFetchDataEvent()),
             ),
+            BlocProvider<CoursesBloc>(
+              create: (_) => CoursesBloc()..add(CoursesFetchEvent()),
+            ),
           ],
           child: DashBoard(),
         );
@@ -196,9 +201,9 @@ class MyApp extends StatelessWidget {
         break;
 
       case LettutorRoutes.courseDetail:
-        final courseDetail = routeSettings.arguments as CourseTmp;
+        final course = routeSettings.arguments as Course;
         return MaterialPageRoute(
-            builder: (context) => CourseDetailScreen(course: courseDetail));
+            builder: (context) => CourseDetailScreen(course: course));
 
         break;
 

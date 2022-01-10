@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/blocs/tutors/tutors_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:lettutor_app/models/tutor/tutor_filter.dart';
+import 'package:lettutor_app/models/filter/tutor_filter.dart';
 import 'package:lettutor_app/screens/dash_board/tabs/tutors/widgets/tutor_filter_bottom_sheet.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/tutor_search_bar.dart';
@@ -61,7 +61,7 @@ class _TutorsTabState extends State<TutorsTab> {
               ],
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: 10,
             ),
             TutorSearchBar(),
             SizedBox(

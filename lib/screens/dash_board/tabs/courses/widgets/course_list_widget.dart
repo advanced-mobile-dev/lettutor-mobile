@@ -1,21 +1,81 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/models/course.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
 
 import 'course_item_widget.dart';
 
-class CourseList extends StatelessWidget {
+class CourseListWidget extends StatefulWidget {
+  @override
+  State<CourseListWidget> createState() => _CourseListWidgetState();
+}
+
+class _CourseListWidgetState extends State<CourseListWidget> {
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_isBottom) {
+        context.read<CoursesBloc>().add(CoursesLoadMoreEvent());
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<CourseTmp> courses = CourseTmp.courseList;
-    return Column(
-      children: [
-        for (var element in courses) ...[
-          CourseItemWidget(course: element),
-          SizedBox(
-            height: 15,
-          )
-        ]
-      ],
-    );
+    return BlocBuilder<CoursesBloc, CoursesState>(builder: (context, state) {
+      if (state is CoursesLoadingState)
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      if (state is CoursesLoadFailureState) return Text('Failed');
+      if (state is CoursesLoadSuccessState) {
+        if (state.courses.isEmpty) return Text('Empty');
+        final _widthScreen = MediaQuery.of(context).size.width;
+        return CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            CupertinoSliverRefreshControl(onRefresh: () async {
+              final abc = context.read<CoursesBloc>()
+                ..add(CoursesRefreshEvent());
+              return abc;
+            }),
+            SliverPadding(
+              padding: EdgeInsets.all(10),
+              sliver: SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: _widthScreen / 2 + 30,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          CourseItemWidget(course: state.courses[index]),
+                      childCount: state.courses.length)),
+            ),
+            SliverToBoxAdapter(
+              child: state.status == CoursesStatus.loadingMore
+                  ? Container(
+                      padding: EdgeInsets.only(bottom: 12),
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(),
+                    )
+                  : SizedBox(),
+            )
+          ],
+        );
+      }
+      return SizedBox();
+    });
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }

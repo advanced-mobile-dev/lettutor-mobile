@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/models/tutor/tutor_feedback.dart';
+import 'package:lettutor_app/utils/date_utils.dart';
 
 class TutorReviews extends StatelessWidget {
   final List<TutorFeedback> tutorFeedbacks;
@@ -83,7 +84,7 @@ class RatingComment extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        '16 days ago',
+                        '${MyDateUtils.getCommentTime(DateTime.parse(feedback.createdAt))}',
                         style: TextStyle(
                             fontWeight: FontWeight.normal, color: Colors.grey),
                       ),
