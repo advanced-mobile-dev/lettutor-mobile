@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutors/tutors_bloc.dart';
+import 'package:lettutor_app/widgets/empty_widget.dart';
+import 'package:lettutor_app/widgets/error_widget.dart';
 import 'tutor_item_widget.dart';
 
 class TutorListWidget extends StatefulWidget {
@@ -13,8 +16,6 @@ class _TutorListWidgetState extends State<TutorListWidget> {
   @override
   void initState() {
     super.initState();
-    context.read<TutorsBloc>().add(TutorsFetchEvent());
-
     _scrollController.addListener(() {
       if (_isBottom) context.read<TutorsBloc>().add(TutorsLoadMoreEvent());
     });
@@ -24,32 +25,42 @@ class _TutorListWidgetState extends State<TutorListWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<TutorsBloc, TutorsState>(
       builder: (context, state) {
-        if (state is LoadingState) {
+        if (state is TutorsLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (state is LoadFailureState)
-          return const Center(child: Text('failed to fetch tutors'));
-        if (state is LoadSuccessState) {
-          if (state.tutors.isEmpty) {
-            return const Center(child: Text('not found tutors'));
-          }
-          return ListView.builder(
-            itemCount: state.hasReachedMax
-                ? state.tutors.length
-                : state.tutors.length + 1,
-            controller: _scrollController,
-            itemBuilder: (BuildContext context, int index) {
-              if (index < state.tutors.length)
-                return TutorItemWidget(tutor: state.tutors[index]);
-              else
-                return Center(
-                  child: SizedBox(
-                    height: 24,
-                    width: 24,
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+        if (state is TutorsLoadFailureState)
+          return AppErrorWidget(
+            retry: () {
+              context.read<TutorsBloc>().add(TutorsRefreshEvent());
             },
+          );
+        if (state is TutorsLoadSuccessState) {
+          if (state.tutors.isEmpty) {
+            return EmptyWidget();
+          }
+          return CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              CupertinoSliverRefreshControl(onRefresh: () async {
+                context.read<TutorsBloc>().add(TutorsRefreshEvent());
+              }),
+              SliverPadding(
+                  padding: EdgeInsets.all(10),
+                  sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          (context, index) =>
+                              TutorItemWidget(tutor: state.tutors[index]),
+                          childCount: state.tutors.length))),
+              SliverToBoxAdapter(
+                child: state.status == TutorsStatus.loadingMore
+                    ? Container(
+                        padding: EdgeInsets.only(bottom: 12),
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(),
+                      )
+                    : SizedBox(),
+              )
+            ],
           );
         }
         return const Center(child: CircularProgressIndicator());

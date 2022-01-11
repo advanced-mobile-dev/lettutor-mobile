@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/models/course/course.dart';
@@ -30,18 +32,22 @@ class CourseItemWidget extends StatelessWidget {
                     blurRadius: 3,
                     offset: Offset(0, 3))
               ]),
-          // padding: EdgeInsets.all(AppSizes.cardPadding),
           child: Column(
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-                child: Image.network(
-                  course.imageUrl,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        Image.asset(Assets.loadingImage),
+                    imageUrl: course.imageUrl,
+                  )
+                  // Image.network(
+                  //   course.imageUrl,
+                  //   fit: BoxFit.fitWidth,
+                  // ),
+                  ),
               SizedBox(
                 height: AppSizes.horizontalItemSpacing,
               ),

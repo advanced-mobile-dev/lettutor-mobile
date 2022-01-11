@@ -62,7 +62,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       padding: EdgeInsets.all(AppSizes.pagePadding),
                       child: Column(
                         children: <Widget>[
-                          UserProfileHeader((state as LoadedState).user),
+                          UserProfileHeader(state.user),
                           UserInfoForm(state.user),
                         ],
                       )));

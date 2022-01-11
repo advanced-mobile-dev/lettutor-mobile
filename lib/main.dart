@@ -30,7 +30,7 @@ import 'screens/booking/booking_screen.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/course_detail/course_detail_screen.dart';
 import 'screens/dash_board/dash_board.dart';
-import 'screens/dash_board/tabs/home/history_screen.dart';
+import 'screens/booking_history.dart/history_screen.dart';
 import 'screens/video-conference.dart/video_conference_screen.dart';
 import 'screens/forget_password/forget_password_screen.dart';
 import 'screens/language_setting/language_setting_screen.dart';
@@ -140,7 +140,7 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider<TutorsBloc>(
-              create: (_) => TutorsBloc(),
+              create: (_) => TutorsBloc()..add(TutorsFetchEvent()),
             ),
             BlocProvider<StudentBookingBloc>(
               create: (_) => StudentBookingBloc(

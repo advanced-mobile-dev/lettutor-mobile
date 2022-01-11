@@ -1,36 +1,35 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
+
+import 'app_circle_avatar.dart';
 
 class TutorImageWidget extends StatelessWidget {
   const TutorImageWidget({
     Key key,
     @required this.tutorBasicInfo,
-    @required this.size,
+    @required this.height,
     @required this.showRating,
   }) : super(key: key);
 
   final TutorBasicInfo tutorBasicInfo;
-  final double size;
+  final double height;
   final bool showRating;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size,
+      height: height,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          tutorBasicInfo.avatar == null
-              ? Icon(
-                  Icons.account_circle_outlined,
-                  size: size,
-                )
-              : CircleAvatar(
-                  foregroundImage: NetworkImage(tutorBasicInfo.avatar),
-                  radius: size / 2,
-                ),
+          NetworkCircleAvatar(
+            url: tutorBasicInfo.avatar,
+            radius: height / 2,
+          ),
           SizedBox(
             width: AppSizes.verticalItemSpacing,
           ),

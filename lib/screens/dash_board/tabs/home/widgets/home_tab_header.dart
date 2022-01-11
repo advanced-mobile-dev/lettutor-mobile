@@ -4,8 +4,8 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({
+class HomeTabHeader extends StatelessWidget {
+  const HomeTabHeader({
     Key key,
   }) : super(key: key);
 

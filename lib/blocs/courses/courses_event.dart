@@ -23,9 +23,9 @@ class CoursesRefreshEvent extends CoursesEvent {
   List<Object> get props => [];
 }
 
-class ApplyCoursesFilterEvent extends CoursesEvent {
+class ApplyCourseFilterEvent extends CoursesEvent {
   final CourseFilter courseFilter;
-  ApplyCoursesFilterEvent({this.courseFilter});
+  ApplyCourseFilterEvent({this.courseFilter});
   @override
   List<Object> get props => [];
 }

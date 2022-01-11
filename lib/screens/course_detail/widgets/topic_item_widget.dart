@@ -18,12 +18,12 @@ class TopicItemWidget extends StatelessWidget {
                 fontSize: AppSizes.normalTextSize, color: Colors.blue),
             recognizer: new TapGestureRecognizer()
               ..onTap = () async {
-                if (await canLaunch(
-                    // '${topic.nameFile}'
-                    'tel:0931922043')) {
-                  await launch(
-                      // '${topic.nameFile}'
-                      'tel:0931922043');
+                if (await canLaunch('${topic.nameFile}'
+                    // 'tel:0931922043'
+                    )) {
+                  await launch('${topic.nameFile}'
+                      // 'tel:0931922043'
+                      );
                 } else {
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()

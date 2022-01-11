@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
 import 'package:lettutor_app/models/course/category.dart';
 import 'package:lettutor_app/models/course/course_level.dart';
 import 'package:lettutor_app/models/filter/course_filter.dart';
+import 'package:lettutor_app/screens/dash_board/tabs/courses/widgets/search_bar.dart';
 import 'package:lettutor_app/widgets/multi-choice-tags.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
 class CourseFilterBottomSheet extends StatefulWidget {
-  final CourseFilter tutorFilter;
-  CourseFilterBottomSheet(this.tutorFilter);
+  final CourseFilter courseFilter;
+  CourseFilterBottomSheet(this.courseFilter);
   @override
   State<CourseFilterBottomSheet> createState() =>
       _CourseFilterBottomSheetState();
@@ -21,8 +23,9 @@ class _CourseFilterBottomSheetState extends State<CourseFilterBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _selectedLevels.addAll(widget.tutorFilter.levels ?? []);
-    _selectedCategories.addAll(widget.tutorFilter.categories ?? []);
+    print(widget.courseFilter.keyword);
+    _selectedLevels.addAll(widget.courseFilter.levels ?? []);
+    _selectedCategories.addAll(widget.courseFilter.categories ?? []);
   }
 
   @override
@@ -107,9 +110,10 @@ class _CourseFilterBottomSheetState extends State<CourseFilterBottomSheet> {
 
                               Navigator.pop(
                                   context,
-                                  widget.tutorFilter.levels.isEmpty
+                                  widget.courseFilter.levels.isEmpty &&
+                                          widget.courseFilter.categories.isEmpty
                                       ? null
-                                      : CourseFilter(
+                                      : widget.courseFilter.copyWith(
                                           levels: _selectedLevels,
                                           categories: _selectedCategories));
                             });
@@ -122,13 +126,13 @@ class _CourseFilterBottomSheetState extends State<CourseFilterBottomSheet> {
                       flex: 1,
                       child: SubmitButton(
                           text:
-                              'Apply (${getFilterNumber(_selectedLevels, _selectedCategories)})',
+                              'Apply ${getFilterNumber(_selectedLevels, _selectedCategories)}',
                           backgroundColor:
                               Theme.of(context).primaryColor.withOpacity(0.8),
                           function: () {
                             Navigator.pop(
                                 context,
-                                CourseFilter(
+                                widget.courseFilter.copyWith(
                                     levels: _selectedLevels,
                                     categories: _selectedCategories));
                           }),

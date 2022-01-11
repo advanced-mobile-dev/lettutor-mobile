@@ -54,7 +54,7 @@ class TutorProfile extends StatelessWidget {
             children: <Widget>[
               TutorImageWidget(
                   tutorBasicInfo: tutor.tutorBasicInfo,
-                  size: 100,
+                  height: 100,
                   showRating: true),
               SizedBox(
                 height: AppSizes.verticalItemSpacing,

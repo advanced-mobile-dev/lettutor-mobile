@@ -1,96 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
-import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
-
-class HistoryScreen extends StatefulWidget {
-  @override
-  State<HistoryScreen> createState() => _HistoryScreenState();
-}
-
-class _HistoryScreenState extends State<HistoryScreen> {
-  ScrollController _scrollController = new ScrollController();
-  @override
-  void initState() {
-    _scrollController.addListener(() {
-      if (_isBottom) {
-        context.read<BookingHistoryBloc>().add(BookingHistoryLoadMoreEvent());
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: ApplicationAppBar(
-        title: AppLocalizations.of(context).history,
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          context.read<BookingHistoryBloc>().add(BookingHistoryRefreshEvent());
-        },
-        child: Container(
-          height: double.infinity,
-          child: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
-              controller: _scrollController,
-              child: BlocBuilder<BookingHistoryBloc, BookingHistoryState>(
-                builder: (context, state) {
-                  if (state is BookingHistoryLoadingState)
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  if (state is BookingHistoryLoadFailureState) {
-                    return Center(
-                      child: Text('Failed'),
-                    );
-                  }
-                  if (state is BookingHistoryLoadedState) {
-                    if (state.bookingList.length == 0)
-                      return Center(
-                        child: Text('Empty'),
-                      );
-                    return Column(
-                      children: <Widget>[
-                        ...state.bookingList
-                            .map(
-                              (e) => Padding(
-                                padding: const EdgeInsets.only(bottom: 15),
-                                child: HistoryItem(
-                                  studentBooking: e,
-                                ),
-                              ),
-                            )
-                            .toList(),
-                        (state.status == BookingHistoryStatus.loadingMore)
-                            ? CircularProgressIndicator()
-                            : SizedBox()
-                      ],
-                    );
-                  }
-                  return SizedBox();
-                },
-              )),
-        ),
-      ),
-    );
-  }
-
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
-  }
-}
 
 class HistoryItem extends StatelessWidget {
   final StudentBooking studentBooking;
@@ -161,7 +75,7 @@ class HistoryItem extends StatelessWidget {
                   Expanded(
                     child: TutorImageWidget(
                         tutorBasicInfo: tutorBasicInfo,
-                        size: 50,
+                        height: 50,
                         showRating: false),
                   ),
                   Container(

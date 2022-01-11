@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lettutor_app/blocs/student_booking/student_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
@@ -117,7 +118,7 @@ class BookingScreen extends StatelessWidget {
                       children: <Widget>[
                         TutorImageWidget(
                             tutorBasicInfo: state.tutor.tutorBasicInfo,
-                            size: 100,
+                            height: 100,
                             showRating: true),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,

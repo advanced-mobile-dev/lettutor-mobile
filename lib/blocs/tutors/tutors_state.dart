@@ -6,26 +6,26 @@ abstract class TutorsState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadingState extends TutorsState {
+class TutorsLoadingState extends TutorsState {
   @override
   List<Object> get props => [];
 }
 
-class LoadSuccessState extends TutorsState {
+class TutorsLoadSuccessState extends TutorsState {
   final TutorsStatus status;
   final List<Tutor> tutors;
   final bool hasReachedMax;
   final int page;
   final TutorFilter tutorFilter;
 
-  LoadSuccessState(
+  TutorsLoadSuccessState(
       {this.status = TutorsStatus.success,
       this.tutors = const <Tutor>[],
       this.page = 1,
       this.hasReachedMax = false,
       this.tutorFilter});
 
-  LoadSuccessState copyWith({
+  TutorsLoadSuccessState copyWith({
     TutorsStatus status,
     List<Tutor> tutors,
     int page = 1,
@@ -33,7 +33,7 @@ class LoadSuccessState extends TutorsState {
     String searchKeyword,
     TutorFilter tutorFilter,
   }) {
-    return LoadSuccessState(
+    return TutorsLoadSuccessState(
       status: status ?? this.status,
       tutors: tutors ?? this.tutors,
       page: page ?? this.page,
@@ -44,14 +44,15 @@ class LoadSuccessState extends TutorsState {
 
   @override
   String toString() {
-    return '''LoadSuccessState  {status: $status hasReachedMax: $hasReachedMax, page: $page, tutors: ${tutors.length}, filter: $tutorFilter }''';
+    return 'TutorsLoadSuccessState  {status: $status hasReachedMax: $hasReachedMax, page: $page, tutors: ${tutors.length}, filter: $tutorFilter }'
+        '';
   }
 
   @override
   List<Object> get props => [status, tutors, page, hasReachedMax, tutorFilter];
 }
 
-class LoadFailureState extends TutorsState {
+class TutorsLoadFailureState extends TutorsState {
   @override
   List<Object> get props => [];
 }

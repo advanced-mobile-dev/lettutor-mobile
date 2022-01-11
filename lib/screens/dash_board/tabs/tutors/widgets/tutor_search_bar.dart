@@ -1,16 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/blocs/tutors/tutors_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lettutor_app/utils/debouner.dart';
+import 'package:lettutor_app/utils/device_utils.dart';
 
-class TutorSearchBar extends StatelessWidget {
+class TutorsSearchBar extends StatefulWidget {
+  @override
+  State<TutorsSearchBar> createState() => _TutorsSearchBarState();
+}
+
+class _TutorsSearchBarState extends State<TutorsSearchBar> {
+  final _searchController = TextEditingController();
+  Debouner _debouner = new Debouner(milliseconds: 500);
+  TutorsBloc _tutorsBloc;
+  @override
+  void initState() {
+    _tutorsBloc = context.read<TutorsBloc>();
+    _searchController.text = _tutorsBloc.tutorFilter.keyword;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 50,
       decoration: BoxDecoration(
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
+        controller: _searchController,
+        onChanged: (value) {
+          _debouner.run(() {
+            _tutorsBloc.add(ApplyTutorFilterEvent(
+                tutorFilter: _tutorsBloc.tutorFilter.copyWith(keyword: value)));
+            DeviceUtils.hideKeyboard(context);
+          });
+        },
         decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
@@ -18,7 +46,24 @@ class TutorSearchBar extends StatelessWidget {
               Icons.search,
             ),
             hintText: AppLocalizations.of(context).searchByName,
-            hintStyle: TextStyle(fontSize: AppSizes.smallTextSize)),
+            hintStyle: TextStyle(
+              fontSize: AppSizes.smallTextSize,
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                if (_searchController.text.isNotEmpty) {
+                  _searchController.clear();
+                  _tutorsBloc.add(ApplyTutorFilterEvent(
+                      tutorFilter:
+                          _tutorsBloc.tutorFilter.copyWith(keyword: '')));
+                }
+              },
+              icon: Icon(
+                Icons.clear,
+                size: 24,
+                color: Colors.grey[700],
+              ),
+            )),
       ),
     );
   }

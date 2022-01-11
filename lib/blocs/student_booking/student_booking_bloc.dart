@@ -15,9 +15,10 @@ class StudentBookingBloc
   UserRepository _userRepository;
   StudentBookingBloc({UserRepository userRepository})
       : _userRepository = userRepository,
-        super(InitialState()) {
+        super(StudentBookingInitialState()) {
     on<StudentBookingFetchDataEvent>(_onFetchData);
     on<StudentBookingLoadMoreEvent>(_onLoadMore);
+    on<StudentBookingRefreshEvent>(_onRefreshEvent);
   }
 
   Future _onFetchData(StudentBookingFetchDataEvent event, emit) async {
@@ -26,19 +27,19 @@ class StudentBookingBloc
           DateTime.now().subtract(Duration(minutes: 30)).millisecondsSinceEpoch;
       final bookingList =
           await _userRepository.getBookingList(_dataPerPage, 1, dateTimeGte);
-      emit(ListLoadedState(
+      emit(StudentBookingLoadedState(
           status: SBListStatus.success,
           page: 1,
           hasReachedMax: bookingList.data.length == bookingList.count,
           bookingList: bookingList.data));
     } catch (_) {
-      emit(ListLoadFailureState());
+      emit(StudentBookingLoadFailureState());
     }
   }
 
   Future _onLoadMore(StudentBookingLoadMoreEvent event, emit) async {
-    if (state is ListLoadedState) {
-      final successState = (state as ListLoadedState);
+    if (state is StudentBookingLoadedState) {
+      final successState = (state as StudentBookingLoadedState);
       if (successState.hasReachedMax ||
           successState.status != SBListStatus.success) return;
       emit(successState.copyWith(status: SBListStatus.loadingMore));
@@ -74,6 +75,25 @@ class StudentBookingBloc
       }
     } else {
       return;
+    }
+  }
+
+  Future _onRefreshEvent(StudentBookingRefreshEvent event,
+      Emitter<StudentBookingState> emit) async {
+    try {
+      int dateTimeGte =
+          DateTime.now().subtract(Duration(minutes: 30)).millisecondsSinceEpoch;
+      final bookingList =
+          await _userRepository.getBookingList(_dataPerPage, 1, dateTimeGte);
+      emit(StudentBookingLoadedState(
+          status: SBListStatus.success,
+          page: 1,
+          hasReachedMax: bookingList.data.length == bookingList.count,
+          bookingList: bookingList.data));
+    } catch (err, trace) {
+      print(err);
+      print(trace);
+      emit(StudentBookingLoadFailureState());
     }
   }
 }

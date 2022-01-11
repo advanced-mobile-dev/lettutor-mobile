@@ -33,7 +33,7 @@ class TutorItemWidget extends StatelessWidget {
           children: <Widget>[
             TutorImageWidget(
                 tutorBasicInfo: tutor.tutorBasicInfo,
-                size: 60,
+                height: 60,
                 showRating: true),
             SizedBox(
               height: AppSizes.verticalItemSpacing,

@@ -11,14 +11,15 @@ part 'courses_state.dart';
 const _coursePerPage = 6;
 
 class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
-  CourseFilter _courseFilter = CourseFilter(levels: [], categories: []);
+  CourseFilter _courseFilter =
+      CourseFilter(levels: [], categories: [], keyword: '');
   CourseFilter get courseFilter => _courseFilter;
 
   CoursesBloc() : super(CoursesLoadingState()) {
     on<CoursesFetchEvent>(_onCoursesFetch);
     on<CoursesLoadMoreEvent>(_onCoursesLoadMore);
     on<CoursesRefreshEvent>(_onCoursesRefresh);
-    on<ApplyCoursesFilterEvent>(_onApplyFilter);
+    on<ApplyCourseFilterEvent>(_onApplyFilter);
   }
   Future<void> _onCoursesFetch(
       CoursesFetchEvent event, Emitter<CoursesState> emit) async {
@@ -84,7 +85,7 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
   }
 
   Future<void> _onApplyFilter(
-      ApplyCoursesFilterEvent event, Emitter<CoursesState> emit) async {
+      ApplyCourseFilterEvent event, Emitter<CoursesState> emit) async {
     emit(CoursesLoadingState());
     _courseFilter = event.courseFilter;
 

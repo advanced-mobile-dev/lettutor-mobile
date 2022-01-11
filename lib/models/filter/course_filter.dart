@@ -5,7 +5,7 @@ class CourseFilter {
   final List<CourseLevel> levels;
   final List<Category> categories;
   final String keyword;
-  CourseFilter({this.levels, this.categories, this.keyword});
+  CourseFilter({this.levels, this.categories, this.keyword = ''});
 
   filterNumber() {
     if (levels.isEmpty) {

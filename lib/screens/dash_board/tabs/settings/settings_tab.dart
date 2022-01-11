@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
 import 'package:lettutor_app/blocs/authentication/authentication_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/widgets/app_circle_avatar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path_provider/path_provider.dart';
 
 class SettingsTab extends StatelessWidget {
   @override
@@ -33,16 +34,8 @@ class SettingsTab extends StatelessWidget {
                 final currentState = (state as AuthenticatedState);
                 return Row(
                   children: <Widget>[
-                    currentState.user.avatar == null
-                        ? Icon(
-                            Icons.account_circle_outlined,
-                            size: 60,
-                          )
-                        : CircleAvatar(
-                            foregroundImage:
-                                NetworkImage(currentState.user.avatar),
-                            radius: 30,
-                          ),
+                    NetworkCircleAvatar(
+                        url: currentState.user.avatar, radius: 30),
                     SizedBox(
                       width: 15,
                     ),

@@ -39,7 +39,6 @@ class BookingHistoryBloc
 
   Future _onRefreshEvent(BookingHistoryRefreshEvent event, emit) async {
     try {
-      emit(BookingHistoryLoadingState());
       int dateTimeLte =
           DateTime.now().subtract(Duration(minutes: 30)).millisecondsSinceEpoch;
       final bookingList =
@@ -50,7 +49,6 @@ class BookingHistoryBloc
           hasReachedMax: bookingList.data.length == bookingList.count,
           bookingList: bookingList.data));
     } catch (error) {
-      print(error);
       emit(BookingHistoryLoadFailureState());
     }
   }

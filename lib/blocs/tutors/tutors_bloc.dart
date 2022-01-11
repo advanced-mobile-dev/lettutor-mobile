@@ -8,30 +8,31 @@ import 'package:lettutor_app/models/tutor/tutor.dart';
 part 'tutors_event.dart';
 part 'tutors_state.dart';
 
-const _tutorPerPage = 3;
+const _tutorPerPage = 5;
 
 class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
-  TutorFilter _tutorFilter = TutorFilter(specialities: []);
+  TutorFilter _tutorFilter = TutorFilter(specialities: [], keyword: '');
   TutorFilter get tutorFilter => _tutorFilter;
 
-  TutorsBloc() : super(LoadingState()) {
+  TutorsBloc() : super(TutorsLoadingState()) {
     on<TutorsFetchEvent>(_onTutorsFetch);
     on<TutorsLoadMoreEvent>(_onTutorsLoadMore);
-    on<ApplyFilterEvent>(_onApplyFilter);
+    on<ApplyTutorFilterEvent>(_onApplyFilter);
+    on<TutorsRefreshEvent>(_onTutorsRefresh);
   }
   Future<void> _onTutorsFetch(
       TutorsFetchEvent event, Emitter<TutorsState> emit) async {
     try {
-      final tutorList = await Repository.getTutors(_tutorPerPage, 1,
-          _tutorFilter.specialities.map((e) => e.code).toList());
-      emit(LoadSuccessState(
+      final tutorList =
+          await Repository.getTutors(_tutorPerPage, 1, _tutorFilter);
+      emit(TutorsLoadSuccessState(
           status: TutorsStatus.success,
           page: 1,
           hasReachedMax: tutorList.data.length == tutorList.count,
           tutorFilter: _tutorFilter,
           tutors: tutorList.data));
     } catch (_) {
-      emit(LoadFailureState());
+      emit(TutorsLoadFailureState());
     }
   }
 
@@ -39,8 +40,8 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
       TutorsLoadMoreEvent event, Emitter<TutorsState> emit) async {
     // if (event.specialities!=null && event.specialities)
 
-    if (state is LoadSuccessState) {
-      final successState = (state as LoadSuccessState);
+    if (state is TutorsLoadSuccessState) {
+      final successState = (state as TutorsLoadSuccessState);
       if (successState.status != TutorsStatus.success ||
           successState.hasReachedMax) return;
       print('loading more');
@@ -52,7 +53,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
             _tutorPerPage,
             nextPage,
             // event.specialities.map((e) => e.code).toList()
-            _tutorFilter.specialities.map((e) => e.code).toList());
+            _tutorFilter);
         if (tutorList.data.isEmpty) {
           emit(successState.copyWith(
               status: TutorsStatus.success,
@@ -73,7 +74,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
           );
         }
       } catch (err) {
-        emit(LoadFailureState());
+        emit(TutorsLoadFailureState());
       }
     } else {
       return;
@@ -81,19 +82,37 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
   }
 
   Future<void> _onApplyFilter(
-      ApplyFilterEvent event, Emitter<TutorsState> emit) async {
-    emit(LoadingState());
+      ApplyTutorFilterEvent event, Emitter<TutorsState> emit) async {
+    emit(TutorsLoadingState());
     _tutorFilter = event.tutorFilter;
     try {
-      final tutorList = await Repository.getTutors(_tutorPerPage, 1,
-          _tutorFilter.specialities.map((e) => e.code).toList());
-      emit(LoadSuccessState(
+      final tutorList =
+          await Repository.getTutors(_tutorPerPage, 1, _tutorFilter);
+      emit(TutorsLoadSuccessState(
           page: 1,
           hasReachedMax: tutorList.data.length >= tutorList.count,
           tutors: tutorList.data,
           tutorFilter: event.tutorFilter));
     } catch (_) {
-      emit(LoadFailureState());
+      emit(TutorsLoadFailureState());
+    }
+  }
+
+  Future _onTutorsRefresh(
+      TutorsRefreshEvent event, Emitter<TutorsState> emit) async {
+    try {
+      final tutorList =
+          await Repository.getTutors(_tutorPerPage, 1, _tutorFilter);
+      emit(TutorsLoadSuccessState(
+          status: TutorsStatus.success,
+          page: 1,
+          hasReachedMax: tutorList.data.length == tutorList.count,
+          tutorFilter: _tutorFilter,
+          tutors: tutorList.data));
+    } catch (err, trace) {
+      print(err);
+      print(trace);
+      emit(TutorsLoadFailureState());
     }
   }
 }

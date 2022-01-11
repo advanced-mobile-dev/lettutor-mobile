@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/user/user.dart';
+import 'package:lettutor_app/widgets/app_circle_avatar.dart';
 
 class UserProfileHeader extends StatelessWidget {
   final User user;
@@ -11,10 +11,7 @@ class UserProfileHeader extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Stack(
         children: <Widget>[
-          CircleAvatar(
-            foregroundImage: NetworkImage(user.avatar),
-            radius: 30,
-          ),
+          NetworkCircleAvatar(url: user.avatar, radius: 30),
           Positioned(
               bottom: 0,
               right: 0,

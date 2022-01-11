@@ -16,9 +16,14 @@ class TutorsLoadMoreEvent extends TutorsEvent {
   List<Object> get props => [];
 }
 
-class ApplyFilterEvent extends TutorsEvent {
+class ApplyTutorFilterEvent extends TutorsEvent {
   final TutorFilter tutorFilter;
-  ApplyFilterEvent({this.tutorFilter});
+  ApplyTutorFilterEvent({this.tutorFilter});
+  @override
+  List<Object> get props => [];
+}
+
+class TutorsRefreshEvent extends TutorsEvent {
   @override
   List<Object> get props => [];
 }

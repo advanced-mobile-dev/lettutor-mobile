@@ -6,10 +6,10 @@ import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 
-class StudentBookingWidget extends StatelessWidget {
+class BookingItemWidget extends StatelessWidget {
   final StudentBooking studentBooking;
   final bool isNearestLesson;
-  StudentBookingWidget(
+  BookingItemWidget(
       {@required this.studentBooking, this.isNearestLesson = false});
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class StudentBookingWidget extends StatelessWidget {
                   children: [
                     TutorImageWidget(
                         tutorBasicInfo: tutorBasicInfo,
-                        size: 40,
+                        height: 40,
                         showRating: false),
                     studentBooking.bookingInfo.studentRequest == null
                         ? SizedBox()
@@ -72,21 +72,31 @@ class StudentBookingWidget extends StatelessWidget {
                 )),
           ],
         ),
-        Container(
-          alignment: Alignment.bottomRight,
-          child: SubmitButton(
-            text: 'Start',
-            function: () {
-              Navigator.pushNamed(context, LettutorRoutes.videoConference,
-                  arguments: studentBooking);
-            },
-            width: 100,
-            height: 35,
-            textColor: Colors.black,
-            backgroundColor: Colors.grey[200],
-          ),
-        )
+        _isShowStartButton()
+            ? Container(
+                alignment: Alignment.bottomRight,
+                child: SubmitButton(
+                  text: 'Start',
+                  function: () {
+                    Navigator.pushNamed(context, LettutorRoutes.videoConference,
+                        arguments: studentBooking);
+                  },
+                  width: 100,
+                  height: 35,
+                  textColor: Colors.black,
+                  backgroundColor: Colors.grey[200],
+                ),
+              )
+            : SizedBox()
       ]),
     );
+  }
+
+  _isShowStartButton() {
+    if (studentBooking.scheduleDetail.startPeriod
+            .difference(DateTime.now())
+            .inMinutes <=
+        120) return true;
+    return false;
   }
 }

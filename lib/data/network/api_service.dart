@@ -8,13 +8,11 @@ import 'package:lettutor_app/models/course/category.dart';
 import 'package:lettutor_app/models/course/course_list.dart';
 import 'package:lettutor_app/models/schedule/booking_info.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
-import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule_list.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
-import 'package:lettutor_app/screens/dash_board/tabs/courses/widgets/course_list_widget.dart';
 
 class ApiService {
   static final RestClient _apiClient = RestClient();
@@ -73,7 +71,7 @@ class ApiService {
   }
 
   Future<TutorList> getTutors(String accessToken, int perPage, int page,
-      List<String> specialties) async {
+      List<String> specialties, String keyword) async {
     final String endpoint = '/tutor/search';
     final Response response = await _apiClient.post('$endpoint', headers: {
       "Authorization": 'Bearer $accessToken',
@@ -82,11 +80,11 @@ class ApiService {
         "specialties": specialties,
       },
       "perPage": perPage,
-      "page": page
+      "page": page,
+      "q": keyword
     });
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      final TutorList tutorList = TutorList.fromJson(body);
+      final TutorList tutorList = TutorList.fromJson(jsonDecode(response.body));
       return tutorList;
     }
     return null;
@@ -214,7 +212,7 @@ class ApiService {
     Map<String, dynamic> _params = {
       "size": '$perPage',
       "page": '$page',
-      "q": '$keyword',
+      "q": '${keyword ?? ''}',
       "level[]": levels.map((e) => '${e.level}').toList(),
       "categoryId[]": categories.map((e) => '${e.id}').toList(),
     };
@@ -225,9 +223,7 @@ class ApiService {
         params: _params);
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      print(body);
       final CourseList tutorList = CourseList.fromJson(body['data']);
-      print(tutorList.count);
       return tutorList;
     }
     return null;

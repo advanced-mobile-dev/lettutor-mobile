@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
-import 'package:lettutor_app/screens/dash_board/tabs/home/widgets/student_%08booking_widget.dart';
+import 'package:lettutor_app/screens/dash_board/tabs/home/widgets/booking_item_widget.dart';
 
 class UpcommingClassWidget extends StatelessWidget {
   final StudentBooking studentBooking;
@@ -32,7 +32,7 @@ class UpcommingClassWidget extends StatelessWidget {
           ],
         ),
       ),
-      StudentBookingWidget(
+      BookingItemWidget(
         studentBooking: studentBooking,
       ),
     ]);

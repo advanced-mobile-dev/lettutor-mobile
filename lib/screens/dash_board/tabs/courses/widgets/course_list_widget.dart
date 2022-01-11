@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
+import 'package:lettutor_app/widgets/empty_widget.dart';
+import 'package:lettutor_app/widgets/error_widget.dart';
 
 import 'course_item_widget.dart';
 
@@ -31,17 +33,20 @@ class _CourseListWidgetState extends State<CourseListWidget> {
         return Center(
           child: CircularProgressIndicator(),
         );
-      if (state is CoursesLoadFailureState) return Text('Failed');
+      if (state is CoursesLoadFailureState)
+        return AppErrorWidget(
+          retry: () {
+            context.read<CoursesBloc>()..add(CoursesRefreshEvent());
+          },
+        );
       if (state is CoursesLoadSuccessState) {
-        if (state.courses.isEmpty) return Text('Empty');
+        if (state.courses.isEmpty) return EmptyWidget();
         final _widthScreen = MediaQuery.of(context).size.width;
         return CustomScrollView(
           controller: _scrollController,
           slivers: [
             CupertinoSliverRefreshControl(onRefresh: () async {
-              final abc = context.read<CoursesBloc>()
-                ..add(CoursesRefreshEvent());
-              return abc;
+              context.read<CoursesBloc>()..add(CoursesRefreshEvent());
             }),
             SliverPadding(
               padding: EdgeInsets.all(10),

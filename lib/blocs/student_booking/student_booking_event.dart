@@ -10,3 +10,5 @@ abstract class StudentBookingEvent extends Equatable {
 class StudentBookingFetchDataEvent extends StudentBookingEvent {}
 
 class StudentBookingLoadMoreEvent extends StudentBookingEvent {}
+
+class StudentBookingRefreshEvent extends StudentBookingEvent {}

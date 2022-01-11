@@ -9,26 +9,26 @@ abstract class StudentBookingState extends Equatable {
   List<Object> get props => [];
 }
 
-class InitialState extends StudentBookingState {}
+class StudentBookingInitialState extends StudentBookingState {}
 
-class ListLoadingState extends StudentBookingState {}
+class StudentBookingLoadingState extends StudentBookingState {}
 
-class ListLoadedState extends StudentBookingState {
+class StudentBookingLoadedState extends StudentBookingState {
   final SBListStatus status;
   final List<StudentBooking> bookingList;
   final bool hasReachedMax;
   final int page;
 
-  ListLoadedState(
+  StudentBookingLoadedState(
       {this.status, this.bookingList, this.hasReachedMax, this.page});
 
-  ListLoadedState copyWith({
+  StudentBookingLoadedState copyWith({
     SBListStatus status,
     List<StudentBooking> bookingList,
     int page = 1,
     bool hasReachedMax,
   }) {
-    return ListLoadedState(
+    return StudentBookingLoadedState(
       status: status ?? this.status,
       bookingList: bookingList ?? this.bookingList,
       page: page ?? this.page,
@@ -40,4 +40,4 @@ class ListLoadedState extends StudentBookingState {
   List<Object> get props => [status, bookingList, page, hasReachedMax];
 }
 
-class ListLoadFailureState extends StudentBookingState {}
+class StudentBookingLoadFailureState extends StudentBookingState {}
