@@ -269,4 +269,15 @@ class ApiService {
     }
     return false;
   }
+
+  Future<int> getTotalLessonTime(String token) async {
+    final String endpoint = '/call/total';
+    final Response response = await _apiClient
+        .get('$endpoint', headers: {"Authorization": 'Bearer $token'});
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      return body['total'];
+    }
+    return null;
+  }
 }

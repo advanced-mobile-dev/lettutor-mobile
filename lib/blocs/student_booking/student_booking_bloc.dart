@@ -8,7 +8,7 @@ import 'package:lettutor_app/repositories/user_repository.dart';
 part 'student_booking_event.dart';
 part 'student_booking_state.dart';
 
-const _dataPerPage = 5;
+const _dataPerPage = 10;
 
 class StudentBookingBloc
     extends Bloc<StudentBookingEvent, StudentBookingState> {

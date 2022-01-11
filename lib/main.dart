@@ -16,6 +16,7 @@ import 'package:lettutor_app/repositories/payment_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:lettutor_app/screens/tutor_report/tutor_report_screen.dart';
 import 'blocs/authentication/authentication_bloc.dart';
+import 'blocs/lesson_time_bloc/lesson_time_bloc.dart';
 import 'blocs/student_booking/student_booking_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
 import 'blocs/user_profile/user_profile_bloc.dart';
@@ -24,7 +25,6 @@ import 'config/languages.dart';
 import 'config/routes.dart';
 import 'config/theme.dart';
 import 'data/repository.dart';
-import 'models/course.dart';
 import 'models/course/course.dart';
 import 'models/student_booking/student_booking.dart';
 import 'models/tutor/tutor.dart';
@@ -151,6 +151,11 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider<CoursesBloc>(
               create: (_) => CoursesBloc()..add(CoursesFetchEvent()),
+            ),
+            BlocProvider<LessonTimeBloc>(
+              create: (_) => LessonTimeBloc(
+                userRepository: RepositoryProvider.of<UserRepository>(context),
+              )..add(LessonTimeFetchEvent()),
             ),
           ],
           child: DashBoard(),

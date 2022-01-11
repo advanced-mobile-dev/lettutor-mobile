@@ -5,7 +5,6 @@ enum BookingHistoryStatus { success, loadingMore, failure }
 abstract class BookingHistoryState extends Equatable {
   const BookingHistoryState();
 
-  @override
   List<Object> get props => [];
 }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lettutor_app/blocs/lesson_time_bloc/lesson_time_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -44,24 +46,36 @@ class HomeTabHeader extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Container(
-              alignment: Alignment.centerLeft,
-              child: Row(children: [
-                Icon(
-                  Icons.timer,
-                  size: 20,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  '${AppLocalizations.of(context).totalLearnedTime}: 36 ${AppLocalizations.of(context).hours} 12 ${AppLocalizations.of(context).minutes}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppSizes.normalTextSize,
-                  ),
-                ),
-              ])),
+          BlocBuilder<LessonTimeBloc, LessonTimeState>(
+              builder: (context, state) {
+            if (state is LessonTimeLoadedState &&
+                state.learnedTime.inSeconds > 0)
+              return Container(
+                  alignment: Alignment.centerLeft,
+                  child: Row(children: [
+                    Icon(
+                      Icons.timer,
+                      size: 20,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Total lesson time: ${state.learnedTime.inHours} ${AppLocalizations.of(context).hours} ${state.learnedTime.inMinutes.remainder(60)} ${AppLocalizations.of(context).minutes}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppSizes.normalTextSize,
+                      ),
+                    ),
+                  ]));
+            return Text(
+              'Welcome to lettutor',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: AppSizes.normalTextSize,
+              ),
+            );
+          })
         ],
       ),
     );

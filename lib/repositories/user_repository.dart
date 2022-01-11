@@ -50,4 +50,11 @@ class UserRepository {
     return ApiService()
         .reportTutor(userToken.accessToken.token, userId, content);
   }
+
+  Future<Duration> getLessonTime() async {
+    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
+    final int total =
+        await ApiService().getTotalLessonTime(userToken.accessToken.token);
+    return Duration(minutes: total);
+  }
 }
