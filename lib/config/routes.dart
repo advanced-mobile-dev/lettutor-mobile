@@ -7,7 +7,7 @@ class LettutorRoutes {
   static const signIn = 'sign-in';
   static const forgetPassword = 'forget-password';
   static const history = 'history';
-  static const tutorProfile = 'tutor-profile';
+  static const tutorProfile = 'tutorprofile';
   static const tutorSchedule = 'tutor-calendar';
   static const booking = 'booking';
   static const courseDetail = 'course-detail';
@@ -15,4 +15,5 @@ class LettutorRoutes {
   static const changePassword = 'change-password';
   static const languageSetting = 'language-setting';
   static const videoConference = 'video-conference';
+  static const tutorReport = 'tutor-report';
 }

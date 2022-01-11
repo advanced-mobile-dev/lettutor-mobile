@@ -9,6 +9,8 @@ import 'package:lettutor_app/models/course/course_list.dart';
 import 'package:lettutor_app/models/schedule/booking_info.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
+import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
 import 'package:lettutor_app/models/tutor_schedule/tutor_schedule_list.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
@@ -84,7 +86,8 @@ class ApiService {
       "q": keyword
     });
     if (response.statusCode == 200) {
-      final TutorList tutorList = TutorList.fromJson(jsonDecode(response.body));
+      final TutorList tutorList =
+          TutorList.fromJson(jsonDecode(response.body), keyword);
       return tutorList;
     }
     return null;
@@ -227,5 +230,43 @@ class ApiService {
       return tutorList;
     }
     return null;
+  }
+
+  Future<Tutor> getTutorById(String token, String id) async {
+    final String endpoint = '/tutor/$id';
+    final Response response = await _apiClient
+        .get('$endpoint', headers: {"Authorization": 'Bearer $token'});
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final Tutor tutor = Tutor.fromJson(body);
+      TutorBasicInfo tutorBasicInfo =
+          TutorBasicInfo.fromJson(body['User'] ?? {});
+      tutor.tutorBasicInfo = tutorBasicInfo;
+      return tutor;
+    }
+    return null;
+  }
+
+  Future<bool> favoriteTutor(String token, String id) async {
+    final String endpoint = '/user/manageFavoriteTutor';
+    final body = {"tutorId": id};
+    final Response response = await _apiClient.post('$endpoint',
+        body: body, headers: {"Authorization": 'Bearer $token'});
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> reportTutor(String token, String userId, String content) async {
+    final String endpoint = '/report';
+    final body = {"tutorId": userId, 'content': content};
+    final Response response = await _apiClient.post('$endpoint',
+        body: body, headers: {"Authorization": 'Bearer $token'});
+    if (response.statusCode == 200) {
+      print(response.body);
+      return true;
+    }
+    return false;
   }
 }

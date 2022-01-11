@@ -10,15 +10,21 @@ class TutorList {
     this.data,
   });
 
-  factory TutorList.fromJson(dynamic json) {
+  factory TutorList.fromJson(dynamic json, String keyword) {
+    List<Tutor> tmpTutors = <Tutor>[];
     List<Tutor> tutors = <Tutor>[];
     int count = json['count'] as int;
-    tutors = (json['rows'] as List).map((element) {
+    tmpTutors = (json['rows'] as List).map((element) {
       Tutor tutor = Tutor.fromJson(element);
       TutorBasicInfo tutorBasicInfo = TutorBasicInfo.fromJson(element);
       tutor.tutorBasicInfo = tutorBasicInfo;
       return tutor;
     }).toList();
+    tmpTutors.forEach((element) {
+      if (element.tutorBasicInfo.name
+          .toLowerCase()
+          .contains(keyword.toLowerCase())) tutors.add(element);
+    });
     return TutorList(
       count: count,
       data: tutors,

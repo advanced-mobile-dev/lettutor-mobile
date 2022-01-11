@@ -18,6 +18,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
   final _scrollController = ScrollController();
   @override
   void initState() {
+    context.read<StudentBookingBloc>().add(StudentBookingRefreshEvent());
     _scrollController.addListener(() {
       if (_isBottom)
         context.read<StudentBookingBloc>().add(StudentBookingLoadMoreEvent());

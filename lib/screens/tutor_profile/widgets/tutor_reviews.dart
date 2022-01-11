@@ -4,6 +4,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/models/tutor/tutor_feedback.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
+import 'package:lettutor_app/widgets/app_circle_avatar.dart';
 
 class TutorReviews extends StatelessWidget {
   final List<TutorFeedback> tutorFeedbacks;
@@ -45,11 +46,11 @@ class RatingComment extends StatelessWidget {
           vertical: AppSizes.pagePadding * 1.5,
           horizontal: AppSizes.pagePadding),
       decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.grey.withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 3,
                 offset: Offset(0, 3))
@@ -59,12 +60,9 @@ class RatingComment extends StatelessWidget {
           Container(
               child: Row(
             children: <Widget>[
-              ClipOval(
-                child: Image.network(
-                  feedback.feedbacker.avatar,
-                  width: 30.0,
-                  height: 30.0,
-                ),
+              NetworkCircleAvatar(
+                url: feedback.feedbacker.avatar,
+                radius: 15,
               ),
               SizedBox(
                 width: 10,

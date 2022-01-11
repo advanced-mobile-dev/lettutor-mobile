@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/routes.dart';
 import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/screens/tutor_profile/tutor_profile.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 
 class TutorItemWidget extends StatelessWidget {
@@ -13,8 +13,8 @@ class TutorItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => TutorProfile(tutor: tutor)));
+        Navigator.pushNamed(context, LettutorRoutes.tutorProfile,
+            arguments: tutor);
       },
       child: Container(
         decoration: BoxDecoration(

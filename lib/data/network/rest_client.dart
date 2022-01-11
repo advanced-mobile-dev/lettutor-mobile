@@ -30,6 +30,7 @@ class RestClient {
       Map<String, dynamic> body,
       Map<String, dynamic> params}) {
     var uri = Uri.https(_baseUrl, path, params);
+    print(body);
     if (headers == null) headers = {};
     headers['Content-type'] = 'application/json';
     return http

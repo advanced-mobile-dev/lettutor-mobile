@@ -20,7 +20,6 @@ class Tutor {
   String createdAt;
   String updatedAt;
   bool isFavorite;
-  int avgRating;
   int price;
 
   Tutor(
@@ -43,7 +42,6 @@ class Tutor {
       this.updatedAt,
       this.tutorBasicInfo,
       this.isFavorite,
-      this.avgRating,
       this.price});
 
   Tutor.fromJson(Map<String, dynamic> json) {
@@ -68,7 +66,6 @@ class Tutor {
         ? new TutorBasicInfo.fromJson(json['tutor'])
         : null;
     isFavorite = json['isFavorite'];
-    avgRating = json['avgRating'];
     price = json['price'];
   }
 
@@ -95,7 +92,6 @@ class Tutor {
       data['tutor'] = this.tutorBasicInfo.toJson();
     }
     data['isFavorite'] = this.isFavorite;
-    data['avgRating'] = this.avgRating;
     data['price'] = this.price;
     return data;
   }

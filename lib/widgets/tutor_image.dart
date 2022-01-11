@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/config/assets.dart';
+import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 
 import 'app_circle_avatar.dart';
@@ -69,7 +70,11 @@ class TutorImageWidget extends StatelessWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    Text(tutorBasicInfo.country,
+                    Text(
+                        AppConfig.countries
+                            .firstWhere((element) =>
+                                element.code == tutorBasicInfo.country)
+                            .name,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: AppSizes.smallTextSize))

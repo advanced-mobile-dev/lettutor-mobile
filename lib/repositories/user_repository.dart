@@ -39,4 +39,15 @@ class UserRepository {
         await ApiService().getBookingHistory(perPage, page, dateTimeLte);
     return data;
   }
+
+  Future<bool> favoriteTutor(String id) async {
+    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
+    return ApiService().favoriteTutor(userToken.accessToken.token, id);
+  }
+
+  Future<bool> reportTutor(String userId, String content) async {
+    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
+    return ApiService()
+        .reportTutor(userToken.accessToken.token, userId, content);
+  }
 }

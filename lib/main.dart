@@ -5,12 +5,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
 import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
 import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
+import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
+import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
+import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/repositories/app_settings_repo.dart';
 import 'package:lettutor_app/repositories/payment_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
+import 'package:lettutor_app/screens/tutor_report/tutor_report_screen.dart';
 import 'blocs/authentication/authentication_bloc.dart';
 import 'blocs/student_booking/student_booking_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
@@ -106,9 +110,6 @@ class MyApp extends StatelessWidget {
         locale: Locale(state.locale),
         theme: state.isDarkTheme ? AppTheme.themeDataDark : AppTheme.themeData,
         routes: _registerRoutes(),
-        // initialRoute: userProvider.loggedInStatus == AuthStatus.NotLoggedIn
-        //     ? LettutorRoutes.start
-        //     : LettutorRoutes.home,
         onGenerateRoute: _registerRoutesWithParameters,
         builder: (context, child) {
           return BlocListener<AuthenticationBloc, AuthenticationState>(
@@ -161,9 +162,7 @@ class MyApp extends StatelessWidget {
             create: (context) => UserProfileBloc(_userRepo),
             child: UserProfileScreen());
       },
-      LettutorRoutes.start: (context) => StartScreen(),
-      LettutorRoutes.signUp: (context) => SignUpScreen(),
-      LettutorRoutes.signIn: (context) => LoginScreen(),
+
       LettutorRoutes.history: (context) {
         return BlocProvider(
             create: (context) => BookingHistoryBloc(
@@ -171,7 +170,10 @@ class MyApp extends StatelessWidget {
               ..add(BookingHistoryFetchDataEvent()),
             child: HistoryScreen());
       },
-      LettutorRoutes.tutorProfile: (context) => TutorProfile(),
+
+      LettutorRoutes.start: (context) => StartScreen(),
+      LettutorRoutes.signUp: (context) => SignUpScreen(),
+      LettutorRoutes.signIn: (context) => LoginScreen(),
       LettutorRoutes.changePassword: (context) => ChangePasswordScreen(),
       LettutorRoutes.languageSetting: (context) => LanguageSettingScreen(),
       LettutorRoutes.forgetPassword: (context) => ForgetPasswordScreen(),
@@ -224,17 +226,37 @@ class MyApp extends StatelessWidget {
         return MaterialPageRoute(
             builder: (context) => VideoConferenceScreen(studentBooking));
         break;
+
+      case LettutorRoutes.tutorProfile:
+        final tutor = routeSettings.arguments as Tutor;
+        return MaterialPageRoute(
+            builder: (context) => MultiBlocProvider(providers: [
+                  BlocProvider(
+                    create: (_) => TutorProfileBloc(
+                        tutor: tutor,
+                        tutorRepository: context.read<TutorRepository>())
+                      ..add(TutorProfileFetchEvent()),
+                  ),
+                  BlocProvider(
+                    create: (_) => FavoriteTutorBloc(
+                        userRepository: context.read<UserRepository>()),
+                  )
+                ], child: TutorProfile()));
+        break;
+
+      case LettutorRoutes.tutorReport:
+        final tutor = routeSettings.arguments as Tutor;
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+              create: (_) => TutorReportBloc(
+                  tutor: tutor, userRepository: context.read<UserRepository>()),
+              child: TutorReportScreen()),
+        );
+        break;
     }
 
     // return ErrorScreen();
     return null;
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return StartScreen();
   }
 }
 

@@ -7,6 +7,6 @@ abstract class TutorProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FavoriteTutorEvent extends TutorProfileEvent {}
+class TutorProfileRefreshEvent extends TutorProfileEvent {}
 
-class ReportTutorEvent extends TutorProfileEvent {}
+class TutorProfileFetchEvent extends TutorProfileEvent {}
