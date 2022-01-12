@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/models/user/user_learn_topic.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user_wallet.dart';
 
-class User {
+class User extends Equatable {
   String id;
   String email;
   String name;
@@ -111,4 +112,7 @@ class User {
         timezone: this.timezone,
         userToken: this.userToken);
   }
+
+  @override
+  List<Object> get props => [id, email, name];
 }

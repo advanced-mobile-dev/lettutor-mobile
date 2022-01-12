@@ -25,20 +25,20 @@ class BottomNavBar extends StatelessWidget {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.home,
+            Icons.home_outlined,
           ),
           label: AppLocalizations.of(context).home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.people),
+          icon: Icon(Icons.people_alt_outlined),
           label: AppLocalizations.of(context).tutors,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.picture_as_pdf),
+          icon: Icon(Icons.menu_book_rounded),
           label: AppLocalizations.of(context).courses,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
+          icon: Icon(Icons.settings_applications_sharp),
           label: AppLocalizations.of(context).settings,
         ),
       ],

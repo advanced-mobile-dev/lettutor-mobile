@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,8 +29,9 @@ class CourseDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Image.network(
-              course.imageUrl,
+            CachedNetworkImage(
+              placeholder: (context, url) => Image.asset(Assets.loadingImage),
+              imageUrl: course.imageUrl,
               fit: BoxFit.cover,
             ),
             Container(

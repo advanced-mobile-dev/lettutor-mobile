@@ -11,5 +11,6 @@ class FetchUserInfodEvent extends UserProfileEvent {}
 
 class SavePressedEvent extends UserProfileEvent {
   final User user;
-  SavePressedEvent(this.user);
+  final XFile avatar;
+  SavePressedEvent(this.user, {this.avatar});
 }

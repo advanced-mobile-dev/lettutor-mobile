@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/models/user/user.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 
@@ -31,7 +32,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     final LoadedState currentState = state;
     emit(currentState.copyWith(userInfoStatus: UserInfoStatus.saving));
     try {
-      final user = await _userRepository.putUserInfo(event.user);
+      final user = await _userRepository.putUserInfo(event.user, event.avatar);
       emit(user != null
           ? currentState.copyWith(
               user: user, userInfoStatus: UserInfoStatus.success)

@@ -25,7 +25,7 @@ class _TutorsSearchBarState extends State<TutorsSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 45,
       decoration: BoxDecoration(
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(15),

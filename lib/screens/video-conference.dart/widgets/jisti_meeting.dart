@@ -62,11 +62,15 @@ class _MeetingState extends State<Meeting> {
       }
     }
     // Define meetings options here
-
     String serverUrl = '${_meetingRoom.sub}';
+    print('server url    $serverUrl');
+    print('room          ${_meetingRoom.room}');
+    print('email         ${_meetingRoom.userCall.email}');
+    print('userAvatarURL ${_meetingRoom.userCall.avatar}');
+
     var options = JitsiMeetingOptions(room: '${_meetingRoom.room}')
       ..serverURL = serverUrl
-      // ..token = '${_meetingRoom.token}'
+      ..token = '${_meetingRoom.token}'
       ..subject = _meetingRoom.roomName
       ..userDisplayName = _meetingRoom.userCall.name
       ..userAvatarURL = _meetingRoom.userCall.avatar
@@ -76,7 +80,7 @@ class _MeetingState extends State<Meeting> {
       ..videoMuted = false
       ..featureFlags.addAll(featureFlags)
       ..webOptions = {
-        "roomName": _meetingRoom.room,
+        "roomName": _meetingRoom.roomName,
         "width": "100%",
         "height": "100%",
         "enableWelcomePage": false,
@@ -84,7 +88,6 @@ class _MeetingState extends State<Meeting> {
         "userInfo": {"displayName": _meetingRoom.userCall.name}
       };
 
-    debugPrint("JitsiMeetingOptions: $options");
     await JitsiMeet.joinMeeting(
       options,
       listener: JitsiMeetingListener(

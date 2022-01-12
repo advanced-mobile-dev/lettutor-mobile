@@ -4,7 +4,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/models/tutor/tutor_feedback.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
-import 'package:lettutor_app/widgets/app_circle_avatar.dart';
+import 'package:lettutor_app/widgets/network_circle_avatar.dart';
 
 class TutorReviews extends StatelessWidget {
   final List<TutorFeedback> tutorFeedbacks;

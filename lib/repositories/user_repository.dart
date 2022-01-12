@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/data/network/api_service.dart';
 import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
@@ -14,16 +17,35 @@ class UserRepository {
 
   Future<User> getUser() async {
     final UserToken userToken = Repository.sharedPrefsHelper.userToken;
-    final user = await ApiService().getUserInfo(userToken.accessToken.token);
-    _user = user;
-    return user;
+    final resUser = await ApiService().getUserInfo(userToken.accessToken.token);
+    if (resUser != null) _user = resUser;
+    return resUser;
   }
 
-  Future<User> putUserInfo(User user) async {
+  Future<User> putUserInfo(User user, XFile avatar) async {
     final UserToken userToken = Repository.sharedPrefsHelper.userToken;
-    final resUser =
-        await ApiService().putUserInfo(userToken.accessToken.token, user);
-    return resUser;
+    if (avatar != null) {
+      final putUserInfo = ApiService().putUserInfo(
+        userToken.accessToken.token,
+        user,
+      );
+      final putAvatar =
+          ApiService().putUserAvatar(userToken.accessToken.token, avatar);
+      final results = await Future.wait([putUserInfo, putAvatar]);
+      if (results != null && results.length == 2) {
+        if (results[0] != null) _user = results[0];
+        if (results[1] != null) _user = results[1];
+        return results[1];
+      }
+      return null;
+    } else {
+      final resUser = await ApiService().putUserInfo(
+        userToken.accessToken.token,
+        user,
+      );
+      if (resUser != null) _user = resUser;
+      return resUser;
+    }
   }
 
   Future<StudentBookingList> getBookingList(

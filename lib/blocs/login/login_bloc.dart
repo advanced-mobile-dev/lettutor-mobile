@@ -29,6 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       );
       if (user != null) emit(LoginSuccessState());
     } catch (error) {
+      print(error);
       String message = 'Login failed';
       if (error is ApiException) {
         message = error.message ?? message;

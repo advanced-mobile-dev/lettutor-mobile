@@ -56,3 +56,8 @@ class TutorsLoadFailureState extends TutorsState {
   @override
   List<Object> get props => [];
 }
+
+class FavoriteTutorsLoadedState extends TutorsState {
+  @override
+  List<Object> get props => [];
+}

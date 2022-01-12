@@ -49,7 +49,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
               context.read<CoursesBloc>()..add(CoursesRefreshEvent());
             }),
             SliverPadding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.only(left: 10, bottom: 10, right: 10, top: 5),
               sliver: SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: _widthScreen / 2 + 30,

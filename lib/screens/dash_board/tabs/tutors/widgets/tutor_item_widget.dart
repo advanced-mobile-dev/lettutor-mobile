@@ -47,7 +47,14 @@ class TutorItemWidget extends StatelessWidget {
                       .split(',')
                       .map((e) => Container(
                             decoration: BoxDecoration(
-                                color: Colors.blue[100],
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.4),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
+                                      offset: Offset(0, 1))
+                                ],
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(10)),
                             margin: EdgeInsets.all(3),
                             padding: EdgeInsets.symmetric(

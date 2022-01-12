@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/screens/user_profile/widgets/profile_header.dart';
@@ -14,6 +15,7 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  XFile _pickedFile;
   LoadingOverlay _loadingOverlay;
   @override
   void initState() {
@@ -59,13 +61,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             if (state is LoadedState)
               return SingleChildScrollView(
                   child: Container(
-                      padding: EdgeInsets.all(AppSizes.pagePadding),
-                      child: Column(
-                        children: <Widget>[
-                          UserProfileHeader(state.user),
-                          UserInfoForm(state.user),
-                        ],
-                      )));
+                padding: EdgeInsets.all(AppSizes.pagePadding),
+                child: UserInfoForm(state.user),
+              ));
             return SizedBox();
           },
         ));

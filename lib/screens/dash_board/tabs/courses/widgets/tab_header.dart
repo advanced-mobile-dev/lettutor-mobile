@@ -21,7 +21,7 @@ class TabHeader extends StatelessWidget {
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: AppSizes.hugeTextSize)),
+                    fontSize: AppSizes.largeTextSize)),
             Badge(
               // showBadge: _tutorsBloc.tutorFilter.specialities.isNotEmpty,
               showBadge: _coursesBloc.courseFilter.filterNumber() != '',

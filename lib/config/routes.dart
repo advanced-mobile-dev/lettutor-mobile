@@ -16,4 +16,5 @@ class LettutorRoutes {
   static const languageSetting = 'language-setting';
   static const videoConference = 'video-conference';
   static const tutorReport = 'tutor-report';
+  static const favoriteTutors = 'favorite-tutors';
 }

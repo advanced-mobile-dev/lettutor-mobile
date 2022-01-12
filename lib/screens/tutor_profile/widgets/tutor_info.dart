@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 
@@ -22,8 +23,9 @@ class TutorInfo extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                ),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: AppSizes.normalTextSize,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -45,11 +47,16 @@ class TutorInfo extends StatelessWidget {
     Widget _buildTag(String text) {
       return Container(
           padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: Colors.blue[100]),
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 1))
+          ], borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: Text(
             text,
-            style: TextStyle(color: Colors.blueGrey[700]),
+            style: TextStyle(color: Colors.black),
           ));
     }
 

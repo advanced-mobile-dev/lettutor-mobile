@@ -1,6 +1,9 @@
 import 'dart:convert';
-
+import 'dart:typed_data';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
 import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/course/course_level.dart';
@@ -115,6 +118,26 @@ class ApiService {
       final body = jsonDecode(response.body);
       final User user = User.fromJson(body['user']);
       return user;
+    }
+    return null;
+  }
+
+  Future<User> putUserAvatar(String token, XFile avatar) async {
+    final String endpoint = '/user/uploadAvatar';
+
+    var uri = Uri.https('sandbox.api.lettutor.com', endpoint, {});
+    final imagePath = avatar.path.split('.').last;
+    var request = http.MultipartRequest('POST', uri)
+      ..files.add(await http.MultipartFile.fromPath('avatar', avatar.path,
+          contentType: new MediaType('image', imagePath)))
+      ..headers.addAll({
+        "Authorization": 'Bearer $token',
+      });
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      final body = await response.stream.bytesToString();
+      return User.fromJson(jsonDecode(body));
     }
     return null;
   }

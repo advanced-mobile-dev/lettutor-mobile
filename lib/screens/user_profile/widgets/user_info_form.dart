@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/models/country.dart';
 import 'package:lettutor_app/models/level.dart';
 import 'package:lettutor_app/models/user/user.dart';
+import 'package:lettutor_app/screens/user_profile/widgets/profile_header.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,6 +29,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
   Level _level;
   String _birthDay;
   Country _country;
+  XFile _pickedFile;
 
   @override
   void initState() {
@@ -49,6 +52,12 @@ class _UserInfoFormState extends State<UserInfoForm> {
           key: _formKey,
           child: Column(
             children: [
+              UserProfileHeader(
+                user: user,
+                onPickedImage: (pickedImage) {
+                  _pickedFile = pickedImage;
+                },
+              ),
               _spacing,
               CustomTextField(
                 initialValue: user.phone,
@@ -81,18 +90,18 @@ class _UserInfoFormState extends State<UserInfoForm> {
                 function: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    context
-                        .read<UserProfileBloc>()
-                        .add(SavePressedEvent(user.copyWith(
+                    context.read<UserProfileBloc>().add(SavePressedEvent(
+                        user.copyWith(
                           name: _name,
                           phone: _phone,
                           birthday: _birthDay,
                           country: _country.code.toUpperCase(),
                           level: _level.code,
-                        )));
+                        ),
+                        avatar: _pickedFile));
                   }
                 },
-                text: 'Save ',
+                text: 'Save',
               )
             ],
           ),
@@ -137,7 +146,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
       autoFocus: false,
       title: 'Country',
       controller: _countryController,
-      iconData: Icons.date_range,
+      iconData: Icons.language,
       keyboardType: TextInputType.text,
       validator: (value) {
         if (value.isEmpty) return 'Country is required';

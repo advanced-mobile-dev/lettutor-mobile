@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:lettutor_app/data/network/api_exception.dart';
+import 'package:http_parser/http_parser.dart';
 
 class RestClient {
   RestClient._();
@@ -30,9 +31,9 @@ class RestClient {
       Map<String, dynamic> body,
       Map<String, dynamic> params}) {
     var uri = Uri.https(_baseUrl, path, params);
-    print(body);
+
     if (headers == null) headers = {};
-    headers['Content-type'] = 'application/json';
+    headers['Content-Type'] = 'application/json';
     return http
         .post(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))
@@ -64,8 +65,6 @@ class RestClient {
 
   _handleResponse(http.Response response) {
     final int statusCode = response.statusCode;
-    // print(statusCode);
-    // print(response.body);
     if (statusCode == 500) {
       final res = jsonDecode(response.body);
       final statusCode = res['statusCode'];

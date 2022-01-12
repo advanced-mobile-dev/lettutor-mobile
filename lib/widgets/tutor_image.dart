@@ -6,7 +6,7 @@ import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 
-import 'app_circle_avatar.dart';
+import 'network_circle_avatar.dart';
 
 class TutorImageWidget extends StatelessWidget {
   const TutorImageWidget({

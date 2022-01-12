@@ -1,22 +1,25 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
 import 'package:lettutor_app/blocs/authentication/authentication_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/assets.dart';
-import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/widgets/app_circle_avatar.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SettingsTab extends StatelessWidget {
+import 'widgets/account_settings.dart';
+import 'widgets/advanced_settings.dart';
+
+class SettingsTab extends StatefulWidget {
+  @override
+  State<SettingsTab> createState() => _SettingsTabState();
+}
+
+class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
     final titleStyle = TextStyle(
         color: Theme.of(context).primaryColor,
         fontWeight: FontWeight.bold,
-        fontSize: AppSizes.hugeTextSize);
+        fontSize: AppSizes.largeTextSize);
 
     return SingleChildScrollView(
       child: Padding(
@@ -25,113 +28,10 @@ class SettingsTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(AppLocalizations.of(context).settings, style: titleStyle),
+            AccountSettings(),
+            AdvancedSettings(),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
-            ),
-            BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context, state) {
-                if (!(state is AuthenticatedState)) return SizedBox();
-                final currentState = (state as AuthenticatedState);
-                return Row(
-                  children: <Widget>[
-                    NetworkCircleAvatar(
-                        url: currentState.user.avatar, radius: 30),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(currentState.user.name,
-                            style: TextStyle(
-                                fontSize: AppSizes.normalTextSize,
-                                fontWeight: FontWeight.bold)),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(currentState.user.email,
-                            style: TextStyle(
-                                fontSize: AppSizes.normalTextSize,
-                                fontWeight: FontWeight.normal))
-                      ],
-                    )
-                  ],
-                );
-              },
-            ),
-            SizedBox(
-              height: AppSizes.verticalItemSpacing,
-            ),
-            Divider(
-              thickness: 1.5,
-            ),
-            SizedBox(
-              height: AppSizes.verticalItemSpacing,
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: AppSizes.verticalItemSpacing,
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(AppLocalizations.of(context).accountSettings,
-                        style: TextStyle(
-                            fontSize: AppSizes.normalTextSize,
-                            color: Colors.grey)),
-                  ),
-                  SizedBox(
-                    height: AppSizes.verticalItemSpacing,
-                  ),
-                  SettingItem(
-                    title: AppLocalizations.of(context).editProfile,
-                    function: () {
-                      Navigator.of(context)
-                          .pushNamed(LettutorRoutes.userProfile);
-                    },
-                  ),
-                  SettingItem(
-                    title: AppLocalizations.of(context).changePassword,
-                    function: () {
-                      Navigator.of(context)
-                          .pushNamed(LettutorRoutes.changePassword);
-                    },
-                  ),
-                  SettingItem(
-                    title: AppLocalizations.of(context).language,
-                    function: () {
-                      Navigator.of(context)
-                          .pushNamed(LettutorRoutes.languageSetting);
-                    },
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          AppLocalizations.of(context).darkMode,
-                          style: TextStyle(
-                              fontSize: AppSizes.normalTextSize,
-                              fontWeight: FontWeight.normal),
-                        ),
-                        BlocBuilder<AppSettingsBloc, AppSettingsState>(
-                            builder: (context, state) => Switch(
-                                  value: state.isDarkTheme,
-                                  onChanged: (bool value) {
-                                    context.read<AppSettingsBloc>().add(
-                                        ThemeChangedEvent(isDarkTheme: value));
-                                  },
-                                ))
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: AppSizes.verticalItemSpacing * 3,
             ),
             SubmitButton(
                 text: AppLocalizations.of(context).logout,
@@ -142,32 +42,5 @@ class SettingsTab extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class SettingItem extends StatelessWidget {
-  final Function() function;
-  final String title;
-  SettingItem({@required this.function, @required this.title});
-
-  final TextStyle textStyle = TextStyle(
-      fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.normal);
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: function,
-        child: Container(
-          height: 50,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                title,
-                style: textStyle,
-              ),
-              Icon(Icons.keyboard_arrow_right)
-            ],
-          ),
-        ));
   }
 }
