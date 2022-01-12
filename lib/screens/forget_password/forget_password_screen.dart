@@ -19,11 +19,10 @@ class ForgetPasswordScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(AppLocalizations.of(context).forgetPasswordContent,
-                maxLines: 2,
-                style: TextStyle(
-                    fontSize: AppSizes.normalTextSize,
-                    fontWeight: FontWeight.w300)),
+            Text(
+              AppLocalizations.of(context).forgetPasswordContent,
+              maxLines: 2,
+            ),
             SizedBox(
               height: 30,
             ),

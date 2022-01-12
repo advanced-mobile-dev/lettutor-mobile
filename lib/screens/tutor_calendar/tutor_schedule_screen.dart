@@ -62,8 +62,7 @@ class TutorScheduleScreen extends StatelessWidget {
                 height: 40,
                 child: Text(
                   '${MyDateUtils.getWeek(convertDate)}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                  style: Theme.of(context).textTheme.bodyText1,
                 ))
             : SizedBox(),
         Padding(
@@ -85,7 +84,6 @@ class TutorScheduleScreen extends StatelessWidget {
                     children: [
                       Text(
                         result,
-                        style: TextStyle(color: Colors.white),
                       ),
                       Icon(
                         Icons.arrow_drop_down,

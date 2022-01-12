@@ -45,8 +45,7 @@ class _TutorListWidgetState extends State<TutorListWidget> {
                 context.read<TutorsBloc>().add(TutorsRefreshEvent());
               }),
               SliverPadding(
-                  padding:
-                      EdgeInsets.only(left: 10, bottom: 10, right: 10, top: 5),
+                  padding: EdgeInsets.only(bottom: 10, top: 10),
                   sliver: SliverList(
                       delegate: SliverChildBuilderDelegate(
                           (context, index) =>

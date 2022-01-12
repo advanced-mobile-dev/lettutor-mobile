@@ -29,14 +29,14 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Column(
           children: [
             Text(
               AppLocalizations.of(context).specialities,
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.start,
             ),
             const SizedBox(
@@ -69,6 +69,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                       child: SubmitButton(
                           text: 'Clear',
                           backgroundColor: Colors.grey,
+                          textColor: Colors.white,
                           function: () {
                             setState(() {
                               _selectedSpec.clear();
@@ -89,8 +90,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                       flex: 1,
                       child: SubmitButton(
                           text: 'Apply ${_selectedSpec.isEmpty ? '' : '(1)'}',
-                          backgroundColor:
-                              Theme.of(context).primaryColor.withOpacity(0.8),
+                          backgroundColor: Theme.of(context).primaryColor,
                           function: () {
                             Navigator.pop(context,
                                 TutorFilter(specialities: _selectedSpec));

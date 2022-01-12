@@ -17,8 +17,8 @@ class BookingItemWidget extends StatelessWidget {
         studentBooking.scheduleDetail.tutorBasicInfo;
     if (tutorBasicInfo == null) return SizedBox();
     return Container(
-      color: Colors.white,
-      padding: EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 5),
+      color: Theme.of(context).cardColor,
+      padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 10),
       child: Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,18 +33,14 @@ class BookingItemWidget extends StatelessWidget {
                       MyDateUtils.getTimeFrame(
                           studentBooking.scheduleDetail.startPeriod,
                           studentBooking.scheduleDetail.endPeriod),
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      )),
+                      style: Theme.of(context).textTheme.bodyText1),
                   SizedBox(
                     height: 5,
                   ),
                   Text(
-                    MyDateUtils.formatDate2(
-                        studentBooking.scheduleDetail.startPeriod),
-                    style: TextStyle(color: Colors.black, fontSize: 14),
-                  ),
+                      MyDateUtils.formatDate2(
+                          studentBooking.scheduleDetail.startPeriod),
+                      style: Theme.of(context).textTheme.bodyText2),
                 ],
               ),
             ),
@@ -55,7 +51,7 @@ class BookingItemWidget extends StatelessWidget {
                   children: [
                     TutorImageWidget(
                         tutorBasicInfo: tutorBasicInfo,
-                        height: 40,
+                        height: 50,
                         showRating: false),
                     studentBooking.bookingInfo.studentRequest == null
                         ? SizedBox()
@@ -83,8 +79,6 @@ class BookingItemWidget extends StatelessWidget {
                   },
                   width: 100,
                   height: 35,
-                  textColor: Colors.black,
-                  backgroundColor: Colors.grey[200],
                 ),
               )
             : SizedBox()

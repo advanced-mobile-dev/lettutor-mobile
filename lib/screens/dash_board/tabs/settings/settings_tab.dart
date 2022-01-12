@@ -16,29 +16,27 @@ class SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
-    final titleStyle = TextStyle(
-        color: Theme.of(context).primaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: AppSizes.largeTextSize);
-
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizes.pagePadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(AppLocalizations.of(context).settings, style: titleStyle),
-            AccountSettings(),
-            AdvancedSettings(),
-            SizedBox(
-              height: AppSizes.verticalItemSpacing * 3,
-            ),
-            SubmitButton(
-                text: AppLocalizations.of(context).logout,
-                function: () {
-                  context.read<AuthenticationBloc>().add(LogoutEvent());
-                }),
-          ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(AppSizes.pagePadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(AppLocalizations.of(context).settings,
+                  style: Theme.of(context).textTheme.headline4),
+              AccountSettings(),
+              AdvancedSettings(),
+              SizedBox(
+                height: AppSizes.verticalItemSpacing * 3,
+              ),
+              SubmitButton(
+                  text: AppLocalizations.of(context).logout,
+                  function: () {
+                    context.read<AuthenticationBloc>().add(LogoutEvent());
+                  }),
+            ],
+          ),
         ),
       ),
     );

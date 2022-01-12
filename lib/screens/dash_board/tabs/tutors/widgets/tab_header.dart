@@ -18,10 +18,7 @@ class TutorsTabHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(AppLocalizations.of(context).tutors,
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppSizes.largeTextSize)),
+                style: Theme.of(context).textTheme.headline4),
             Badge(
               showBadge: _tutorsBloc.tutorFilter.specialities.isNotEmpty,
               badgeContent: Text(
@@ -46,6 +43,7 @@ class TutorsTabHeader extends StatelessWidget {
                   icon: Icon(
                     Icons.filter_list_outlined,
                     size: 36,
+                    color: Theme.of(context).primaryColor,
                   )),
             )
           ],

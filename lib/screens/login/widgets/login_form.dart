@@ -111,9 +111,7 @@ class _LoginFormState extends State<LoginForm> {
                   padding: EdgeInsets.all(5),
                   alignment: Alignment.center,
                   child: Text(AppLocalizations.of(context).orContinueWith,
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: AppSizes.smallTextSize))),
+                      style: Theme.of(context).textTheme.caption)),
               SizedBox(
                 height: AppSizes.verticalItemSpacing,
               ),
@@ -176,12 +174,10 @@ Widget _buildFacebookButton(BuildContext context) {
         children: <Widget>[
           AppIcons.facebookIcon,
           SizedBox(
-            width: 5,
+            width: 10,
           ),
           Text(
             'Facebook',
-            style: TextStyle(
-                fontSize: AppSizes.smallTextSize, fontWeight: FontWeight.w400),
           )
         ],
       ),
@@ -235,16 +231,15 @@ Widget _buildGoogleButton(BuildContext context) {
     },
     child: Container(
       padding: EdgeInsets.all(8),
+      alignment: Alignment.center,
       child: Row(
         children: <Widget>[
           AppIcons.googleIcon,
           SizedBox(
-            width: 5,
+            width: 10,
           ),
           Text(
             'Google',
-            style: TextStyle(
-                fontSize: AppSizes.smallTextSize, fontWeight: FontWeight.w400),
           )
         ],
       ),

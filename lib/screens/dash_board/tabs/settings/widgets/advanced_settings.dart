@@ -20,8 +20,10 @@ class AdvancedSettings extends StatelessWidget {
           Container(
             alignment: Alignment.centerLeft,
             child: Text('Advanced settings',
-                style: TextStyle(
-                    fontSize: AppSizes.smallTextSize, color: Colors.grey[600])),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Colors.grey[600], fontSize: 13)),
           ),
           SizedBox(
             height: 10,
@@ -38,9 +40,6 @@ class AdvancedSettings extends StatelessWidget {
               children: <Widget>[
                 Text(
                   AppLocalizations.of(context).darkMode,
-                  style: TextStyle(
-                      fontSize: AppSizes.normalTextSize,
-                      fontWeight: FontWeight.normal),
                 ),
                 BlocBuilder<AppSettingsBloc, AppSettingsState>(
                     builder: (context, state) => Switch(

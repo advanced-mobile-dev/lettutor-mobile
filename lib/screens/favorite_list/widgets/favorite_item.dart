@@ -20,16 +20,7 @@ class FavoriteItemWidget extends StatelessWidget {
         context.read<FavoriteListBloc>().add(FavoriteListFetchEvent());
       },
       child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 1,
-                  blurRadius: 7,
-                  offset: Offset(1, 3))
-            ]),
+        decoration: BoxDecoration(color: Theme.of(context).cardColor),
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         margin: EdgeInsets.only(bottom: 15),
         child: Column(
@@ -59,17 +50,18 @@ class FavoriteItemWidget extends StatelessWidget {
                                 ],
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10)),
-                            margin: EdgeInsets.all(3),
+                            margin: EdgeInsets.only(bottom: 6, right: 6),
                             padding: EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 10),
                             child: Text(
-                              Speciality.data
-                                  .firstWhere((element) => element.code == e)
-                                  .name,
-                              style: TextStyle(
-                                  color: Colors.blueGrey[700],
-                                  fontSize: AppSizes.smallTextSize),
-                            ),
+                                Speciality.data
+                                    .firstWhere((element) => element.code == e)
+                                    .name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2
+                                    .copyWith(
+                                        fontSize: 13, color: Colors.black)),
                           ))
                       .toList()
                 ],
@@ -83,8 +75,7 @@ class FavoriteItemWidget extends StatelessWidget {
               child: Text(tutor.bio,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
-                  style: TextStyle(
-                      color: Colors.black, fontSize: AppSizes.smallTextSize)),
+                  style: Theme.of(context).textTheme.subtitle2),
             ),
           ],
         ),

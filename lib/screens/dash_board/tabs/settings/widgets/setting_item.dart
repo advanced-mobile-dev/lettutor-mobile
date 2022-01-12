@@ -9,8 +9,6 @@ class SettingItem extends StatelessWidget {
     @required this.title,
   });
 
-  final TextStyle textStyle = TextStyle(
-      fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.normal);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -23,7 +21,6 @@ class SettingItem extends StatelessWidget {
             children: <Widget>[
               Text(
                 title,
-                style: textStyle,
               ),
               const Expanded(child: SizedBox()),
               const Icon(Icons.keyboard_arrow_right),

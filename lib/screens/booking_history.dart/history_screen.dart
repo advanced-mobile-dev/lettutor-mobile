@@ -59,7 +59,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   },
                 ),
                 SliverPadding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     sliver: SliverList(
                         delegate: SliverChildBuilderDelegate(
                             (context, index) => Padding(

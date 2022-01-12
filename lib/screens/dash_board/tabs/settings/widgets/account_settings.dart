@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/routes.dart';
-import 'package:lettutor_app/models/user/user.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/widgets/network_circle_avatar.dart';
@@ -40,16 +39,12 @@ class _AccountSettingsState extends State<AccountSettings> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(_user.name,
-                            style: TextStyle(
-                                fontSize: AppSizes.normalTextSize,
-                                fontWeight: FontWeight.bold)),
+                            style: Theme.of(context).textTheme.bodyText1),
                         SizedBox(
                           height: 5,
                         ),
                         Text(_user.email,
-                            style: TextStyle(
-                                fontSize: AppSizes.normalTextSize,
-                                fontWeight: FontWeight.normal))
+                            style: Theme.of(context).textTheme.bodyText2)
                       ],
                     )
                   ],
@@ -64,11 +59,12 @@ class _AccountSettingsState extends State<AccountSettings> {
             height: AppSizes.verticalItemSpacing,
           ),
           Container(
-            alignment: Alignment.centerLeft,
-            child: Text('Account settings',
-                style: TextStyle(
-                    fontSize: AppSizes.smallTextSize, color: Colors.grey[600])),
-          ),
+              alignment: Alignment.centerLeft,
+              child: Text('Account settings',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(fontSize: 13, color: Colors.grey[600]))),
           SizedBox(
             height: 10,
           ),

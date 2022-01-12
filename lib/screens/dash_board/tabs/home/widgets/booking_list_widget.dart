@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/student_booking/student_booking_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/widgets/empty_widget.dart';
 import 'package:lettutor_app/widgets/error_widget.dart';
@@ -61,18 +60,15 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withOpacity(0.1),
-                  ),
+                      // color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      ),
                   height: 45,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
                         'Others',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: AppSizes.normalTextSize),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ],
                   ),

@@ -36,7 +36,6 @@ class CustomTextField extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               labelText: title,
-              labelStyle: TextStyle(fontSize: 14),
               icon: Icon(
                 iconData,
               ),

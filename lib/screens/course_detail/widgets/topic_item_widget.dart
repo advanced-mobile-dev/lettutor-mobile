@@ -16,8 +16,10 @@ class TopicItemWidget extends StatelessWidget {
           children: [
             TextSpan(
               text: '${topic.orderCourse + 1}. ${topic.name}',
-              style: new TextStyle(
-                  fontSize: AppSizes.normalTextSize, color: Colors.blue),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .copyWith(color: Colors.blue, fontSize: 14),
               recognizer: new TapGestureRecognizer()
                 ..onTap = () async {
                   await customLaunch(context, topic.nameFile);
@@ -38,13 +40,11 @@ class TopicItemWidget extends StatelessWidget {
     );
   }
 
-  Future<void> customLaunch(context, command) async {
+  Future<void> customLaunch(context, String command) async {
+    command = command.replaceAll(' ', '%20');
     if (await canLaunch(command)) {
-      await launch(command).catchError((onError) {
-        print(onError);
-      });
+      await launch(command);
     } else {
-      print('Could not launch $command');
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(

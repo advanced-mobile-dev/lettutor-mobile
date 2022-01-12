@@ -22,10 +22,7 @@ class TutorInfo extends StatelessWidget {
               ),
               Text(
                 title,
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: AppSizes.normalTextSize,
-                    fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ],
           ),

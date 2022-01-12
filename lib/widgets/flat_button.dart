@@ -18,7 +18,7 @@ class AppFlatButton extends StatelessWidget {
     return TextButton(
       style: flatButtonStyle,
       onPressed: function,
-      child: Text(text, style: TextStyle(fontSize: AppSizes.normalTextSize)),
+      child: Text(text),
     );
   }
 }

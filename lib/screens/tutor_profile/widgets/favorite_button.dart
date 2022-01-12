@@ -4,16 +4,12 @@ import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/widgets/loading_overlay.dart';
 
 class FavoriteButton extends StatelessWidget {
   final Tutor tutor;
   FavoriteButton(this.tutor);
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle buttonStyle = TextButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
-        backgroundColor: Colors.transparent);
     return BlocListener<FavoriteTutorBloc, FavoriteTutorState>(
         listener: (context, favoriteState) {
           if (favoriteState is FavoriteSuccessState) {
@@ -31,7 +27,6 @@ class FavoriteButton extends StatelessWidget {
             onPressed: () {
               context.read<FavoriteTutorBloc>().add(FavoriteTutorEvent(tutor));
             },
-            style: buttonStyle,
             child: Column(
               children: <Widget>[
                 tutor.isFavorite ?? false
@@ -46,9 +41,7 @@ class FavoriteButton extends StatelessWidget {
                   height: 4,
                 ),
                 Text('Favorite',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: AppSizes.normalTextSize,
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: tutor.isFavorite ?? false
                             ? Colors.red
                             : Theme.of(context).primaryColor))

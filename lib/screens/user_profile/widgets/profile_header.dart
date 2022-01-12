@@ -43,9 +43,9 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
         child: Stack(
           children: <Widget>[
             _pickedFile == null
-                ? NetworkCircleAvatar(url: widget.user.avatar, radius: 40)
+                ? NetworkCircleAvatar(url: widget.user.avatar, radius: 35)
                 : CircleAvatar(
-                    radius: 40,
+                    radius: 35,
                     backgroundImage: Image.file(
                       File(_pickedFile.path),
                       height: 120,
@@ -79,17 +79,11 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.user.name,
-              style: TextStyle(
-                  fontSize: AppSizes.normalTextSize,
-                  fontWeight: FontWeight.bold)),
+          Text(widget.user.name, style: Theme.of(context).textTheme.bodyText1),
           SizedBox(
             height: 5,
           ),
-          Text(widget.user.email,
-              style: TextStyle(
-                  fontSize: AppSizes.normalTextSize,
-                  fontWeight: FontWeight.normal))
+          Text(widget.user.email, style: Theme.of(context).textTheme.bodyText2)
         ],
       )
     ]);

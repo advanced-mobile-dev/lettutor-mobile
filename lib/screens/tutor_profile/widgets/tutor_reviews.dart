@@ -12,22 +12,22 @@ class TutorReviews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).backgroundColor,
       child: Column(
         children: <Widget>[
           Container(
+              padding: EdgeInsets.only(left: 15, top: 15),
               alignment: Alignment.centerLeft,
               child: Text(
                 AppLocalizations.of(context).reviews,
-                style: TextStyle(
-                    fontSize: AppSizes.normalTextSize,
-                    fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headline6,
               )),
-          SizedBox(
-            height: AppSizes.verticalItemSpacing,
-          ),
           Column(
             children: tutorFeedbacks.map((e) => RatingComment(e)).toList(),
           ),
+          SizedBox(
+            height: 30,
+          )
         ],
       ),
     );
@@ -46,19 +46,13 @@ class RatingComment extends StatelessWidget {
           vertical: AppSizes.pagePadding * 1.5,
           horizontal: AppSizes.pagePadding),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 3,
-                offset: Offset(0, 3))
-          ]),
+        color: Theme.of(context).cardColor,
+      ),
       child: Column(
         children: <Widget>[
           Container(
               child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               NetworkCircleAvatar(
                 url: feedback.feedbacker.avatar,
@@ -68,26 +62,10 @@ class RatingComment extends StatelessWidget {
                 width: 10,
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    children: [
-                      Text(
-                        feedback.feedbacker.name,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        '${MyDateUtils.getCommentTime(DateTime.parse(feedback.createdAt))}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, color: Colors.grey),
-                      ),
-                    ],
-                  ),
+                  Text(feedback.feedbacker.name,
+                      style: Theme.of(context).textTheme.subtitle1),
                   Row(
                     children: [
                       Text(
@@ -120,6 +98,11 @@ class RatingComment extends StatelessWidget {
                   )
                 ],
               ),
+              Expanded(child: SizedBox()),
+              Text(
+                '${MyDateUtils.getCommentTime(DateTime.parse(feedback.createdAt))}',
+                style: Theme.of(context).textTheme.caption,
+              ),
             ],
           )),
           SizedBox(
@@ -129,8 +112,8 @@ class RatingComment extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: Text(
               '${feedback.content}',
-              style: TextStyle(color: Colors.black),
               textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.subtitle2,
             ),
           )
         ],

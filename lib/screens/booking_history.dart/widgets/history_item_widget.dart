@@ -20,7 +20,6 @@ class HistoryItem extends StatelessWidget {
             Icon(
               iconData,
               size: 15,
-              color: Theme.of(context).primaryColor,
             ),
             SizedBox(
               width: 5,
@@ -29,19 +28,13 @@ class HistoryItem extends StatelessWidget {
               width: 75,
               child: Text(
                 title,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppSizes.smallTextSize,
-                    color: Theme.of(context).primaryColor),
+                style: Theme.of(context).textTheme.subtitle1,
               ),
             ),
             Expanded(
               child: Text(
                 content,
-                style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: AppSizes.smallTextSize,
-                    color: Colors.black),
+                style: Theme.of(context).textTheme.subtitle2,
                 textAlign: TextAlign.start,
               ),
             )
@@ -55,16 +48,7 @@ class HistoryItem extends StatelessWidget {
 
     String feedback = studentBooking.bookingInfo.tutorReview;
     return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 3,
-                offset: Offset(0, 3))
-          ]),
+      color: Theme.of(context).cardColor,
       padding: EdgeInsets.all(15),
       child: Column(
         children: <Widget>[
@@ -81,9 +65,7 @@ class HistoryItem extends StatelessWidget {
                   Container(
                     child: Text(
                         '${MyDateUtils.getCommentTime(studentBooking.scheduleDetail.endPeriod)}',
-                        style: TextStyle(
-                            fontSize: AppSizes.smallTextSize,
-                            color: Colors.grey)),
+                        style: Theme.of(context).textTheme.caption),
                     alignment: Alignment.topRight,
                   )
                 ],

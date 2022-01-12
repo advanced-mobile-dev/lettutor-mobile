@@ -20,7 +20,10 @@ class CoursesTab extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(child: CourseListWidget()),
+        Expanded(
+            child: Container(
+                color: Theme.of(context).backgroundColor,
+                child: CourseListWidget())),
       ],
     ));
   }

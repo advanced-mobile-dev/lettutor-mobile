@@ -45,14 +45,13 @@ class _MultiChoiceTagsState extends State<MultiChoiceTags> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: (widget.selectedTags.contains(e)
-                ? Colors.blue[600]
-                : Colors.white),
-            border: Border.all(width: 1, color: Colors.blue[600])),
+                ? Colors.blue
+                : Colors.transparent),
+            border: Border.all(width: 1, color: Colors.blue)),
         child: Text(e.name,
             style: TextStyle(
-              color: widget.selectedTags.contains(e)
-                  ? Colors.white
-                  : Colors.blue[600],
+              color:
+                  widget.selectedTags.contains(e) ? Colors.white : Colors.blue,
             )),
       ),
     );

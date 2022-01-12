@@ -20,7 +20,10 @@ class TutorsTab extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(child: TutorListWidget())
+          Expanded(
+              child: Container(
+                  color: Theme.of(context).backgroundColor,
+                  child: TutorListWidget()))
         ],
       ),
     );

@@ -12,8 +12,6 @@ class TutorReportScreen extends StatelessWidget {
   final TextEditingController _noteController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final titleTextStyle = TextStyle(
-        fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.normal);
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: ApplicationAppBar(
@@ -101,16 +99,16 @@ class TutorReportScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Tutor: ${tutorBasicInfo.name}',
-                              style: TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.bold),
+                              style: Theme.of(context).textTheme.headline6,
                             )
                           ],
                         ),
                         SizedBox(
-                          height: 50,
+                          height: 20,
                         ),
-                        Text('Help us understand what\'s happening',
-                            style: titleTextStyle),
+                        Text(
+                          'Help us understand what\'s happening',
+                        ),
                         SizedBox(
                           height: 20,
                         ),

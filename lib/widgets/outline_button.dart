@@ -29,17 +29,18 @@ class CustomTextButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Icon(
-              iconData,
-              color: color,
-            ),
+            iconData == null
+                ? SizedBox()
+                : Icon(
+                    iconData,
+                    color: color,
+                  ),
             SizedBox(
               width: 5,
             ),
-            Text(text,
-                style: TextStyle(
-                    fontSize: AppSizes.normalTextSize,
-                    fontWeight: FontWeight.w400))
+            Text(
+              text,
+            )
           ],
         ));
   }

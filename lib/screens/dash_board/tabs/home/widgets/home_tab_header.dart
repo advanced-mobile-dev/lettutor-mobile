@@ -14,7 +14,7 @@ class HomeTabHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: AppSizes.pagePadding, bottom: 30),
+      padding: EdgeInsets.only(left: AppSizes.pagePadding, bottom: 24),
       child: Column(
         children: <Widget>[
           Row(
@@ -29,16 +29,22 @@ class HomeTabHeader extends StatelessWidget {
                 child: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
                   Icon(
                     Icons.history,
+                    color: Colors.blue,
+                    size: 24,
                   ),
                   SizedBox(
                     width: 3,
                   ),
                   Text(
                     AppLocalizations.of(context).history,
-                    style: TextStyle(
-                      fontSize: AppSizes.normalTextSize,
-                    ),
-                  )
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 15,
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
                 ]),
               ),
             ],
@@ -53,27 +59,18 @@ class HomeTabHeader extends StatelessWidget {
               return Container(
                   alignment: Alignment.centerLeft,
                   child: Row(children: [
-                    Icon(
-                      Icons.timer,
-                      size: 20,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
                     Text(
                       'Total lesson time: ${state.learnedTime.inHours} ${AppLocalizations.of(context).hours} ${state.learnedTime.inMinutes.remainder(60)} ${AppLocalizations.of(context).minutes}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: AppSizes.normalTextSize,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(fontSize: 15),
                     ),
                   ]));
             return Text(
               'Welcome to lettutor',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: AppSizes.normalTextSize,
-              ),
+              style:
+                  Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 15),
             );
           })
         ],

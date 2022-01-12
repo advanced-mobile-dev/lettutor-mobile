@@ -13,7 +13,6 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Theme.of(context).primaryColor,
             size: 20,
           ),
           onPressed: () {
@@ -25,9 +24,7 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
-        style: TextStyle(
-            fontSize: AppSizes.normalTextSize,
-            color: Theme.of(context).primaryColor),
+        style: Theme.of(context).textTheme.headline6,
       ),
       actions: actions,
     );

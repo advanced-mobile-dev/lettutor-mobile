@@ -14,14 +14,10 @@ class CourseDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final courseNameTextStyle = TextStyle(
-        fontSize: AppSizes.largeTextSize, fontWeight: FontWeight.bold);
-    final titleTextStyle = TextStyle(
-      color: Theme.of(context).primaryColor,
-      fontSize: AppSizes.normalTextSize,
-      fontWeight: FontWeight.bold,
-    );
-    final contentTextStyle = TextStyle(fontSize: AppSizes.normalTextSize);
+    final courseNameTextStyle = Theme.of(context).textTheme.headline5;
+    final titleTextStyle =
+        Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16);
+    final contentTextStyle = Theme.of(context).textTheme.bodyText2;
     return Scaffold(
       appBar: ApplicationAppBar(
         title: AppLocalizations.of(context).courseDetail,

@@ -75,7 +75,7 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     AppLocalizations.of(context).login,
-                    style: TextStyle(fontSize: AppSizes.largeTextSize),
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
                 SizedBox(
@@ -88,7 +88,7 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     AppLocalizations.of(context).signUp,
-                    style: TextStyle(fontSize: AppSizes.largeTextSize),
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                 ),
               ],

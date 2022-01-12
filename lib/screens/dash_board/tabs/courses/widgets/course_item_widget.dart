@@ -23,15 +23,16 @@ class CourseItemWidget extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 3,
-                    offset: Offset(0, 3))
-              ]),
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(10),
+            // boxShadow: [
+            //   BoxShadow(
+            //       color: Colors.grey.withOpacity(0.3),
+            //       spreadRadius: 2,
+            //       blurRadius: 3,
+            //       offset: Offset(0, 1))
+            // ]
+          ),
           child: Column(
             children: <Widget>[
               ClipRRect(
@@ -57,9 +58,7 @@ class CourseItemWidget extends StatelessWidget {
                     course.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: AppSizes.smallTextSize),
+                    style: Theme.of(context).textTheme.subtitle1,
                     textAlign: TextAlign.center,
                   )),
               SizedBox(
@@ -70,10 +69,9 @@ class CourseItemWidget extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   alignment: Alignment.bottomRight,
                   child: Text(
-                      '$courseLevelName - ${course.topics.length} ${AppLocalizations.of(context).topics}',
-                      style: TextStyle(
-                          fontSize: AppSizes.smallTextSize,
-                          fontWeight: FontWeight.normal)),
+                    '$courseLevelName - ${course.topics.length} ${AppLocalizations.of(context).topics}',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
                 ),
               )
             ],

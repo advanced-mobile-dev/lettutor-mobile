@@ -4,15 +4,15 @@ class AppColors {
   AppColors._(); // this basically makes it so you can't instantiate this class
 
   static const Map<int, Color> primaryColor = const <int, Color>{
-    50: const Color(0xFF5DA1FC),
-    100: const Color(0xFF4E94F1),
-    200: const Color(0xFF3883E6),
-    300: const Color(0xFF2974D9),
-    400: const Color(0xFF0E58BD),
-    500: const Color(0xFF0C51AD),
-    600: const Color(0xFF0B4A9E),
-    700: const Color(0xFF0A438F),
-    800: const Color(0xFF0A3C80),
-    900: const Color(0xFF08346F)
+    50: Color(0xFFFFF5E8),
+    100: Color(0xFFFFE6C6),
+    200: Color(0xFFFFD5A0),
+    300: Color(0xFFFFC479),
+    400: Color(0xFFFFB85D),
+    500: const Color(0xFFFFAB40),
+    600: Color(0xFFFFA43A),
+    700: Color(0xFFFF9A32),
+    800: Color(0xFFFF912A),
+    900: Color(0xFFFF801C),
   };
 }

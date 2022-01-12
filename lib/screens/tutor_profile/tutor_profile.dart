@@ -22,22 +22,21 @@ class TutorProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _buildFlatButton({Widget icon, Function() function, String title}) {
-      final ButtonStyle buttonStyle = TextButton.styleFrom(
-          primary: Theme.of(context).primaryColor,
-          backgroundColor: Colors.transparent);
       return TextButton(
           onPressed: function,
-          style: buttonStyle,
           child: Column(
             children: <Widget>[
               icon,
               SizedBox(
                 height: 4,
               ),
-              Text(title,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: AppSizes.normalTextSize))
+              Text(
+                title,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(color: Theme.of(context).primaryColor),
+              )
             ],
           ));
     }
@@ -63,88 +62,93 @@ class TutorProfile extends StatelessWidget {
             );
           if (state is TutorProfileLoadedState) {
             return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(AppSizes.pagePadding),
-                child: Column(
-                  children: <Widget>[
-                    TutorImageWidget(
-                        tutorBasicInfo: state.tutor.tutorBasicInfo,
-                        height: 100,
-                        showRating: true),
-                    SizedBox(
-                      height: AppSizes.verticalItemSpacing,
-                    ),
-                    Text(
-                      state.tutor.bio,
-                    ),
-                    SizedBox(
-                      height: AppSizes.verticalItemSpacing,
-                    ),
-                    SubmitButton(
-                      text: 'Book now',
-                      // text: AppLocalizations.of(context).calendar,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      function: () {
-                        Navigator.of(context).pushNamed(
-                            LettutorRoutes.tutorSchedule,
-                            arguments: state.tutor);
-                      },
-                      textColor: Colors.white,
-                      icon: Icon(Icons.calendar_today),
-                    ),
-                    SizedBox(
-                      height: AppSizes.verticalItemSpacing,
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildFlatButton(
-                              icon: Badge(
-                                badgeColor: Colors.redAccent,
-                                badgeContent: Text(
-                                  '1',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                child: Icon(Icons.video_library_outlined),
-                              ),
-                              function: () {
-                                showModalBottomSheet(
-                                  isScrollControlled: false,
-                                  backgroundColor: Colors.transparent,
-                                  context: context,
-                                  builder: (context) => TutorIntroVideo(
-                                      state.tutor.tutorBasicInfo.name,
-                                      state.tutor.video),
-                                );
-                              },
-                              title: AppLocalizations.of(context).introVideo),
-                          FavoriteButton(state.tutor),
-                          _buildFlatButton(
-                              icon: Icon(
-                                Icons.report,
-                                size: 20,
-                              ),
-                              function: () {
-                                Navigator.pushNamed(
-                                    context, LettutorRoutes.tutorReport,
-                                    arguments: state.tutor);
-                              },
-                              title: AppLocalizations.of(context).report),
-                        ],
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(children: [
+                      TutorImageWidget(
+                          tutorBasicInfo: state.tutor.tutorBasicInfo,
+                          height: 100,
+                          showRating: true),
+                      SizedBox(
+                        height: AppSizes.verticalItemSpacing,
                       ),
-                    ),
-                    Divider(
-                      thickness: 1,
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: AppSizes.verticalItemSpacing,
-                    ),
-                    TutorInfo(state.tutor),
-                    TutorReviews(state.tutor.tutorBasicInfo.feedbacks)
-                  ],
-                ),
+                      Text(
+                        state.tutor.bio,
+                      ),
+                      SizedBox(
+                        height: AppSizes.verticalItemSpacing,
+                      ),
+                      SubmitButton(
+                        text: 'Book now',
+                        // text: AppLocalizations.of(context).calendar,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        function: () {
+                          Navigator.of(context).pushNamed(
+                              LettutorRoutes.tutorSchedule,
+                              arguments: state.tutor);
+                        },
+                        textColor: Colors.white,
+                        icon: Icon(Icons.calendar_today),
+                      ),
+                      SizedBox(
+                        height: AppSizes.verticalItemSpacing,
+                      ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildFlatButton(
+                                icon: Badge(
+                                  badgeColor: Colors.redAccent,
+                                  badgeContent: Text(
+                                    '1',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        .copyWith(color: Colors.white),
+                                  ),
+                                  child: Icon(Icons.video_library_outlined),
+                                ),
+                                function: () {
+                                  showModalBottomSheet(
+                                    isScrollControlled: false,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) => TutorIntroVideo(
+                                        state.tutor.tutorBasicInfo.name,
+                                        state.tutor.video),
+                                  );
+                                },
+                                title: AppLocalizations.of(context).introVideo),
+                            FavoriteButton(state.tutor),
+                            _buildFlatButton(
+                                icon: Icon(
+                                  Icons.report,
+                                  size: 20,
+                                ),
+                                function: () {
+                                  Navigator.pushNamed(
+                                      context, LettutorRoutes.tutorReport,
+                                      arguments: state.tutor);
+                                },
+                                title: AppLocalizations.of(context).report),
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        thickness: 1,
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: AppSizes.verticalItemSpacing,
+                      ),
+                      TutorInfo(state.tutor),
+                    ]),
+                  ),
+                  TutorReviews(state.tutor.tutorBasicInfo.feedbacks)
+                ],
               ),
             );
           }

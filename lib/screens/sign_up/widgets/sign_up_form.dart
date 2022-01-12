@@ -135,13 +135,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 children: [
                   Text(
                     'Already have an account?  ',
-                    style: TextStyle(fontSize: 16),
                   ),
                   GestureDetector(
                       child: Text("Login here",
                           style: TextStyle(
                               decoration: TextDecoration.underline,
-                              fontSize: 16,
                               color: Colors.blue)),
                       onTap: () {
                         Navigator.pushReplacementNamed(

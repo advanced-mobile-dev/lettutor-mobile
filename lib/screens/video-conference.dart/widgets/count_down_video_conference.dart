@@ -38,6 +38,9 @@ class _CountDownVideoConferenceState extends State<CountDownVideoConference> {
   Widget build(BuildContext context) {
     return Text(
         '${MyDateUtils.countDown(_studentBooking.scheduleDetail.startPeriod, showSeconds: true)}',
-        style: TextStyle(color: Colors.white, fontSize: 15));
+        style: Theme.of(context)
+            .textTheme
+            .bodyText2
+            .copyWith(color: Colors.white));
   }
 }

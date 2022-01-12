@@ -18,11 +18,6 @@ class BookingScreen extends StatelessWidget {
   final TextEditingController _noteController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final titleTextStyle = TextStyle(
-        fontSize: AppSizes.normalTextSize, fontWeight: FontWeight.bold);
-    final contentTextStyle = TextStyle(
-        // color: AppTheme.textColor,
-        fontSize: AppSizes.normalTextSize);
     return Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: ApplicationAppBar(
@@ -32,7 +27,7 @@ class BookingScreen extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   'Buy lessons',
-                  style: TextStyle(color: Colors.black),
+                  style: Theme.of(context).textTheme.bodyText2,
                 ))
           ],
         ),
@@ -58,16 +53,22 @@ class BookingScreen extends StatelessWidget {
                             SizedBox(
                               width: 15,
                             ),
-                            Text("Booking success")
+                            Text(
+                              "Booking success",
+                              style: Theme.of(context).textTheme.bodyText2,
+                            )
                           ],
                         ),
                         content: Text(
                           "Check your mail's inbox to see detail order",
-                          // textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
                         actions: [
                           TextButton(
-                            child: Text('Return home'),
+                            child: Text(
+                              'Return home',
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
                             onPressed: () {
                               Navigator.popUntil(
                                   context,
@@ -124,7 +125,7 @@ class BookingScreen extends StatelessWidget {
                         ),
                         Text(
                           AppLocalizations.of(context).bookingTime,
-                          style: titleTextStyle,
+                          style: Theme.of(context).textTheme.bodyText1,
                         ),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
@@ -133,14 +134,13 @@ class BookingScreen extends StatelessWidget {
                           padding: EdgeInsets.only(left: 30),
                           child: Text(
                             MyDateUtils.getBookingTime(state.scheduleDetail),
-                            style: contentTextStyle,
                           ),
                         ),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
                         ),
                         Text(AppLocalizations.of(context).balance,
-                            style: titleTextStyle),
+                            style: Theme.of(context).textTheme.bodyText1),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
                         ),
@@ -148,14 +148,13 @@ class BookingScreen extends StatelessWidget {
                           padding: EdgeInsets.only(left: 30),
                           child: Text(
                             '${state.userWallet.amount ~/ 100000} ${AppLocalizations.of(context).lessonsLeft}',
-                            style: contentTextStyle,
                           ),
                         ),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
                         ),
                         Text(AppLocalizations.of(context).price,
-                            style: titleTextStyle),
+                            style: Theme.of(context).textTheme.bodyText1),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
                         ),
@@ -163,13 +162,13 @@ class BookingScreen extends StatelessWidget {
                           padding: EdgeInsets.only(left: 30),
                           child: Text(
                             '1 ${AppLocalizations.of(context).lesson}',
-                            style: contentTextStyle,
                           ),
                         ),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
                         ),
-                        Text('Note', style: titleTextStyle),
+                        Text('Note',
+                            style: Theme.of(context).textTheme.bodyText1),
                         SizedBox(
                           height: AppSizes.verticalItemSpacing,
                         ),

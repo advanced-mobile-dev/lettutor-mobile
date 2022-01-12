@@ -7,6 +7,8 @@ class SubmitButton extends StatelessWidget {
   final Function function;
   final Color backgroundColor;
   final Color textColor;
+  final Color borderColor;
+
   final Widget icon;
   final double width;
   final double height;
@@ -15,6 +17,7 @@ class SubmitButton extends StatelessWidget {
       @required this.function,
       this.backgroundColor,
       this.textColor = Colors.white,
+      this.borderColor = Colors.transparent,
       this.icon,
       this.width = double.infinity,
       this.height = 50});
@@ -24,9 +27,9 @@ class SubmitButton extends StatelessWidget {
       onPrimary: textColor,
       primary: backgroundColor,
       minimumSize: Size(width, height),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          side: BorderSide(color: borderColor, width: 1)),
     );
     return ElevatedButton(
       style: raisedButtonStyle,
@@ -38,12 +41,7 @@ class SubmitButton extends StatelessWidget {
           SizedBox(
             width: icon != null ? 10 : 0,
           ),
-          Text(
-            text,
-            style: TextStyle(
-                fontSize: AppSizes.normalTextSize,
-                fontWeight: FontWeight.normal),
-          )
+          Text(text)
         ],
       ),
     );

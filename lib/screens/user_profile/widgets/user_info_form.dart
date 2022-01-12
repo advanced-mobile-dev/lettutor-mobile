@@ -187,7 +187,6 @@ class _UserInfoFormState extends State<UserInfoForm> {
         decoration: InputDecoration(
           label: Text('Level'),
           icon: Icon(Icons.book),
-          labelStyle: TextStyle(fontSize: 14),
           filled: true,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

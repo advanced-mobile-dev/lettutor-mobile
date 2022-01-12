@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 
@@ -47,10 +47,10 @@ class TutorImageWidget extends StatelessWidget {
                       Expanded(
                         child: Text(
                           tutorBasicInfo.name,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: AppSizes.normalTextSize,
-                              fontWeight: FontWeight.bold),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .copyWith(fontSize: 14 * height / 50),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -71,13 +71,12 @@ class TutorImageWidget extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                        AppConfig.countries
-                            .firstWhere((element) =>
-                                element.code == tutorBasicInfo.country)
-                            .name,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: AppSizes.smallTextSize))
+                      AppConfig.countries
+                          .firstWhere((element) =>
+                              element.code == tutorBasicInfo.country)
+                          .name,
+                      style: TextStyle(fontSize: 13 * height / 50),
+                    )
                   ],
                 ),
                 showRating

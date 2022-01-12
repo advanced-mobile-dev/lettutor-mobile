@@ -28,7 +28,7 @@ class _SearchBarState extends State<SearchBar> {
     return Container(
       height: 45,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
@@ -43,13 +43,12 @@ class _SearchBarState extends State<SearchBar> {
         decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(
-              Icons.search,
-            ),
+            prefixIcon: Icon(Icons.search, color: Colors.grey),
             hintText: AppLocalizations.of(context).searchByName,
-            hintStyle: TextStyle(
-              fontSize: AppSizes.smallTextSize,
-            ),
+            hintStyle: Theme.of(context)
+                .textTheme
+                .bodyText2
+                .copyWith(color: Colors.grey),
             suffixIcon: IconButton(
               onPressed: () {
                 if (_searchController.text.isNotEmpty) {
@@ -64,7 +63,7 @@ class _SearchBarState extends State<SearchBar> {
               icon: Icon(
                 Icons.clear,
                 size: 24,
-                color: Colors.grey[700],
+                color: Colors.grey,
               ),
             )),
       ),
