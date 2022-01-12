@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/blocs/sign_up/sign_up_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/config/utility.dart';
+import 'package:lettutor_app/routes.dart';
+import 'package:lettutor_app/utils/device_utils.dart';
 import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
@@ -117,7 +117,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   return SubmitButton(
                       text: AppLocalizations.of(context).signUp,
                       function: () {
-                        Utility.hideKeyboard(context);
+                        DeviceUtils.hideKeyboard(context);
                         if (_formKey.currentState.validate()) {
                           _formKey.currentState.save();
                           context.read<SignUpBloc>().add(

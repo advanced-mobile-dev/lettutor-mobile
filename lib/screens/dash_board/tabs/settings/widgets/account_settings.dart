@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/user/user.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,9 +74,7 @@ class _AccountSettingsState extends State<AccountSettings> {
           ),
           SettingItem(
             title: 'Become a tutor',
-            function: () {
-              Navigator.of(context).pushNamed(LettutorRoutes.favoriteTutors);
-            },
+            function: () {},
           ),
           SettingItem(
             title: 'Favorite tutors',

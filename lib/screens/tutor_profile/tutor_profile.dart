@@ -1,12 +1,9 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
-import 'package:lettutor_app/config/routes.dart';
-import 'package:lettutor_app/models/tutor/tutor.dart';
+import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/screens/tutor_profile/widgets/tutor_intro_video.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/empty_widget.dart';

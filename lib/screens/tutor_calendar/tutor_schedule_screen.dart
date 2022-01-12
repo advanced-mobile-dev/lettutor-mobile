@@ -2,14 +2,12 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
-import 'package:lettutor_app/config/colors.dart';
-import 'package:lettutor_app/config/routes.dart';
+import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/screens/booking/booking_screen.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorScheduleScreen extends StatelessWidget {
   final Tutor tutor;
