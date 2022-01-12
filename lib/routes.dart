@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
 import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
+import 'package:lettutor_app/blocs/favorite_list/favorite_list_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/repositories/payment_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
+import 'package:lettutor_app/screens/favorite_list/favorite_list.dart';
 import 'package:lettutor_app/screens/tutor_report/tutor_report_screen.dart';
 import 'blocs/lesson_time_bloc/lesson_time_bloc.dart';
 import 'blocs/student_booking/student_booking_bloc.dart';
@@ -94,6 +96,14 @@ Map<String, WidgetBuilder> registerRoutes() {
               BookingHistoryBloc(userRepository: context.read<UserRepository>())
                 ..add(BookingHistoryFetchDataEvent()),
           child: HistoryScreen());
+    },
+
+    LettutorRoutes.favoriteTutors: (context) {
+      return BlocProvider(
+          create: (context) =>
+              FavoriteListBloc(userRepository: context.read<UserRepository>())
+                ..add(FavoriteListFetchEvent()),
+          child: FavoriteListScreen());
     },
 
     LettutorRoutes.start: (context) => StartScreen(),

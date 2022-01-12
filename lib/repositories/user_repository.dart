@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/data/network/api_service.dart';
 import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
+import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
@@ -78,5 +79,12 @@ class UserRepository {
     final int total =
         await ApiService().getTotalLessonTime(userToken.accessToken.token);
     return Duration(minutes: total);
+  }
+
+  Future<List<Tutor>> getFavoriteList() async {
+    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
+    final data =
+        await ApiService().getFavoriteList(userToken.accessToken.token);
+    return data;
   }
 }

@@ -303,4 +303,28 @@ class ApiService {
     }
     return null;
   }
+
+  Future<List<Tutor>> getFavoriteList(String token) async {
+    final String endpoint = '/tutor/more';
+    final Response response = await _apiClient.get('$endpoint', headers: {
+      "Authorization": 'Bearer $token'
+    }, params: {
+      'perPage': '1',
+      'page': '1',
+    });
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      final List<Tutor> tutors = (body['favoriteTutor'] as List)
+          .where((element) => element['secondInfo'] != null)
+          .map((e) {
+        final basicInfo = e['secondInfo'];
+        final tutorBasicInfo = TutorBasicInfo.fromJson(basicInfo);
+        final tutor = Tutor.fromJson(basicInfo['tutorInfo']);
+        tutor.tutorBasicInfo = tutorBasicInfo;
+        return tutor;
+      }).toList();
+      return tutors;
+    }
+    return null;
+  }
 }
