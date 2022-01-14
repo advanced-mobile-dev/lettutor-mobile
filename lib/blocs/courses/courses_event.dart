@@ -17,7 +17,8 @@ class CoursesLoadMoreEvent extends CoursesEvent {
 }
 
 class CoursesRefreshEvent extends CoursesEvent {
-  CoursesRefreshEvent();
+  final bool showLoading;
+  CoursesRefreshEvent({this.showLoading = false});
 
   @override
   List<Object> get props => [];

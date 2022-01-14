@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String text;

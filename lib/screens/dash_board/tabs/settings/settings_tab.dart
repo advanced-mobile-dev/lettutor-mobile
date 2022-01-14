@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/blocs/authentication/authentication_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class _SettingsTabState extends State<SettingsTab> {
       backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(AppSizes.pagePadding),
+          padding: const EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -29,7 +29,7 @@ class _SettingsTabState extends State<SettingsTab> {
               AccountSettings(),
               AdvancedSettings(),
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 3,
+                height: 30,
               ),
               SubmitButton(
                   text: AppLocalizations.of(context).logout,

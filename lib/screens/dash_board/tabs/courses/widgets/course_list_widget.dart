@@ -36,7 +36,8 @@ class _CourseListWidgetState extends State<CourseListWidget> {
       if (state is CoursesLoadFailureState)
         return AppErrorWidget(
           retry: () {
-            context.read<CoursesBloc>()..add(CoursesRefreshEvent());
+            context.read<CoursesBloc>()
+              ..add(CoursesRefreshEvent(showLoading: true));
           },
         );
       if (state is CoursesLoadSuccessState) {

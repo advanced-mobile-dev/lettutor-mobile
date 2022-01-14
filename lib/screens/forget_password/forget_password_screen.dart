@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
@@ -14,7 +14,7 @@ class ForgetPasswordScreen extends StatelessWidget {
         title: AppLocalizations.of(context).forgetPassword,
       ),
       body: Container(
-        padding: EdgeInsets.all(AppSizes.pagePadding),
+        padding: EdgeInsets.all(15),
         alignment: Alignment.topLeft,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing * 5,
+              height: 50,
             ),
             SubmitButton(
                 text: AppLocalizations.of(context).sendResetLink,

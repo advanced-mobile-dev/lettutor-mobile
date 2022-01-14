@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
@@ -37,7 +37,7 @@ class TutorItemWidget extends StatelessWidget {
                 height: 60,
                 showRating: true),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: 10,
             ),
             Container(
               width: double.infinity,
@@ -75,7 +75,7 @@ class TutorItemWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing / 2,
+              height: 10 / 2,
             ),
             Container(
               width: double.infinity,

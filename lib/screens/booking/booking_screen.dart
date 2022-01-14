@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
@@ -114,7 +114,7 @@ class BookingScreen extends StatelessWidget {
           builder: (context, state) {
             return SingleChildScrollView(
               child: Container(
-                  padding: EdgeInsets.all(AppSizes.pagePadding),
+                  padding: EdgeInsets.all(15),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -123,14 +123,14 @@ class BookingScreen extends StatelessWidget {
                             height: 100,
                             showRating: true),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         Text(
                           AppLocalizations.of(context).bookingTime,
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 30),
@@ -139,12 +139,12 @@ class BookingScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         Text(AppLocalizations.of(context).balance,
                             style: Theme.of(context).textTheme.bodyText1),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 30),
@@ -153,12 +153,12 @@ class BookingScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         Text(AppLocalizations.of(context).price,
                             style: Theme.of(context).textTheme.bodyText1),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 30),
@@ -167,12 +167,12 @@ class BookingScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         Text('Note',
                             style: Theme.of(context).textTheme.bodyText1),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         CustomTextField(
                           controller: _noteController,
@@ -197,7 +197,7 @@ class BookingScreen extends StatelessWidget {
                                 },
                         ),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         SubmitButton(
                           text: AppLocalizations.of(context).cancel,

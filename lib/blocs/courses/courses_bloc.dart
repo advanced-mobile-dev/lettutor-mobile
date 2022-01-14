@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:lettutor_app/data/repository.dart';
 import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/models/filter/course_filter.dart';
+import 'package:lettutor_app/repositories/course_repository.dart';
 
 part 'courses_event.dart';
 part 'courses_state.dart';
@@ -15,7 +15,11 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
       CourseFilter(levels: [], categories: [], keyword: '');
   CourseFilter get courseFilter => _courseFilter;
 
-  CoursesBloc() : super(CoursesLoadingState()) {
+  CourseRepository _courseRepository;
+
+  CoursesBloc({CourseRepository courseRepository})
+      : _courseRepository = courseRepository,
+        super(CoursesLoadingState()) {
     on<CoursesFetchEvent>(_onCoursesFetch);
     on<CoursesLoadMoreEvent>(_onCoursesLoadMore);
     on<CoursesRefreshEvent>(_onCoursesRefresh);
@@ -25,7 +29,7 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
       CoursesFetchEvent event, Emitter<CoursesState> emit) async {
     try {
       final courseList =
-          await Repository.getCourses(_coursePerPage, 1, _courseFilter);
+          await _courseRepository.getCourses(_coursePerPage, 1, _courseFilter);
       emit(CoursesLoadSuccessState(
           status: CoursesStatus.success,
           page: 1,
@@ -52,11 +56,8 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
       try {
         //load more
         final int nextPage = successState.page + 1;
-        final courseList = await Repository.getCourses(
-            _coursePerPage,
-            nextPage,
-            // event.specialities.map((e) => e.code).toList()
-            _courseFilter);
+        final courseList = await _courseRepository.getCourses(
+            _coursePerPage, nextPage, _courseFilter);
         if (courseList.data.isEmpty) {
           emit(successState.copyWith(
               status: CoursesStatus.success,
@@ -91,7 +92,7 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
 
     try {
       final courseList =
-          await Repository.getCourses(_coursePerPage, 1, _courseFilter);
+          await _courseRepository.getCourses(_coursePerPage, 1, _courseFilter);
       emit(CoursesLoadSuccessState(
           page: 1,
           hasReachedMax: courseList.data.length >= courseList.count,
@@ -107,8 +108,9 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
   Future _onCoursesRefresh(
       CoursesRefreshEvent event, Emitter<CoursesState> emit) async {
     try {
+      if (event.showLoading) emit(CoursesLoadingState());
       final courseList =
-          await Repository.getCourses(_coursePerPage, 1, _courseFilter);
+          await _courseRepository.getCourses(_coursePerPage, 1, _courseFilter);
       emit(CoursesLoadSuccessState(
           status: CoursesStatus.success,
           page: 1,

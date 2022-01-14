@@ -8,42 +8,30 @@ class SharedPrefsHelper {
   static const String current_language = "current_language";
   static const String user_access_token = "userAccessToken";
   static const String user_refresh_token = "userRefreshToken";
-  static const String user_expires_access_token = "expiresAccessToken";
-  static const String user_expires_refresh_token = "expiresRefreshToken";
 
   final SharedPreferences _prefs;
   SharedPrefsHelper(this._prefs);
 
   void removeUserToken() {
     _prefs.remove(user_access_token);
-    _prefs.remove(user_expires_access_token);
     _prefs.remove(user_refresh_token);
-    _prefs.remove(user_expires_refresh_token);
     _prefs.remove(is_logged_in);
   }
 
   bool saveUserToken(UserToken userToken) {
-    _prefs.setString(user_access_token, userToken.accessToken.token);
-    _prefs.setString(user_expires_access_token, userToken.accessToken.expires);
-    _prefs.setString(user_refresh_token, userToken.refreshToken.token);
-    _prefs.setString(
-        user_expires_refresh_token, userToken.refreshToken.expires);
+    _prefs.setString(user_access_token, userToken.accessToken);
+    _prefs.setString(user_refresh_token, userToken.refreshToken);
     return true;
   }
 
   UserToken get userToken {
     String accessToken = _prefs.getString(user_access_token);
-    String expiresAccessToken = _prefs.getString(user_expires_access_token);
     String refreshToken = _prefs.getString(user_refresh_token);
-    String expiresRefreshToken = _prefs.getString(user_expires_refresh_token);
-    if (accessToken == null ||
-        expiresAccessToken == null ||
-        refreshToken == null ||
-        expiresRefreshToken == null) return null;
+    if (accessToken == null || refreshToken == null) return null;
 
     final userToken = UserToken(
-      accessToken: Token(token: accessToken, expires: expiresAccessToken),
-      refreshToken: Token(token: refreshToken, expires: expiresRefreshToken),
+      accessToken: accessToken,
+      refreshToken: refreshToken,
     );
     return userToken;
   }

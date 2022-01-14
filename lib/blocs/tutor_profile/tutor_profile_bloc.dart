@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/repositories/tutor_repo.dart';
+import 'package:lettutor_app/repositories/tutor_repository.dart';
 
 part 'tutor_profile_event.dart';
 part 'tutor_profile_state.dart';

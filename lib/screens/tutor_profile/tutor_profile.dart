@@ -2,7 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/screens/tutor_profile/widgets/tutor_intro_video.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -75,13 +75,13 @@ class TutorProfile extends StatelessWidget {
                               height: 100,
                               showRating: true),
                           SizedBox(
-                            height: AppSizes.verticalItemSpacing,
+                            height: 10,
                           ),
                           Text(
                             state.tutor.bio,
                           ),
                           SizedBox(
-                            height: AppSizes.verticalItemSpacing,
+                            height: 10,
                           ),
                           SubmitButton(
                             text: 'Book now',
@@ -96,7 +96,7 @@ class TutorProfile extends StatelessWidget {
                             icon: Icon(Icons.calendar_today),
                           ),
                           SizedBox(
-                            height: AppSizes.verticalItemSpacing,
+                            height: 10,
                           ),
                           Container(
                             child: Row(
@@ -146,7 +146,7 @@ class TutorProfile extends StatelessWidget {
                             height: 10,
                           ),
                           SizedBox(
-                            height: AppSizes.verticalItemSpacing,
+                            height: 10,
                           ),
                           TutorInfo(state.tutor),
                         ]),

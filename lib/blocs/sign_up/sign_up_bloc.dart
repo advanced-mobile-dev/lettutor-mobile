@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/data/network/api_exception.dart';
-import 'package:lettutor_app/repositories/authentication_repo.dart';
+import 'package:lettutor_app/data/network/exceptions/api_exception.dart';
+import 'package:lettutor_app/repositories/authentication_repository.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';

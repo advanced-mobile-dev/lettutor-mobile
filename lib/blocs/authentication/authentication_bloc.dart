@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lettutor_app/models/user/user.dart';
-import 'package:lettutor_app/repositories/authentication_repo.dart';
+import 'package:lettutor_app/repositories/authentication_repository.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 
 part 'authentication_event.dart';

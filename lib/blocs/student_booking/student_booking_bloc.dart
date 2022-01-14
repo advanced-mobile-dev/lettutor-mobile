@@ -23,6 +23,7 @@ class StudentBookingBloc
 
   Future _onFetchData(StudentBookingFetchDataEvent event, emit) async {
     try {
+      emit(StudentBookingLoadingState());
       int dateTimeGte =
           DateTime.now().subtract(Duration(minutes: 30)).millisecondsSinceEpoch;
       final bookingList =

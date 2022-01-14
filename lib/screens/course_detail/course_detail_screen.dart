@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -34,7 +34,7 @@ class CourseDetailScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               Container(
-                  padding: EdgeInsets.all(AppSizes.pagePadding),
+                  padding: EdgeInsets.all(15),
                   alignment: Alignment.centerLeft,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,77 +44,77 @@ class CourseDetailScreen extends StatelessWidget {
                         style: courseNameTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         course.description,
                         style: contentTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         'Why take this course?',
                         style: titleTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         '${course.reason}',
                         style: contentTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         'What will you be able to do',
                         style: titleTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         course.purpose,
                         style: contentTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         AppLocalizations.of(context).experienceLevel,
                         style: titleTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         course.level,
                         style: contentTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         AppLocalizations.of(context).courseLength,
                         style: titleTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         '${course.topics.length} ${AppLocalizations.of(context).topics}',
                         style: contentTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       Text(
                         AppLocalizations.of(context).listTopics,
                         style: titleTextStyle,
                       ),
                       SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+                        height: 10,
                       ),
                       ...course.topics.map((e) => TopicItemWidget(e)).toList(),
                     ],

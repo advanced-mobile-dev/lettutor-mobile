@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/screens/user_profile/widgets/profile_header.dart';
 import 'package:lettutor_app/screens/user_profile/widgets/user_info_form.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
@@ -62,7 +62,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             if (state is LoadedState)
               return SingleChildScrollView(
                   child: Container(
-                padding: EdgeInsets.all(AppSizes.pagePadding),
+                padding: EdgeInsets.all(15),
                 child: UserInfoForm(state.user),
               ));
             return SizedBox();

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lettutor_app/blocs/login/login_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
@@ -35,13 +35,13 @@ class _LoginFormState extends State<LoginForm> {
         }
       },
       child: Container(
-        padding: EdgeInsets.all(AppSizes.pagePadding),
+        padding: EdgeInsets.all(15),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 4,
+                height: 40,
               ),
               CustomTextField(
                   title: AppLocalizations.of(context).email,
@@ -50,7 +50,7 @@ class _LoginFormState extends State<LoginForm> {
                   keyboardType: TextInputType.emailAddress,
                   validator: validateEmail),
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 3,
+                height: 30,
               ),
               CustomTextField(
                 title: AppLocalizations.of(context).password,
@@ -61,7 +61,7 @@ class _LoginFormState extends State<LoginForm> {
                 isPasswordTextField: true,
               ),
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 2,
+                height: 20,
               ),
               Container(
                 alignment: Alignment.centerRight,
@@ -73,7 +73,7 @@ class _LoginFormState extends State<LoginForm> {
                     }),
               ),
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 2,
+                height: 20,
               ),
               BlocBuilder<LoginBloc, LoginState>(
                 builder: (context, state) {
@@ -92,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
                 },
               ),
               SizedBox(
-                height: AppSizes.verticalItemSpacing,
+                height: 10,
               ),
               GestureDetector(
                   child: Text("Create an account",
@@ -105,7 +105,7 @@ class _LoginFormState extends State<LoginForm> {
                         context, LettutorRoutes.signUp);
                   }),
               SizedBox(
-                height: AppSizes.verticalItemSpacing,
+                height: 10,
               ),
               Container(
                   padding: EdgeInsets.all(5),
@@ -113,14 +113,14 @@ class _LoginFormState extends State<LoginForm> {
                   child: Text(AppLocalizations.of(context).orContinueWith,
                       style: Theme.of(context).textTheme.caption)),
               SizedBox(
-                height: AppSizes.verticalItemSpacing,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   _buildFacebookButton(context),
                   SizedBox(
-                    width: AppSizes.horizontalItemSpacing,
+                    width: 10,
                   ),
                   _buildGoogleButton(context),
                 ],
@@ -146,7 +146,9 @@ Widget _buildFacebookButton(BuildContext context) {
       ),
     ),
     onPressed: () async {
-      final LoginResult result = await FacebookAuth.instance
+      final facebookAuth = FacebookAuth.instance;
+      await facebookAuth.logOut();
+      final LoginResult result = await facebookAuth
           .login(); // by default we request the email and the public profile
       if (result.status == LoginStatus.success) {
         // you are logged

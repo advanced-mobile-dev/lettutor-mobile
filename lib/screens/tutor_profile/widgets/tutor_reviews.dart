@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/models/tutor/tutor_feedback.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
@@ -42,9 +42,7 @@ class RatingComment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 15),
-      padding: EdgeInsets.symmetric(
-          vertical: AppSizes.pagePadding * 1.5,
-          horizontal: AppSizes.pagePadding),
+      padding: EdgeInsets.symmetric(vertical: 15 * 1.5, horizontal: 15),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
       ),

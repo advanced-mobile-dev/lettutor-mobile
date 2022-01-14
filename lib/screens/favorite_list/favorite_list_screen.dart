@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_list/favorite_list_bloc.dart';
 import 'package:lettutor_app/screens/favorite_list/widgets/favorite_item.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
+import 'package:lettutor_app/widgets/empty_widget.dart';
 import 'package:lettutor_app/widgets/error_widget.dart';
 
 class FavoriteListScreen extends StatelessWidget {
@@ -25,6 +26,7 @@ class FavoriteListScreen extends StatelessWidget {
             });
           }
           if (state is FavoriteListLoaded) {
+            if (state.favoriteList.isEmpty) return EmptyWidget();
             return ListView(
                 children: state.favoriteList
                     .map((e) => FavoriteItemWidget(

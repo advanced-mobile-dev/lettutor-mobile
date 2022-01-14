@@ -8,7 +8,8 @@ import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
-import 'package:lettutor_app/repositories/payment_repo.dart';
+import 'package:lettutor_app/repositories/course_repository.dart';
+import 'package:lettutor_app/repositories/payment_repository.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:lettutor_app/screens/favorite_list/favorite_list_screen.dart';
 import 'package:lettutor_app/screens/tutor_report/tutor_report_screen.dart';
@@ -19,7 +20,7 @@ import 'blocs/user_profile/user_profile_bloc.dart';
 import 'models/course/course.dart';
 import 'models/student_booking/student_booking.dart';
 import 'models/tutor/tutor.dart';
-import 'repositories/tutor_repo.dart';
+import 'repositories/tutor_repository.dart';
 import 'screens/booking/booking_screen.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/course_detail/course_detail_screen.dart';
@@ -64,15 +65,18 @@ Map<String, WidgetBuilder> registerRoutes() {
       return MultiBlocProvider(
         providers: [
           BlocProvider<TutorsBloc>(
-            create: (_) => TutorsBloc()..add(TutorsFetchEvent()),
+            create: (_) =>
+                TutorsBloc(tutorRepository: context.read<TutorRepository>())
+                  ..add(TutorsFetchEvent()),
           ),
           BlocProvider<StudentBookingBloc>(
             create: (_) => StudentBookingBloc(
-                userRepository: RepositoryProvider.of<UserRepository>(context))
-              ..add(StudentBookingFetchDataEvent()),
+                userRepository: RepositoryProvider.of<UserRepository>(context)),
           ),
           BlocProvider<CoursesBloc>(
-            create: (_) => CoursesBloc()..add(CoursesFetchEvent()),
+            create: (_) =>
+                CoursesBloc(courseRepository: context.read<CourseRepository>())
+                  ..add(CoursesFetchEvent()),
           ),
           BlocProvider<LessonTimeBloc>(
             create: (_) => LessonTimeBloc(
@@ -148,8 +152,10 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
       final tutor = routeSettings.arguments as Tutor;
       return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context) =>
-                  TutorScheduleBloc(tutor)..add(FetchTutorSchedulesEvent()),
+              create: (context) => TutorScheduleBloc(
+                  tutor: tutor,
+                  tutorRepository: context.read<TutorRepository>())
+                ..add(FetchTutorSchedulesEvent()),
               child: TutorScheduleScreen(
                 tutor: tutor,
               )));

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,7 @@ class _AccountSettingsState extends State<AccountSettings> {
       child: Column(
         children: [
           SizedBox(
-            height: AppSizes.verticalItemSpacing,
+            height: 10,
           ),
           _user == null
               ? SizedBox()
@@ -51,13 +51,13 @@ class _AccountSettingsState extends State<AccountSettings> {
                   ],
                 ),
           SizedBox(
-            height: AppSizes.verticalItemSpacing,
+            height: 10,
           ),
           Divider(
             thickness: 1.5,
           ),
           SizedBox(
-            height: AppSizes.verticalItemSpacing,
+            height: 10,
           ),
           Container(
               alignment: Alignment.centerLeft,

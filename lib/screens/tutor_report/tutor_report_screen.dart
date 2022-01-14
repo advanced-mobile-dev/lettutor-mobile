@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/loading_overlay.dart';
@@ -91,7 +91,7 @@ class TutorReportScreen extends StatelessWidget {
                 context.read<TutorReportBloc>().tutor.tutorBasicInfo;
             return SingleChildScrollView(
               child: Container(
-                  padding: EdgeInsets.all(AppSizes.pagePadding),
+                  padding: EdgeInsets.all(15),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -132,7 +132,7 @@ class TutorReportScreen extends StatelessWidget {
                           },
                         ),
                         SizedBox(
-                          height: AppSizes.verticalItemSpacing,
+                          height: 10,
                         ),
                         SubmitButton(
                           text: 'Cancel',

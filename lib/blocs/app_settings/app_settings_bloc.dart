@@ -1,8 +1,7 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/repositories/app_settings_repo.dart';
+import 'package:lettutor_app/repositories/app_settings_repository.dart';
 
 part 'app_settings_event.dart';
 part 'app_settings_state.dart';

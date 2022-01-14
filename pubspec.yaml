@@ -48,6 +48,7 @@ dependencies:
   jitsi_meet: ^4.0.0
   url_launcher: ^6.0.18
   image_picker: ^0.8.4+4
+  http_interceptor: ^1.0.2
 
 dev_dependencies:
   flutter_test:

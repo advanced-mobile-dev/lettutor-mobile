@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lettutor_app/blocs/lesson_time_bloc/lesson_time_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,7 +14,7 @@ class HomeTabHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: AppSizes.pagePadding, bottom: 24),
+      padding: EdgeInsets.only(left: 15, bottom: 24),
       child: Column(
         children: <Widget>[
           Row(

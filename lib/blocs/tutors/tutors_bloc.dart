@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:lettutor_app/data/repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:lettutor_app/models/filter/tutor_filter.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
+import 'package:lettutor_app/repositories/tutor_repository.dart';
 
 part 'tutors_event.dart';
 part 'tutors_state.dart';
@@ -14,7 +14,11 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
   TutorFilter _tutorFilter = TutorFilter(specialities: [], keyword: '');
   TutorFilter get tutorFilter => _tutorFilter;
 
-  TutorsBloc() : super(TutorsLoadingState()) {
+  TutorRepository _tutorRepository;
+
+  TutorsBloc({TutorRepository tutorRepository})
+      : _tutorRepository = tutorRepository,
+        super(TutorsLoadingState()) {
     on<TutorsFetchEvent>(_onTutorsFetch);
     on<TutorsLoadMoreEvent>(_onTutorsLoadMore);
     on<ApplyTutorFilterEvent>(_onApplyFilter);
@@ -24,7 +28,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
       TutorsFetchEvent event, Emitter<TutorsState> emit) async {
     try {
       final tutorList =
-          await Repository.getTutors(_tutorPerPage, 1, _tutorFilter);
+          await _tutorRepository.getTutors(_tutorPerPage, 1, _tutorFilter);
       emit(TutorsLoadSuccessState(
           status: TutorsStatus.success,
           page: 1,
@@ -49,7 +53,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
       try {
         //load more
         final int nextPage = successState.page + 1;
-        final tutorList = await Repository.getTutors(
+        final tutorList = await _tutorRepository.getTutors(
             _tutorPerPage,
             nextPage,
             // event.specialities.map((e) => e.code).toList()
@@ -87,7 +91,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
     _tutorFilter = event.tutorFilter;
     try {
       final tutorList =
-          await Repository.getTutors(_tutorPerPage, 1, _tutorFilter);
+          await _tutorRepository.getTutors(_tutorPerPage, 1, _tutorFilter);
       emit(TutorsLoadSuccessState(
           page: 1,
           hasReachedMax: tutorList.data.length >= tutorList.count,
@@ -101,8 +105,9 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
   Future _onTutorsRefresh(
       TutorsRefreshEvent event, Emitter<TutorsState> emit) async {
     try {
+      if (event.showLoading) emit(TutorsLoadingState());
       final tutorList =
-          await Repository.getTutors(_tutorPerPage, 1, _tutorFilter);
+          await _tutorRepository.getTutors(_tutorPerPage, 1, _tutorFilter);
       emit(TutorsLoadSuccessState(
           status: TutorsStatus.success,
           page: 1,

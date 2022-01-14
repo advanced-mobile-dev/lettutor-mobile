@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/config/config.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 
@@ -32,7 +32,7 @@ class TutorImageWidget extends StatelessWidget {
             radius: height / 2,
           ),
           SizedBox(
-            width: AppSizes.verticalItemSpacing,
+            width: 10,
           ),
           Expanded(
             child: Column(

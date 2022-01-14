@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/models/course/topic.dart';
 import 'package:lettutor_app/utils/url_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';

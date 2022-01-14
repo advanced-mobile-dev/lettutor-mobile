@@ -31,7 +31,9 @@ class _TutorListWidgetState extends State<TutorListWidget> {
         if (state is TutorsLoadFailureState)
           return AppErrorWidget(
             retry: () {
-              context.read<TutorsBloc>().add(TutorsRefreshEvent());
+              context
+                  .read<TutorsBloc>()
+                  .add(TutorsRefreshEvent(showLoading: true));
             },
           );
         if (state is TutorsLoadSuccessState) {

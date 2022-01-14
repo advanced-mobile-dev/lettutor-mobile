@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:lettutor_app/data/network/api_service.dart';
-import 'package:lettutor_app/data/repository.dart';
+import 'package:lettutor_app/data/network/apis/authentication_api_client.dart';
+import 'package:lettutor_app/data/shared_preferences/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
 
@@ -9,9 +9,14 @@ enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
   final _controller = StreamController<AuthenticationStatus>();
+  final AuthenticationApiClient authenticationApiClient;
+  final SharedPrefsHelper sharedPrefsHelper;
+
+  AuthenticationRepository(
+      {this.authenticationApiClient, this.sharedPrefsHelper});
 
   Stream<AuthenticationStatus> get status async* {
-    UserToken userToken = Repository.sharedPrefsHelper.userToken;
+    UserToken userToken = sharedPrefsHelper.userToken;
     if (userToken == null)
       yield AuthenticationStatus.unknown;
     else {
@@ -21,10 +26,10 @@ class AuthenticationRepository {
   }
 
   Future<User> login(String email, String password) async {
-    final user = await ApiService().login(email, password);
+    final user = await authenticationApiClient.login(email, password);
     print(user);
     if (user != null) {
-      Repository.sharedPrefsHelper.saveUserToken(user.userToken);
+      sharedPrefsHelper.saveUserToken(user.userToken);
       _controller.add(AuthenticationStatus.authenticated);
       return user;
     }
@@ -32,9 +37,9 @@ class AuthenticationRepository {
   }
 
   Future<User> facebookLogin(String token) async {
-    final user = await ApiService().facebookLogin(token);
+    final user = await authenticationApiClient.facebookLogin(token);
     if (user != null) {
-      Repository.sharedPrefsHelper.saveUserToken(user.userToken);
+      sharedPrefsHelper.saveUserToken(user.userToken);
       _controller.add(AuthenticationStatus.authenticated);
       return user;
     }
@@ -42,10 +47,10 @@ class AuthenticationRepository {
   }
 
   Future<User> googleLogin(String token) async {
-    final user = await ApiService().googleLogin(token);
+    final user = await authenticationApiClient.googleLogin(token);
     print(user);
     if (user != null) {
-      Repository.sharedPrefsHelper.saveUserToken(user.userToken);
+      sharedPrefsHelper.saveUserToken(user.userToken);
       _controller.add(AuthenticationStatus.authenticated);
       return user;
     }
@@ -53,15 +58,27 @@ class AuthenticationRepository {
   }
 
   void logout() {
-    Repository.sharedPrefsHelper.removeUserToken();
+    sharedPrefsHelper.removeUserToken();
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 
   Future<User> signUp(String email, String password) async {
-    final User user = await ApiService().signUp(email, password);
+    final User user = await authenticationApiClient.signUp(email, password);
     if (user != null) {
-      Repository.sharedPrefsHelper.saveUserToken(user.userToken);
+      sharedPrefsHelper.saveUserToken(user.userToken);
       if (user.isActivated) _controller.add(AuthenticationStatus.authenticated);
+      return user;
+    }
+    return null;
+  }
+
+  Future<User> refreshToken() async {
+    print('old ${sharedPrefsHelper.userToken.accessToken}');
+    print('old ${sharedPrefsHelper.userToken.refreshToken}');
+    final user = await authenticationApiClient
+        .refreshToken(sharedPrefsHelper.userToken.refreshToken);
+    if (user != null) {
+      sharedPrefsHelper.saveUserToken(user.userToken);
       return user;
     }
     return null;

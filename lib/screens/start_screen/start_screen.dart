@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -42,6 +42,7 @@ class StartScreen extends StatelessWidget {
       ),
     );
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       resizeToAvoidBottomInset: true,
       body: Column(
         children: <Widget>[
@@ -67,7 +68,7 @@ class StartScreen extends StatelessWidget {
             ],
           ),
           Container(
-            padding: EdgeInsets.all(AppSizes.pagePadding),
+            padding: EdgeInsets.all(15),
             child: Column(
               children: [
                 ElevatedButton(
@@ -77,7 +78,10 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     AppLocalizations.of(context).login,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .copyWith(color: Colors.white),
                   ),
                 ),
                 SizedBox(

@@ -1,14 +1,16 @@
-import 'dart:typed_data';
-
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lettutor_app/data/network/api_service.dart';
-import 'package:lettutor_app/data/repository.dart';
+import 'package:lettutor_app/data/network/apis/user_api_client.dart';
+import 'package:lettutor_app/data/shared_preferences/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/models/user/user_token.dart';
 import 'package:lettutor_app/models/user/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
+  final UserApiClient userApiClient;
+  UserRepository({@required this.userApiClient});
+
   User _user;
   User get user => _user;
 
@@ -17,21 +19,18 @@ class UserRepository {
   }
 
   Future<User> getUser() async {
-    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
-    final resUser = await ApiService().getUserInfo(userToken.accessToken.token);
+    final resUser = await userApiClient.getUserInfo();
     if (resUser != null) _user = resUser;
     return resUser;
   }
 
   Future<User> putUserInfo(User user, XFile avatar) async {
-    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
     if (avatar != null) {
-      final putUserInfo = ApiService().putUserInfo(
-        userToken.accessToken.token,
-        user,
-      );
-      final putAvatar =
-          ApiService().putUserAvatar(userToken.accessToken.token, avatar);
+      final sharedPrefsHelper =
+          SharedPrefsHelper(await SharedPreferences.getInstance());
+      final putUserInfo = userApiClient.putUserInfo(user);
+      final putAvatar = userApiClient.putUserAvatar(
+          sharedPrefsHelper.userToken.accessToken, avatar);
       final results = await Future.wait([putUserInfo, putAvatar]);
       if (results != null && results.length == 2) {
         if (results[0] != null) _user = results[0];
@@ -40,10 +39,7 @@ class UserRepository {
       }
       return null;
     } else {
-      final resUser = await ApiService().putUserInfo(
-        userToken.accessToken.token,
-        user,
-      );
+      final resUser = await userApiClient.putUserInfo(user);
       if (resUser != null) _user = resUser;
       return resUser;
     }
@@ -51,40 +47,28 @@ class UserRepository {
 
   Future<StudentBookingList> getBookingList(
       int perPage, int page, int dateTimeGte) async {
-    final data =
-        await ApiService().getStudentBooking(perPage, page, dateTimeGte);
+    final data = await userApiClient.getUserBooking(perPage, page, dateTimeGte);
     return data;
   }
 
   Future<StudentBookingList> getBookingHistory(
       int perPage, int page, int dateTimeLte) async {
-    final data =
-        await ApiService().getBookingHistory(perPage, page, dateTimeLte);
-    return data;
+    return await userApiClient.getBookingHistory(perPage, page, dateTimeLte);
   }
 
   Future<bool> favoriteTutor(String id) async {
-    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
-    return ApiService().favoriteTutor(userToken.accessToken.token, id);
+    return userApiClient.favoriteTutor(id);
   }
 
   Future<bool> reportTutor(String userId, String content) async {
-    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
-    return ApiService()
-        .reportTutor(userToken.accessToken.token, userId, content);
+    return userApiClient.reportTutor(userId, content);
   }
 
   Future<Duration> getLessonTime() async {
-    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
-    final int total =
-        await ApiService().getTotalLessonTime(userToken.accessToken.token);
-    return Duration(minutes: total);
+    return Duration(minutes: await userApiClient.getTotalLessonTime());
   }
 
   Future<List<Tutor>> getFavoriteList() async {
-    final UserToken userToken = Repository.sharedPrefsHelper.userToken;
-    final data =
-        await ApiService().getFavoriteList(userToken.accessToken.token);
-    return data;
+    return await userApiClient.getFavoriteList();
   }
 }

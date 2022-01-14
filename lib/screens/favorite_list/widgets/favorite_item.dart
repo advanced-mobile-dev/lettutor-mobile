@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/blocs/favorite_list/favorite_list_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
@@ -30,7 +30,7 @@ class FavoriteItemWidget extends StatelessWidget {
                 height: 60,
                 showRating: false),
             SizedBox(
-              height: AppSizes.verticalItemSpacing,
+              height: 10,
             ),
             Container(
               width: double.infinity,
@@ -68,7 +68,7 @@ class FavoriteItemWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: AppSizes.verticalItemSpacing / 2,
+              height: 10 / 2,
             ),
             Container(
               width: double.infinity,

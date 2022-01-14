@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/blocs/sign_up/sign_up_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/utils/device_utils.dart';
 import 'package:lettutor_app/utils/validator.dart';
@@ -67,7 +67,7 @@ class _SignUpFormState extends State<SignUpForm> {
           }
         },
         child: Container(
-          padding: EdgeInsets.all(AppSizes.pagePadding),
+          padding: EdgeInsets.all(15),
           child: Column(
             children: <Widget>[
               CustomTextField(
@@ -78,7 +78,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 3,
+                height: 30,
               ),
               CustomTextField(
                 controller: _passwordController,
@@ -90,7 +90,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 isPasswordTextField: true,
               ),
               SizedBox(
-                height: AppSizes.verticalItemSpacing * 3,
+                height: 30,
               ),
               CustomTextField(
                 // controller: _confirmPasswordController,

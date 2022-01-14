@@ -24,6 +24,8 @@ class ApplyTutorFilterEvent extends TutorsEvent {
 }
 
 class TutorsRefreshEvent extends TutorsEvent {
+  final bool showLoading;
+  TutorsRefreshEvent({this.showLoading = false});
   @override
   List<Object> get props => [];
 }

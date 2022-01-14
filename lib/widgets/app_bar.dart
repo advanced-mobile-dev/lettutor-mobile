@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/utils/device_utils.dart';
 
 class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {

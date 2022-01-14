@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -50,7 +50,7 @@ class CourseItemWidget extends StatelessWidget {
                   // ),
                   ),
               SizedBox(
-                height: AppSizes.horizontalItemSpacing,
+                height: 10,
               ),
               Container(
                   alignment: Alignment.center,
@@ -62,7 +62,7 @@ class CourseItemWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                   )),
               SizedBox(
-                height: AppSizes.horizontalItemSpacing,
+                height: 10,
               ),
               Expanded(
                 child: Container(

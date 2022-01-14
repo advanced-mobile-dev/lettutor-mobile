@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
-import 'package:lettutor_app/config/app_sizes.dart';
+
 import 'package:lettutor_app/models/tutor/tutor.dart';
 
 class FavoriteButton extends StatelessWidget {

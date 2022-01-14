@@ -1,25 +1,12 @@
 class UserToken {
-  Token accessToken;
-  Token refreshToken;
+  String accessToken;
+  String refreshToken;
 
   UserToken({this.accessToken, this.refreshToken});
 
   UserToken.fromJson(Map<String, dynamic> json) {
-    accessToken =
-        json['access'] != null ? new Token.fromJson(json['access']) : null;
-    refreshToken =
-        json['refresh'] != null ? new Token.fromJson(json['refresh']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.accessToken != null) {
-      data['access'] = this.accessToken.toJson();
-    }
-    if (this.refreshToken != null) {
-      data['refresh'] = this.refreshToken.toJson();
-    }
-    return data;
+    accessToken = json['access'] != null ? json['access']['token'] : null;
+    refreshToken = json['refresh'] != null ? json['refresh']['token'] : null;
   }
 }
 

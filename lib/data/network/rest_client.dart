@@ -1,23 +1,19 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:lettutor_app/data/network/api_exception.dart';
-import 'package:http_parser/http_parser.dart';
+import 'package:http/http.dart';
+import 'package:lettutor_app/data/network/exceptions/api_exception.dart';
 
 class RestClient {
-  RestClient._();
-  static final RestClient _apiClient = RestClient._();
-  factory RestClient() {
-    return _apiClient;
-  }
   static const _baseUrl = 'sandbox.api.lettutor.com';
-  static const _timeout = 10;
+  static const _timeout = 15;
+  final BaseClient httpClient;
+  RestClient(this.httpClient);
 
   Future<dynamic> get(String path,
       {Map<String, String> headers, Map<String, dynamic> params}) {
     var uri = Uri.https(_baseUrl, path, params);
     print(uri);
-    return http
+    return httpClient
         .get(
           uri,
           headers: headers,
@@ -28,13 +24,10 @@ class RestClient {
 
   Future<dynamic> post(String path,
       {Map<String, String> headers,
-      Map<String, dynamic> body,
-      Map<String, dynamic> params}) {
+      Map<String, dynamic> params,
+      Map<String, dynamic> body}) {
     var uri = Uri.https(_baseUrl, path, params);
-
-    if (headers == null) headers = {};
-    headers['Content-Type'] = 'application/json';
-    return http
+    return httpClient
         .post(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))
         .then(_handleResponse);
@@ -47,46 +40,31 @@ class RestClient {
     Map<String, dynamic> body,
   }) {
     var uri = Uri.https(_baseUrl, path, params);
-    if (headers == null) headers = {};
-    headers['Content-type'] = 'application/json';
-    return http
+    return httpClient
         .put(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))
         .then(_handleResponse);
   }
 
-  Future<dynamic> delete(path, {Map<String, String> headers, body, params}) {
+  Future<dynamic> delete(path, {Map<String, dynamic> headers, params}) {
     var uri = Uri.https(_baseUrl, path, params);
-    return http
-        .delete(uri, headers: headers, body: body)
+    return httpClient
+        .delete(uri, headers: headers)
         .timeout(Duration(seconds: _timeout))
         .then(_handleResponse);
   }
 
   _handleResponse(http.Response response) {
+    // throw ApiException('message', 401);
     final int statusCode = response.statusCode;
     if (statusCode == 500) {
       final res = jsonDecode(response.body);
-      final statusCode = res['statusCode'];
       final message = res['message'];
-      throw FetchDataException(
-        message,
-        statusCode,
-      );
+      print(message);
+      throw ApiException(message, statusCode);
     }
     if (statusCode < 200 || statusCode >= 300) {
-      switch (statusCode) {
-        case 400:
-          throw BadRequestException(response.body.toString(), statusCode);
-        case 401:
-        case 403:
-          throw UnauthorisedException(response.body.toString(), statusCode);
-        default:
-          throw FetchDataException(
-            response.body,
-            response.statusCode,
-          );
-      }
+      throw ApiException(response.body.toString(), statusCode);
     }
     return response;
   }
