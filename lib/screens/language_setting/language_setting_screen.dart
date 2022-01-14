@@ -9,6 +9,7 @@ class LanguageSettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       resizeToAvoidBottomInset: true,
       appBar: ApplicationAppBar(
         title: AppLocalizations.of(context).language,
@@ -33,9 +34,18 @@ class LanguageSettingScreen extends StatelessWidget {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(e.language),
+                            Text(
+                              e.language,
+                              style: TextStyle(
+                                  color: state.locale == e.locale
+                                      ? Colors.black
+                                      : null),
+                            ),
                             state.locale == e.locale
-                                ? Icon(Icons.check)
+                                ? Icon(Icons.check,
+                                    color: state.locale == e.locale
+                                        ? Colors.black
+                                        : null)
                                 : SizedBox(),
                           ]),
                     )))

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/filter/tutor_filter.dart';
 import 'package:lettutor_app/widgets/multi-choice-tags.dart';
@@ -29,7 +30,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
+            color: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Column(
@@ -68,7 +69,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                       flex: 1,
                       child: SubmitButton(
                           text: 'Clear',
-                          backgroundColor: Colors.grey,
+                          backgroundColor: AppColors.customGrey,
                           textColor: Colors.white,
                           function: () {
                             setState(() {
@@ -90,7 +91,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                       flex: 1,
                       child: SubmitButton(
                           text: 'Apply ${_selectedSpec.isEmpty ? '' : '(1)'}',
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor: AppColors.primaryColor[900],
                           function: () {
                             Navigator.pop(context,
                                 TutorFilter(specialities: _selectedSpec));

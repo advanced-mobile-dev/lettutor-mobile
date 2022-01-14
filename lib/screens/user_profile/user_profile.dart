@@ -27,6 +27,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         resizeToAvoidBottomInset: true,
         appBar: ApplicationAppBar(
           title: AppLocalizations.of(context).editProfile,

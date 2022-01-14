@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/models/course/category.dart';
 import 'package:lettutor_app/models/course/course_level.dart';
 import 'package:lettutor_app/models/filter/course_filter.dart';
-import 'package:lettutor_app/screens/dash_board/tabs/courses/widgets/search_bar.dart';
 import 'package:lettutor_app/widgets/multi-choice-tags.dart';
-import 'package:lettutor_app/widgets/outline_button.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
 class CourseFilterBottomSheet extends StatefulWidget {
@@ -36,7 +34,7 @@ class _CourseFilterBottomSheetState extends State<CourseFilterBottomSheet> {
         padding: EdgeInsets.symmetric(horizontal: 0, vertical: 30),
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
+            color: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Column(
@@ -103,7 +101,7 @@ class _CourseFilterBottomSheetState extends State<CourseFilterBottomSheet> {
                       flex: 1,
                       child: SubmitButton(
                           text: 'Clear',
-                          backgroundColor: Colors.grey,
+                          backgroundColor: AppColors.customGrey,
                           textColor: Colors.white,
                           function: () {
                             setState(() {
@@ -129,7 +127,7 @@ class _CourseFilterBottomSheetState extends State<CourseFilterBottomSheet> {
                       child: SubmitButton(
                           text:
                               'Apply ${getFilterNumber(_selectedLevels, _selectedCategories)}',
-                          backgroundColor: Theme.of(context).primaryColor,
+                          backgroundColor: AppColors.primaryColor[900],
                           function: () {
                             Navigator.pop(
                                 context,

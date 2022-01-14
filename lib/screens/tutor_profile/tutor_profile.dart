@@ -45,114 +45,118 @@ class TutorProfile extends StatelessWidget {
         appBar: ApplicationAppBar(
           title: AppLocalizations.of(context).profile,
         ),
-        body: BlocBuilder<TutorProfileBloc, TutorProfileState>(
-            builder: (context, state) {
-          if (state is TutorProfileInitialState) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is TutorProfileLoadFailedState)
-            return AppErrorWidget(
-              retry: () {
-                context
-                    .read<TutorProfileBloc>()
-                    .add(TutorProfileRefreshEvent());
-              },
-            );
-          if (state is TutorProfileLoadedState) {
-            return SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(children: [
-                      TutorImageWidget(
-                          tutorBasicInfo: state.tutor.tutorBasicInfo,
-                          height: 100,
-                          showRating: true),
-                      SizedBox(
-                        height: AppSizes.verticalItemSpacing,
+        body: Container(
+            height: double.infinity,
+            color: Theme.of(context).backgroundColor,
+            child: BlocBuilder<TutorProfileBloc, TutorProfileState>(
+                builder: (context, state) {
+              if (state is TutorProfileInitialState) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is TutorProfileLoadFailedState)
+                return AppErrorWidget(
+                  retry: () {
+                    context
+                        .read<TutorProfileBloc>()
+                        .add(TutorProfileRefreshEvent());
+                  },
+                );
+              if (state is TutorProfileLoadedState) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: Column(children: [
+                          TutorImageWidget(
+                              tutorBasicInfo: state.tutor.tutorBasicInfo,
+                              height: 100,
+                              showRating: true),
+                          SizedBox(
+                            height: AppSizes.verticalItemSpacing,
+                          ),
+                          Text(
+                            state.tutor.bio,
+                          ),
+                          SizedBox(
+                            height: AppSizes.verticalItemSpacing,
+                          ),
+                          SubmitButton(
+                            text: 'Book now',
+                            // text: AppLocalizations.of(context).calendar,
+                            backgroundColor: Theme.of(context).primaryColor,
+                            function: () {
+                              Navigator.of(context).pushNamed(
+                                  LettutorRoutes.tutorSchedule,
+                                  arguments: state.tutor);
+                            },
+                            textColor: Colors.white,
+                            icon: Icon(Icons.calendar_today),
+                          ),
+                          SizedBox(
+                            height: AppSizes.verticalItemSpacing,
+                          ),
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                _buildFlatButton(
+                                    icon: Badge(
+                                      badgeColor: Colors.redAccent,
+                                      badgeContent: Text(
+                                        '1',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2
+                                            .copyWith(color: Colors.white),
+                                      ),
+                                      child: Icon(Icons.video_library_outlined),
+                                    ),
+                                    function: () {
+                                      showModalBottomSheet(
+                                        isScrollControlled: false,
+                                        backgroundColor: Colors.transparent,
+                                        context: context,
+                                        builder: (context) => TutorIntroVideo(
+                                            state.tutor.tutorBasicInfo.name,
+                                            state.tutor.video),
+                                      );
+                                    },
+                                    title: AppLocalizations.of(context)
+                                        .introVideo),
+                                FavoriteButton(state.tutor),
+                                _buildFlatButton(
+                                    icon: Icon(
+                                      Icons.report,
+                                      size: 20,
+                                    ),
+                                    function: () {
+                                      Navigator.pushNamed(
+                                          context, LettutorRoutes.tutorReport,
+                                          arguments: state.tutor);
+                                    },
+                                    title: AppLocalizations.of(context).report),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            thickness: 1,
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: AppSizes.verticalItemSpacing,
+                          ),
+                          TutorInfo(state.tutor),
+                        ]),
                       ),
-                      Text(
-                        state.tutor.bio,
-                      ),
-                      SizedBox(
-                        height: AppSizes.verticalItemSpacing,
-                      ),
-                      SubmitButton(
-                        text: 'Book now',
-                        // text: AppLocalizations.of(context).calendar,
-                        backgroundColor: Theme.of(context).primaryColor,
-                        function: () {
-                          Navigator.of(context).pushNamed(
-                              LettutorRoutes.tutorSchedule,
-                              arguments: state.tutor);
-                        },
-                        textColor: Colors.white,
-                        icon: Icon(Icons.calendar_today),
-                      ),
-                      SizedBox(
-                        height: AppSizes.verticalItemSpacing,
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _buildFlatButton(
-                                icon: Badge(
-                                  badgeColor: Colors.redAccent,
-                                  badgeContent: Text(
-                                    '1',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2
-                                        .copyWith(color: Colors.white),
-                                  ),
-                                  child: Icon(Icons.video_library_outlined),
-                                ),
-                                function: () {
-                                  showModalBottomSheet(
-                                    isScrollControlled: false,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) => TutorIntroVideo(
-                                        state.tutor.tutorBasicInfo.name,
-                                        state.tutor.video),
-                                  );
-                                },
-                                title: AppLocalizations.of(context).introVideo),
-                            FavoriteButton(state.tutor),
-                            _buildFlatButton(
-                                icon: Icon(
-                                  Icons.report,
-                                  size: 20,
-                                ),
-                                function: () {
-                                  Navigator.pushNamed(
-                                      context, LettutorRoutes.tutorReport,
-                                      arguments: state.tutor);
-                                },
-                                title: AppLocalizations.of(context).report),
-                          ],
-                        ),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: AppSizes.verticalItemSpacing,
-                      ),
-                      TutorInfo(state.tutor),
-                    ]),
+                      TutorReviews(state.tutor.tutorBasicInfo.feedbacks)
+                    ],
                   ),
-                  TutorReviews(state.tutor.tutorBasicInfo.feedbacks)
-                ],
-              ),
-            );
-          }
-          return EmptyWidget();
-        }));
+                );
+              }
+              return EmptyWidget();
+            })));
   }
 }

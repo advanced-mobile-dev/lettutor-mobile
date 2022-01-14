@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/config/colors.dart';
 
 class MultiChoiceTags extends StatefulWidget {
   final List<dynamic> selectedTags;
@@ -45,13 +46,18 @@ class _MultiChoiceTagsState extends State<MultiChoiceTags> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: (widget.selectedTags.contains(e)
-                ? Colors.blue
+                ? AppColors.primaryColor[500]
                 : Colors.transparent),
-            border: Border.all(width: 1, color: Colors.blue)),
+            border: Border.all(
+                width: 1,
+                color: widget.selectedTags.contains(e)
+                    ? Colors.transparent
+                    : Theme.of(context).textTheme.bodyText1.color)),
         child: Text(e.name,
             style: TextStyle(
-              color:
-                  widget.selectedTags.contains(e) ? Colors.white : Colors.blue,
+              color: widget.selectedTags.contains(e)
+                  ? Colors.white
+                  : Theme.of(context).textTheme.bodyText1.color,
             )),
       ),
     );

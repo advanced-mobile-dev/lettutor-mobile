@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
@@ -19,6 +20,7 @@ class BookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         resizeToAvoidBottomInset: true,
         appBar: ApplicationAppBar(
           title: AppLocalizations.of(context).bookAClass,
@@ -182,7 +184,7 @@ class BookingScreen extends StatelessWidget {
                           height: 50,
                         ),
                         SubmitButton(
-                          text: AppLocalizations.of(context).book.toUpperCase(),
+                          text: 'Book',
                           function: state.userWallet.amount <= 0 ||
                                   state.bookingStatus == BookingStatus.success
                               ? null
@@ -198,8 +200,7 @@ class BookingScreen extends StatelessWidget {
                           height: AppSizes.verticalItemSpacing,
                         ),
                         SubmitButton(
-                          text:
-                              AppLocalizations.of(context).cancel.toUpperCase(),
+                          text: AppLocalizations.of(context).cancel,
                           function: () {
                             if (state.bookingStatus == BookingStatus.success)
                               Navigator.popUntil(
@@ -210,8 +211,7 @@ class BookingScreen extends StatelessWidget {
                             else
                               Navigator.pop(context);
                           },
-                          backgroundColor: Colors.white,
-                          textColor: Theme.of(context).primaryColor,
+                          backgroundColor: AppColors.customGrey,
                         ),
                       ])),
             );

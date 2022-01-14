@@ -19,32 +19,35 @@ class TutorsTabHeader extends StatelessWidget {
           children: [
             Text(AppLocalizations.of(context).tutors,
                 style: Theme.of(context).textTheme.headline4),
-            Badge(
-              showBadge: _tutorsBloc.tutorFilter.specialities.isNotEmpty,
-              badgeContent: Text(
-                '1',
-                style: TextStyle(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Badge(
+                badgeColor: Theme.of(context).primaryColor,
+                showBadge: _tutorsBloc.tutorFilter.specialities.isNotEmpty,
+                badgeContent: Text(
+                  '1',
+                  style: TextStyle(color: Colors.white),
+                ),
+                child: IconButton(
+                    onPressed: () async {
+                      final TutorFilter filter = await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) =>
+                            TutorFilterBottomSheet(_tutorsBloc.tutorFilter),
+                      );
+                      if (filter != null) {
+                        _tutorsBloc.add(ApplyTutorFilterEvent(
+                            tutorFilter: _tutorsBloc.tutorFilter
+                                .copyWith(specialities: filter.specialities)));
+                      }
+                    },
+                    icon: Icon(
+                      Icons.filter_list_outlined,
+                      size: 36,
+                    )),
               ),
-              child: IconButton(
-                  onPressed: () async {
-                    final TutorFilter filter = await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) =>
-                          TutorFilterBottomSheet(_tutorsBloc.tutorFilter),
-                    );
-                    if (filter != null) {
-                      _tutorsBloc.add(ApplyTutorFilterEvent(
-                          tutorFilter: _tutorsBloc.tutorFilter
-                              .copyWith(specialities: filter.specialities)));
-                    }
-                  },
-                  icon: Icon(
-                    Icons.filter_list_outlined,
-                    size: 36,
-                    color: Theme.of(context).primaryColor,
-                  )),
             )
           ],
         );

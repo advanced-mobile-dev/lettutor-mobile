@@ -22,7 +22,7 @@ class FavoriteItemWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: Theme.of(context).cardColor),
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        margin: EdgeInsets.only(bottom: 15),
+        margin: EdgeInsets.only(top: 15),
         child: Column(
           children: <Widget>[
             TutorImageWidget(

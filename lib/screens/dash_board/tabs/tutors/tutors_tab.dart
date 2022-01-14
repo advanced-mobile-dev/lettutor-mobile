@@ -10,9 +10,10 @@ class TutorsTab extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
+          Container(
+            color: Theme.of(context).backgroundColor,
             padding:
-                const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 10),
             child: Column(
               children: [
                 TutorsTabHeader(),
@@ -20,10 +21,7 @@ class TutorsTab extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-              child: Container(
-                  color: Theme.of(context).backgroundColor,
-                  child: TutorListWidget()))
+          Expanded(child: TutorListWidget())
         ],
       ),
     );

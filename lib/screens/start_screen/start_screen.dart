@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lettutor_app/config/app_sizes.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -10,11 +11,12 @@ class StartScreen extends StatelessWidget {
     final String _backgroundPath = 'assets/images/background.svg';
     final Widget _background = SvgPicture.asset(
       _backgroundPath,
+      color: AppColors.customGrey,
     );
     final String _imagePath = 'assets/images/illustrator_image_01.svg';
     final Widget _image = SvgPicture.asset(
       _imagePath,
-      width: 175,
+      width: 150,
     );
     final String _logoPath = 'assets/icons/logo.svg';
     final Widget _logo = SvgPicture.asset(_logoPath,
@@ -75,7 +77,7 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     AppLocalizations.of(context).login,
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 SizedBox(
@@ -88,7 +90,10 @@ class StartScreen extends StatelessWidget {
                   },
                   child: Text(
                     AppLocalizations.of(context).signUp,
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .copyWith(color: Theme.of(context).primaryColor),
                   ),
                 ),
               ],

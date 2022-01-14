@@ -29,18 +29,19 @@ class HomeTabHeader extends StatelessWidget {
                 child: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
                   Icon(
                     Icons.history,
-                    color: Colors.blue,
                     size: 24,
+                    color: Theme.of(context).iconTheme.color,
                   ),
                   SizedBox(
-                    width: 3,
+                    width: 5,
                   ),
                   Text(
                     AppLocalizations.of(context).history,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        fontSize: 15,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).iconTheme.color,
+                        ),
                   ),
                   SizedBox(
                     width: 5,

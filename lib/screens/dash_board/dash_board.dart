@@ -34,7 +34,6 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           toolbarHeight: 0,
           elevation: 0,
         ),

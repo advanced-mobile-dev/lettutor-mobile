@@ -6,19 +6,20 @@ class AppTheme {
       brightness: Brightness.light,
       primarySwatch: MaterialColor(
           AppColors.primaryColor[500].value, AppColors.primaryColor),
-      scaffoldBackgroundColor: Colors.white,
-      backgroundColor: Colors.blueGrey[50],
+      scaffoldBackgroundColor: Colors.blueGrey[50],
+      backgroundColor: Colors.white,
       primaryColor: AppColors.primaryColor[500],
       primaryColorBrightness: Brightness.light,
-      iconTheme: IconThemeData(
-        color: AppColors.primaryColor[500],
-      ),
       primaryIconTheme: IconThemeData(color: Colors.black, size: 24),
       cardColor: Colors.white,
       appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
           iconTheme: IconThemeData(
-        color: Colors.black,
-      )),
+            color: Color(0xff707B8A),
+          )),
+      iconTheme: IconThemeData(
+        color: Color(0xff707B8A),
+      ),
       textTheme: TextTheme(
         bodyText1: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         bodyText2: TextStyle(fontSize: 14),
@@ -37,22 +38,23 @@ class AppTheme {
 
   static final ThemeData themeDataDark = ThemeData(
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: Color(0xff282832),
-      backgroundColor: Color(0xff1A1B25),
+      // scaffoldBackgroundColor: Color(0xff282832),
+      scaffoldBackgroundColor: Color(0xff232934),
+      backgroundColor: Color(0xff232934),
       primaryColor: AppColors.primaryColor[500],
       primarySwatch: MaterialColor(
           AppColors.primaryColor[500].value, AppColors.primaryColor),
       primaryColorBrightness: Brightness.dark,
-      cardColor: Color(0xff333436),
+      cardColor: Color(0xff2A313C),
       bottomNavigationBarTheme:
-          BottomNavigationBarThemeData(backgroundColor: Color(0xff282832)),
-      // cardColor: Color(0xff282832),
+          BottomNavigationBarThemeData(backgroundColor: Color(0xff202630)),
       appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xff232934),
           iconTheme: IconThemeData(
-        color: Colors.white,
-      )),
+            color: Color(0xff707B8A),
+          )),
       iconTheme: IconThemeData(
-        color: Colors.white,
+        color: Color(0xff707B8A),
       ),
       textTheme: TextTheme(
           bodyText1: TextStyle(

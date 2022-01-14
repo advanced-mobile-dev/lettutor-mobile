@@ -2,6 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
+import 'package:lettutor_app/config/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
@@ -29,14 +30,10 @@ class TutorScheduleScreen extends StatelessWidget {
           child: Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 45, right: 45),
+            margin: EdgeInsets.only(bottom: 1, top: 1),
             height: 40,
             width: double.infinity,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(width: 1, color: Colors.grey),
-              ),
-              color: e.isBooked ? Colors.grey[300] : Colors.white,
-            ),
+            decoration: BoxDecoration(color: Theme.of(context).cardColor),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -56,17 +53,19 @@ class TutorScheduleScreen extends StatelessWidget {
       return Column(children: [
         convertDate.weekday == 1 || MyDateUtils.isToday(convertDate)
             ? Container(
-                color: Theme.of(context).primaryColor,
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
                 alignment: Alignment.centerLeft,
                 height: 40,
                 child: Text(
                   '${MyDateUtils.getWeek(convertDate)}',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: AppColors.customGrey),
                 ))
             : SizedBox(),
         Padding(
-          padding: const EdgeInsets.only(bottom: 1),
+          padding: const EdgeInsets.only(bottom: 0),
           child: ExpandablePanel(
             theme: const ExpandableThemeData(
               headerAlignment: ExpandablePanelHeaderAlignment.center,
@@ -77,6 +76,7 @@ class TutorScheduleScreen extends StatelessWidget {
             header: Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: 25, right: 15),
+                margin: EdgeInsets.symmetric(vertical: 1),
                 height: 40,
                 width: double.infinity,
                 child: Row(
@@ -84,14 +84,15 @@ class TutorScheduleScreen extends StatelessWidget {
                     children: [
                       Text(
                         result,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Icon(
                         Icons.arrow_drop_down,
-                        size: 32,
-                        color: Colors.white,
+                        size: 24,
+                        color: Theme.of(context).textTheme.bodyText1.color,
                       )
                     ]),
-                color: Colors.blue[900].withOpacity(0.5)),
+                color: Theme.of(context).cardColor),
             expanded: Column(
               children: [...schedules.map((e) => _buildTimeFrame(e)).toList()],
             ),

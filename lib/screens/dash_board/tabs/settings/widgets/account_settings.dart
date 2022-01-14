@@ -3,6 +3,7 @@ import 'package:lettutor_app/config/app_sizes.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lettutor_app/utils/url_launcher.dart';
 import 'package:lettutor_app/widgets/network_circle_avatar.dart';
 import 'setting_item.dart';
 
@@ -70,7 +71,10 @@ class _AccountSettingsState extends State<AccountSettings> {
           ),
           SettingItem(
             title: 'Become a tutor',
-            function: () {},
+            function: () async {
+              await AppUrlLauncher.launchHttpsUrl(
+                  context, "https://sandbox.app.lettutor.com/register-tutor");
+            },
           ),
           SettingItem(
             title: 'Favorite tutors',

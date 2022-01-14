@@ -17,6 +17,7 @@ class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(AppSizes.pagePadding),

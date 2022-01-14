@@ -43,6 +43,7 @@ class AdvancedSettings extends StatelessWidget {
                 ),
                 BlocBuilder<AppSettingsBloc, AppSettingsState>(
                     builder: (context, state) => Switch(
+                          activeColor: Theme.of(context).primaryColor,
                           value: state.isDarkTheme,
                           onChanged: (bool value) {
                             context

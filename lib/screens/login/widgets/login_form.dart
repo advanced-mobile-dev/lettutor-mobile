@@ -178,6 +178,7 @@ Widget _buildFacebookButton(BuildContext context) {
           ),
           Text(
             'Facebook',
+            style: TextStyle(color: Colors.black),
           )
         ],
       ),
@@ -240,6 +241,7 @@ Widget _buildGoogleButton(BuildContext context) {
           ),
           Text(
             'Google',
+            style: TextStyle(color: Colors.black),
           )
         ],
       ),

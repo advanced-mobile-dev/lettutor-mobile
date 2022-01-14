@@ -5,8 +5,12 @@ import 'package:lettutor_app/utils/device_utils.dart';
 class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget> actions;
+  final Color backgroundColor;
 
-  ApplicationAppBar({@required this.title, this.actions = const <Widget>[]});
+  ApplicationAppBar(
+      {@required this.title,
+      this.actions = const <Widget>[],
+      this.backgroundColor});
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -19,7 +23,7 @@ class ApplicationAppBar extends StatelessWidget implements PreferredSizeWidget {
             DeviceUtils.hideKeyboard(context);
             Navigator.pop(context);
           }),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: backgroundColor ?? Theme.of(context).backgroundColor,
       elevation: 0,
       centerTitle: true,
       title: Text(

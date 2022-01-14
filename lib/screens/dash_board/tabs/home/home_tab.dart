@@ -18,11 +18,9 @@ class _HomeTabState extends State<HomeTab> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          HomeTabHeader(),
-          Expanded(
-              child: Container(
-                  color: Theme.of(context).backgroundColor,
-                  child: BookingListWidget())),
+          Container(
+              color: Theme.of(context).backgroundColor, child: HomeTabHeader()),
+          Expanded(child: BookingListWidget()),
         ],
       ),
     );

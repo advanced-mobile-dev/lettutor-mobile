@@ -12,7 +12,7 @@ class TutorReviews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).backgroundColor,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: <Widget>[
           Container(

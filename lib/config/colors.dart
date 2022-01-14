@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._(); // this basically makes it so you can't instantiate this class
 
+  static const customGrey = Color(0xff707B8A);
   static const Map<int, Color> primaryColor = const <int, Color>{
     50: Color(0xFFFFF5E8),
     100: Color(0xFFFFE6C6),

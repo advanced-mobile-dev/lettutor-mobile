@@ -10,7 +10,7 @@ import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/repositories/payment_repo.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
-import 'package:lettutor_app/screens/favorite_list/favorite_list.dart';
+import 'package:lettutor_app/screens/favorite_list/favorite_list_screen.dart';
 import 'package:lettutor_app/screens/tutor_report/tutor_report_screen.dart';
 import 'blocs/lesson_time_bloc/lesson_time_bloc.dart';
 import 'blocs/student_booking/student_booking_bloc.dart';
