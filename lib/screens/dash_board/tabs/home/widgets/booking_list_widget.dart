@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lettutor_app/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:lettutor_app/blocs/student_booking/student_booking_bloc.dart';
 import 'package:lettutor_app/models/student_booking/student_booking.dart';
 import 'package:lettutor_app/widgets/empty_widget.dart';
@@ -43,7 +44,14 @@ class _BookingListWidgetState extends State<BookingListWidget> {
           );
         }
         if (state is StudentBookingLoadedState) {
-          if (state.bookingList.length == 0) return EmptyWidget();
+          if (state.bookingList.length == 0)
+            return EmptyWidget(
+                content: 'You have no upcoming lesson, click below to book',
+                action: () {
+                  context
+                      .read<BottomNavBloc>()
+                      .add(TabChangeEvent(AppTab.tutors.index));
+                });
           StudentBooking upcommingClass = state.bookingList[0];
           return CustomScrollView(
             controller: _scrollController,

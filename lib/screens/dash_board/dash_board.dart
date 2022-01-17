@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:lettutor_app/blocs/bottom_nav/bottom_nav_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/screens/dash_board/widgets/bottom_nav_bar.dart';
 import 'tabs/courses/courses_tab.dart';
 import 'tabs/home/home_tab.dart';
 import 'tabs/settings/settings_tab.dart';
 import 'tabs/tutors/tutors_tab.dart';
-
-enum AppTab { home, tutors, courses, settings }
 
 class DashBoard extends StatefulWidget {
   @override
@@ -15,12 +14,11 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   final PageController _pageController = PageController();
-  AppTab _currentTab;
+  // AppTab _currentTab;
 
   @override
   void initState() {
-    _currentTab = AppTab.home;
-    print('init dashboard');
+    // _currentTab = AppTab.home;
     super.initState();
   }
 
@@ -32,31 +30,30 @@ class _DashBoardState extends State<DashBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 0,
-          elevation: 0,
-        ),
-        body: SizedBox.expand(
-          child: PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _currentTab = AppTab.values[index];
-              });
-            },
-            children: <Widget>[
-              HomeTab(),
-              TutorsTab(),
-              CoursesTab(),
-              SettingsTab(),
-            ],
+    return BlocListener<BottomNavBloc, BottomNavState>(
+      listener: (BuildContext context, state) {
+        if (state is BottomNavState) {
+          _pageController.jumpToPage(state.tab.index);
+        }
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 0,
+            elevation: 0,
           ),
-        ),
-        bottomNavigationBar: BottomNavBar(
-            activeTab: _currentTab,
-            onTabSelected: (tab) {
-              _pageController.jumpToPage(tab.index);
-            }));
+          body: SizedBox.expand(
+            child: PageView(
+              physics: NeverScrollableScrollPhysics(),
+              controller: _pageController,
+              children: <Widget>[
+                HomeTab(),
+                TutorsTab(),
+                CoursesTab(),
+                SettingsTab(),
+              ],
+            ),
+          ),
+          bottomNavigationBar: BottomNavBar()),
+    );
   }
 }

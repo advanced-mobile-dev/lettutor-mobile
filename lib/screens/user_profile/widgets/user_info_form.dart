@@ -175,14 +175,16 @@ class _UserInfoFormState extends State<UserInfoForm> {
       (element) => element.code == user.level,
       orElse: () => Level.data[0],
     );
+    print(_level);
     return DropdownButtonFormField(
         isExpanded: true,
         items: Level.data.map((e) {
           return DropdownMenuItem(value: e, child: Text(e.name));
         }).toList(),
-        onChanged: (newValue) {
+        onChanged: (Level newValue) {
           setState(() => _level = newValue);
         },
+        onSaved: (value) => {_level = value},
         value: _level,
         decoration: InputDecoration(
           label: Text('Level'),

@@ -32,6 +32,7 @@ class _SearchBarState extends State<SearchBar> {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
+        style: TextStyle(color: Colors.black),
         controller: _searchController,
         onChanged: (value) {
           _debouner.run(() {

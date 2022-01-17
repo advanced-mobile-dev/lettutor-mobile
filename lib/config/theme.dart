@@ -5,7 +5,7 @@ class AppTheme {
   static final ThemeData themeData = new ThemeData(
       brightness: Brightness.light,
       primarySwatch: MaterialColor(
-          AppColors.primaryColor[500].value, AppColors.primaryColor),
+          AppColors.primaryColor[700].value, AppColors.primaryColor),
       scaffoldBackgroundColor: Colors.blueGrey[50],
       backgroundColor: Colors.white,
       primaryColor: AppColors.primaryColor[500],
@@ -43,7 +43,7 @@ class AppTheme {
       backgroundColor: Color(0xff232934),
       primaryColor: AppColors.primaryColor[500],
       primarySwatch: MaterialColor(
-          AppColors.primaryColor[500].value, AppColors.primaryColor),
+          AppColors.primaryColor[700].value, AppColors.primaryColor),
       primaryColorBrightness: Brightness.dark,
       cardColor: Color(0xff2A313C),
       bottomNavigationBarTheme:
@@ -64,6 +64,7 @@ class AppTheme {
           headline5: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
+            color: AppColors.primaryColor[500],
           ),
           headline4: TextStyle(
               fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),

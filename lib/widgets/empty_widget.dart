@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/config/assets.dart';
+import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/widgets/submit_button.dart';
 
 class EmptyWidget extends StatelessWidget {
+  final Widget emptyWidget;
+  final String content;
+  final VoidCallback action;
+  EmptyWidget(
+      {this.content = 'No results found', this.action, this.emptyWidget});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -11,15 +18,26 @@ class EmptyWidget extends StatelessWidget {
         ),
         Container(
           alignment: Alignment.center,
-          child: Image.asset(
-            Assets.noDataImage,
-            width: 100,
-          ),
+          child: emptyWidget ??
+              Image.asset(
+                Assets.noDataImage,
+                width: 100,
+              ),
         ),
         SizedBox(
           height: 20,
         ),
-        Text('No results found')
+        Text('$content'),
+        SizedBox(
+          height: 20,
+        ),
+        action != null
+            ? SubmitButton(
+                text: 'Book now',
+                function: action,
+                width: 100,
+              )
+            : SizedBox()
       ],
     );
   }

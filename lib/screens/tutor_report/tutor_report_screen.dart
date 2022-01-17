@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
+import 'package:lettutor_app/config/colors.dart';
 
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
@@ -122,7 +123,7 @@ class TutorReportScreen extends StatelessWidget {
                           height: 50,
                         ),
                         SubmitButton(
-                          backgroundColor: Colors.red[900],
+                          backgroundColor: Colors.red[700],
                           icon: Icon(Icons.warning),
                           text: 'Submit Report',
                           function: () {
@@ -139,8 +140,7 @@ class TutorReportScreen extends StatelessWidget {
                           function: () {
                             Navigator.pop(context);
                           },
-                          backgroundColor: Colors.white,
-                          textColor: Theme.of(context).primaryColor,
+                          backgroundColor: AppColors.customGrey,
                         ),
                       ])),
             );

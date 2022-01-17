@@ -14,7 +14,7 @@ class TutorItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, LettutorRoutes.tutorProfile,
-            arguments: tutor);
+            arguments: tutor.userId);
       },
       child: Container(
         decoration: BoxDecoration(

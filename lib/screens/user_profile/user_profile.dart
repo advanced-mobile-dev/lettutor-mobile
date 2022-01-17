@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
 
-import 'package:lettutor_app/screens/user_profile/widgets/profile_header.dart';
 import 'package:lettutor_app/screens/user_profile/widgets/user_info_form.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,7 +14,6 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
-  XFile _pickedFile;
   LoadingOverlay _loadingOverlay;
   @override
   void initState() {

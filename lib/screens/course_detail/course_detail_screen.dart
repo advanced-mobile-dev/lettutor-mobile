@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:lettutor_app/config/assets.dart';
 import 'package:lettutor_app/models/course/course.dart';
+import 'package:lettutor_app/models/course/course_level.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,6 +19,8 @@ class CourseDetailScreen extends StatelessWidget {
     final titleTextStyle =
         Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16);
     final contentTextStyle = Theme.of(context).textTheme.bodyText2;
+    final courseLevel = CourseLevel.data
+        .firstWhere((e) => e.level == int.parse(course.level), orElse: null);
     return Scaffold(
       appBar: ApplicationAppBar(
         title: AppLocalizations.of(context).courseDetail,
@@ -93,7 +96,7 @@ class CourseDetailScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        course.level,
+                        '${courseLevel != null ? courseLevel.name : course.level}',
                         style: contentTextStyle,
                       ),
                       SizedBox(

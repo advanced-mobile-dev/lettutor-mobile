@@ -11,6 +11,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: ApplicationAppBar(
           title: AppLocalizations.of(context).forgetPassword,
         ),

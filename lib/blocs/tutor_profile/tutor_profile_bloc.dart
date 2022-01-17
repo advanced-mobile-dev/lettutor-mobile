@@ -11,9 +11,9 @@ class TutorProfileBloc extends Bloc<TutorProfileEvent, TutorProfileState> {
   TutorRepository _tutorRepository;
   String _tutorId;
 
-  TutorProfileBloc({Tutor tutor, TutorRepository tutorRepository})
+  TutorProfileBloc({String tutorId, TutorRepository tutorRepository})
       : _tutorRepository = tutorRepository,
-        _tutorId = tutor.userId,
+        _tutorId = tutorId,
         super(TutorProfileInitialState()) {
     on<TutorProfileFetchEvent>(_onTutorProfileFetch);
     on<TutorProfileRefreshEvent>(_onRefreshTutorProfile);

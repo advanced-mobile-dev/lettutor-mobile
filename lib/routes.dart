@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
+import 'package:lettutor_app/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_list/favorite_list_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
@@ -64,6 +65,9 @@ Map<String, WidgetBuilder> registerRoutes() {
     LettutorRoutes.home: (context) {
       return MultiBlocProvider(
         providers: [
+          BlocProvider<BottomNavBloc>(
+            create: (_) => BottomNavBloc(),
+          ),
           BlocProvider<TutorsBloc>(
             create: (_) =>
                 TutorsBloc(tutorRepository: context.read<TutorRepository>())
@@ -169,12 +173,12 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
       break;
 
     case LettutorRoutes.tutorProfile:
-      final tutor = routeSettings.arguments as Tutor;
+      final String tutorId = routeSettings.arguments;
       return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(providers: [
                 BlocProvider(
                   create: (_) => TutorProfileBloc(
-                      tutor: tutor,
+                      tutorId: tutorId,
                       tutorRepository: context.read<TutorRepository>())
                     ..add(TutorProfileFetchEvent()),
                 ),
