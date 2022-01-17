@@ -28,10 +28,14 @@ class CourseDetailScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              CachedNetworkImage(
-                placeholder: (context, url) => Image.asset(Assets.loadingImage),
-                imageUrl: course.imageUrl,
-                fit: BoxFit.cover,
+              Hero(
+                tag: 'course-image${course.id}',
+                child: CachedNetworkImage(
+                  placeholder: (context, url) =>
+                      Image.asset(Assets.loadingImage),
+                  imageUrl: course.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
               Container(
                   padding: EdgeInsets.all(15),

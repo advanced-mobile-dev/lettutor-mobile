@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:lettutor_app/blocs/forget_password/forget_password_bloc.dart';
 import 'package:lettutor_app/data/network/apis/authentication_api_client.dart';
 import 'package:lettutor_app/data/shared_preferences/shared_prefs_provider.dart';
 import 'package:lettutor_app/models/user/user_token.dart';
@@ -65,11 +66,18 @@ class AuthenticationRepository {
   Future<User> signUp(String email, String password) async {
     final User user = await authenticationApiClient.signUp(email, password);
     if (user != null) {
-      sharedPrefsHelper.saveUserToken(user.userToken);
-      if (user.isActivated) _controller.add(AuthenticationStatus.authenticated);
+      if (user.isActivated) {
+        sharedPrefsHelper.saveUserToken(user.userToken);
+        _controller.add(AuthenticationStatus.authenticated);
+      }
       return user;
     }
     return null;
+  }
+
+  Future<bool> forgetPassword(String email) async {
+    final bool result = await authenticationApiClient.forgetPassword(email);
+    return result;
   }
 
   Future<User> refreshToken() async {

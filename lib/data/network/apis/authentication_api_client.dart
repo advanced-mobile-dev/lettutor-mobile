@@ -76,4 +76,14 @@ class AuthenticationApiClient {
     }
     return null;
   }
+
+  Future<bool> forgetPassword(String email) async {
+    final String endpoint = '/user/forgotPassword';
+    final body = {"email": email};
+    final Response response = await _restClient.post('$endpoint', body: body);
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
 }

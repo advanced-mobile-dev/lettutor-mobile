@@ -35,20 +35,22 @@ class CourseItemWidget extends StatelessWidget {
           ),
           child: Column(
             children: <Widget>[
-              ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
-                  child: CachedNetworkImage(
-                    placeholder: (context, url) =>
-                        Image.asset(Assets.loadingImage),
-                    imageUrl: course.imageUrl,
-                  )
-                  // Image.network(
-                  //   course.imageUrl,
-                  //   fit: BoxFit.fitWidth,
-                  // ),
+              Column(
+                children: [
+                  Hero(
+                    tag: 'course-image${course.id}',
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) =>
+                              Image.asset(Assets.loadingImage),
+                          imageUrl: course.imageUrl,
+                        )),
                   ),
+                ],
+              ),
               SizedBox(
                 height: 10,
               ),
