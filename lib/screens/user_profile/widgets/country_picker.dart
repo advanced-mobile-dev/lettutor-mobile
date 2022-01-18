@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/config.dart';
-import 'package:lettutor_app/models/country.dart';
+import 'package:lettutor_app/constants/config.dart';
+import 'package:lettutor_app/models/config/country.dart';
 
 class CountryPicker extends SearchDelegate<String> {
   @override

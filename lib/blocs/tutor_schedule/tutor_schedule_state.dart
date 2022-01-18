@@ -7,7 +7,7 @@ abstract class TutorScheduleState extends Equatable {
   List<Object> get props => [];
 }
 
-class TutorBookingInitial extends TutorScheduleState {}
+class ReservationInitial extends TutorScheduleState {}
 
 class SchedulesLoadedState extends TutorScheduleState {
   final Tutor tutor;

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'package:lettutor_app/config/assets.dart';
+import 'package:lettutor_app/constants/assets.dart';
 import 'package:lettutor_app/models/course/course.dart';
 import 'package:lettutor_app/models/course/course_level.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';

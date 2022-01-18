@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
+import 'package:lettutor_app/blocs/reservation/reservation_bloc.dart';
 
-import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/constants/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
@@ -14,7 +14,7 @@ import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 
-class BookingScreen extends StatelessWidget {
+class ReservationScreen extends StatelessWidget {
   final LoadingOverlay _loadingOverlay = new LoadingOverlay();
   final TextEditingController _noteController = TextEditingController();
   @override
@@ -33,15 +33,15 @@ class BookingScreen extends StatelessWidget {
                 ))
           ],
         ),
-        body: BlocConsumer<TutorBookingBloc, TutorBookingState>(
+        body: BlocConsumer<ReservationBloc, ReservationState>(
           listener: (context, state) {
-            if (state.bookingStatus == BookingStatus.loading) {
+            if (state.reservationStatus == ReservationStatus.loading) {
               _loadingOverlay.show(context);
             } else {
               _loadingOverlay.hide();
             }
 
-            if (state.bookingStatus == BookingStatus.success) {
+            if (state.reservationStatus == ReservationStatus.success) {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
@@ -56,7 +56,7 @@ class BookingScreen extends StatelessWidget {
                               width: 15,
                             ),
                             Text(
-                              "Booking success",
+                              "Success",
                               style: Theme.of(context).textTheme.bodyText2,
                             )
                           ],
@@ -82,7 +82,7 @@ class BookingScreen extends StatelessWidget {
                         ],
                       ));
             }
-            if (state.bookingStatus == BookingStatus.failed) {
+            if (state.reservationStatus == ReservationStatus.failed) {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
@@ -96,7 +96,7 @@ class BookingScreen extends StatelessWidget {
                             SizedBox(
                               width: 15,
                             ),
-                            Text("Booking failed")
+                            Text("Reservation failed")
                           ],
                         ),
                         content: Text("${state.errorMessage}"),
@@ -126,7 +126,7 @@ class BookingScreen extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          AppLocalizations.of(context).bookingTime,
+                          AppLocalizations.of(context).bookAClass,
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         SizedBox(
@@ -149,7 +149,7 @@ class BookingScreen extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 30),
                           child: Text(
-                            '${state.userWallet.amount ~/ 100000} ${AppLocalizations.of(context).lessonsLeft}',
+                            '${state.userWallet != null ? (state.userWallet.amount) ~/ 100000 : 0} ${AppLocalizations.of(context).lessonsLeft}',
                           ),
                         ),
                         SizedBox(
@@ -186,13 +186,14 @@ class BookingScreen extends StatelessWidget {
                         SubmitButton(
                           text: 'Book',
                           function: state.userWallet.amount <= 0 ||
-                                  state.bookingStatus == BookingStatus.success
+                                  state.reservationStatus ==
+                                      ReservationStatus.success
                               ? null
                               : () {
                                   // Navigator.popUntil(context,
                                   //     ModalRoute.withName(LettutorRoutes.home));
                                   context
-                                      .read<TutorBookingBloc>()
+                                      .read<ReservationBloc>()
                                       .add(BookEvent(_noteController.text));
                                 },
                         ),
@@ -202,7 +203,8 @@ class BookingScreen extends StatelessWidget {
                         SubmitButton(
                           text: AppLocalizations.of(context).cancel,
                           function: () {
-                            if (state.bookingStatus == BookingStatus.success)
+                            if (state.reservationStatus ==
+                                ReservationStatus.success)
                               Navigator.popUntil(
                                   context,
                                   (route) =>
@@ -220,9 +222,9 @@ class BookingScreen extends StatelessWidget {
   }
 }
 
-class BookingScreenArguments {
+class ReservationScreenArguments {
   final Tutor tutor;
   final ScheduleDetail scheduleDetail;
 
-  BookingScreenArguments({this.tutor, this.scheduleDetail});
+  ReservationScreenArguments({this.tutor, this.scheduleDetail});
 }

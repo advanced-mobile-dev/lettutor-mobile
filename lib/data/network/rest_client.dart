@@ -46,10 +46,15 @@ class RestClient {
         .then(_handleResponse);
   }
 
-  Future<dynamic> delete(path, {Map<String, dynamic> headers, params}) {
+  Future<dynamic> delete(
+    path, {
+    Map<String, String> params,
+    Map<String, String> headers,
+    Map<String, dynamic> body,
+  }) {
     var uri = Uri.https(_baseUrl, path, params);
     return httpClient
-        .delete(uri, headers: headers)
+        .delete(uri, headers: headers, body: jsonEncode(body))
         .timeout(Duration(seconds: _timeout))
         .then(_handleResponse);
   }

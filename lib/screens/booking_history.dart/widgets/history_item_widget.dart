@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:lettutor_app/models/student_booking/student_booking.dart';
+import 'package:lettutor_app/models/booking/booking.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 
 class HistoryItem extends StatelessWidget {
-  final StudentBooking studentBooking;
+  final Booking studentBooking;
   HistoryItem({@required this.studentBooking});
   @override
   Widget build(BuildContext context) {

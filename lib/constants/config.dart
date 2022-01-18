@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:lettutor_app/models/country.dart';
+import 'package:lettutor_app/models/config/country.dart';
 
 class AppConfig {
   AppConfig._();

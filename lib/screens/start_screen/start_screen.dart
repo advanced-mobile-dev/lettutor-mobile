@@ -1,108 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lettutor_app/constants/assets.dart';
 
-import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/constants/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lettutor_app/widgets/submit_button.dart';
 
 class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final String _backgroundPath = 'assets/images/background.svg';
-    final Widget _background = SvgPicture.asset(
-      _backgroundPath,
-      color: AppColors.customGrey,
-    );
-    final String _imagePath = 'assets/images/illustrator_image_01.svg';
-    final Widget _image = SvgPicture.asset(
-      _imagePath,
-      width: 150,
-    );
-    final String _logoPath = 'assets/icons/logo.svg';
-    final Widget _logo = SvgPicture.asset(_logoPath,
-        height: 40, color: Theme.of(context).primaryColor);
-
-    final ButtonStyle raisedButtonStyle1 = ElevatedButton.styleFrom(
-      onPrimary: Colors.white,
-      // primary: Theme.of(context).primaryColor,
-      minimumSize: Size(double.infinity, 60),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-    );
-
-    final ButtonStyle raisedButtonStyle2 = ElevatedButton.styleFrom(
-      onPrimary: Theme.of(context).primaryColor,
-      primary: Colors.white,
-      minimumSize: Size(double.infinity, 60),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
-      ),
-    );
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       resizeToAvoidBottomInset: true,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Stack(
             children: <Widget>[
-              _background,
-              Padding(
-                padding: MediaQuery.of(context).padding,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Column(children: <Widget>[
-                    SizedBox(
-                      height: 7,
+              SvgPicture.asset(
+                Assets.background,
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: MediaQuery.of(context).padding,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Column(children: <Widget>[
+                        SizedBox(
+                          height: 7,
+                        ),
+                        SvgPicture.asset(Assets.logo,
+                            height: 40, color: Theme.of(context).primaryColor),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SvgPicture.asset(
+                          Assets.illustrator_image,
+                          height: 150,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 150,
+                              ),
+                              SubmitButton(
+                                  text: 'Login',
+                                  function: () {
+                                    Navigator.of(context)
+                                        .pushNamed(LettutorRoutes.signIn);
+                                  }),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              SubmitButton(
+                                  text: 'Sign up',
+                                  backgroundColor: Theme.of(context).cardColor,
+                                  textColor: (Theme.of(context)
+                                              .primaryColorBrightness ==
+                                          Brightness.dark)
+                                      ? Colors.white60
+                                      : AppColors.customGrey,
+                                  function: () {
+                                    Navigator.of(context)
+                                        .pushNamed(LettutorRoutes.signUp);
+                                  }),
+                            ],
+                          ),
+                        )
+                      ]),
                     ),
-                    _logo,
-                    SizedBox(
-                      height: 12,
-                    ),
-                    _image,
-                  ]),
-                ),
+                  )
+                ],
               )
             ],
           ),
-          Container(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              children: [
-                ElevatedButton(
-                  style: raisedButtonStyle1,
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(LettutorRoutes.signIn);
-                  },
-                  child: Text(
-                    AppLocalizations.of(context).login,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: raisedButtonStyle2,
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(LettutorRoutes.signUp);
-                  },
-                  child: Text(
-                    AppLocalizations.of(context).signUp,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        .copyWith(color: Theme.of(context).primaryColor),
-                  ),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );

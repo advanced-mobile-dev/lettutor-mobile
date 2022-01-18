@@ -1,8 +1,8 @@
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
-import 'package:lettutor_app/models/tutor_schedule/date_schedule.dart';
-import 'package:lettutor_app/models/tutor_schedule/tutor_schedule.dart';
 import "package:collection/collection.dart";
 import 'package:lettutor_app/utils/date_utils.dart';
+
+import 'tutor_schedule.dart';
 
 class TutorScheduleList {
   final List<ScheduleDetail> data;
@@ -42,4 +42,10 @@ class TutorScheduleList {
 
     return TutorScheduleList(data: schedules, dateSchedules: dateSchedules);
   }
+}
+
+class DateSchedule {
+  final String date;
+  final List<ScheduleDetail> schedules;
+  DateSchedule(this.date, this.schedules);
 }

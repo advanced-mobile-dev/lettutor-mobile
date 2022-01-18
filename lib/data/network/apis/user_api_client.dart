@@ -4,7 +4,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
-import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
+import 'package:lettutor_app/models/booking/booking_list.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/models/user/user.dart';
@@ -61,7 +61,7 @@ class UserApiClient {
     return null;
   }
 
-  Future<StudentBookingList> getUserBooking(
+  Future<BookingList> getUserBooking(
       int perPage, int page, int dateTimeGte) async {
     final String endpoint = '/booking/list/student';
     final Response response = await _restClient.get('$endpoint', params: {
@@ -73,8 +73,7 @@ class UserApiClient {
     });
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      final StudentBookingList bookingList =
-          StudentBookingList.fromJson(body['data']);
+      final BookingList bookingList = BookingList.fromJson(body['data']);
       return bookingList;
     }
     return null;
@@ -91,8 +90,7 @@ class UserApiClient {
     });
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      final StudentBookingList bookingList =
-          StudentBookingList.fromJson(body['data']);
+      final BookingList bookingList = BookingList.fromJson(body['data']);
       return bookingList;
     }
     return null;
@@ -157,5 +155,17 @@ class UserApiClient {
       return tutors;
     }
     return null;
+  }
+
+  Future<bool> cancelMeeting(String scheduleId) async {
+    final String endpoint = '/booking';
+    final Response response = await _restClient.delete('$endpoint', body: {
+      "scheduleDetailIds": [scheduleId]
+    });
+    if (response.statusCode == 200) {
+      print(response.body);
+      return true;
+    }
+    return false;
   }
 }

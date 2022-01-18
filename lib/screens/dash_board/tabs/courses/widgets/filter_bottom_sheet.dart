@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/constants/colors.dart';
 import 'package:lettutor_app/models/course/category.dart';
 import 'package:lettutor_app/models/course/course_level.dart';
 import 'package:lettutor_app/models/filter/course_filter.dart';

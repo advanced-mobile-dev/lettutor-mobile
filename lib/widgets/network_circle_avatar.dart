@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/assets.dart';
+import 'package:lettutor_app/constants/assets.dart';
 
 class NetworkCircleAvatar extends StatelessWidget {
   final String url;
@@ -19,6 +19,10 @@ class NetworkCircleAvatar extends StatelessWidget {
                   backgroundColor: Colors.white,
                   backgroundImage: Image.asset(Assets.loadingImage).image,
                   radius: radius,
+                ),
+            errorWidget: (context, url, error) => Icon(
+                  Icons.account_circle_outlined,
+                  size: radius * 2,
                 ),
             imageUrl: url,
             imageBuilder: (context, imageProvider) => CircleAvatar(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lettutor_app/blocs/login/login_bloc.dart';
+import 'package:lettutor_app/constants/assets.dart';
 
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/flat_button.dart';
-import 'package:lettutor_app/widgets/icons.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -174,7 +175,7 @@ Widget _buildFacebookButton(BuildContext context) {
       padding: EdgeInsets.all(8),
       child: Row(
         children: <Widget>[
-          AppIcons.facebookIcon,
+          SvgPicture.asset(Assets.facebookIcon),
           SizedBox(
             width: 10,
           ),
@@ -237,7 +238,7 @@ Widget _buildGoogleButton(BuildContext context) {
       alignment: Alignment.center,
       child: Row(
         children: <Widget>[
-          AppIcons.googleIcon,
+          SvgPicture.asset(Assets.googleIcon),
           SizedBox(
             width: 10,
           ),

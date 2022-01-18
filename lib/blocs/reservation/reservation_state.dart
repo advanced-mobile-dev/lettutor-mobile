@@ -1,32 +1,32 @@
-part of 'tutor_booking_bloc.dart';
+part of 'reservation_bloc.dart';
 
-enum BookingStatus { initial, loading, success, failed }
+enum ReservationStatus { initial, loading, success, failed }
 
-class TutorBookingState extends Equatable {
-  final BookingStatus bookingStatus;
+class ReservationState extends Equatable {
+  final ReservationStatus reservationStatus;
   final Tutor tutor;
   final ScheduleDetail scheduleDetail;
   final UserWallet userWallet;
   final String errorMessage;
-  const TutorBookingState(
-      {this.bookingStatus = BookingStatus.initial,
+  const ReservationState(
+      {this.reservationStatus = ReservationStatus.initial,
       this.tutor,
       this.scheduleDetail,
       this.userWallet,
       this.errorMessage = ''});
   copyWith(
-      {BookingStatus bookingStatus,
+      {ReservationStatus reservationStatus,
       UserWallet userWallet,
       String errorMessage}) {
-    return TutorBookingState(
+    return ReservationState(
       tutor: this.tutor,
       scheduleDetail: this.scheduleDetail,
-      bookingStatus: bookingStatus ?? this.bookingStatus,
+      reservationStatus: reservationStatus ?? this.reservationStatus,
       userWallet: userWallet ?? this.userWallet,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  List<Object> get props => [bookingStatus, tutor, scheduleDetail];
+  List<Object> get props => [reservationStatus, tutor, scheduleDetail];
 }

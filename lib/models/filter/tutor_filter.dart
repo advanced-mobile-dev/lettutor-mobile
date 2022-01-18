@@ -1,4 +1,4 @@
-import 'package:lettutor_app/models/speciality.dart';
+import 'package:lettutor_app/models/config/speciality.dart';
 
 class TutorFilter {
   final List<Speciality> specialities;

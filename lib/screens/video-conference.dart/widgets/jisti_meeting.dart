@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
-import 'package:lettutor_app/models/meeting_room.dart';
-import 'package:lettutor_app/models/student_booking/student_booking.dart';
+import 'package:lettutor_app/models/booking/meeting_room.dart';
+import 'package:lettutor_app/models/booking/booking.dart';
 
 class Meeting extends StatefulWidget {
-  final StudentBooking studentBooking;
+  final Booking studentBooking;
   Meeting(this.studentBooking);
   @override
   _MeetingState createState() => _MeetingState();
@@ -51,6 +51,7 @@ class _MeetingState extends State<Meeting> {
     Map<FeatureFlagEnum, bool> featureFlags = {
       FeatureFlagEnum.WELCOME_PAGE_ENABLED: false,
     };
+
     if (!kIsWeb) {
       // Here is an example, disabling features for each platform
       if (Platform.isAndroid) {
@@ -62,11 +63,9 @@ class _MeetingState extends State<Meeting> {
       }
     }
     // Define meetings options here
-    String serverUrl = '${_meetingRoom.sub}';
-    print('server url    $serverUrl');
-    print('room          ${_meetingRoom.room}');
-    print('email         ${_meetingRoom.userCall.email}');
-    print('userAvatarURL ${_meetingRoom.userCall.avatar}');
+    String serverUrl =
+        // '${_meetingRoom.sub}';
+        'https://meet.lettutor.com';
 
     var options = JitsiMeetingOptions(room: '${_meetingRoom.room}')
       ..serverURL = serverUrl

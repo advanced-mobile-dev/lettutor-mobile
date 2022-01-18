@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:lettutor_app/config/config.dart';
+import 'package:lettutor_app/constants/config.dart';
 
 class StringUtils {
   StringUtils._();

@@ -9,20 +9,20 @@ import 'package:lettutor_app/models/user/user_wallet.dart';
 import 'package:lettutor_app/repositories/payment_repository.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 
-part 'tutor_booking_event.dart';
-part 'tutor_booking_state.dart';
+part 'reservation_event.dart';
+part 'reservation_state.dart';
 
-class TutorBookingBloc extends Bloc<TutorBookingEvent, TutorBookingState> {
+class ReservationBloc extends Bloc<ReservationEvent, ReservationState> {
   UserRepository _userRepository;
   PaymentRepository _paymentRepository;
-  TutorBookingBloc(
+  ReservationBloc(
       {Tutor tutor,
       ScheduleDetail scheduleDetail,
       UserRepository userRepository,
       PaymentRepository paymentRepository})
       : _userRepository = userRepository,
         _paymentRepository = paymentRepository,
-        super(TutorBookingState(
+        super(ReservationState(
             tutor: tutor,
             scheduleDetail: scheduleDetail,
             userWallet: userRepository.user.userWallet)) {
@@ -31,7 +31,7 @@ class TutorBookingBloc extends Bloc<TutorBookingEvent, TutorBookingState> {
 
   Future<void> _onBook(BookEvent event, emit) async {
     try {
-      emit(state.copyWith(bookingStatus: BookingStatus.loading));
+      emit(state.copyWith(reservationStatus: ReservationStatus.loading));
       List<BookingInfo> results = await _paymentRepository.bookClass(
           state.scheduleDetail.id, event.note);
       //update user wallet
@@ -39,15 +39,15 @@ class TutorBookingBloc extends Bloc<TutorBookingEvent, TutorBookingState> {
         try {
           final User user = await _userRepository.getUser();
           emit(state.copyWith(
-              bookingStatus: BookingStatus.success,
+              reservationStatus: ReservationStatus.success,
               userWallet: user.userWallet));
           return;
         } catch (_) {
-          emit(state.copyWith(bookingStatus: BookingStatus.success));
+          emit(state.copyWith(reservationStatus: ReservationStatus.success));
         }
       } else {
         emit(state.copyWith(
-            bookingStatus: BookingStatus.failed,
+            reservationStatus: ReservationStatus.failed,
             errorMessage: 'Something went wrong, please try again'));
       }
     } catch (error) {
@@ -56,7 +56,8 @@ class TutorBookingBloc extends Bloc<TutorBookingEvent, TutorBookingState> {
         message = error.message ?? message;
       }
       emit(state.copyWith(
-          bookingStatus: BookingStatus.failed, errorMessage: '$message'));
+          reservationStatus: ReservationStatus.failed,
+          errorMessage: '$message'));
     }
   }
 }

@@ -33,6 +33,7 @@ class CustomTextButton extends StatelessWidget {
                 : Icon(
                     iconData,
                     color: color,
+                    size: 20,
                   ),
             SizedBox(
               width: 5,

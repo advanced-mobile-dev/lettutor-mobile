@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:lettutor_app/blocs/student_booking/student_booking_bloc.dart';
-import 'package:lettutor_app/models/student_booking/student_booking.dart';
+import 'package:lettutor_app/models/booking/booking.dart';
 import 'package:lettutor_app/widgets/empty_widget.dart';
 import 'package:lettutor_app/widgets/error_widget.dart';
 import 'booking_item_widget.dart';
@@ -52,7 +52,7 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                       .read<BottomNavBloc>()
                       .add(TabChangeEvent(AppTab.tutors.index));
                 });
-          StudentBooking upcommingClass = state.bookingList[0];
+          Booking upcommingClass = state.bookingList[0];
           return CustomScrollView(
             controller: _scrollController,
             slivers: [

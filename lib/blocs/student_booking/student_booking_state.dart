@@ -15,7 +15,7 @@ class StudentBookingLoadingState extends StudentBookingState {}
 
 class StudentBookingLoadedState extends StudentBookingState {
   final SBListStatus status;
-  final List<StudentBooking> bookingList;
+  final List<Booking> bookingList;
   final bool hasReachedMax;
   final int page;
 
@@ -24,7 +24,7 @@ class StudentBookingLoadedState extends StudentBookingState {
 
   StudentBookingLoadedState copyWith({
     SBListStatus status,
-    List<StudentBooking> bookingList,
+    List<Booking> bookingList,
     int page = 1,
     bool hasReachedMax,
   }) {

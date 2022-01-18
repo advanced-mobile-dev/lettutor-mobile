@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
-import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/constants/colors.dart';
 
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
@@ -14,6 +14,7 @@ class TutorReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         resizeToAvoidBottomInset: true,
         appBar: ApplicationAppBar(
           title: 'Report',

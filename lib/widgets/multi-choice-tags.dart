@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/constants/colors.dart';
 
 class MultiChoiceTags extends StatefulWidget {
   final List<dynamic> selectedTags;

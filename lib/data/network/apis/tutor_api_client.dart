@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
+import 'package:lettutor_app/models/schedule/tutor_schedule_list.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
-import 'package:lettutor_app/models/tutor_schedule/tutor_schedule_list.dart';
 
 class TutorApiClient {
   final BaseClient httpClient;

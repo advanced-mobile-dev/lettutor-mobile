@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/src/repository_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:lettutor_app/config/config.dart';
+import 'package:lettutor_app/constants/config.dart';
 import 'package:lettutor_app/data/network/apis/authentication_api_client.dart';
 import 'package:lettutor_app/data/network/apis/user_api_client.dart';
 import 'package:lettutor_app/data/network/interceptors/access_token_interceptor.dart';

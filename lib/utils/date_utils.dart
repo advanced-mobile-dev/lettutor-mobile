@@ -44,6 +44,10 @@ class MyDateUtils {
     return '${timeFormat.format(start)} - ${timeFormat.format(end)}';
   }
 
+  static String getTime(DateTime start) {
+    return '${timeFormat.format(start)} - ${dateFormat2.format(start)}';
+  }
+
   static String getWeek(DateTime convertDate) {
     DateTime monday =
         convertDate.subtract(Duration(days: convertDate.weekday - 1));
@@ -63,10 +67,14 @@ class MyDateUtils {
     return convertDate == today;
   }
 
-  static countDown(DateTime startPeriod, {bool showSeconds = false}) {
+  static timeRemaining(DateTime startPeriod, {bool showSeconds = false}) {
     final duration = startPeriod.difference(DateTime.now());
-    if (duration.inSeconds < 0) return '';
-    return "${duration.inHours}h:${duration.inMinutes.remainder(60)}m${showSeconds ? ':${duration.inSeconds.remainder(60)}s' : ''}";
+    if (duration.inSeconds < 0) return '0h:0p';
+    if (duration.inHours < 24) {
+      return "${duration.inHours}h:${duration.inMinutes.remainder(60)}m${showSeconds ? ':${duration.inSeconds.remainder(60)}s' : ''}";
+    } else {
+      return "${duration.inDays} days, ${duration.inHours.remainder(24)}h:${duration.inMinutes.remainder(60)}m${showSeconds ? ':${duration.inSeconds.remainder(60)}s' : ''}";
+    }
   }
 
   static getCommentTime(DateTime endPeriod) {
@@ -75,5 +83,10 @@ class MyDateUtils {
       return '${duration.inHours} hours ago';
     }
     return '${duration.inDays} days ago';
+  }
+
+  static getTimeDuration(DateTime startPeriod, DateTime endPeriod) {
+    final duration = endPeriod.difference(startPeriod);
+    return '${duration.inMinutes} minutes';
   }
 }

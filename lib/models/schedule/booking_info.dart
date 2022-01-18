@@ -1,6 +1,4 @@
-import 'dart:typed_data';
-
-import 'package:lettutor_app/models/meeting_room.dart';
+import 'package:lettutor_app/models/booking/meeting_room.dart';
 import 'dart:convert';
 
 class BookingInfo {

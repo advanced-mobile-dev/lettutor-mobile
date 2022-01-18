@@ -9,8 +9,8 @@ import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/utils/key_service.dart';
 import 'blocs/authentication/authentication_bloc.dart';
-import 'config/languages.dart';
-import 'config/theme.dart';
+import 'constants/languages.dart';
+import 'constants/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class App extends StatelessWidget {

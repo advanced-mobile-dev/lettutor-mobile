@@ -1,4 +1,4 @@
-import 'user/user.dart';
+import '../user/user.dart';
 
 class MeetingRoom {
   String token;

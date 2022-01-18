@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
-import 'package:lettutor_app/models/student_booking/student_booking.dart';
+import 'package:lettutor_app/models/booking/booking.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 
 part 'student_booking_event.dart';

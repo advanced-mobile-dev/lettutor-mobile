@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lettutor_app/data/network/apis/user_api_client.dart';
 import 'package:lettutor_app/data/shared_preferences/shared_prefs_provider.dart';
-import 'package:lettutor_app/models/student_booking/student_booking_list.dart';
+import 'package:lettutor_app/models/booking/booking_list.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/user/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,13 +45,13 @@ class UserRepository {
     }
   }
 
-  Future<StudentBookingList> getBookingList(
+  Future<BookingList> getBookingList(
       int perPage, int page, int dateTimeGte) async {
     final data = await userApiClient.getUserBooking(perPage, page, dateTimeGte);
     return data;
   }
 
-  Future<StudentBookingList> getBookingHistory(
+  Future<BookingList> getBookingHistory(
       int perPage, int page, int dateTimeLte) async {
     return await userApiClient.getBookingHistory(perPage, page, dateTimeLte);
   }
@@ -70,5 +70,9 @@ class UserRepository {
 
   Future<List<Tutor>> getFavoriteList() async {
     return await userApiClient.getFavoriteList();
+  }
+
+  Future<bool> cancelMeeting(String scheduleId) async {
+    return userApiClient.cancelMeeting(scheduleId);
   }
 }

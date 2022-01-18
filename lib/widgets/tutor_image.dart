@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import 'package:lettutor_app/config/config.dart';
+import 'package:lettutor_app/constants/config.dart';
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 
 import 'network_circle_avatar.dart';

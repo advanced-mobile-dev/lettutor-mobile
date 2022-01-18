@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/data/network/apis/tutor_api_client.dart';
 import 'package:lettutor_app/models/filter/tutor_filter.dart';
+import 'package:lettutor_app/models/schedule/tutor_schedule_list.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/models/tutor/tutor_list.dart';
-import 'package:lettutor_app/models/tutor_schedule/tutor_schedule_list.dart';
 
 class TutorRepository {
   final TutorApiClient tutorApiClient;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lettutor_app/models/config/speciality.dart';
 
 import 'package:lettutor_app/routes.dart';
-import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 

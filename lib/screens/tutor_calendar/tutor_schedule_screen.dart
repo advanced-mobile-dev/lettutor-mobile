@@ -2,11 +2,11 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
-import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/constants/colors.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
-import 'package:lettutor_app/screens/booking/booking_screen.dart';
+import 'package:lettutor_app/screens/reservation/reservation_screen.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 
@@ -21,7 +21,7 @@ class TutorScheduleScreen extends StatelessWidget {
           onTap: !e.isBooked
               ? () async {
                   await Navigator.of(context).pushNamed(LettutorRoutes.booking,
-                      arguments: BookingScreenArguments(
+                      arguments: ReservationScreenArguments(
                         tutor: tutor,
                         scheduleDetail: e,
                       ));
@@ -109,7 +109,7 @@ class TutorScheduleScreen extends StatelessWidget {
         ),
         body: BlocConsumer<TutorScheduleBloc, TutorScheduleState>(
           builder: (context, state) {
-            if (state is TutorBookingInitial)
+            if (state is ReservationInitial)
               return Center(
                 child: CircularProgressIndicator(),
               );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lettutor_app/config/assets.dart';
-import 'package:lettutor_app/config/colors.dart';
+import 'package:lettutor_app/constants/assets.dart';
+import 'package:lettutor_app/constants/colors.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 
 class EmptyWidget extends StatelessWidget {

@@ -5,7 +5,6 @@ import 'package:lettutor_app/blocs/bottom_nav/bottom_nav_bloc.dart';
 import 'package:lettutor_app/blocs/courses/courses_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_list/favorite_list_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
-import 'package:lettutor_app/blocs/tutor_booking/tutor_booking_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
@@ -15,18 +14,21 @@ import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:lettutor_app/screens/favorite_list/favorite_list_screen.dart';
 import 'package:lettutor_app/screens/tutor_report/tutor_report_screen.dart';
 import 'blocs/lesson_time_bloc/lesson_time_bloc.dart';
+import 'blocs/meeting/meeting_bloc.dart';
+import 'blocs/reservation/reservation_bloc.dart';
 import 'blocs/student_booking/student_booking_bloc.dart';
 import 'blocs/tutors/tutors_bloc.dart';
 import 'blocs/user_profile/user_profile_bloc.dart';
+import 'models/booking/booking.dart';
 import 'models/course/course.dart';
-import 'models/student_booking/student_booking.dart';
 import 'models/tutor/tutor.dart';
 import 'repositories/tutor_repository.dart';
-import 'screens/booking/booking_screen.dart';
 import 'screens/change_password/change_password_screen.dart';
 import 'screens/course_detail/course_detail_screen.dart';
 import 'screens/dash_board/dash_board.dart';
 import 'screens/booking_history.dart/history_screen.dart';
+import 'screens/meeting/meeting_screen.dart';
+import 'screens/reservation/reservation_screen.dart';
 import 'screens/video-conference.dart/video_conference_screen.dart';
 import 'screens/forget_password/forget_password_screen.dart';
 import 'screens/language_setting/language_setting_screen.dart';
@@ -57,6 +59,7 @@ class LettutorRoutes {
   static const videoConference = 'video-conference';
   static const tutorReport = 'tutor-report';
   static const favoriteTutors = 'favorite-tutors';
+  static const meeting = 'meeting';
 }
 
 Map<String, WidgetBuilder> registerRoutes() {
@@ -127,10 +130,10 @@ Map<String, WidgetBuilder> registerRoutes() {
 Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case LettutorRoutes.booking:
-      final args = routeSettings.arguments as BookingScreenArguments;
+      final args = routeSettings.arguments as ReservationScreenArguments;
       return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context) => TutorBookingBloc(
+              create: (context) => ReservationBloc(
                     tutor: args.tutor,
                     scheduleDetail: args.scheduleDetail,
                     userRepository:
@@ -138,11 +141,7 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
                     paymentRepository:
                         RepositoryProvider.of<PaymentRepository>(context),
                   ),
-              child: BookingScreen()));
-      //   (context) => BookingScreen(
-      //       tutor: args.tutor, scheduleDetail: args.scheduleDetail),
-      // );
-
+              child: ReservationScreen()));
       break;
 
     case LettutorRoutes.courseDetail:
@@ -167,7 +166,7 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
       break;
 
     case LettutorRoutes.videoConference:
-      final studentBooking = routeSettings.arguments as StudentBooking;
+      final studentBooking = routeSettings.arguments as Booking;
       return MaterialPageRoute(
           builder: (context) => VideoConferenceScreen(studentBooking));
       break;
@@ -198,6 +197,16 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
             child: TutorReportScreen()),
       );
       break;
+
+    case LettutorRoutes.meeting:
+      final booking = routeSettings.arguments as Booking;
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider(
+            create: (_) => MeetingBloc(
+                booking: booking,
+                userRepository: context.read<UserRepository>()),
+            child: MeetingScreen()),
+      );
   }
 
   return null;

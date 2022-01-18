@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/blocs/favorite_list/favorite_list_bloc.dart';
+import 'package:lettutor_app/models/config/speciality.dart';
 
 import 'package:lettutor_app/routes.dart';
-import 'package:lettutor_app/models/speciality.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +16,7 @@ class FavoriteItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await Navigator.pushNamed(context, LettutorRoutes.tutorProfile,
-            arguments: tutor);
+            arguments: tutor.userId);
         context.read<FavoriteListBloc>().add(FavoriteListFetchEvent());
       },
       child: Container(

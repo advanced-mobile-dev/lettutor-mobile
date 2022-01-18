@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/app_settings/app_settings_bloc.dart';
-import 'package:lettutor_app/config/languages.dart';
+import 'package:lettutor_app/constants/languages.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
