@@ -30,7 +30,7 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
     try {
       final courseList =
           await _courseRepository.getCourses(_coursePerPage, 1, _courseFilter);
-      emit(CoursesLoadSuccessState(
+      emit(CoursesLoadedState(
           status: CoursesStatus.success,
           page: 1,
           hasReachedMax: courseList.data.length == courseList.count,
@@ -46,13 +46,12 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
   Future<void> _onCoursesLoadMore(
       CoursesLoadMoreEvent event, Emitter<CoursesState> emit) async {
     // if (event.specialities!=null && event.specialities)
-
-    if (state is CoursesLoadSuccessState) {
-      final successState = (state as CoursesLoadSuccessState);
+    if (state is CoursesLoadedState) {
+      final successState = (state as CoursesLoadedState);
       if (successState.status != CoursesStatus.success ||
           successState.hasReachedMax) return;
-      print('loading more');
       emit(successState.copyWith(status: CoursesStatus.loadingMore));
+
       try {
         //load more
         final int nextPage = successState.page + 1;
@@ -93,7 +92,7 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
     try {
       final courseList =
           await _courseRepository.getCourses(_coursePerPage, 1, _courseFilter);
-      emit(CoursesLoadSuccessState(
+      emit(CoursesLoadedState(
           page: 1,
           hasReachedMax: courseList.data.length >= courseList.count,
           courses: courseList.data,
@@ -111,7 +110,7 @@ class CoursesBloc extends Bloc<CoursesEvent, CoursesState> {
       if (event.showLoading) emit(CoursesLoadingState());
       final courseList =
           await _courseRepository.getCourses(_coursePerPage, 1, _courseFilter);
-      emit(CoursesLoadSuccessState(
+      emit(CoursesLoadedState(
           status: CoursesStatus.success,
           page: 1,
           hasReachedMax: courseList.data.length == courseList.count,

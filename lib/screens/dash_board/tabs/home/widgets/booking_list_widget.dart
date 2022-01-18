@@ -54,12 +54,17 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                 });
           Booking upcommingClass = state.bookingList[0];
           return CustomScrollView(
+            physics: BouncingScrollPhysics(),
             controller: _scrollController,
             slivers: [
               CupertinoSliverRefreshControl(onRefresh: () async {
                 context
                     .read<StudentBookingBloc>()
                     .add(StudentBookingRefreshEvent());
+                await context.read<StudentBookingBloc>().stream.firstWhere(
+                    (element) =>
+                        element is StudentBookingLoadedState ||
+                        element is StudentBookingLoadFailureState);
               }),
               SliverToBoxAdapter(
                 child: UpcommingClassWidget(upcommingClass),

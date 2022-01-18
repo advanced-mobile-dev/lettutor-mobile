@@ -40,13 +40,19 @@ class _CourseListWidgetState extends State<CourseListWidget> {
               ..add(CoursesRefreshEvent(showLoading: true));
           },
         );
-      if (state is CoursesLoadSuccessState) {
+      if (state is CoursesLoadedState) {
         if (state.courses.isEmpty) return EmptyWidget();
         final _widthScreen = MediaQuery.of(context).size.width;
         return CustomScrollView(
+          physics: BouncingScrollPhysics(),
           controller: _scrollController,
           slivers: [
             CupertinoSliverRefreshControl(onRefresh: () async {
+              final _coursesBloc = context.read<CoursesBloc>();
+              _coursesBloc.add(CoursesRefreshEvent());
+              await _coursesBloc.stream.firstWhere((element) =>
+                  element is CoursesLoadedState ||
+                  element is CoursesLoadFailureState);
               context.read<CoursesBloc>()..add(CoursesRefreshEvent());
             }),
             SliverPadding(

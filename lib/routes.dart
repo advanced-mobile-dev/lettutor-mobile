@@ -29,7 +29,6 @@ import 'screens/dash_board/dash_board.dart';
 import 'screens/booking_history.dart/history_screen.dart';
 import 'screens/meeting/meeting_screen.dart';
 import 'screens/reservation/reservation_screen.dart';
-import 'screens/video-conference.dart/video_conference_screen.dart';
 import 'screens/forget_password/forget_password_screen.dart';
 import 'screens/language_setting/language_setting_screen.dart';
 import 'screens/login/login_screen.dart';
@@ -163,12 +162,6 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
                 tutor: tutor,
               )));
 
-      break;
-
-    case LettutorRoutes.videoConference:
-      final studentBooking = routeSettings.arguments as Booking;
-      return MaterialPageRoute(
-          builder: (context) => VideoConferenceScreen(studentBooking));
       break;
 
     case LettutorRoutes.tutorProfile:

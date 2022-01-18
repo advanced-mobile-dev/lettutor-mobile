@@ -11,21 +11,21 @@ class TutorsLoadingState extends TutorsState {
   List<Object> get props => [];
 }
 
-class TutorsLoadSuccessState extends TutorsState {
+class TutorsLoadedState extends TutorsState {
   final TutorsStatus status;
   final List<Tutor> tutors;
   final bool hasReachedMax;
   final int page;
   final TutorFilter tutorFilter;
 
-  TutorsLoadSuccessState(
+  TutorsLoadedState(
       {this.status = TutorsStatus.success,
       this.tutors = const <Tutor>[],
       this.page = 1,
       this.hasReachedMax = false,
       this.tutorFilter});
 
-  TutorsLoadSuccessState copyWith({
+  TutorsLoadedState copyWith({
     TutorsStatus status,
     List<Tutor> tutors,
     int page = 1,
@@ -33,7 +33,7 @@ class TutorsLoadSuccessState extends TutorsState {
     String searchKeyword,
     TutorFilter tutorFilter,
   }) {
-    return TutorsLoadSuccessState(
+    return TutorsLoadedState(
       status: status ?? this.status,
       tutors: tutors ?? this.tutors,
       page: page ?? this.page,
@@ -44,8 +44,7 @@ class TutorsLoadSuccessState extends TutorsState {
 
   @override
   String toString() {
-    return 'TutorsLoadSuccessState  {status: $status hasReachedMax: $hasReachedMax, page: $page, tutors: ${tutors.length}, filter: $tutorFilter }'
-        '';
+    return 'TutorsLoadedState  {status: $status hasReachedMax: $hasReachedMax, page: $page, tutors: ${tutors.length}, filter: $tutorFilter }';
   }
 
   @override

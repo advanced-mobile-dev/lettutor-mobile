@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/booking_history/booking_history_bloc.dart';
+import 'package:lettutor_app/blocs/user_profile/user_profile_bloc.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/widgets/empty_widget.dart';
@@ -50,34 +53,42 @@ class _HistoryScreenState extends State<HistoryScreen> {
             if (state is BookingHistoryLoadedState) {
               if (state.bookingList.length == 0) return EmptyWidget();
 
-              return CustomScrollView(controller: _scrollController, slivers: [
-                CupertinoSliverRefreshControl(
-                  onRefresh: () async {
-                    context
-                        .read<BookingHistoryBloc>()
-                        .add(BookingHistoryRefreshEvent());
-                  },
-                ),
-                SliverPadding(
-                    padding: EdgeInsets.only(top: 10),
-                    sliver: SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                            (context, index) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 10),
-                                  child: HistoryItem(
-                                    studentBooking: state.bookingList[index],
-                                  ),
-                                ),
-                            childCount: state.bookingList.length))),
-                SliverToBoxAdapter(
-                    child: state.status == BookingHistoryStatus.loadingMore
-                        ? Container(
-                            padding: EdgeInsets.only(bottom: 12),
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(),
-                          )
-                        : SizedBox())
-              ]);
+              return CustomScrollView(
+                  physics: BouncingScrollPhysics(),
+                  controller: _scrollController,
+                  slivers: [
+                    CupertinoSliverRefreshControl(
+                      onRefresh: () async {
+                        final _bookingHistoryBloc =
+                            context.read<BookingHistoryBloc>();
+                        _bookingHistoryBloc.add(BookingHistoryRefreshEvent());
+                        await _bookingHistoryBloc.stream.firstWhere((element) =>
+                            element is BookingHistoryLoadedState ||
+                            element is BookingHistoryLoadFailureState);
+                      },
+                    ),
+                    SliverPadding(
+                        padding: EdgeInsets.only(top: 10),
+                        sliver: SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                                (context, index) => Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10),
+                                      child: HistoryItem(
+                                        studentBooking:
+                                            state.bookingList[index],
+                                      ),
+                                    ),
+                                childCount: state.bookingList.length))),
+                    SliverToBoxAdapter(
+                        child: state.status == BookingHistoryStatus.loadingMore
+                            ? Container(
+                                padding: EdgeInsets.only(bottom: 12),
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator(),
+                              )
+                            : SizedBox())
+                  ]);
             }
             return EmptyWidget();
           },

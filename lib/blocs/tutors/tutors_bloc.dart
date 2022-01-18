@@ -29,7 +29,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
     try {
       final tutorList =
           await _tutorRepository.getTutors(_tutorPerPage, 1, _tutorFilter);
-      emit(TutorsLoadSuccessState(
+      emit(TutorsLoadedState(
           status: TutorsStatus.success,
           page: 1,
           hasReachedMax: tutorList.data.length == tutorList.count,
@@ -44,8 +44,8 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
       TutorsLoadMoreEvent event, Emitter<TutorsState> emit) async {
     // if (event.specialities!=null && event.specialities)
 
-    if (state is TutorsLoadSuccessState) {
-      final successState = (state as TutorsLoadSuccessState);
+    if (state is TutorsLoadedState) {
+      final successState = (state as TutorsLoadedState);
       if (successState.status != TutorsStatus.success ||
           successState.hasReachedMax) return;
       print('loading more');
@@ -92,7 +92,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
     try {
       final tutorList =
           await _tutorRepository.getTutors(_tutorPerPage, 1, _tutorFilter);
-      emit(TutorsLoadSuccessState(
+      emit(TutorsLoadedState(
           page: 1,
           hasReachedMax: tutorList.data.length >= tutorList.count,
           tutors: tutorList.data,
@@ -108,7 +108,7 @@ class TutorsBloc extends Bloc<TutorsEvent, TutorsState> {
       if (event.showLoading) emit(TutorsLoadingState());
       final tutorList =
           await _tutorRepository.getTutors(_tutorPerPage, 1, _tutorFilter);
-      emit(TutorsLoadSuccessState(
+      emit(TutorsLoadedState(
           status: TutorsStatus.success,
           page: 1,
           hasReachedMax: tutorList.data.length == tutorList.count,

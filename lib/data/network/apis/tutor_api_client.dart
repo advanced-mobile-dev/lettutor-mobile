@@ -22,11 +22,10 @@ class TutorApiClient {
       },
       "perPage": perPage,
       "page": page,
-      "q": keyword
+      "search": keyword
     });
     if (response.statusCode == 200) {
-      final TutorList tutorList =
-          TutorList.fromJson(jsonDecode(response.body), keyword);
+      final TutorList tutorList = TutorList.fromJson(jsonDecode(response.body));
       return tutorList;
     }
     return null;

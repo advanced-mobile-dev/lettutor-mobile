@@ -36,15 +36,20 @@ class _TutorListWidgetState extends State<TutorListWidget> {
                   .add(TutorsRefreshEvent(showLoading: true));
             },
           );
-        if (state is TutorsLoadSuccessState) {
+        if (state is TutorsLoadedState) {
           if (state.tutors.isEmpty) {
             return EmptyWidget();
           }
           return CustomScrollView(
+            physics: BouncingScrollPhysics(),
             controller: _scrollController,
             slivers: [
               CupertinoSliverRefreshControl(onRefresh: () async {
-                context.read<TutorsBloc>().add(TutorsRefreshEvent());
+                final _tutorsBloc = context.read<TutorsBloc>();
+                _tutorsBloc.add(TutorsRefreshEvent());
+                await _tutorsBloc.stream.firstWhere((element) =>
+                    element is TutorsLoadedState ||
+                    element is TutorsLoadFailureState);
               }),
               SliverPadding(
                   padding: EdgeInsets.only(bottom: 10, top: 10),

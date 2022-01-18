@@ -13,7 +13,7 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   final _searchController = TextEditingController();
-  Debouner _debouner = new Debouner(milliseconds: 500);
+  Debouner _debouner = new Debouner(milliseconds: 1000);
   CoursesBloc _coursesBloc;
   @override
   void initState() {

@@ -11,7 +11,7 @@ class CoursesLoadingState extends CoursesState {
   List<Object> get props => [];
 }
 
-class CoursesLoadSuccessState extends CoursesState {
+class CoursesLoadedState extends CoursesState {
   final CoursesStatus status;
   final List<Course> courses;
   final bool hasReachedMax;
@@ -19,7 +19,7 @@ class CoursesLoadSuccessState extends CoursesState {
   final String searchKeyword;
   final CourseFilter courseFilter;
 
-  CoursesLoadSuccessState(
+  CoursesLoadedState(
       {this.status = CoursesStatus.success,
       this.courses = const <Course>[],
       this.page = 1,
@@ -27,7 +27,7 @@ class CoursesLoadSuccessState extends CoursesState {
       this.searchKeyword = '',
       this.courseFilter});
 
-  CoursesLoadSuccessState copyWith({
+  CoursesLoadedState copyWith({
     CoursesStatus status,
     List<Course> courses,
     int page = 1,
@@ -35,7 +35,7 @@ class CoursesLoadSuccessState extends CoursesState {
     String searchKeyword,
     CourseFilter courseFilter,
   }) {
-    return CoursesLoadSuccessState(
+    return CoursesLoadedState(
       status: status ?? this.status,
       courses: courses ?? this.courses,
       page: page ?? this.page,
@@ -47,7 +47,7 @@ class CoursesLoadSuccessState extends CoursesState {
 
   @override
   String toString() {
-    return '''LoadSuccessState  {status: $status hasReachedMax: $hasReachedMax, page: $page, courses: ${courses.length}, filter: $courseFilter }''';
+    return '''LoadedState  {status: $status hasReachedMax: $hasReachedMax, page: $page, courses: ${courses.length}, filter: $courseFilter }''';
   }
 
   @override

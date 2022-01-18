@@ -13,7 +13,7 @@ class TutorsSearchBar extends StatefulWidget {
 
 class _TutorsSearchBarState extends State<TutorsSearchBar> {
   final _searchController = TextEditingController();
-  Debouner _debouner = new Debouner(milliseconds: 500);
+  Debouner _debouner = new Debouner(milliseconds: 1000);
   TutorsBloc _tutorsBloc;
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _TutorsSearchBarState extends State<TutorsSearchBar> {
           _debouner.run(() {
             _tutorsBloc.add(ApplyTutorFilterEvent(
                 tutorFilter: _tutorsBloc.tutorFilter.copyWith(keyword: value)));
-            DeviceUtils.hideKeyboard(context);
+            // DeviceUtils.hideKeyboard(context);
           });
         },
         decoration: InputDecoration(

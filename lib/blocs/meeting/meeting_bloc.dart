@@ -54,6 +54,7 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
         featureFlags[FeatureFlagEnum.CALL_INTEGRATION_ENABLED] = false;
       } else if (Platform.isIOS) {
         featureFlags[FeatureFlagEnum.PIP_ENABLED] = false;
+        featureFlags[FeatureFlagEnum.IOS_RECORDING_ENABLED] = false;
       }
     }
     featureFlags[FeatureFlagEnum.ADD_PEOPLE_ENABLED] = false;
@@ -61,16 +62,15 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
     featureFlags[FeatureFlagEnum.MEETING_PASSWORD_ENABLED] = false;
     featureFlags[FeatureFlagEnum.CALENDAR_ENABLED] = false;
     featureFlags[FeatureFlagEnum.INVITE_ENABLED] = false;
-    featureFlags[FeatureFlagEnum.IOS_RECORDING_ENABLED] = false;
 
     String serverUrl = 'https://meet.lettutor.com';
     var options = JitsiMeetingOptions(room: '${meetingRoom.room}')
       ..serverURL = serverUrl
       ..token = '${meetingRoom.token}'
       ..subject = meetingRoom.roomName
-      ..userDisplayName = 'meetingRoom.userCall.name'
-      ..userAvatarURL = 'meetingRoom.userCall.avatar'
-      ..userEmail = 'meetingRoom.userCall.email'
+      ..userDisplayName = meetingRoom.userCall.name
+      ..userAvatarURL = meetingRoom.userCall.avatar
+      ..userEmail = meetingRoom.userCall.email
       ..audioOnly = false
       ..audioMuted = true
       ..videoMuted = true
