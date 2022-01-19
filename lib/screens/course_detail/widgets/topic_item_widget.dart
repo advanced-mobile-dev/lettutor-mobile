@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lettutor_app/models/course/topic.dart';
+import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/utils/url_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,7 +24,9 @@ class TopicItemWidget extends StatelessWidget {
                   .copyWith(color: Colors.blue, fontSize: 14),
               recognizer: new TapGestureRecognizer()
                 ..onTap = () async {
-                  await AppUrlLauncher.launchHttpsUrl(context, topic.nameFile);
+                  Navigator.pushNamed(context, LettutorRoutes.topic,
+                      arguments: topic);
+                  // await AppUrlLauncher.launchHttpsUrl(context, topic.nameFile);
                 },
             ),
           ],

@@ -12,6 +12,7 @@ import 'package:lettutor_app/repositories/course_repository.dart';
 import 'package:lettutor_app/repositories/payment_repository.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 import 'package:lettutor_app/screens/favorite_list/favorite_list_screen.dart';
+import 'package:lettutor_app/screens/topic/topic_screen.dart';
 import 'package:lettutor_app/screens/tutor_report/tutor_report_screen.dart';
 import 'blocs/lesson_time_bloc/lesson_time_bloc.dart';
 import 'blocs/meeting/meeting_bloc.dart';
@@ -21,6 +22,7 @@ import 'blocs/tutors/tutors_bloc.dart';
 import 'blocs/user_profile/user_profile_bloc.dart';
 import 'models/booking/booking.dart';
 import 'models/course/course.dart';
+import 'models/course/topic.dart';
 import 'models/tutor/tutor.dart';
 import 'repositories/tutor_repository.dart';
 import 'screens/change_password/change_password_screen.dart';
@@ -59,6 +61,7 @@ class LettutorRoutes {
   static const tutorReport = 'tutor-report';
   static const favoriteTutors = 'favorite-tutors';
   static const meeting = 'meeting';
+  static const topic = 'topic';
 }
 
 Map<String, WidgetBuilder> registerRoutes() {
@@ -99,7 +102,6 @@ Map<String, WidgetBuilder> registerRoutes() {
           create: (context) => UserProfileBloc(_userRepo),
           child: UserProfileScreen());
     },
-
     LettutorRoutes.history: (context) {
       return BlocProvider(
           create: (context) =>
@@ -107,7 +109,6 @@ Map<String, WidgetBuilder> registerRoutes() {
                 ..add(BookingHistoryFetchDataEvent()),
           child: HistoryScreen());
     },
-
     LettutorRoutes.favoriteTutors: (context) {
       return BlocProvider(
           create: (context) =>
@@ -115,14 +116,12 @@ Map<String, WidgetBuilder> registerRoutes() {
                 ..add(FavoriteListFetchEvent()),
           child: FavoriteListScreen());
     },
-
     LettutorRoutes.start: (context) => StartScreen(),
     LettutorRoutes.signUp: (context) => SignUpScreen(),
     LettutorRoutes.signIn: (context) => LoginScreen(),
     LettutorRoutes.changePassword: (context) => ChangePasswordScreen(),
     LettutorRoutes.languageSetting: (context) => LanguageSettingScreen(),
     LettutorRoutes.forgetPassword: (context) => ForgetPasswordScreen(),
-    // LettutorRoutes.videoConference: (context) => VideoConference(),
   };
 }
 
@@ -199,6 +198,12 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
                 booking: booking,
                 userRepository: context.read<UserRepository>()),
             child: MeetingScreen()),
+      );
+
+    case LettutorRoutes.topic:
+      final topic = routeSettings.arguments as Topic;
+      return MaterialPageRoute(
+        builder: (context) => TopicScreen(topic),
       );
   }
 
