@@ -45,16 +45,17 @@ class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
                           SizedBox(
                             width: 15,
                           ),
-                          Text("Success")
+                          Text('${AppLocalizations.of(context).success}')
                         ],
                       ),
                       content: Text(
-                        "Please check your email for a link to reset your password.",
-                        // textAlign: TextAlign.center,
-                      ),
+                          '${AppLocalizations.of(context).forgetPasswordSuccess}'
+                          // "Please check your email for a link to reset your password.",
+                          // textAlign: TextAlign.center,
+                          ),
                       actions: [
                         TextButton(
-                          child: Text('Close'),
+                          child: Text('${AppLocalizations.of(context).close}'),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -67,9 +68,12 @@ class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
           padding: EdgeInsets.all(15),
           child: Column(
             children: <Widget>[
-              Text(
-                AppLocalizations.of(context).forgetPasswordContent,
-                maxLines: 2,
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  AppLocalizations.of(context).forgetPasswordContent,
+                  maxLines: 2,
+                ),
               ),
               SizedBox(
                 height: 30,

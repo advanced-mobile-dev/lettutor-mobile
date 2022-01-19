@@ -41,7 +41,8 @@ class _TutorListWidgetState extends State<TutorListWidget> {
             return EmptyWidget();
           }
           return CustomScrollView(
-            physics: BouncingScrollPhysics(),
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             controller: _scrollController,
             slivers: [
               CupertinoSliverRefreshControl(onRefresh: () async {

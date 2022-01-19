@@ -50,7 +50,7 @@ class LettutorRoutes {
   static const signIn = 'sign-in';
   static const forgetPassword = 'forget-password';
   static const history = 'history';
-  static const tutorProfile = 'tutorprofile';
+  static const tutorProfile = 'tutor-profile';
   static const tutorSchedule = 'tutor-calendar';
   static const booking = 'booking';
   static const courseDetail = 'course-detail';
@@ -114,7 +114,7 @@ Map<String, WidgetBuilder> registerRoutes() {
           create: (context) =>
               FavoriteListBloc(userRepository: context.read<UserRepository>())
                 ..add(FavoriteListFetchEvent()),
-          child: FavoriteListScreen());
+          child: FavoriteTutorsScreen());
     },
     LettutorRoutes.start: (context) => StartScreen(),
     LettutorRoutes.signUp: (context) => SignUpScreen(),

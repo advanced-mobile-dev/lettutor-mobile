@@ -39,94 +39,99 @@ class _LoginFormState extends State<LoginForm> {
         padding: EdgeInsets.all(15),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 40,
-              ),
-              CustomTextField(
-                  title: AppLocalizations.of(context).email,
-                  iconData: Icons.email,
-                  onSaved: (value) => {_email = value},
-                  keyboardType: TextInputType.emailAddress,
-                  validator: validateEmail),
-              SizedBox(
-                height: 30,
-              ),
-              CustomTextField(
-                title: AppLocalizations.of(context).password,
-                iconData: Icons.lock,
-                keyboardType: TextInputType.visiblePassword,
-                onSaved: (value) => _password = value,
-                validator: validatePassword,
-                isPasswordTextField: true,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                child: AppFlatButton(
-                    text: '${AppLocalizations.of(context).forgetPassword}?',
-                    function: () {
-                      Navigator.of(context)
-                          .pushNamed(LettutorRoutes.forgetPassword);
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 40,
+                ),
+                CustomTextField(
+                    title: AppLocalizations.of(context).email,
+                    iconData: Icons.email,
+                    onSaved: (value) => {_email = value},
+                    keyboardType: TextInputType.emailAddress,
+                    validator: validateEmail),
+                SizedBox(
+                  height: 30,
+                ),
+                CustomTextField(
+                  title: AppLocalizations.of(context).password,
+                  iconData: Icons.lock,
+                  keyboardType: TextInputType.visiblePassword,
+                  onSaved: (value) => _password = value,
+                  validator: validatePassword,
+                  isPasswordTextField: true,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: AppFlatButton(
+                      text: '${AppLocalizations.of(context).forgetPassword}?',
+                      function: () {
+                        Navigator.of(context)
+                            .pushNamed(LettutorRoutes.forgetPassword);
+                      }),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    if (state is LoginInprogressState) {
+                      return SubmitButton(
+                          text: '${AppLocalizations.of(context).login}...',
+                          function: null);
+                    }
+                    return SubmitButton(
+                        text: AppLocalizations.of(context).login,
+                        function: () async {
+                          if (_formKey.currentState.validate()) {
+                            _formKey.currentState.save();
+                            context.read<LoginBloc>().add(LoginByEmailEvent(
+                                email: _email, password: _password));
+                          }
+                        });
+                  },
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                    child: Text(
+                        '${AppLocalizations.of(context).createAnAccount}',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: 14,
+                            color: Colors.blue)),
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, LettutorRoutes.signUp);
                     }),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              BlocBuilder<LoginBloc, LoginState>(
-                builder: (context, state) {
-                  if (state is LoginInprogressState) {
-                    return SubmitButton(text: 'Logging in...', function: null);
-                  }
-                  return SubmitButton(
-                      text: AppLocalizations.of(context).login,
-                      function: () async {
-                        if (_formKey.currentState.validate()) {
-                          _formKey.currentState.save();
-                          context.read<LoginBloc>().add(LoginByEmailEvent(
-                              email: _email, password: _password));
-                        }
-                      });
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              GestureDetector(
-                  child: Text("Create an account",
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 16,
-                          color: Colors.blue)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, LettutorRoutes.signUp);
-                  }),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                  padding: EdgeInsets.all(5),
-                  alignment: Alignment.center,
-                  child: Text(AppLocalizations.of(context).orContinueWith,
-                      style: Theme.of(context).textTheme.caption)),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _buildFacebookButton(context),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  _buildGoogleButton(context),
-                ],
-              ),
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                    padding: EdgeInsets.all(5),
+                    alignment: Alignment.center,
+                    child: Text(AppLocalizations.of(context).orContinueWith,
+                        style: Theme.of(context).textTheme.caption)),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    _buildFacebookButton(context),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    _buildGoogleButton(context),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

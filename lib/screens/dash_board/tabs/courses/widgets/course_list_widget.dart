@@ -44,7 +44,8 @@ class _CourseListWidgetState extends State<CourseListWidget> {
         if (state.courses.isEmpty) return EmptyWidget();
         final _widthScreen = MediaQuery.of(context).size.width;
         return CustomScrollView(
-          physics: BouncingScrollPhysics(),
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           controller: _scrollController,
           slivers: [
             CupertinoSliverRefreshControl(onRefresh: () async {

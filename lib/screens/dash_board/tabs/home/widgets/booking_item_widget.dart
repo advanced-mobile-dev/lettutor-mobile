@@ -7,6 +7,7 @@ import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:lettutor_app/widgets/tutor_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookingItemWidget extends StatelessWidget {
   final Booking studentBooking;
@@ -68,7 +69,7 @@ class BookingItemWidget extends StatelessWidget {
                               padding: EdgeInsets.symmetric(vertical: 15),
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Your note: ${studentBooking.bookingInfo.studentRequest}',
+                                '${AppLocalizations.of(context).note}: ${studentBooking.bookingInfo.studentRequest}',
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               )),
@@ -80,7 +81,7 @@ class BookingItemWidget extends StatelessWidget {
               ? Container(
                   alignment: Alignment.bottomRight,
                   child: SubmitButton(
-                    text: 'Start',
+                    text: '${AppLocalizations.of(context).start}',
                     function: () async {
                       await Navigator.pushNamed(context, LettutorRoutes.meeting,
                           arguments: studentBooking);

@@ -19,7 +19,7 @@ class AdvancedSettings extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            child: Text('Advanced settings',
+            child: Text('${AppLocalizations.of(context).advancedSettings}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2

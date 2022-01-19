@@ -5,13 +5,14 @@ import 'package:lettutor_app/screens/favorite_list/widgets/favorite_item.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/empty_widget.dart';
 import 'package:lettutor_app/widgets/error_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class FavoriteListScreen extends StatelessWidget {
+class FavoriteTutorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ApplicationAppBar(
-        title: 'Favorite tutors',
+        title: '${AppLocalizations.of(context).favoriteTutors}',
       ),
       body: BlocBuilder<FavoriteListBloc, FavoriteListState>(
         builder: (context, state) {

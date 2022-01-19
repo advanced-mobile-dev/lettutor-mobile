@@ -8,6 +8,7 @@ import 'package:lettutor_app/widgets/empty_widget.dart';
 import 'package:lettutor_app/widgets/error_widget.dart';
 import 'booking_item_widget.dart';
 import 'upcomming_class_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookingListWidget extends StatefulWidget {
   @override
@@ -54,7 +55,8 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                 });
           Booking upcommingClass = state.bookingList[0];
           return CustomScrollView(
-            physics: BouncingScrollPhysics(),
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             controller: _scrollController,
             slivers: [
               CupertinoSliverRefreshControl(onRefresh: () async {
@@ -80,7 +82,8 @@ class _BookingListWidgetState extends State<BookingListWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Others',
+                        '${AppLocalizations.of(context).others}',
+                        // 'Others',
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ],

@@ -1,17 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/meeting/meeting_bloc.dart';
-import 'package:lettutor_app/blocs/student_booking/student_booking_bloc.dart';
 import 'package:lettutor_app/routes.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
+import 'package:lettutor_app/utils/dialog_utils.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/loading_overlay.dart';
 import 'package:lettutor_app/widgets/outline_button.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
 import 'package:lettutor_app/widgets/time_remaining.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/detail_row.dart';
 
 class MeetingScreen extends StatelessWidget {
@@ -21,7 +19,7 @@ class MeetingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: ApplicationAppBar(
-          title: 'Meeting',
+          title: '${AppLocalizations.of(context).meeting}',
         ),
         body: BlocConsumer<MeetingBloc, MeetingState>(
           listener: (context, state) {
@@ -34,48 +32,23 @@ class MeetingScreen extends StatelessWidget {
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(
-                  SnackBar(content: Text('Failed')),
+                  SnackBar(
+                      content: Text('${AppLocalizations.of(context).failed}')),
                 );
             }
             if (state.removeStatus == MeetingRemoveStatus.success) {
-              showDialog(
-                  context: context,
+              DialogUtils.showCustomDialog(context,
+                  title: '${AppLocalizations.of(context).success}',
+                  content: '${AppLocalizations.of(context).meetingCancelled}',
                   barrierDismissible: false,
-                  builder: (context) => AlertDialog(
-                        title: Row(
-                          children: [
-                            Icon(
-                              Icons.check_box_rounded,
-                              size: 36,
-                              color: Colors.green,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text("Sucess")
-                          ],
-                        ),
-                        content: Text(
-                          "Your meeting has been cancelled!!!",
-                          // textAlign: TextAlign.center,
-                        ),
-                        actions: [
-                          TextButton(
-                            child: Text('Ok'),
-                            onPressed: () {
-                              Navigator.popUntil(
-                                  context,
-                                  (route) =>
-                                      route.settings.name ==
-                                      LettutorRoutes.home);
-                            },
-                          ),
-                        ],
-                      ));
+                  dialogType: DialogType.success,
+                  okBtnText: 'Ok', onOkPressed: () {
+                Navigator.popUntil(context,
+                    (route) => route.settings.name == LettutorRoutes.home);
+              });
             }
           },
           builder: (context, state) {
-            print('build');
             void _cancelMeeting() {
               context.read<MeetingBloc>().add(CancelMeetingEvent());
             }
@@ -100,30 +73,30 @@ class MeetingScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           DetailRow(
-                            title: 'Remaining',
+                            title: '${AppLocalizations.of(context).remaining}',
                             content: TimeRemaining(
                                 state.booking.scheduleDetail.startPeriod),
                           ),
                           DetailRow(
-                              title: 'Start',
+                              title: '${AppLocalizations.of(context).start}',
                               content: Text(
                                 '${MyDateUtils.getTime(state.booking.scheduleDetail.startPeriod)}',
                               )),
                           DetailRow(
-                            title: 'Duration',
+                            title: '${AppLocalizations.of(context).duration}',
                             content: Text(
-                              '${MyDateUtils.getTimeDuration(state.booking.scheduleDetail.startPeriod, state.booking.scheduleDetail.endPeriod)}',
+                              '${MyDateUtils.getTimeDuration(state.booking.scheduleDetail.startPeriod, state.booking.scheduleDetail.endPeriod)} ${AppLocalizations.of(context).minutes}',
                             ),
                           ),
                           DetailRow(
-                              title: 'Tutor',
+                              title: '${AppLocalizations.of(context).tutor}',
                               content: Text(
                                 '${state.booking.scheduleDetail.tutorBasicInfo.name}',
                               )),
                           state.booking.bookingInfo.studentRequest == null
                               ? SizedBox()
                               : DetailRow(
-                                  title: 'Note',
+                                  title: '${AppLocalizations.of(context).note}',
                                   content: Text(
                                     '${state.booking.bookingInfo.studentRequest}',
                                   )),
@@ -131,32 +104,27 @@ class MeetingScreen extends StatelessWidget {
                               ? Container(
                                   alignment: Alignment.bottomRight,
                                   child: CustomTextButton(
-                                      text: 'Cancel',
+                                      text:
+                                          '${AppLocalizations.of(context).cancel}',
                                       function: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                                  title: Text("Cancel meeting"),
-                                                  content: Text(
-                                                    "Do you want to cancel this meeting?",
-                                                    // textAlign: TextAlign.center,
-                                                  ),
-                                                  actions: [
-                                                    TextButton(
-                                                      child: Text('No'),
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                    ),
-                                                    TextButton(
-                                                      child: Text('Yes'),
-                                                      onPressed: () {
-                                                        _cancelMeeting();
-                                                        Navigator.pop(context);
-                                                      },
-                                                    ),
-                                                  ],
-                                                ));
+                                        DialogUtils.showCustomDialog(
+                                          context,
+                                          content:
+                                              '${AppLocalizations.of(context).cancelMeetingContent}',
+                                          okBtnText:
+                                              '${AppLocalizations.of(context).yes}',
+                                          cancelBtnText:
+                                              '${AppLocalizations.of(context).no}',
+                                          onOkPressed: () {
+                                            _cancelMeeting();
+                                            Navigator.pop(context);
+                                          },
+                                          onCancelPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          title:
+                                              '${AppLocalizations.of(context).cancelMeeting}',
+                                        );
                                       },
                                       iconData: Icons.delete,
                                       color: Colors.red),
@@ -169,7 +137,7 @@ class MeetingScreen extends StatelessWidget {
                       height: 35,
                     ),
                     SubmitButton(
-                        text: 'Start meeting',
+                        text: '${AppLocalizations.of(context).startMeeting}',
                         function: _remainingMinutes <= 120
                             ? () async {
                                 context

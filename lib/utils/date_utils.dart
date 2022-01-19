@@ -80,6 +80,7 @@ class MyDateUtils {
   static getCommentTime(DateTime endPeriod) {
     final duration = DateTime.now().difference(endPeriod);
     if (duration.inHours < 24) {
+      if (duration.inHours == 0) return '${duration.inMinutes} minutes ago';
       return '${duration.inHours} hours ago';
     }
     return '${duration.inDays} days ago';
@@ -87,6 +88,6 @@ class MyDateUtils {
 
   static getTimeDuration(DateTime startPeriod, DateTime endPeriod) {
     final duration = endPeriod.difference(startPeriod);
-    return '${duration.inMinutes} minutes';
+    return '${duration.inMinutes}';
   }
 }

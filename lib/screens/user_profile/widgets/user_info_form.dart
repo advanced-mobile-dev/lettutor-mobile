@@ -101,7 +101,7 @@ class _UserInfoFormState extends State<UserInfoForm> {
                         avatar: _pickedFile));
                   }
                 },
-                text: 'Save',
+                text: '${AppLocalizations.of(context).save}',
               )
             ],
           ),

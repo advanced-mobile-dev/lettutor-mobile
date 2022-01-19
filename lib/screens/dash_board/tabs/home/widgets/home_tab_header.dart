@@ -61,7 +61,7 @@ class HomeTabHeader extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Row(children: [
                     Text(
-                      'Total lesson time: ${state.learnedTime.inHours} ${AppLocalizations.of(context).hours} ${state.learnedTime.inMinutes.remainder(60)} ${AppLocalizations.of(context).minutes}',
+                      '${AppLocalizations.of(context).totalLessonTime}: ${state.learnedTime.inHours} ${AppLocalizations.of(context).hours} ${state.learnedTime.inMinutes.remainder(60)} ${AppLocalizations.of(context).minutes}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -69,7 +69,8 @@ class HomeTabHeader extends StatelessWidget {
                     ),
                   ]));
             return Text(
-              'Welcome to lettutor',
+              '${AppLocalizations.of(context).welcomeToLettutor}',
+              // 'Welcome to lettutor',
               style:
                   Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 15),
             );

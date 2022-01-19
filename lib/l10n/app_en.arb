@@ -13,7 +13,9 @@
     "sendResetLink": "Send Reset Link",
     "home": "Home",
     "tutors": "Tutors",
+    "tutor": "Tutor",
     "courses": "Courses",
+    "course": "Course",
     "settings": "Settings",
     "totalLessonTime": "Total learned time",
     "hours": "hours",
@@ -61,5 +63,33 @@
     "currentPassword": "Current password",
     "newPassword": "New password",
     "save": "Save",
-    "name": "Name"
+    "name": "Name",
+    "createAnAccount": "Create an account",
+    "success": "Success",
+    "failed": "Failed",
+    "forgetPasswordSuccess": "Please check your email for a link to reset your password.",
+    "signUpSuccess": "Please check your email to verify your account.",
+    "close": "Close",
+    "loginNow": "Login now"
+    ,"passwordNotMatch":"Password and confirm password does not match"
+    ,"alreadyHaveAnAccount":"Already have an account?"
+    ,"loginHere":"Login here"   
+    ,"meeting":"Meeting"
+    ,"note":"Note"
+    ,"others":"Others"
+    ,"welcomeToLettutor":"Welcome to Lettutor"
+    ,"remaining":"Remaining"
+    ,"start":"Start"
+    ,"duration":"Duration"
+    ,"cancelMeeting":"Cancel metting"
+    ,"cancelMeetingContent":"Do you want to cancel this meeting?"
+    ,"confirm":"Confirm"
+    ,"yes":"Yes"
+    ,"no":"No"
+    ,"startMeeting":"Start Meeting"
+    ,"meetingCancelled":"Your meeting has been cancelled!!!"
+    ,"becomeATutor":"Become a Tutor"
+    ,"favoriteTutors":"Favorite Tutors"
+    ,"advancedSettings":"Advanced Settings"
+
 }

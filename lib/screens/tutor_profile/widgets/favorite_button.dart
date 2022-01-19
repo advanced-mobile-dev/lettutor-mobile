@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/favorite_tutor/favorite_tutor_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_profile/tutor_profile_bloc.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lettutor_app/models/tutor/tutor.dart';
 
 class FavoriteButton extends StatelessWidget {
@@ -40,7 +40,7 @@ class FavoriteButton extends StatelessWidget {
                 SizedBox(
                   height: 4,
                 ),
-                Text('Favorite',
+                Text('${AppLocalizations.of(context).favorite}',
                     style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: tutor.isFavorite ?? false
                             ? Colors.red

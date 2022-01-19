@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/blocs/tutor_report/tutor_report_bloc.dart';
 import 'package:lettutor_app/constants/colors.dart';
+import 'package:lettutor_app/routes.dart';
+import 'package:lettutor_app/utils/dialog_utils.dart';
 
 import 'package:lettutor_app/widgets/app_bar.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/loading_overlay.dart';
 import 'package:lettutor_app/widgets/submit_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorReportScreen extends StatelessWidget {
   final LoadingOverlay _loadingOverlay = new LoadingOverlay();
@@ -28,64 +31,31 @@ class TutorReportScreen extends StatelessWidget {
             }
 
             if (state is ReportSuccessState) {
-              showDialog(
-                  context: context,
+              DialogUtils.showCustomDialog(context,
+                  title: '${AppLocalizations.of(context).success}',
+                  content: null,
                   barrierDismissible: false,
-                  builder: (context) => AlertDialog(
-                        title: Row(
-                          children: [
-                            Icon(
-                              Icons.check_box_rounded,
-                              size: 36,
-                              color: Colors.green,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text("Report successfully")
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            child: Text('Ok'),
-                            onPressed: () {
-                              Navigator.pop(
-                                context,
-                              );
-                              Navigator.pop(
-                                context,
-                              );
-                            },
-                          ),
-                        ],
-                      ));
+                  dialogType: DialogType.success,
+                  okBtnText: 'Ok', onOkPressed: () {
+                Navigator.pop(
+                  context,
+                );
+                Navigator.pop(
+                  context,
+                );
+              });
             }
             if (state is ReportFailedState) {
-              showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        title: Row(
-                          children: [
-                            Icon(
-                              Icons.cancel,
-                              size: 36,
-                              color: Colors.red,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text("Failed")
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            child: Text('Go back'),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      ));
+              DialogUtils.showCustomDialog(context,
+                  title: '${AppLocalizations.of(context).failed}',
+                  content: null,
+                  barrierDismissible: true,
+                  dialogType: DialogType.error,
+                  okBtnText: 'Ok', onOkPressed: () {
+                Navigator.pop(
+                  context,
+                );
+              });
             }
           },
           builder: (context, state) {
@@ -125,7 +95,6 @@ class TutorReportScreen extends StatelessWidget {
                         ),
                         SubmitButton(
                           backgroundColor: Colors.red[700],
-                          icon: Icon(Icons.warning),
                           text: 'Submit Report',
                           function: () {
                             context

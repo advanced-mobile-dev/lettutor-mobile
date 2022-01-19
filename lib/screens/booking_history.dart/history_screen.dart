@@ -54,7 +54,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
               if (state.bookingList.length == 0) return EmptyWidget();
 
               return CustomScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
                   controller: _scrollController,
                   slivers: [
                     CupertinoSliverRefreshControl(

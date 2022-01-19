@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lettutor_app/utils/url_launcher.dart';
 import 'package:lettutor_app/widgets/network_circle_avatar.dart';
 import 'setting_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountSettings extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _AccountSettingsState extends State<AccountSettings> {
           ),
           Container(
               alignment: Alignment.centerLeft,
-              child: Text('Account settings',
+              child: Text('${AppLocalizations.of(context).accountSettings}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -70,20 +71,20 @@ class _AccountSettingsState extends State<AccountSettings> {
             height: 10,
           ),
           SettingItem(
-            title: 'Become a tutor',
+            title: '${AppLocalizations.of(context).becomeATutor}',
             function: () async {
               await AppUrlLauncher.launchHttpsUrl(
                   context, "https://sandbox.app.lettutor.com/register-tutor");
             },
           ),
           SettingItem(
-            title: 'Favorite tutors',
+            title: '${AppLocalizations.of(context).favoriteTutors}',
             function: () {
               Navigator.of(context).pushNamed(LettutorRoutes.favoriteTutors);
             },
           ),
           SettingItem(
-            title: 'Edit profile',
+            title: '${AppLocalizations.of(context).editProfile}',
             function: () async {
               await Navigator.of(context).pushNamed(LettutorRoutes.userProfile);
               setState(() {});

@@ -19,35 +19,6 @@ class ForgetPasswordScreen extends StatelessWidget {
           create: (_) => ForgetPasswordBloc(
               RepositoryProvider.of<AuthenticationRepository>(context)),
           child: ForgetPasswordForm(),
-        )
-        // Container(
-        //   padding: EdgeInsets.all(15),
-        //   alignment: Alignment.topLeft,
-        //   child: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: <Widget>[
-        //       Text(
-        //         AppLocalizations.of(context).forgetPasswordContent,
-        //         maxLines: 2,
-        //       ),
-        //       SizedBox(
-        //         height: 30,
-        //       ),
-        //       CustomTextField(
-        //         title: AppLocalizations.of(context).email,
-        //         controller: _emailController,
-        //         iconData: Icons.email,
-        //         keyboardType: TextInputType.emailAddress,
-        //       ),
-        //       SizedBox(
-        //         height: 50,
-        //       ),
-        //       SubmitButton(
-        //           text: AppLocalizations.of(context).sendResetLink,
-        //           function: () {})
-        //     ],
-        //   ),
-        // ),
-        );
+        ));
   }
 }

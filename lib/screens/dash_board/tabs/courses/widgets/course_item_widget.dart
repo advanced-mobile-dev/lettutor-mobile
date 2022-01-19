@@ -16,6 +16,7 @@ class CourseItemWidget extends StatelessWidget {
     final courseLevel = CourseLevel.data
         .firstWhere((e) => e.level == int.parse(course.level), orElse: null);
     final courseLevelName = courseLevel != null ? courseLevel.name : '';
+    double width = MediaQuery.of(context).size.width;
     return GestureDetector(
         onTap: () {
           Navigator.of(context)
@@ -25,13 +26,6 @@ class CourseItemWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(10),
-            // boxShadow: [
-            //   BoxShadow(
-            //       color: Colors.grey.withOpacity(0.3),
-            //       spreadRadius: 2,
-            //       blurRadius: 3,
-            //       offset: Offset(0, 1))
-            // ]
           ),
           child: Column(
             children: <Widget>[
@@ -44,9 +38,12 @@ class CourseItemWidget extends StatelessWidget {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) =>
-                              Image.asset(Assets.loadingImage),
+                          placeholder: (context, url) => Image.asset(
+                            Assets.loadingImage,
+                            width: width / 2,
+                          ),
                           imageUrl: course.imageUrl,
+                          width: width / 2,
                         )),
                   ),
                 ],

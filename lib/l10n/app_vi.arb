@@ -13,13 +13,15 @@
     "sendResetLink": "Đặt lại mật khẩu",
     "home": "Trang chủ",
     "tutors": "Gia sư",
+    "tutor": "Gia sư",
     "courses": "Khoá học",
+    "course": "Khoá học",
     "settings": "Cài đặt",
     "totalLessonTime": "Tổng thời gian học",
     "hours": "giờ",
     "minutes": "phút",
     "history": "Lịch sử",
-    "upcommingLesson": "Khoá học sắp đến",
+    "upcommingLesson": "Buổi học sắp đến",
     "goToMeeting": "Vào học ngay",
     "videoConference": "Buổi học qua video call",
     "searchByName": "Tìm kiếm theo tên",
@@ -61,5 +63,32 @@
     "currentPassword": "Mật khẩu hiện tại",
     "newPassword": "Mật khẩu mới",
     "save": "Lưu",
-    "name": "Tên"    
+    "name": "Tên" ,
+    "createAnAccount": "Tạo tài khoản mới",
+    "success": "Thành công",
+    "failed": "Không thành công",
+    "forgetPasswordSuccess": "Kiểm tra hộp thư đến trong email để đặt lại mật khẩu của bạn.",
+    "signUpSuccess": "Kiểm tra hộp thư đến trong email để xác thực tài khoản",
+    "close": "Đóng",
+    "loginNow": "Đăng nhập ngay"
+    ,"passwordNotMatch":"Mật khẩu không khớp"
+    ,"alreadyHaveAnAccount":"Bạn đã có tài khoản?"
+    ,"loginHere":"Đăng nhập"   
+    ,"meeting":"Buổi học"
+    ,"note":"Ghi chú"
+    ,"others":"Khác"
+    ,"welcomeToLettutor":"Chào mừng đến với Lettutor"
+    ,"remaining":"Còn lại"
+    ,"start":"Bắt đầu"
+    ,"duration":"Thời lượng"
+    ,"cancelMeeting":"Huỷ buổi học"
+    ,"cancelMeetingContent":"Bạn có muốn huỷ buổi học này không?"
+    ,"confirm":"Xác nhận"
+    ,"yes":"Có"
+    ,"no":"Không"
+    ,"startMeeting":"Bắt đầu ngay"
+    ,"meetingCancelled":"Huỷ buổi học thành công!!!"
+    ,"becomeATutor":"Trở giành gia sư"
+    ,"favoriteTutors":"Gia sư yêu thích"
+    ,"advancedSettings":"Cài đặt nâng cao"
 }

@@ -47,16 +47,17 @@ class _SignUpFormState extends State<SignUpForm> {
                           SizedBox(
                             width: 15,
                           ),
-                          Text("Sign up successful")
+                          Text("${AppLocalizations.of(context).success}")
                         ],
                       ),
                       content: Text(
-                        "Please check your email to verify your account",
+                        "${AppLocalizations.of(context).signUpSuccess}",
                         // textAlign: TextAlign.center,
                       ),
                       actions: [
                         TextButton(
-                          child: Text('Login now'),
+                          child:
+                              Text('${AppLocalizations.of(context).loginNow}'),
                           onPressed: () {
                             Navigator.pushReplacementNamed(
                                 context, LettutorRoutes.signIn);
@@ -99,7 +100,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   if (confirmPassword.length == 0)
                     return '${AppLocalizations.of(context).password} ${AppLocalizations.of(context).isRequired}';
                   if (confirmPassword != _passwordController.text)
-                    return 'Password and confirm password does not match';
+                    return '${AppLocalizations.of(context).passwordNotMatch}';
                   return null;
                 },
                 iconData: Icons.lock,
@@ -112,10 +113,12 @@ class _SignUpFormState extends State<SignUpForm> {
               BlocBuilder<SignUpBloc, SignUpState>(
                 builder: (context, state) {
                   if (state is SignUpInProgress) {
-                    return SubmitButton(text: 'Loading ...', function: null);
+                    return SubmitButton(
+                        text: '${AppLocalizations.of(context).signUp}...',
+                        function: null);
                   }
                   return SubmitButton(
-                      text: AppLocalizations.of(context).signUp,
+                      text: '${AppLocalizations.of(context).signUp}',
                       function: () {
                         DeviceUtils.hideKeyboard(context);
                         if (_formKey.currentState.validate()) {
@@ -133,13 +136,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Already have an account?  ',
-                  ),
+                  Text('${AppLocalizations.of(context).alreadyHaveAnAccount} '),
                   GestureDetector(
-                      child: Text("Login here",
+                      child: Text('${AppLocalizations.of(context).loginHere}',
                           style: TextStyle(
                               decoration: TextDecoration.underline,
+                              fontSize: 14,
                               color: Colors.blue)),
                       onTap: () {
                         Navigator.pushReplacementNamed(
