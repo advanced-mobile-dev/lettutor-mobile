@@ -16,10 +16,11 @@ class ExpiredTokenRetryPolicy extends RetryPolicy {
   @override
   Future<bool> shouldAttemptRetryOnResponse(ResponseData response) async {
     if (response.statusCode == 401) {
-      print("Retrying request...${DateTime.now().microsecondsSinceEpoch}");
-      // await authenticationRepository.refreshToken();
-      await Future.delayed(Duration(seconds: 5));
-      return true;
+      print("Refresh token...${DateTime.now().microsecondsSinceEpoch}");
+      final user = await authenticationRepository.refreshToken();
+      if (user == null) {
+        return true;
+      }
     }
 
     return false;

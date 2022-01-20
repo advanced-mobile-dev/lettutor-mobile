@@ -60,7 +60,6 @@ class RestClient {
   }
 
   _handleResponse(http.Response response) {
-    // throw ApiException('message', 401);
     final int statusCode = response.statusCode;
     if (statusCode == 500) {
       final res = jsonDecode(response.body);

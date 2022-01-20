@@ -85,14 +85,15 @@ class AuthenticationRepository {
   }
 
   Future<User> refreshToken() async {
-    print('old ${sharedPrefsHelper.userToken.accessToken}');
-    print('old ${sharedPrefsHelper.userToken.refreshToken}');
-    final user = await authenticationApiClient
-        .refreshToken(sharedPrefsHelper.userToken.refreshToken);
-    if (user != null) {
-      sharedPrefsHelper.saveUserToken(user.userToken);
-      return user;
-    }
+    try {
+      final user = await authenticationApiClient
+          .refreshToken(sharedPrefsHelper.userToken.refreshToken);
+      if (user != null) {
+        sharedPrefsHelper.saveUserToken(user.userToken);
+        print('success');
+        return user;
+      }
+    } catch (_) {}
     return null;
   }
 
