@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:lettutor_app/data/network/rest_client.dart';
-import 'package:lettutor_app/models/schedule/booking_info.dart';
+import 'package:lettutor_app/models/booking/booking_info.dart';
 
 class PaymentApiClient {
   final BaseClient httpClient;

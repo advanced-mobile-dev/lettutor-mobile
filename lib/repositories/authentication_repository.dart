@@ -63,6 +63,10 @@ class AuthenticationRepository {
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 
+  void removeUserInfo() {
+    sharedPrefsHelper.removeUserToken();
+  }
+
   Future<User> signUp(String email, String password) async {
     final User user = await authenticationApiClient.signUp(email, password);
     if (user != null) {

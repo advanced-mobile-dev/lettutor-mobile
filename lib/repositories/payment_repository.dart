@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lettutor_app/data/network/apis/payment_api_client.dart';
-import 'package:lettutor_app/models/schedule/booking_info.dart';
+import 'package:lettutor_app/models/booking/booking_info.dart';
 
 class PaymentRepository {
   final PaymentApiClient paymentApiClient;

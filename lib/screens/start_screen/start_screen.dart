@@ -70,7 +70,7 @@ class StartScreen extends StatelessWidget {
                                                 .primaryColorBrightness ==
                                             Brightness.dark)
                                         ? Colors.white60
-                                        : AppColors.customGrey,
+                                        : Colors.white,
                                     function: () {
                                       Navigator.of(context)
                                           .pushNamed(LettutorRoutes.signUp);

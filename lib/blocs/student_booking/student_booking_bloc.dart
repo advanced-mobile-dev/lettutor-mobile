@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:lettutor_app/blocs/tutor_schedule/tutor_schedule_bloc.dart';
 import 'package:lettutor_app/models/booking/booking.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
 
@@ -72,7 +71,7 @@ class StudentBookingBloc
           );
         }
       } catch (err) {
-        emit(LoadFailureState());
+        emit(StudentBookingLoadFailureState());
       }
     } else {
       return;

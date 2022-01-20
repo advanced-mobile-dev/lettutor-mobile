@@ -14,22 +14,22 @@ class TutorScheduleBloc extends Bloc<TutorScheduleEvent, TutorScheduleState> {
   TutorScheduleBloc({TutorRepository tutorRepository, Tutor tutor})
       : _tutorRepository = tutorRepository,
         _tutor = tutor,
-        super(ReservationInitial()) {
-    on<FetchTutorSchedulesEvent>(_onFetchTutorSchedules);
+        super(TutorScheduleInitial()) {
+    on<TutorScheduleFetchEvent>(_onFetchTutorSchedules);
   }
 
   Future<void> _onFetchTutorSchedules(event, emit) async {
     try {
-      emit(ReservationInitial());
+      emit(TutorScheduleLoading());
       TutorScheduleList schedules =
           await _tutorRepository.fetchTutorSchedules(_tutor.userId);
       emit(schedules == null
-          ? LoadFailureState()
-          : SchedulesLoadedState(_tutor, schedules));
+          ? TutorScheduleLoadFailureState()
+          : TutorScheduleLoadedState(_tutor, schedules));
     } catch (error, trace) {
       print(error);
       print(trace);
-      emit(LoadFailureState());
+      emit(TutorScheduleLoadFailureState());
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:lettutor_app/models/schedule/booking_info.dart';
+import 'package:lettutor_app/models/booking/booking_info.dart';
 import 'package:lettutor_app/models/schedule/schedule_detail.dart';
 
 class Booking {

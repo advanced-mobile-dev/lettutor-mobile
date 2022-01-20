@@ -37,8 +37,8 @@ import 'screens/login/login_screen.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 import 'screens/splash_screen/splash_screen.dart';
 import 'screens/start_screen/start_screen.dart';
-import 'screens/tutor_calendar/tutor_schedule_screen.dart';
 import 'screens/tutor_profile/tutor_profile.dart';
+import 'screens/tutor_schedule/tutor_schedule_screen.dart';
 import 'screens/user_profile/user_profile.dart';
 
 class LettutorRoutes {
@@ -156,7 +156,7 @@ Route<dynamic> registerRoutesWithParameters(RouteSettings routeSettings) {
               create: (context) => TutorScheduleBloc(
                   tutor: tutor,
                   tutorRepository: context.read<TutorRepository>())
-                ..add(FetchTutorSchedulesEvent()),
+                ..add(TutorScheduleFetchEvent()),
               child: TutorScheduleScreen(
                 tutor: tutor,
               )));

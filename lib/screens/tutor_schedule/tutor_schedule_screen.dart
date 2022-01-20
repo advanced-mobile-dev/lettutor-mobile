@@ -9,6 +9,8 @@ import 'package:lettutor_app/models/tutor/tutor.dart';
 import 'package:lettutor_app/screens/reservation/reservation_screen.dart';
 import 'package:lettutor_app/utils/date_utils.dart';
 import 'package:lettutor_app/widgets/app_bar.dart';
+import 'package:lettutor_app/widgets/empty_widget.dart';
+import 'package:lettutor_app/widgets/error_widget.dart';
 
 class TutorScheduleScreen extends StatelessWidget {
   final Tutor tutor;
@@ -109,13 +111,21 @@ class TutorScheduleScreen extends StatelessWidget {
         ),
         body: BlocConsumer<TutorScheduleBloc, TutorScheduleState>(
           builder: (context, state) {
-            if (state is ReservationInitial)
+            if (state is TutorScheduleLoading)
               return Center(
                 child: CircularProgressIndicator(),
               );
-            if (state is LoadFailureState) return Text('Load data failure!!!');
+            if (state is TutorScheduleLoadFailureState)
+              return AppErrorWidget(
+                retry: () {
+                  context
+                      .read<TutorScheduleBloc>()
+                      .add(TutorScheduleFetchEvent());
+                },
+              );
 
-            if (state is SchedulesLoadedState) {
+            if (state is TutorScheduleLoadedState) {
+              if (state.tutorSchedules.data.isEmpty) return EmptyWidget();
               return SingleChildScrollView(
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 100),

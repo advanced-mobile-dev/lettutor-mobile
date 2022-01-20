@@ -7,6 +7,7 @@ import 'package:lettutor_app/blocs/login/login_bloc.dart';
 import 'package:lettutor_app/constants/assets.dart';
 
 import 'package:lettutor_app/routes.dart';
+import 'package:lettutor_app/utils/device_utils.dart';
 import 'package:lettutor_app/utils/validator.dart';
 import 'package:lettutor_app/widgets/custom_text_field.dart';
 import 'package:lettutor_app/widgets/flat_button.dart';
@@ -89,6 +90,7 @@ class _LoginFormState extends State<LoginForm> {
                         function: () async {
                           if (_formKey.currentState.validate()) {
                             _formKey.currentState.save();
+                            DeviceUtils.hideKeyboard(context);
                             context.read<LoginBloc>().add(LoginByEmailEvent(
                                 email: _email, password: _password));
                           }

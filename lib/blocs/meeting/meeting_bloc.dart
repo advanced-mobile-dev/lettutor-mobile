@@ -84,7 +84,18 @@ class MeetingBloc extends Bloc<MeetingEvent, MeetingState> {
         "userInfo": {"displayName": meetingRoom.userCall.name}
       };
 
-    await JitsiMeet.joinMeeting(options);
+    await JitsiMeet.joinMeeting(options,
+        listener: JitsiMeetingListener(onConferenceWillJoin: (message) {
+          debugPrint("${options.room} will join with message: $message");
+        }, onConferenceJoined: (message) {
+          debugPrint("${options.room} joined with message: $message");
+        }, onConferenceTerminated: (message) {
+          debugPrint("${options.room} terminated with message: $message");
+        }, onPictureInPictureWillEnter: (message) {
+          debugPrint("${options.room} entered PIP mode with message: $message");
+        }, onPictureInPictureTerminated: (message) {
+          debugPrint("${options.room} exited PIP mode with message: $message");
+        }));
   }
 
   void _onConferenceWillJoin(message) {

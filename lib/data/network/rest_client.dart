@@ -5,7 +5,7 @@ import 'package:lettutor_app/data/network/exceptions/api_exception.dart';
 
 class RestClient {
   static const _baseUrl = 'sandbox.api.lettutor.com';
-  static const _timeout = 15;
+  static const _timeout = 20;
   final BaseClient httpClient;
   RestClient(this.httpClient);
 

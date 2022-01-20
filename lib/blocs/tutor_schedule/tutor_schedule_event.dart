@@ -7,4 +7,4 @@ abstract class TutorScheduleEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchTutorSchedulesEvent extends TutorScheduleEvent {}
+class TutorScheduleFetchEvent extends TutorScheduleEvent {}

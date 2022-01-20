@@ -51,6 +51,8 @@ class _TutorsSearchBarState extends State<TutorsSearchBar> {
                 .copyWith(color: Colors.grey),
             suffixIcon: IconButton(
               onPressed: () {
+                DeviceUtils.hideKeyboard(context);
+
                 if (_searchController.text.isNotEmpty) {
                   _searchController.clear();
                   _tutorsBloc.add(ApplyTutorFilterEvent(

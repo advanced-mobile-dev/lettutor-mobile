@@ -7,15 +7,11 @@ class BookingInfo {
   String id;
   String userId;
   String scheduleDetailId;
-  // String tutorMeetingLink;
   MeetingRoom meetingRoom;
   String studentRequest;
   String tutorReview;
   int scoreByTutor;
-  // String createdAt;
-  // String updatedAt;
   String recordUrl;
-  bool isDeleted;
 
   BookingInfo(
       {this.createdAtTimeStamp,
@@ -27,8 +23,7 @@ class BookingInfo {
       this.studentRequest,
       this.tutorReview,
       this.scoreByTutor,
-      this.recordUrl,
-      this.isDeleted});
+      this.recordUrl});
 
   BookingInfo.fromJson(Map<String, dynamic> json) {
     createdAtTimeStamp = json['createdAtTimeStamp'];
@@ -49,6 +44,5 @@ class BookingInfo {
     tutorReview = json['tutorReview'];
     scoreByTutor = json['scoreByTutor'];
     recordUrl = json['recordUrl'];
-    isDeleted = json['isDeleted'];
   }
 }

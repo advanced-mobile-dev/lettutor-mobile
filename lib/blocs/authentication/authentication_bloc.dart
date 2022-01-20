@@ -39,9 +39,13 @@ class AuthenticationBloc
         return emit(UnAuthenticatedState());
       case AuthenticationStatus.authenticated:
         final user = await _tryGetUser();
-        return emit(user != null
-            ? AuthenticatedState(user: user)
-            : UnAuthenticatedState());
+        if (user != null) {
+          return emit(AuthenticatedState(user: user));
+        } else {
+          _authenticationRepository.removeUserInfo();
+          return emit(UnAuthenticatedState());
+        }
+        break;
       default:
         return emit(UnknownState());
     }

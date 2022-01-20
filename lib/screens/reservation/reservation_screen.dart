@@ -185,7 +185,8 @@ class ReservationScreen extends StatelessWidget {
                         ),
                         SubmitButton(
                           text: 'Book',
-                          function: state.userWallet.amount <= 0 ||
+                          function: state.userWallet == null ||
+                                  state.userWallet.amount <= 0 ||
                                   state.reservationStatus ==
                                       ReservationStatus.success
                               ? null

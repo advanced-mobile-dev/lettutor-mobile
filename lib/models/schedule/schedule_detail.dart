@@ -1,5 +1,5 @@
 import 'package:lettutor_app/models/tutor/tutor_basic_info.dart';
-import 'booking_info.dart';
+import '../booking/booking_info.dart';
 
 class ScheduleDetail {
   DateTime startPeriod;

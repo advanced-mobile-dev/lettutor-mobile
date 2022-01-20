@@ -18,7 +18,9 @@ class TutorList {
       tutor.tutorBasicInfo = tutorBasicInfo;
       return tutor;
     }).toList();
-
+    tutors.sort((Tutor a, Tutor b) => b.tutorBasicInfo
+        .calcAvgRating()
+        .compareTo(a.tutorBasicInfo.calcAvgRating()));
     return TutorList(
       count: count,
       data: tutors,
