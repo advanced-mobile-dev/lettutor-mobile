@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/src/repository_provider.dart';
@@ -12,6 +14,7 @@ import 'package:lettutor_app/data/network/interceptors/expired_retry_token_polic
 import 'package:lettutor_app/repositories/app_settings_repository.dart';
 import 'package:lettutor_app/repositories/payment_repository.dart';
 import 'package:lettutor_app/repositories/user_repository.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'data/network/apis/course_api_client.dart';
 import 'data/network/apis/payment_api_client.dart';
@@ -24,19 +27,25 @@ import 'utils/bloc_observer.dart';
 import 'app.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
-  await AppConfig.readCountriesFromJson();
+    await AppConfig.readCountriesFromJson();
 
-  final repositoryProviders = await getRepositoryProviders();
-
-  BlocOverrides.runZoned(
-    () => runApp(
-        MultiRepositoryProvider(providers: repositoryProviders, child: App())),
-    blocObserver: AppBlocObserver(),
-  );
+    final repositoryProviders = await getRepositoryProviders();
+    await SentryFlutter.init(
+        (options) => options.dsn =
+            'https://f2cd6131329e4b378e34e267647cdae2@o1099429.ingest.sentry.io/6158180',
+        appRunner: () => BlocOverrides.runZoned(
+              () => runApp(MultiRepositoryProvider(
+                  providers: repositoryProviders, child: App())),
+              blocObserver: AppBlocObserver(),
+            ));
+  }, (exception, stackTrace) async {
+    await Sentry.captureException(exception, stackTrace: stackTrace);
+  });
 }
 
 Future<List<RepositoryProviderSingleChildWidget>>

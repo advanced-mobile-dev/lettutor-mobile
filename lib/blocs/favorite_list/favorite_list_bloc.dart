@@ -16,6 +16,7 @@ class FavoriteListBloc extends Bloc<FavoriteListEvent, FavoriteListState> {
   }
 
   Future _onFetchEvent(FavoriteListFetchEvent event, emit) async {
+    // throw ('catch thu xem');
     emit(FavoriteListLoading());
     try {
       final List<Tutor> favoriteList = await _userRepository.getFavoriteList();

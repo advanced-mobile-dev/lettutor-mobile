@@ -28,6 +28,18 @@ class FavoriteTutorsScreen extends StatelessWidget {
           }
           if (state is FavoriteListLoaded) {
             if (state.favoriteList.isEmpty) return EmptyWidget();
+            // return Container(
+            //   child: Row(
+            //     children: [
+            //       Container(
+            //         width: 1000,
+            //       ),
+            //       Container(
+            //         width: 2000,
+            //       ),
+            //     ],
+            //   ),
+            // );
             return ListView(
                 children: state.favoriteList
                     .map((e) => FavoriteItemWidget(
